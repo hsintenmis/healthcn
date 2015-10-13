@@ -1,0 +1,250 @@
+//
+// APP 首次進入頁面
+//
+
+import UIKit
+import Foundation
+
+/**
+ * 本專案首頁，USER登入頁面
+ */
+class MainLogin: UIViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var txtAcc: UITextField!
+    @IBOutlet weak var txtPsd: UITextField!
+    @IBOutlet weak var labVer: UILabel!
+    @IBOutlet weak var labSaveAcc: UILabel!
+    @IBOutlet weak var switchSave: UISwitch!
+    @IBOutlet weak var btnLogin: UIButton!
+    
+    // public property
+    var mVCtrl: UIViewController!
+    var pubClass: PubClass!
+    var dictPref: Dictionary<String, AnyObject>!  // Prefer data
+    var popLoading: UIAlertController! // 彈出視窗 popLoading
+    
+    // 虛擬鍵盤相關參數
+    private var currentTextField: UITextField?  // 目前選擇的 txtView
+    private var isKeyboardShown = false
+    
+    /**
+     * View Load 程序
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // 固定初始參數
+        mVCtrl = self
+        pubClass = PubClass(viewControl: mVCtrl)
+        dictPref = pubClass.getPrefData()
+        popLoading = pubClass.getPopLoading()
+        
+        self.initViewField()
+
+        // Keyboard show/hide, 宣告此頁面的 VC NSNotificationCenter
+        pubClass.setKeyboardNotify()
+    }
+    
+    /**
+     * 初始與設定 VCview 內的 field
+     */
+    func initViewField() {
+        pubClass.setVCBackgroundImg("back002.jpg")
+        txtAcc.delegate = self
+        txtPsd.delegate = self
+    
+        txtAcc.text = dictPref["acc"] as? String
+        txtPsd.text = dictPref["psd"] as? String
+        switchSave.setOn((dictPref["issave"] as! Bool), animated: false)
+
+        txtAcc.placeholder = pubClass.getLang("login_acc")
+        txtPsd.placeholder = pubClass.getLang("login_psd")
+        labSaveAcc.text = pubClass.getLang("saveaccpsd")
+        btnLogin.setTitle(pubClass.getLang("login"), forState: UIControlState.Normal)
+        
+        labVer.text = pubClass.getLang("version") + ":" +
+            (NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
+    }
+    
+    /**
+     * user 登入資料送出, HTTP 連線檢查與初始
+     */
+    func StartLogin() {
+        // acc, psd 檢查
+        if ((txtAcc.text?.isEmpty) == true || (txtPsd.text?.isEmpty) == true) {
+            pubClass.popIsee(Msg: pubClass.getLang("err_accpsd"))
+            
+            return
+        }
+        
+        currentTextField = nil
+        
+        // 連線 HTTP post/get 參數
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = txtAcc.text;
+        dictParm["psd"] = txtPsd.text;
+        dictParm["page"] = "memberdata";
+        dictParm["act"] = "memberdata_login";
+        
+        var strConnParm: String = "";
+        for (strParm, strVal) in dictParm {
+            strConnParm += "\(strParm)=\(strVal)&"
+        }
+        
+        // HTTP 開始連線
+        mVCtrl.presentViewController(popLoading, animated: true, completion: nil)
+        pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
+    }
+    
+    /**
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callbac function
+     */
+    func HttpResponChk(mData: NSData?) {
+        popLoading.dismissViewControllerAnimated(false, completion: {})
+
+        // 檢查回傳的 'NSData'
+        if mData == nil {
+            print(pubClass.getLang("err_data"))
+            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
+            
+            return
+        }
+        
+        // 解析回傳的 NSData 為 JSON
+        do {
+            let jobjRoot = try NSJSONSerialization.JSONObjectWithData(mData!, options:NSJSONReadingOptions(rawValue: 0))
+
+            guard let dictRespon = jobjRoot as? Dictionary<String, AnyObject> else {
+                pubClass.popIsee(Msg: "資料解析錯誤 (JSON data error)！")
+                
+                return
+            }
+
+            if ( dictRespon["result"] as! Bool != true) {
+                pubClass.popIsee(Msg: "回傳結果失敗！")
+                print("JSONDictionary! \(dictRespon)")
+                
+                return;
+            }
+            
+            // 解析正確的 jobj data
+            self.HttpResponAnaly(dictRespon)
+        }
+        catch let errJson as NSError {
+            pubClass.popIsee(Msg: "資料解析錯誤!\n\(errJson)")
+            
+            return
+        }
+        
+        return
+    }
+    
+    /**
+     * 解析正確的 http 回傳結果，執行後續動作
+     */
+    func HttpResponAnaly(dictRespon: Dictionary<String, AnyObject>) {
+        //print("JSONDictionary! \(dictRoot)")
+        
+        // 資料存入 'Prefer'
+        let mPref = NSUserDefaults(suiteName: "standardUserDefaults")!
+        
+        if (switchSave.on == true) {
+            mPref.setObject(txtAcc.text, forKey: "acc")
+            mPref.setObject(txtPsd.text, forKey: "psd")
+            mPref.setObject(true, forKey: "issave")
+        }
+        else {
+            mPref.setObject("", forKey: "acc")
+            mPref.setObject("", forKey: "psd")
+            mPref.setObject(false, forKey: "issave")
+        }
+
+        mPref.synchronize()
+        
+        // 跳轉至指定的名稱的Segue頁面, 傳遞參數
+        self.performSegueWithIdentifier("MainCategory", sender: dictRespon)
+        
+        //pubClass.popIsee(Msg: "登入完成")
+    }
+    
+    /**
+     * 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MainCategory"{
+            let cvChild = segue.destinationViewController as! MainCategory
+            cvChild.parentData = sender as! Dictionary<String, AnyObject>
+        }
+    }
+
+    /**
+     * 點取 [登入] 按鈕
+     */
+    @IBAction func actLogin() {
+        StartLogin();
+    }
+    
+    // ********** 以下為常用固定 function ********** //
+    
+    /**
+     * UITextFieldDelegate<BR>
+     * 取得並設定目前選擇的 textView
+     */
+    func textFieldDidBeginEditing(textField: UITextField) {
+        currentTextField = textField
+    }
+    
+    /**
+     * UITextFieldDelegate<BR>
+     * 虛擬鍵盤: 'Return' key 型態與動作
+     */
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == txtAcc {
+            txtPsd.becomeFirstResponder();
+            
+            return true
+        }
+        
+        if textField == txtPsd {
+            textField.resignFirstResponder()
+            self.StartLogin()
+            
+            return true
+        }
+        
+        return true
+    }
+    
+    /**
+     * 虛擬鍵盤: 將要 [顯示] 時執行相關程序
+     */
+    func keyboardWillShow(mNotify: NSNotification) {
+        if isKeyboardShown || (currentTextField != txtPsd && currentTextField != txtAcc) {
+            return
+        }
+        
+        isKeyboardShown = true
+        pubClass.KBShowProc(mNotify)
+    }
+    
+    /**
+     * 虛擬鍵盤: 將要 [關閉] 時執行相關程序
+     */
+    func keyboardWillHide(mNotify: NSNotification) {
+        isKeyboardShown = false
+        pubClass.KBHideProc(mNotify)
+    }
+    
+    /**
+     * 虛擬鍵盤: [關閉]
+     */
+    func keyboardHide(tapG: UITapGestureRecognizer){
+        if (isKeyboardShown) {
+            currentTextField!.resignFirstResponder()
+        }
+    }
+    
+    
+    
+}
+

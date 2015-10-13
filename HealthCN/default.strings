@@ -1,0 +1,15 @@
+"CFBundleDisplayName" = "iSOQI健康精靈";
+"app_name" = "iSOQI健康精靈";
+"app_name_full" = "iSOQI健康精靈  美利版";
+"version" = "版本";
+
+"login" = "登入";
+"logout" = "登出";
+"login_acc" = "登入ID";
+"login_psd" = "登入密碼";
+"datatranplzwait" = "資料傳送中，請稍後...";
+"sysprompt" = "系統提示";
+"saveaccpsd" = "記住帳號密碼";
+"i_see" = "我知道了";
+"err_accpsd" = "帳號或是密碼錯誤!";
+"err_data" = "資料錯誤!";
