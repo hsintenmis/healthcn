@@ -34,7 +34,11 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         
         // Scroll View 處理
         // 设置container view来保持你定制的视图层次
-        let containerSize = CGSize(width: 640.0, height: 640.0)
+        
+        let containerSize = CGSize(width: 0.0, height: 700.0)
+        viewScrolle.contentSize = containerSize;
+
+        /*
         containerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size:containerSize))
         viewScrolle.addSubview(containerView)
         
@@ -50,26 +54,12 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         let greenView = UIView(frame: CGRect(x: 160, y: 160, width: 320, height: 320))
         greenView.backgroundColor = UIColor.greenColor();
         containerView.addSubview(greenView)
-        
-        let imageView = UIImageView(image: UIImage(named: "slow.png"))
-        imageView.center = CGPoint(x: 320, y: 320);
-        containerView.addSubview(imageView)
+
         
         // 告诉scroll view内容的尺寸
         viewScrolle.contentSize = containerSize;
-        
-        // 设置最大和最小的缩放系数
-        let scrollViewFrame = viewScrolle.frame
-        let scaleWidth = scrollViewFrame.size.width / viewScrolle.contentSize.width
-        let scaleHeight = scrollViewFrame.size.height / viewScrolle.contentSize.height
-        let minScale = min(scaleWidth, scaleHeight)
-        
-        viewScrolle.minimumZoomScale = minScale
-        viewScrolle.maximumZoomScale = 1.0
-        viewScrolle.zoomScale = 1.0
-        
-        //centerScrollViewContents()
-        
+        */
+
         // 設定相關 UI text 欄位 delegate to textfile
         //self.initViewField()
     }
