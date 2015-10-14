@@ -20,8 +20,8 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
-    var dictPref: Dictionary<String, AnyObject>!  // Prefer data
     var popLoading: UIAlertController! // 彈出視窗 popLoading
+    var dictPref: Dictionary<String, AnyObject>!  // Prefer data
     
     // 虛擬鍵盤相關參數
     private var currentTextField: UITextField?  // 目前選擇的 txtView
@@ -36,8 +36,8 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        dictPref = pubClass.getPrefData()
         popLoading = pubClass.getPopLoading()
+        dictPref = pubClass.getPrefData()
         
         self.initViewField()
 
@@ -69,7 +69,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     /**
      * user 登入資料送出, HTTP 連線檢查與初始
      */
-    func StartLogin() {
+    func StartHTTPConn() {
         // acc, psd 檢查
         if ((txtAcc.text?.isEmpty) == true || (txtPsd.text?.isEmpty) == true) {
             pubClass.popIsee(Msg: pubClass.getLang("err_accpsd"))
@@ -92,7 +92,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         }
         
         // HTTP 開始連線
-        mVCtrl.presentViewController(popLoading, animated: true, completion: nil)
+        mVCtrl.presentViewController(popLoading, animated: false, completion: nil)
         pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
     }
     
@@ -100,7 +100,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callbac function
      */
     func HttpResponChk(mData: NSData?) {
-        popLoading.dismissViewControllerAnimated(false, completion: {})
+        popLoading.dismissViewControllerAnimated(true, completion: {})
 
         // 檢查回傳的 'NSData'
         if mData == nil {
@@ -143,7 +143,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
      * 解析正確的 http 回傳結果，執行後續動作
      */
     func HttpResponAnaly(dictRespon: Dictionary<String, AnyObject>) {
-        //print("JSONDictionary! \(dictRoot)")
+        //print("JSONDictionary! \(dictRespon)")
         
         // 資料存入 'Prefer'
         let mPref = NSUserDefaults(suiteName: "standardUserDefaults")!
@@ -161,6 +161,11 @@ class MainLogin: UIViewController, UITextFieldDelegate {
 
         mPref.synchronize()
         
+        // 設定全域變數
+        let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+        mAppDelegate.setValue(txtAcc.text, forKey: "V_USRACC")
+        mAppDelegate.setValue(txtPsd.text, forKey: "V_USRPSD")
+        
         // 跳轉至指定的名稱的Segue頁面, 傳遞參數
         self.performSegueWithIdentifier("MainCategory", sender: dictRespon)
         
@@ -175,13 +180,16 @@ class MainLogin: UIViewController, UITextFieldDelegate {
             let cvChild = segue.destinationViewController as! MainCategory
             cvChild.parentData = sender as! Dictionary<String, AnyObject>
         }
+        
+        
+        return
     }
 
     /**
      * 點取 [登入] 按鈕
      */
     @IBAction func actLogin() {
-        StartLogin();
+        self.StartHTTPConn();
     }
     
     // ********** 以下為常用固定 function ********** //
@@ -207,7 +215,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         
         if textField == txtPsd {
             textField.resignFirstResponder()
-            self.StartLogin()
+            self.StartHTTPConn()
             
             return true
         }

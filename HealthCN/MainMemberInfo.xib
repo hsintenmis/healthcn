@@ -10,19 +10,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_empty01.png" translatesAutoresizingMaskIntoConstraints="NO" id="kVT-kn-60X">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user_empty01.png" translatesAutoresizingMaskIntoConstraints="NO" id="kVT-kn-60X">
                     <rect key="frame" x="8" y="13" width="96" height="96"/>
                     <animations/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="96" id="92F-ha-3D7"/>
-                        <constraint firstAttribute="width" constant="96" id="coc-Le-uvd"/>
-                    </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNQ-62-hv4">
                     <rect key="frame" x="112" y="13" width="200" height="29"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OjI-1n-5EN">
@@ -73,10 +69,6 @@
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="kVT-kn-60X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="Pam-vG-JQS"/>
-                <constraint firstItem="kVT-kn-60X" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="UqV-1i-4vp"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
