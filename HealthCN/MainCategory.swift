@@ -72,10 +72,11 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         }
         
         // HTTP 開始連線
-        mVCtrl.presentViewController(popLoading, animated: false, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(self.popLoading, animated: true, completion: nil)
+        })
+        
         pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
-        
-        
     }
     
     /**
@@ -83,6 +84,7 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
         popLoading.dismissViewControllerAnimated(true, completion: {})
+        
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
