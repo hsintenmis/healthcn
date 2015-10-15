@@ -115,9 +115,10 @@ class PubClass {
     
     
     /**
-     * HTTP 連線, 使用 post 方式, 'callBack' 需要實作
+     * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
+     * callBack 參數為 JSON data
      */
-    func startHTTPConn(strConnParm: String!, callBack: (NSData?)->Void ) {
+    func startHTTPConn(strConnParm: String!, callBack: (Dictionary<String, AnyObject>)->Void ) {
         // 產生 http Request
         let mRequest = NSMutableURLRequest(URL: NSURL(string: self.D_WEBURL)!)
         mRequest.HTTPBody = strConnParm.dataUsingEncoding(NSUTF8StringEncoding)
@@ -129,15 +130,62 @@ class PubClass {
         let task = NSURLSession.sharedSession().dataTaskWithRequest(mRequest) {
             data, response, error in
             
+            var dictRS = Dictionary<String, AnyObject>();
+            
             if error != nil {
-                callBack(nil)
+                dictRS = self.getHTTPJSONData(nil)
             } else {
-                callBack(data!)
+                dictRS = self.getHTTPJSONData(data!)
             }
+
+            callBack(dictRS)
         }
-        
+
         task.resume()
     }
+    
+    /**
+    * HTTP 連線, 連線取得 NSData 解析並回傳 JSON data<BR>
+    * 回傳資料如: 'result' => bool, 'msg' => 錯誤訊息 or nil, 'data' => Dictionary
+    */
+    private func getHTTPJSONData(mData: NSData?)->Dictionary<String, AnyObject> {
+        var dictRS = Dictionary<String, AnyObject>()
+        dictRS["result"] = false
+        dictRS["msg"] = self.getLang("err_data")
+        dictRS["data"] = nil
+        
+        // 檢查回傳的 'NSData'
+        if mData == nil {
+            return dictRS
+        }
+        
+        // 解析回傳的 NSData 為 JSON
+        do {
+            let jobjRoot = try NSJSONSerialization.JSONObjectWithData(mData!, options:NSJSONReadingOptions(rawValue: 0))
+            
+            guard let dictRespon = jobjRoot as? Dictionary<String, AnyObject> else {
+                dictRS["msg"] = "資料解析錯誤 (JSON data error)！"
+                return dictRS
+            }
+            
+            if ( dictRespon["result"] as! Bool != true) {
+                dictRS["msg"] = "回傳結果失敗！"
+                return dictRS
+            }
+            
+            // 解析正確的 jobj data
+            dictRS["result"] = true
+            dictRS["msg"] = nil
+            dictRS["data"] = dictRespon
+            
+            return dictRS
+        }
+        catch let errJson as NSError {
+            dictRS["msg"] = "資料解析錯誤!\n\(errJson)"
+            return dictRS
+        }
+    }
+
     
     /**
      * Keyboard 相關<BR>

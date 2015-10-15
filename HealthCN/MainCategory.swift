@@ -11,7 +11,6 @@ import Foundation
 class MainCategory: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var viewScrolle: UIScrollView!
-    var containerView: UIView!
     
     // public property
     var mVCtrl: UIViewController!
@@ -21,6 +20,9 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     
     // 前一個頁面傳入的資料
     var parentData: Dictionary<String, AnyObject>!
+    
+    // 其他 class
+    var mMainScrollData: MainScrollData!  // ScrollView 的 VC calss
 
     // View load
     override func viewDidLoad() {
@@ -31,37 +33,11 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
         popLoading = pubClass.getPopLoading()
-        
-        // Scroll View 處理
-        // 设置container view来保持你定制的视图层次
-        
-        let containerSize = CGSize(width: 0.0, height: 700.0)
-        viewScrolle.contentSize = containerSize;
-
-        /*
-        containerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size:containerSize))
-        viewScrolle.addSubview(containerView)
-        
-        // 设置你定制的视图层次
-        let redView = UIView(frame: CGRect(x: 0, y: 0, width: 640, height: 80))
-        redView.backgroundColor = UIColor.redColor();
-        containerView.addSubview(redView)
-        
-        let blueView = UIView(frame: CGRect(x: 0, y: 560, width: 640, height: 80))
-        blueView.backgroundColor = UIColor.blueColor();
-        containerView.addSubview(blueView)
-        
-        let greenView = UIView(frame: CGRect(x: 160, y: 160, width: 320, height: 320))
-        greenView.backgroundColor = UIColor.greenColor();
-        containerView.addSubview(greenView)
-
-        
-        // 告诉scroll view内容的尺寸
-        viewScrolle.contentSize = containerSize;
-        */
 
         // 設定相關 UI text 欄位 delegate to textfile
-        //self.initViewField()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.initViewField()
+        })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -72,20 +48,17 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     /**
     * 初始與設定 VCview 內的 field
     */
-    func initViewField() {
-    }
-    
-    /**
-     * UIScrollViewDelegate 內建方法
-     */
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-
+    private func initViewField() {
+        // Scroll View 處理
+        //let containerSize = CGSize(width: 0.0, height: 700.0)
+        //viewScrolle.contentSize = containerSize;
+        viewScrolle.contentSize.height = 700.0
     }
     
     /**
     * HTTP 連線取得本頁面需要的資料
     */
-    func StartHTTPConn() {
+    private func StartHTTPConn() {
         // 連線 HTTP post/get 參數
         var dictParm = Dictionary<String, String>()
         dictParm["acc"] = mAppDelegate.V_USRACC
@@ -101,58 +74,53 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         // HTTP 開始連線
         mVCtrl.presentViewController(popLoading, animated: false, completion: nil)
         pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
+        
+        
     }
     
     /**
-    * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callbac function
+    * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
     */
-    func HttpResponChk(mData: NSData?) {
+    private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
         popLoading.dismissViewControllerAnimated(true, completion: {})
         
-        // 檢查回傳的 'NSData'
-        if mData == nil {
-            print(pubClass.getLang("err_data"))
-            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
-            
+        // 任何錯誤跳離
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: dictRS["msg"] as! String)
             return
         }
         
-        // 解析回傳的 NSData 為 JSON
-        do {
-            let jobjRoot = try NSJSONSerialization.JSONObjectWithData(mData!, options:NSJSONReadingOptions(rawValue: 0))
-            
-            guard let dictRespon = jobjRoot as? Dictionary<String, AnyObject> else {
-                pubClass.popIsee(Msg: "資料解析錯誤 (JSON data error)！")
-                
-                return
-            }
-            
-            if ( dictRespon["result"] as! Bool != true) {
-                pubClass.popIsee(Msg: "回傳結果失敗！")
-                print("JSONDictionary! \(dictRespon)")
-                
-                return;
-            }
-            
-            // 解析正確的 jobj data
-            self.HttpResponAnaly(dictRespon)
-        }
-        catch let errJson as NSError {
-            pubClass.popIsee(Msg: "資料解析錯誤!\n\(errJson)")
-            
-            return
+        // 解析正確的 http 回傳結果，傳遞 JSONdata, 設定 'MainScrollData' view 資料
+        let dictRespon = dictRS["data"] as! Dictionary<String, AnyObject>
+        //print("JSONDictionary! \(dictRespon)")
+        
+        self.mMainScrollData.setParam(dictRespon)
+        
+        //self.mMainScrollData.initViewField()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mMainScrollData.initViewField()
+        })
+        
+    }
+
+    /**
+    * Segue 判別跳轉哪個頁面, 給 scrollview 的 childView 使用
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 跳轉 'MainScrollData' class
+        if segue.identifier == "MainScrollData"{
+            self.mMainScrollData = segue.destinationViewController as! MainScrollData
         }
         
         return
     }
     
     /**
-    * 解析正確的 http 回傳結果，執行後續動作
+    * HTTP重新連線讀取資料
     */
-    func HttpResponAnaly(dictRespon: Dictionary<String, AnyObject>) {
-        //print("JSONDictionary! \(dictRespon)")
+    @IBAction func actReload(sender: UIBarButtonItem) {
+        // HTTP 開始連線
+        self.StartHTTPConn()
     }
-
-
 
 }

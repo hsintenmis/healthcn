@@ -39,7 +39,9 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         popLoading = pubClass.getPopLoading()
         dictPref = pubClass.getPrefData()
         
-        self.initViewField()
+        dispatch_async(dispatch_get_main_queue(), {
+           self.initViewField()
+        })
 
         // Keyboard show/hide, 宣告此頁面的 VC NSNotificationCenter
         pubClass.setKeyboardNotify()
@@ -97,46 +99,19 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     }
     
     /**
-     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callbac function
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
-    func HttpResponChk(mData: NSData?) {
+    func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
         popLoading.dismissViewControllerAnimated(true, completion: {})
 
-        // 檢查回傳的 'NSData'
-        if mData == nil {
-            print(pubClass.getLang("err_data"))
-            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
-            
+        // 任何錯誤跳離
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: dictRS["msg"] as! String)
             return
         }
         
-        // 解析回傳的 NSData 為 JSON
-        do {
-            let jobjRoot = try NSJSONSerialization.JSONObjectWithData(mData!, options:NSJSONReadingOptions(rawValue: 0))
-
-            guard let dictRespon = jobjRoot as? Dictionary<String, AnyObject> else {
-                pubClass.popIsee(Msg: "資料解析錯誤 (JSON data error)！")
-                
-                return
-            }
-
-            if ( dictRespon["result"] as! Bool != true) {
-                pubClass.popIsee(Msg: "回傳結果失敗！")
-                print("JSONDictionary! \(dictRespon)")
-                
-                return;
-            }
-            
-            // 解析正確的 jobj data
-            self.HttpResponAnaly(dictRespon)
-        }
-        catch let errJson as NSError {
-            pubClass.popIsee(Msg: "資料解析錯誤!\n\(errJson)")
-            
-            return
-        }
-        
-        return
+        // 解析正確的 http 回傳結果，執行後續動作
+        self.HttpResponAnaly(dictRS["data"] as! Dictionary<String, AnyObject>)
     }
     
     /**
@@ -173,14 +148,13 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     }
     
     /**
-     * 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "MainCategory"{
             let cvChild = segue.destinationViewController as! MainCategory
             cvChild.parentData = sender as! Dictionary<String, AnyObject>
         }
-        
         
         return
     }
