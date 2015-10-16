@@ -80,6 +80,8 @@
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; settings = {ASSET_TAGS = (); }; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; settings = {ASSET_TAGS = (); }; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; settings = {ASSET_TAGS = (); }; };
+		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; settings = {ASSET_TAGS = (); }; };
+		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; settings = {ASSET_TAGS = (); }; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,8 @@
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
+		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
+		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +298,8 @@
 		42E708F51BC752EE0092A5A9 /* SysFIle */ = {
 			isa = PBXGroup;
 			children = (
+				D77684161BD0A1C500B97009 /* digt001.ttf */,
+				D77684171BD0A1C500B97009 /* digt002.ttf */,
 				42D1A73A1BC587DD008ECEFB /* AppDelegate.swift */,
 				42D1A7411BC587DD008ECEFB /* Assets.xcassets */,
 				42D1A7461BC587DD008ECEFB /* Info.plist */,
@@ -384,6 +390,8 @@
 				42C498CB1BC80B7D002DF0ED /* testmechine_128.png in Resources */,
 				42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */,
 				42C498CC1BC80B7D002DF0ED /* user_empty01.png in Resources */,
+				D77684181BD0A1C500B97009 /* digt001.ttf in Resources */,
+				D77684191BD0A1C500B97009 /* digt002.ttf in Resources */,
 				42C498B41BC80B7D002DF0ED /* logo_isoqi01.png in Resources */,
 				42C498BF1BC80B7D002DF0ED /* menu_testint01_256.png in Resources */,
 				42C498C51BC80B7D002DF0ED /* msgicon_qq.png in Resources */,

@@ -35,9 +35,8 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         popLoading = pubClass.getPopLoading()
 
         // 設定相關 UI text 欄位 delegate to textfile
-        dispatch_async(dispatch_get_main_queue(), {
-            self.initViewField()
-        })
+        self.initViewField()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -49,10 +48,9 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     * 初始與設定 VCview 內的 field
     */
     private func initViewField() {
-        // Scroll View 處理
-        //let containerSize = CGSize(width: 0.0, height: 700.0)
-        //viewScrolle.contentSize = containerSize;
-        viewScrolle.contentSize.height = 700.0
+        dispatch_async(dispatch_get_main_queue(), {
+            self.viewScrolle.contentSize.height = 700.0
+        })
     }
     
     /**
@@ -72,10 +70,7 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         }
         
         // HTTP 開始連線
-        dispatch_async(dispatch_get_main_queue(), {
-            self.mVCtrl.presentViewController(self.popLoading, animated: true, completion: nil)
-        })
-        
+        self.mVCtrl.presentViewController(self.popLoading, animated: true, completion: nil)
         pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
     }
     
@@ -84,7 +79,6 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
         popLoading.dismissViewControllerAnimated(true, completion: {})
-        
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
@@ -99,9 +93,7 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         self.mMainScrollData.setParam(dictRespon)
         
         //self.mMainScrollData.initViewField()
-        dispatch_async(dispatch_get_main_queue(), {
-            self.mMainScrollData.initViewField()
-        })
+        self.mMainScrollData.resetViewField()
         
     }
 

@@ -9,4 +9,5 @@ class CellViewHealth: UICollectionViewCell {
     
     @IBOutlet weak var labVal: UILabel!
     @IBOutlet weak var labItem: UILabel!
+    @IBOutlet weak var labUnit: UILabel!
 }

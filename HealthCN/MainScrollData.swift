@@ -17,6 +17,8 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var labStoreTel: UILabel!
     
     @IBOutlet weak var colviewHealth: UICollectionView!
+    @IBOutlet weak var viewTodayInfo: UIView!  // 今日提醒資料 View list
+    @IBOutlet var btnGroup: [UIButton]! // 跳轉的 UIButton array
     
     // public property
     var mVCtrl: UIViewController!
@@ -24,7 +26,11 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // 本 class 需要使用的 json data
     var parentData: Dictionary<String, AnyObject>!
-    var aryHealth: Array<Dictionary<String, String>>?
+    var aryHealth: [[String:String]] = []
+    
+    // 跳轉其他 class 的 UIButton
+    // Dictionary 的 key 要在 storyboard 設定 restorationIdentifier
+    var dictBtn = Dictionary<String, UIButton>()
     
     // View load
     override func viewDidLoad() {
@@ -35,7 +41,21 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
         pubClass = PubClass(viewControl: mVCtrl)
         
         // 設定相關 UI text 欄位
-        //self.initViewField()
+        self.self.initViewField()
+        
+        
+        // 重新整理 btnGroup 為 Dictionary
+        for btnItem: UIButton in btnGroup {
+            dictBtn[btnItem.restorationIdentifier!] = btnItem
+        }
+    }
+
+    /**
+     * 初始與設定 VCview 內的 field
+     */
+    private func initViewField() {
+        viewTodayInfo.layer.borderWidth = 2
+        viewTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
     }
     
     /**
@@ -46,20 +66,22 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     /**
-    * 初始與設定 VCview 內的 field
+    * public method, 初始與設定 VCview 內的 field
     */
-    internal func initViewField() {
+    internal func resetViewField() {
         // 會員資料區塊
         let dictMember = (parentData["content"])?.objectForKey("member") as! Dictionary<String, AnyObject>
         
-        labMemberName.text = dictMember["usrname"] as? String
-        labStoreName.text = dictMember["store_name"] as? String
-        labStoreTel.text = dictMember["up_tel"] as? String
-        
-        // CollectionView, 健康資料重新 reload
-        aryHealth = (parentData["content"])?.objectForKey("health") as? [Dictionary<String, String>]
-        
-        colviewHealth.reloadData();
+        dispatch_async(dispatch_get_main_queue(), {
+            self.labMemberName.text = dictMember["usrname"] as? String
+            self.labStoreName.text = dictMember["store_name"] as? String
+            self.labStoreTel.text = dictMember["up_tel"] as? String
+            
+            // CollectionView, 健康資料重新 reload
+            let dicContent = self.parentData["content"] as! Dictionary<String, AnyObject>
+            self.aryHealth = dicContent["health"] as! [[String:String]]
+            self.colviewHealth.reloadData()
+        })
     }
     
     /**
@@ -73,31 +95,60 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
     * CollectionView, 設定 資料總數
     */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = aryHealth?.count {
-            //print(aryHealth?[1])
-            return count
+        if aryHealth.count > 0 {
+            return aryHealth.count
         }
         
         return 0
     }
     
     /**
-    * CollectionView, 設定 Cell 的内容
+    * CollectionView, 設定健康檢測資料 Cell 的内容
     */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: CellViewHealth = collectionView.dequeueReusableCellWithReuseIdentifier("cellHealthVal", forIndexPath: indexPath) as! CellViewHealth
         
-        let ditItem = aryHealth[1] as Dictionary<String, String>
-        
-        
-        cell.labVal.text = ""
-        cell.labItem.text = "Item \(indexPath.row)"
+        let ditItem = aryHealth[indexPath.row] as [String:String]
+        cell.labVal.text = ditItem["val"]
+        cell.labUnit.text = ditItem["unit"]
+        cell.labItem.text = ditItem["name"]
         
         return cell
     }
     
+    /**
+     * Button 點取時執行程序
+     */
+    @IBAction func actBtnClick(sender: UIButton) {
+        // 設定 btn 背景, 放開時
+        self.changeBtnBackgroung(sender, strMode: "up")
+    }
+    
+    @IBAction func actBtnDown(sender: UIButton) {
+        // 設定 btn 背景, 按下時
+        self.changeBtnBackgroung(sender, strMode: "down")
+    }
+    
+    /**
+     * Button 點取與放開時的背景顏色
+     * @param strMode : ex. "up", "down"
+     */
+    private func changeBtnBackgroung(sender: UIButton, strMode: String) {
+        let strKey: String = sender.restorationIdentifier!
+        let btnCurr = self.dictBtn[strKey]!
+
+        if (strMode == "up") {
+            dispatch_async(dispatch_get_main_queue(), {
+                btnCurr.backgroundColor = self.pubClass.ColorHEX("#FFFFFF")
+            })
+        } else {
+            btnCurr.backgroundColor = self.pubClass.ColorHEX("#E0E0E0")
+        }
+
+    }
+    
     @IBAction func actEditProfile(sender: UIButton) {
-        print("edit")
+        
     }
 
 }
