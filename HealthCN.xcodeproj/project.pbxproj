@@ -73,6 +73,7 @@
 		42C498CA1BC80B7D002DF0ED /* search_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C4988A1BC80B7D002DF0ED /* search_64.png */; settings = {ASSET_TAGS = (); }; };
 		42C498CB1BC80B7D002DF0ED /* testmechine_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C4988B1BC80B7D002DF0ED /* testmechine_128.png */; settings = {ASSET_TAGS = (); }; };
 		42C498CC1BC80B7D002DF0ED /* user_empty01.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C4988C1BC80B7D002DF0ED /* user_empty01.png */; settings = {ASSET_TAGS = (); }; };
+		42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C9C4931BD15C0E00BB217F /* NewsMain.swift */; settings = {ASSET_TAGS = (); }; };
 		42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1A73A1BC587DD008ECEFB /* AppDelegate.swift */; };
 		42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1A73C1BC587DD008ECEFB /* MainLogin.swift */; };
 		42D1A7401BC587DD008ECEFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D1A73E1BC587DD008ECEFB /* Main.storyboard */; };
@@ -80,6 +81,7 @@
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; settings = {ASSET_TAGS = (); }; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; settings = {ASSET_TAGS = (); }; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; settings = {ASSET_TAGS = (); }; };
+		42F685321BD3431C007B49C3 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F685311BD3431C007B49C3 /* NewsCell.swift */; settings = {ASSET_TAGS = (); }; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; settings = {ASSET_TAGS = (); }; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; settings = {ASSET_TAGS = (); }; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; settings = {ASSET_TAGS = (); }; };
@@ -152,6 +154,7 @@
 		42C4988A1BC80B7D002DF0ED /* search_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_64.png; sourceTree = "<group>"; };
 		42C4988B1BC80B7D002DF0ED /* testmechine_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testmechine_128.png; sourceTree = "<group>"; };
 		42C4988C1BC80B7D002DF0ED /* user_empty01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_empty01.png; sourceTree = "<group>"; };
+		42C9C4931BD15C0E00BB217F /* NewsMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsMain.swift; path = Program/NewsMain.swift; sourceTree = "<group>"; };
 		42D1A7371BC587DD008ECEFB /* HealthCN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthCN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D1A73A1BC587DD008ECEFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D1A73C1BC587DD008ECEFB /* MainLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLogin.swift; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
+		42F685311BD3431C007B49C3 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsCell.swift; path = Program/NewsCell.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
@@ -248,6 +252,15 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		42C9C4921BD15BDF00BB217F /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				42C9C4931BD15C0E00BB217F /* NewsMain.swift */,
+				42F685311BD3431C007B49C3 /* NewsCell.swift */,
+			);
+			name = Program;
+			sourceTree = "<group>";
+		};
 		42D1A72E1BC587DD008ECEFB = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +282,7 @@
 			children = (
 				42D1A73E1BC587DD008ECEFB /* Main.storyboard */,
 				42E708F41BC752D40092A5A9 /* MainHome */,
+				42C9C4921BD15BDF00BB217F /* Program */,
 				42E708F31BC752C40092A5A9 /* PubClass */,
 				42C4984C1BC80B7D002DF0ED /* image */,
 				42E708F51BC752EE0092A5A9 /* SysFIle */,
@@ -448,9 +462,11 @@
 			files = (
 				427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
+				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */,
+				42F685321BD3431C007B49C3 /* NewsCell.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

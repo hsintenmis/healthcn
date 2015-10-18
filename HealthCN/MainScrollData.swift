@@ -10,7 +10,7 @@ import Foundation
  * ScrollView 內的 VC, 本 class顯示: 會員資料<BR>
  * 今日健康資料/今日提醒, 各頁面跳轉
  */
-class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MainScrollData: UIViewController {
     
     @IBOutlet weak var labMemberName: UILabel!
     @IBOutlet weak var labStoreName: UILabel!
@@ -42,7 +42,6 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // 設定相關 UI text 欄位
         self.self.initViewField()
-        
         
         // 重新整理 btnGroup 為 Dictionary
         for btnItem: UIButton in btnGroup {
@@ -85,6 +84,17 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     /**
+    * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MainCategory"{
+            //let cvChild = segue.destinationViewController as! MainCategory
+        }
+        
+        return
+    }
+    
+    /**
     * CollectionView, 設定 Sections
     */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -120,10 +130,16 @@ class MainScrollData: UIViewController, UICollectionViewDelegate, UICollectionVi
      * Button 點取時執行程序
      */
     @IBAction func actBtnClick(sender: UIButton) {
+        // 取得點取 Button 的 resoration ID
+        self.performSegueWithIdentifier(sender.restorationIdentifier!, sender: nil)
+        
         // 設定 btn 背景, 放開時
         self.changeBtnBackgroung(sender, strMode: "up")
     }
     
+    /**
+    * Button '按下'時執行程序
+    */
     @IBAction func actBtnDown(sender: UIButton) {
         // 設定 btn 背景, 按下時
         self.changeBtnBackgroung(sender, strMode: "down")

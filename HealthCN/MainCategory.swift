@@ -8,14 +8,13 @@ import Foundation
 /**
 * 主選單 class
 */
-class MainCategory: UIViewController, UIScrollViewDelegate {
+class MainCategory: UIViewController {
     
     @IBOutlet weak var viewScrolle: UIScrollView!
     
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
-    var popLoading: UIAlertController! // 彈出視窗 popLoading
     let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // 前一個頁面傳入的資料
@@ -32,14 +31,10 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        popLoading = pubClass.getPopLoading()
 
         // 設定相關 UI text 欄位 delegate to textfile
         self.initViewField()
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         // HTTP 連線取得本頁面需要的資料
         self.StartHTTPConn()
     }
@@ -49,7 +44,7 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
     */
     private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.viewScrolle.contentSize.height = 700.0
+
         })
     }
     
@@ -64,21 +59,16 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         dictParm["page"] = "memberdata"
         dictParm["act"] = "memberdata_homepage"
         
-        var strConnParm: String = "";
-        for (strParm, strVal) in dictParm {
-            strConnParm += "\(strParm)=\(strVal)&"
-        }
-        
         // HTTP 開始連線
-        self.mVCtrl.presentViewController(self.popLoading, animated: true, completion: nil)
-        pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
     /**
     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
     */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
-        popLoading.dismissViewControllerAnimated(true, completion: {})
+        pubClass.closePopLoading()
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
@@ -94,7 +84,6 @@ class MainCategory: UIViewController, UIScrollViewDelegate {
         
         //self.mMainScrollData.initViewField()
         self.mMainScrollData.resetViewField()
-        
     }
 
     /**

@@ -16,7 +16,8 @@ class PubClass {
     var aryLangCode = ["default", "zh-Hans"]  // 本專案語系
     
     // private property
-    private let mVCtrl: UIViewController!;
+    private let mVCtrl: UIViewController!
+    var mPopLoading: UIAlertController // 目前產生 pop Loading 視窗的 'ViewControler'
     
     /**
     * init
@@ -24,34 +25,9 @@ class PubClass {
     init(viewControl: UIViewController) {
         mVCtrl = viewControl;
         AppDelg = AppDelegate()
+        mPopLoading = UIAlertController()
     }
-    
-    /**
-     * Color 使用 HEX code, ex. #FFFFFF<BR>
-     */
-    func ColorHEX (hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
-        
-        if (cString.hasPrefix("#")) {
-            cString = (cString as NSString).substringFromIndex(1)
-        }
-        
-        if (cString.characters.count != 6) {
-            return UIColor.grayColor()
-        }
-        
-        let rString = (cString as NSString).substringToIndex(2)
-        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
-        
-        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
-        NSScanner(string: rString).scanHexInt(&r)
-        NSScanner(string: gString).scanHexInt(&g)
-        NSScanner(string: bString).scanHexInt(&b)
-        
-        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
-    }
-    
+
     /**
     * 取得 prefer data, NSUserDefaults<br>
     * 目前 key: 'prefAcc', 'prefPsd', 'prefLang', 'prefIssave'
@@ -125,31 +101,61 @@ class PubClass {
             // print("Handle Ok logic here")
         }))
         
-        mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
+        })
     }
     
     /**
-     * 資料傳送中/讀取中 progress pop window
-     */
-    func getPopLoading()->UIAlertController {
-        let mAlert = UIAlertController(title: "", message: getLang("datatranplzwait"), preferredStyle: UIAlertControllerStyle.Alert)
-        mAlert.restorationIdentifier = "popLoading"
+    * 資料傳送中/讀取中, 顯示視窗
+    */
+    func showPopLoading(msg: String?) {
+        var strMsg = msg
+        if (strMsg == nil) {
+            strMsg = self.getLang("datatranplzwait")
+        }
         
-        return mAlert
-        //mViewControl.presentViewController(alert, animated: true, completion: nil)
+        // 產生 pop Loading 視窗的 'ViewControler'
+        mPopLoading = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        mPopLoading.restorationIdentifier = "popLoading"
+        mPopLoading.message = strMsg
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(self.mPopLoading, animated: false, completion: nil)
+        })
     }
     
+    /**
+    * 資料傳送中/讀取中, 關閉視窗
+    */
+    func closePopLoading() {
+        // self.mPopLoading.dismissViewControllerAnimated(true, completion: {})
+        self.mPopLoading.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     /**
-     * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
-     * callBack 參數為 JSON data
-     */
-    func startHTTPConn(strConnParm: String!, callBack: (Dictionary<String, AnyObject>)->Void ) {
+    * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
+    * callBack 參數為 JSON data
+    */
+    func startHTTPConn(dictParm: Dictionary<String, String>!, callBack: (Dictionary<String, AnyObject>)->Void ) {
+        // 將 dict 參數轉為 string
+        var strConnParm: String = "";
+        var loopi = 0
+        
+        for (strKey, strVal) in dictParm {
+            strConnParm += "\(strKey)=\(strVal)"
+            loopi++
+            
+            if loopi != dictParm.count {
+                strConnParm += "&"
+            }
+        }
+        
         // 產生 http Request
         let mRequest = NSMutableURLRequest(URL: NSURL(string: self.D_WEBURL)!)
         mRequest.HTTPBody = strConnParm.dataUsingEncoding(NSUTF8StringEncoding)
         mRequest.HTTPMethod = "POST"
-        mRequest.timeoutInterval = 10
+        mRequest.timeoutInterval = 60
         mRequest.HTTPShouldHandleCookies = false
         
         // 產生 'task' 使用閉包
@@ -163,10 +169,10 @@ class PubClass {
             } else {
                 dictRS = self.getHTTPJSONData(data!)
             }
-
+            
             callBack(dictRS)
         }
-
+        
         task.resume()
     }
     
@@ -211,7 +217,54 @@ class PubClass {
             return dictRS
         }
     }
-
+    
+    /**
+    * Color 使用 HEX code, ex. #FFFFFF<BR>
+    */
+    func ColorHEX (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = (cString as NSString).substringFromIndex(1)
+        }
+        
+        if (cString.characters.count != 6) {
+            return UIColor.grayColor()
+        }
+        
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
+        
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+    
+    /**
+     * 字串格式化可閱讀的日期文字, ex. '20150131235959' = 2015年01月31日23時59秒<BR>
+     * @param type: 8 or 14 (Int)
+     */
+    func formatDateWIthStr(strDate: String!, type: Int?)->String {
+        if ( strDate.characters.count < 8) {
+            return strDate
+        }
+        
+        var strYY: String, strMM: String, strDD: String
+        
+        if (type == 8) {
+            strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
+            strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
+            strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
+            
+            return "\(strYY)年\(strMM)月\(strDD)日"
+        }
+        
+        return strDate
+    }
     
     /**
      * Keyboard 相關<BR>

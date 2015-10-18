@@ -20,7 +20,6 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
-    var popLoading: UIAlertController! // 彈出視窗 popLoading
     var dictPref: Dictionary<String, AnyObject>!  // Prefer data
     
     // 虛擬鍵盤相關參數
@@ -36,7 +35,6 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        popLoading = pubClass.getPopLoading()
         dictPref = pubClass.getPrefData()
         
         dispatch_async(dispatch_get_main_queue(), {
@@ -88,21 +86,16 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         dictParm["page"] = "memberdata";
         dictParm["act"] = "memberdata_login";
         
-        var strConnParm: String = "";
-        for (strParm, strVal) in dictParm {
-            strConnParm += "\(strParm)=\(strVal)&"
-        }
-        
         // HTTP 開始連線
-        mVCtrl.presentViewController(popLoading, animated: false, completion: nil)
-        pubClass.startHTTPConn(strConnParm, callBack: HttpResponChk)
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
     /**
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
     func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
-        popLoading.dismissViewControllerAnimated(true, completion: {})
+        pubClass.closePopLoading()
 
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
