@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4219A7D91BD6A05E008C6F0E /* NewsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */; settings = {ASSET_TAGS = (); }; };
 		427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F028B1BC9799400A4AEB7 /* MainCategory.swift */; settings = {ASSET_TAGS = (); }; };
 		42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0B9B61BCFF9E500B56D3D /* CellViewHealth.swift */; settings = {ASSET_TAGS = (); }; };
 		42C4988D1BC80B7D002DF0ED /* akregator_256.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C4984D1BC80B7D002DF0ED /* akregator_256.png */; settings = {ASSET_TAGS = (); }; };
@@ -88,6 +89,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsDetail.swift; path = Program/NewsDetail.swift; sourceTree = "<group>"; };
 		427F028B1BC9799400A4AEB7 /* MainCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCategory.swift; sourceTree = "<group>"; };
 		42C0B9B61BCFF9E500B56D3D /* CellViewHealth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewHealth.swift; sourceTree = "<group>"; };
 		42C4984D1BC80B7D002DF0ED /* akregator_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = akregator_256.png; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			children = (
 				42C9C4931BD15C0E00BB217F /* NewsMain.swift */,
 				42F685311BD3431C007B49C3 /* NewsCell.swift */,
+				4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */,
 			);
 			name = Program;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
+				4219A7D91BD6A05E008C6F0E /* NewsDetail.swift in Sources */,
 				42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */,
 				42F685321BD3431C007B49C3 /* NewsCell.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,

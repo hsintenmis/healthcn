@@ -12,17 +12,17 @@ class MainCategory: UIViewController {
     
     @IBOutlet weak var viewScrolle: UIScrollView!
     
-    // public property
-    var mVCtrl: UIViewController!
-    var pubClass: PubClass!
-    let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+    // common property
+    private var mVCtrl: UIViewController!
+    private var pubClass: PubClass!
+    private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // 前一個頁面傳入的資料
     var parentData: Dictionary<String, AnyObject>!
     
     // 其他 class
     var mMainScrollData: MainScrollData!  // ScrollView 的 VC calss
-
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +32,11 @@ class MainCategory: UIViewController {
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
 
-        // 設定相關 UI text 欄位 delegate to textfile
-        self.initViewField()
-        
         // HTTP 連線取得本頁面需要的資料
         self.StartHTTPConn()
+        
+        // 設定相關 UI text 欄位 delegate to textfile
+        self.initViewField()
     }
     
     /**

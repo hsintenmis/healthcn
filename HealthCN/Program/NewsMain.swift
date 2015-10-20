@@ -24,7 +24,6 @@ class NewsMain: UIViewController {
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(parentData)
         
         // 固定初始參數
         mVCtrl = self
@@ -117,7 +116,7 @@ class NewsMain: UIViewController {
         }
         
         let cell: NewsCell = tableView.dequeueReusableCellWithIdentifier("cellNews", forIndexPath: indexPath) as! NewsCell
-        let ditItem = dictCurrNewsData[indexPath.row] as! [String:String]
+        let ditItem = dictCurrNewsData[indexPath.row] as! Dictionary<String, String>
         
         cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
         cell.labTitle.text = ditItem["title"]
@@ -125,19 +124,37 @@ class NewsMain: UIViewController {
         return cell
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 140.0
+    /**
+    * UITableView, Cell 點取
+    */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 跳轉至指定的名稱的Segue頁面, 傳遞參數
+        let ditItem = dictCurrNewsData[indexPath.row] as! Dictionary<String, String>
+        print(ditItem)
+        self.performSegueWithIdentifier("NewsDetail", sender: ditItem)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    /**
+    * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "NewsDetail"{
+            let cvChild = segue.destinationViewController as! NewsDetail
+            cvChild.parentData = sender as! Dictionary<String, String>
+        }
+        
+        return
     }
-    
+
     /**
      * btn '返回' 點取
      */
     @IBAction func actBack(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
 }

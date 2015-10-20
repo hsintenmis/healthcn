@@ -17,7 +17,7 @@ class PubClass {
     
     // private property
     private let mVCtrl: UIViewController!
-    var mPopLoading: UIAlertController // 目前產生 pop Loading 視窗的 'ViewControler'
+    var mPopLoading: UIAlertController? // 目前產生 pop Loading 視窗的 'ViewControler'
     
     /**
     * init
@@ -25,7 +25,6 @@ class PubClass {
     init(viewControl: UIViewController) {
         mVCtrl = viewControl;
         AppDelg = AppDelegate()
-        mPopLoading = UIAlertController()
     }
 
     /**
@@ -117,11 +116,11 @@ class PubClass {
         
         // 產生 pop Loading 視窗的 'ViewControler'
         mPopLoading = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        mPopLoading.restorationIdentifier = "popLoading"
-        mPopLoading.message = strMsg
+        mPopLoading!.restorationIdentifier = "popLoading"
+        mPopLoading!.message = strMsg
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.mVCtrl.presentViewController(self.mPopLoading, animated: false, completion: nil)
+            self.mVCtrl.presentViewController(self.mPopLoading!, animated: false, completion: nil)
         })
     }
     
@@ -130,7 +129,7 @@ class PubClass {
     */
     func closePopLoading() {
         // self.mPopLoading.dismissViewControllerAnimated(true, completion: {})
-        self.mPopLoading.dismissViewControllerAnimated(true, completion: nil)
+        self.mPopLoading!.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /**
