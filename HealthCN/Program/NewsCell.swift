@@ -1,5 +1,5 @@
 //
-//  NewsCell.swift
+//  News Main Table Cell Class
 //
 
 import Foundation

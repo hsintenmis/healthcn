@@ -11,6 +11,7 @@ import UIKit
 */
 class PubClass {
     // public
+    /** 伺服器/網站 URL: http://pub.mysoqi.com/store_cn/001/ */
     let D_WEBURL = "http://pub.mysoqi.com/store_cn/001/"
     var AppDelg: AppDelegate
     var aryLangCode = ["default", "zh-Hans"]  // 本專案語系
@@ -263,6 +264,19 @@ class PubClass {
         }
         
         return strDate
+    }
+    
+    /**
+    * 計算動態 View 的 CGFloat 長,寬
+    * @return dict: ex. dict["h"], dict["w"]
+    */
+    func getUIViewSize(mView: UIView)->Dictionary<String, CGFloat> {
+        let mSize = mView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        var dictData = Dictionary<String, CGFloat>()
+        dictData["h"] = mSize.height
+        dictData["w"] = mSize.width
+        
+        return dictData
     }
     
     /**

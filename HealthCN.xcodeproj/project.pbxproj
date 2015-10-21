@@ -86,6 +86,7 @@
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; settings = {ASSET_TAGS = (); }; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; settings = {ASSET_TAGS = (); }; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; settings = {ASSET_TAGS = (); }; };
+		D7F91E131BD7579100CC2489 /* NewsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F91E121BD7579100CC2489 /* NewsDetailCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +171,7 @@
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
+		D7F91E121BD7579100CC2489 /* NewsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				42C9C4931BD15C0E00BB217F /* NewsMain.swift */,
 				42F685311BD3431C007B49C3 /* NewsCell.swift */,
 				4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */,
+				D7F91E121BD7579100CC2489 /* NewsDetailCell.swift */,
 			);
 			name = Program;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				4219A7D91BD6A05E008C6F0E /* NewsDetail.swift in Sources */,
 				42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */,
+				D7F91E131BD7579100CC2489 /* NewsDetailCell.swift in Sources */,
 				42F685321BD3431C007B49C3 /* NewsCell.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,
 			);

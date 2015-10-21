@@ -13,6 +13,7 @@ class MainCategory: UIViewController {
     @IBOutlet weak var viewScrolle: UIScrollView!
     
     // common property
+    private var isPageReloadAgain = false // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
@@ -31,12 +32,19 @@ class MainCategory: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-
-        // HTTP 連線取得本頁面需要的資料
-        self.StartHTTPConn()
         
         // 設定相關 UI text 欄位 delegate to textfile
         self.initViewField()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if (!isPageReloadAgain) {
+            isPageReloadAgain = true
+            
+            // HTTP 連線取得本頁面需要的資料
+            self.StartHTTPConn()
+            return
+        }
     }
     
     /**
