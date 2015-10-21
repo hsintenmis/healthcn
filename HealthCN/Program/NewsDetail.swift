@@ -73,17 +73,31 @@ class NewsDetail: UIViewController {
         cell.labDate.text = pubClass.formatDateWIthStr(parentData["sdate"], type: 8)
         cell.labTitle.text = parentData["title"]
         cell.labContent.text = parentData["content"]
-        
-        print(parentData["pict"])
-        
+
         // image 處理
         if let url = NSURL(string: (pubClass.D_WEBURL + "upload/" + parentData["pict"]!)) {
-            if let data = NSData(contentsOfURL: url) {
-                cell.imgPict.image = UIImage(data: data)
+            if let mData = NSData(contentsOfURL: url) {
+                cell.imgPict.image = resizeImageWithWidth(UIImage(data: mData)!, imgWidth: 320.0)
             }        
+        } else {
+            cell.imgPict.hidden = true
         }
         
         return cell
+    }
+    
+    func resizeImageWithWidth(sourceImage: UIImage, imgWidth: CGFloat)->UIImage {
+        let oldWidth: CGFloat = sourceImage.size.width
+        let scaleFactor: CGFloat = imgWidth / oldWidth
+        let newHeight: CGFloat = sourceImage.size.height * scaleFactor
+        let newWidth: CGFloat = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        sourceImage.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return newImage
     }
     
     /**
