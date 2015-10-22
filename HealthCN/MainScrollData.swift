@@ -131,7 +131,7 @@ class MainScrollData: UIViewController {
      */
     @IBAction func actBtnClick(sender: UIButton) {
         // 取得點取 Button 的 resoration ID
-        self.performSegueWithIdentifier(sender.restorationIdentifier!, sender: nil)
+        //self.performSegueWithIdentifier(sender.restorationIdentifier!, sender: nil)
         
         // 設定 btn 背景, 放開時
         self.changeBtnBackgroung(sender, strMode: "up")

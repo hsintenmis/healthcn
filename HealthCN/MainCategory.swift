@@ -114,4 +114,10 @@ class MainCategory: UIViewController {
         self.StartHTTPConn()
     }
 
+    /**
+    * 登出
+    */
+    @IBAction func actLogout(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

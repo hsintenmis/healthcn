@@ -1,15 +1,15 @@
 //
-// 最新消息
+//  會員 mead 檢測結果 List
 //
 
 import UIKit
 import Foundation
 
 /**
-* 最新消息 class, 店家新訊與官網新訊
-*/
-class NewsMain: UIViewController {
-    @IBOutlet weak var tableNews: UITableView!
+ * 會員 mead 檢測結果 List
+ */
+class MeadList: UIViewController {
+    @IBOutlet weak var tableMead: UITableView!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -18,9 +18,7 @@ class NewsMain: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // 本 class 需要使用的 json data
-    var dictNewsStore: [[String: AnyObject]] = []
-    var dictNewsOffice: [[String: AnyObject]] = []
-    var dictCurrNewsData: [[String: AnyObject]] = []  // 目前 news 資料為 'store' or 'office'
+    var dictAllData: [[String: AnyObject]] = []
     
     // View load
     override func viewDidLoad() {
@@ -43,23 +41,23 @@ class NewsMain: UIViewController {
     }
     
     /**
-    * 初始與設定 VCview 內的 field
-    */
+     * 初始與設定 VCview 內的 field
+     */
     private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.tableNews.reloadData()
+            self.tableMead.reloadData()
         })
     }
     
     /**
-    * HTTP 連線取得 news JSON data
-    */
+     * HTTP 連線取得 news JSON data
+     */
     func StartHTTPConn() {
         var dictParm = Dictionary<String, String>()
         dictParm["acc"] = mAppDelegate.V_USRACC
         dictParm["psd"] = mAppDelegate.V_USRPSD
-        dictParm["page"] = "memberdata"
-        dictParm["act"] = "memberdata_getnews"
+        dictParm["page"] = "mead"
+        dictParm["act"] = "mead_getreport"
         
         // HTTP 開始連線
         pubClass.showPopLoading(nil)
@@ -67,8 +65,8 @@ class NewsMain: UIViewController {
     }
     
     /**
-    * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
-    */
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
+     */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
         pubClass.closePopLoading()
         
@@ -84,71 +82,53 @@ class NewsMain: UIViewController {
         let dictRespon = dictRS["data"] as! Dictionary<String, AnyObject>
         let dictContent = dictRespon["content"] as! Dictionary<String, AnyObject>
         
-        if dictContent["store"] != nil {
-            self.dictNewsStore = dictContent["store"]! as! [[String : AnyObject]]
+        if dictContent["data"]?.count < 1 {
+            pubClass.popIsee(Msg: pubClass.getLang("nodata") )
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            return
         }
         
-        if (dictContent["office"]?.count > 0) {
-            self.dictNewsOffice = dictContent["office"] as! [[String: AnyObject]]
-        }
-        
-        dictCurrNewsData = self.dictNewsStore
-
+        self.dictAllData = dictContent["data"]! as! [[String : AnyObject]]
         self.initViewField()
     }
-
     
     /**
-    * UITableView, 'section' 回傳指定的數量
-    */
-    func numberOfSectionsInTableView(tableView: UITableView!)->Int {
-        return 1
-    }
-    
-    /** 
      * UITableView<BR>
      * 宣告這個 UITableView 畫面上的控制項總共有多少筆資料<BR>
      * 可根據 'section' 回傳指定的數量
      */
     func tableView(tableView: UITableView!, numberOfRowsInSection section:Int) -> Int {
-        return dictCurrNewsData.count
+        return dictAllData.count
     }
     
-    /** 
+    /**
      * UITableView, Cell 內容
      */
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        if (dictCurrNewsData.count < 1) {
+        if (dictAllData.count < 1) {
             return nil
         }
         
-        let cell: NewsCell = tableView.dequeueReusableCellWithIdentifier("cellNews", forIndexPath: indexPath) as! NewsCell
-        let ditItem = dictCurrNewsData[indexPath.row] as! Dictionary<String, String>
+        let cell: MeadCell = tableView.dequeueReusableCellWithIdentifier("cellMead", forIndexPath: indexPath) as! MeadCell
+        let ditItem = dictAllData[indexPath.row] as! Dictionary<String, String>
         
         cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
-        cell.labTitle.text = ditItem["title"]
-
+        cell.labAvg.text = ditItem["avg"]
+        cell.labAvgH.text = ditItem["avgH"]
+        cell.labAvgL.text = ditItem["avgL"]
+        
         return cell
     }
-    
+
     /**
-    * UITableView, Cell 點取
-    */
-    /*
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 跳轉至指定的名稱的Segue頁面
-        self.performSegueWithIdentifier("NewsDetail", sender: nil)
-    }
-    */
-    
-    /**
-    * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
-    */
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // 取得點取 cell 的 index, 產生 JSON data
-        let indexPath = self.tableNews.indexPathForSelectedRow!
-        let ditItem = dictCurrNewsData[indexPath.row] as! Dictionary<String, String>
-        let cvChild = segue.destinationViewController as! NewsDetail
+        let indexPath = self.tableMead.indexPathForSelectedRow!
+        let ditItem = dictAllData[indexPath.row] as! Dictionary<String, String>
+        let cvChild = segue.destinationViewController as! MeadDetail
         cvChild.parentData = ditItem
         
         return

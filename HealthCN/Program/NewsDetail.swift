@@ -75,29 +75,17 @@ class NewsDetail: UIViewController {
         cell.labContent.text = parentData["content"]
 
         // image 處理
-        if let url = NSURL(string: (pubClass.D_WEBURL + "upload/" + parentData["pict"]!)) {
-            if let mData = NSData(contentsOfURL: url) {
-                cell.imgPict.image = resizeImageWithWidth(UIImage(data: mData)!, imgWidth: 320.0)
-            }        
+        let url = NSURL(string: (pubClass.D_WEBURL + "upload/" + parentData["pict"]!))
+
+        if let mData = NSData(contentsOfURL: url!) {
+            let mImg: UIImage = pubClass.resizeImageWithWidth(UIImage(data: mData)!, imgWidth: 320.0)
+            cell.imgPict.frame.size = mImg.size
+            cell.imgPict.image = mImg
         } else {
             cell.imgPict.hidden = true
         }
         
         return cell
-    }
-    
-    func resizeImageWithWidth(sourceImage: UIImage, imgWidth: CGFloat)->UIImage {
-        let oldWidth: CGFloat = sourceImage.size.width
-        let scaleFactor: CGFloat = imgWidth / oldWidth
-        let newHeight: CGFloat = sourceImage.size.height * scaleFactor
-        let newWidth: CGFloat = oldWidth * scaleFactor
-        
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        sourceImage.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        return newImage
     }
     
     /**
@@ -106,4 +94,5 @@ class NewsDetail: UIViewController {
     @IBAction func actBack(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }

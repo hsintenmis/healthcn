@@ -280,6 +280,30 @@ class PubClass {
     }
     
     /**
+     * 根據輸入的 width 重新調整 Imgae 尺寸
+     */
+    func resizeImageWithWidth(sourceImage: UIImage, imgWidth: CGFloat)->UIImage {
+        // 若 width <= 輸入的 width, 直接回傳原 image
+        let oldWidth: CGFloat = sourceImage.size.width
+        if (imgWidth >= oldWidth) {
+            return sourceImage
+        }
+        
+        // 重新計算長寬
+        let scaleFactor: CGFloat = imgWidth / oldWidth
+        let newHeight: CGFloat = sourceImage.size.height * scaleFactor
+        let newWidth: CGFloat = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        sourceImage.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        return newImage
+    }
+    
+    /**
      * Keyboard 相關<BR>
      * 宣告 NSNotificationCenter, Keyboard show/hide 使用
      * <BR>
