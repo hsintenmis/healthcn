@@ -245,7 +245,7 @@ class PubClass {
     }
     
     /**
-     * 字串格式化可閱讀的日期文字, ex. '20150131235959' = 2015年01月31日23時59秒<BR>
+     * 字串格式化可閱讀的日期文字, ex. '20150131235959' = 2015年01月31日 23:59<BR>
      * @param type: 8 or 14 (Int)
      */
     func formatDateWIthStr(strDate: String!, type: Int?)->String {
@@ -254,13 +254,22 @@ class PubClass {
         }
         
         var strYY: String, strMM: String, strDD: String
+
+        strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
+        strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
+        strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
         
         if (type == 8) {
-            strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
-            strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
-            strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
-            
             return "\(strYY)年\(strMM)月\(strDD)日"
+        }
+        
+        if (type > 8) {
+            var strHH: String, strMin: String
+            
+            strHH = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(8), end: strDate.startIndex.advancedBy(10)))
+            strMin = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(10), end: strDate.startIndex.advancedBy(12)))
+            
+            return "\(strYY)年\(strMM)月\(strDD)日 \(strHH):\(strMin)"
         }
         
         return strDate

@@ -110,10 +110,23 @@ class OdrsList: UIViewController {
             return nil
         }
         
-        let cell: MeadCell = tableView.dequeueReusableCellWithIdentifier("cellOdrs", forIndexPath: indexPath) as! MeadCell
+        let cell: OdrsCell = tableView.dequeueReusableCellWithIdentifier("cellOdrs", forIndexPath: indexPath) as! OdrsCell
         let ditItem = dictAllData[indexPath.row] as Dictionary<String, AnyObject>
         
-        cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"] as! String, type: 8)
+        cell.labSdate.text = pubClass.formatDateWIthStr(ditItem["sdate"] as! String, type: 14)
+        cell.labId.text = ditItem["id"] as? String
+        cell.labPrice.text = ditItem["price"] as? String
+        cell.labCustPrice.text = ditItem["custprice"] as? String
+        
+        let returnPrice = ditItem["returnpricecust"] as? String
+        if ( Int(returnPrice!) > 0) {
+            cell.labReturnPriceCust.alpha = 1
+            cell.strReturnPrice.alpha = 1
+            cell.labReturnPriceCust.text = returnPrice
+        } else {
+            cell.labReturnPriceCust.alpha = 0
+            cell.strReturnPrice.alpha = 0
+        }
         
         return cell
     }

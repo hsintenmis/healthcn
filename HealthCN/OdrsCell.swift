@@ -12,4 +12,6 @@ class OdrsCell: UITableViewCell {
     @IBOutlet weak var labCustPrice: UILabel!
     @IBOutlet weak var labPrice: UILabel!
     @IBOutlet weak var labReturnPriceCust: UILabel!
+    
+    @IBOutlet weak var strReturnPrice: UILabel!
 }
