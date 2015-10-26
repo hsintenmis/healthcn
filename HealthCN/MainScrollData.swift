@@ -113,7 +113,7 @@ class MainScrollData: UIViewController {
     }
     
     /**
-    * CollectionView, 設定健康檢測資料 Cell 的内容
+    * CollectionView, 設定資料 Cell 的内容
     */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: CellViewHealth = collectionView.dequeueReusableCellWithReuseIdentifier("cellHealthVal", forIndexPath: indexPath) as! CellViewHealth
