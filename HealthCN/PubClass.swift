@@ -76,6 +76,13 @@ class PubClass {
     }
     
     /**
+    * SubString
+    */
+    func subStr(mStr: String, strFrom: Int, strEnd: Int)->String {
+        return mStr.substringWithRange(Range<String.Index>(start: mStr.startIndex.advancedBy(strFrom), end: mStr.startIndex.advancedBy(strEnd)))
+    }
+    
+    /**
     * 取得 prefer 的 user data, ex. acc, psd ...
     */
     func getUserData()->[String : String] {

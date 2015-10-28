@@ -97,7 +97,6 @@ class NewsMain: UIViewController {
         self.initViewField()
     }
 
-    
     /**
     * UITableView, 'section' 回傳指定的數量
     */
