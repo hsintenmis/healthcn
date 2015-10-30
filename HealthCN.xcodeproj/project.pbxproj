@@ -85,9 +85,13 @@
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; };
 		42F685321BD3431C007B49C3 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F685311BD3431C007B49C3 /* NewsCell.swift */; };
+		D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2E91BE31EBD0067CCC1 /* HealthValCell.swift */; };
+		D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2EB1BE323D00067CCC1 /* HealthDataInit.swift */; };
+		D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2ED1BE34FEB0067CCC1 /* HealthCellExtData.swift */; };
+		D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2EF1BE36D640067CCC1 /* HealthExplainTestData.swift */; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; };
-		D79235081BE0AA570051D0B9 /* HealthDictData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthDictData.swift */; };
+		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; };
 		D7F91E131BD7579100CC2489 /* NewsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F91E121BD7579100CC2489 /* NewsDetailCell.swift */; };
 		D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FDEFB81BD8BCA000ECA71A /* MeadList.swift */; };
@@ -178,9 +182,13 @@
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
 		42F685311BD3431C007B49C3 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsCell.swift; path = Program/NewsCell.swift; sourceTree = "<group>"; };
+		D71CE2E91BE31EBD0067CCC1 /* HealthValCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthValCell.swift; sourceTree = "<group>"; };
+		D71CE2EB1BE323D00067CCC1 /* HealthDataInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataInit.swift; sourceTree = "<group>"; };
+		D71CE2ED1BE34FEB0067CCC1 /* HealthCellExtData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCellExtData.swift; sourceTree = "<group>"; };
+		D71CE2EF1BE36D640067CCC1 /* HealthExplainTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthExplainTestData.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
-		D79235071BE0AA570051D0B9 /* HealthDictData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDictData.swift; sourceTree = "<group>"; };
+		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCalCellData.swift; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
 		D7F91E121BD7579100CC2489 /* NewsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailCell.swift; sourceTree = "<group>"; };
 		D7FDEFB81BD8BCA000ECA71A /* MeadList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadList.swift; sourceTree = "<group>"; };
@@ -206,7 +214,11 @@
 			children = (
 				429B2E631BDD205300BAF88E /* HealthCalendar.swift */,
 				422D4F5E1BDE85310045E6D5 /* CellCalendarDate.swift */,
-				D79235071BE0AA570051D0B9 /* HealthDictData.swift */,
+				D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */,
+				D71CE2E91BE31EBD0067CCC1 /* HealthValCell.swift */,
+				D71CE2EB1BE323D00067CCC1 /* HealthDataInit.swift */,
+				D71CE2ED1BE34FEB0067CCC1 /* HealthCellExtData.swift */,
+				D71CE2EF1BE36D640067CCC1 /* HealthExplainTestData.swift */,
 			);
 			name = Health;
 			sourceTree = "<group>";
@@ -499,11 +511,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */,
-				D79235081BE0AA570051D0B9 /* HealthDictData.swift in Sources */,
+				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
 				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
+				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
+				D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */,
+				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
+				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				D7FDEFC11BD8E49200ECA71A /* OdrsCell.swift in Sources */,
 				422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */,

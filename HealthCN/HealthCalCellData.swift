@@ -5,7 +5,7 @@
 import UIKit
 import Foundation
 
-class HealthDictData {
+class HealthCalCellData {
     private var pubClass: PubClass!
     
     private let aryFixWeek = ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"]

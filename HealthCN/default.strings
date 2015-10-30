@@ -14,3 +14,37 @@
 "err_accpsd" = "帳號或是密碼錯誤!";
 "err_data" = "資料錯誤!";
 "nodata" = "目前沒有資料. . .";
+
+"name_height" = "厘米(CM)";
+"name_weight" = "千克(KG)";
+"genderandage" = "性别年龄";
+"heightandweight" = "身高体重";
+"age" = "年龄";
+"healthname_height" = "身高";
+"healthname_weight" = "体重";
+"healthname_whr" = "腰臀比";
+"healthname_fat" = "体脂率";
+"healthname_water" = "含水量";
+"healthname_bone" = "骨骼";
+"healthname_muscle" = "肌肉";
+"healthname_vfat" = "内脏脂肪";
+"healthname_calory" = "基础代谢";
+"healthname_bmi" = "BMI";
+"healthname_waistline" = "腰围";
+"healthname_hipline" = "臀围";
+"healthname_sbp" = "收缩压";
+"healthname_dbp" = "舒张压";
+"healthname_sugar" = "血糖";
+"healthname_heartbeat" = "心跳";
+"healthname_temperature" = "体温";
+"healthname_sugar_before" = "血糖(空腹)";
+"healthname_sugar_after" = "血糖(饭後)";
+"healthname_group_bmi" = "BMI / 身高体重";
+"healthname_group_whr" = "腰臀比";
+"healthname_group_bp" = "血压";
+"healthname_group_sugar" = "血糖";
+"heartbeatsunitname" = "次"
+"temperature_unitname_P" = "C°"
+"temperature_unitname_E" = "F°"
+
+

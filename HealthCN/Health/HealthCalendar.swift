@@ -9,20 +9,27 @@ import Foundation
  * 以月曆型態顯示會員的健康檢測數值資料
  */
 class HealthCalendar: UIViewController {
+    // @IBOutlet
     @IBOutlet weak var viewCalendar: UICollectionView!
     @IBOutlet weak var labMM: UILabel!
     @IBOutlet weak var labYY: UILabel!
-
+    @IBOutlet weak var viewHealthList: UITableView!
+    
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
+    // other class import
+    private var mHealthDataInit = HealthDataInit()  // 健康項目資料產生整理好的資料 class
+    
     // 本 class 需要使用的 json data
-    private var dictMMData: [String: [String:String]] = [:]  // jobj data, ex. 'D_20151031'
+    private var dictMMData: [String: [String:String]] = [:] // jobj data, ex. 'D_20151031'
     private var dictMember: [String: String] = [:]  // 會員資料
     private var today: String = ""
+    
+    private var dictCurrItemData: [String: [String:String]] = [:]  // 指定日期的資料, TableView use
     
     // calendar 相關
     private let firstYYMM = "201503", lastYYMM = "202512"  // 本月曆的起始 YYMM
@@ -30,7 +37,7 @@ class HealthCalendar: UIViewController {
     private var dictCurrDate: [String: String] = [:]  // 日期相關按鍵點取後，設定的YY MM DD
     
     // CollectionView Cell 的 'Block' dict 資料 class
-    private var mHealthDictData = HealthDictData()
+    private var mHealthCalCellData = HealthCalCellData()
     
     // View load
     override func viewDidLoad() {
@@ -39,7 +46,10 @@ class HealthCalendar: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        mHealthDictData.cusInit(mVCtrl)
+        
+        // 其他 class 初始
+        mHealthCalCellData.cusInit(mVCtrl)
+        mHealthDataInit.CustInit(mVCtrl)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,7 +111,7 @@ class HealthCalendar: UIViewController {
         dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
         
         // 初始 Calendar, 重新 reload collectionView
-        mHealthDictData.setDataSource(dictMMData)
+        mHealthCalCellData.setDataSource(dictMMData)
         self.initCalendarParm()
     }
     
@@ -109,13 +119,30 @@ class HealthCalendar: UIViewController {
     * 初始 NSCalendar, NSDate 相關參數<BR>
     */
     func initCalendarParm() {
-        aryAllBlock = mHealthDictData.getAllData(dictCurrDate)
+        aryAllBlock = mHealthCalCellData.getAllData(dictCurrDate)
         
          // collectionView Reload
         dispatch_async(dispatch_get_main_queue(), {
             self.labMM.text = self.dictCurrDate["MM"]! + "月"
             self.labYY.text = self.dictCurrDate["YY"]!
             self.viewCalendar.reloadData()
+        })
+        
+        // 重新 reload 健康項目資料的 TableView
+        self.reloadTableViewData()
+    }
+    
+    /**
+    * 日期改變重新 reload TableView
+    */
+    func reloadTableViewData() {
+        // 取得資料的 'key'
+        let strKey = "D_" + dictCurrDate["YY"]! + dictCurrDate["MM"]! + dictCurrDate["DD"]!
+        mHealthDataInit.setAllTestData(dictMMData[strKey])
+        dictCurrItemData = mHealthDataInit.GetAllTestData()
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.viewHealthList.reloadData()
         })
     }
     
@@ -158,8 +185,47 @@ class HealthCalendar: UIViewController {
      * CollectionView, Cell 長寬
      */
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.size.width/7), height: 40);
+        return CGSize(width: (collectionView.bounds.size.width/7), height: 30);
     }
+    
+    /**
+     * UITableView<BR>
+     * 可根據 'section' 回傳指定的數量
+     */
+    func tableView(tableView: UITableView!, numberOfRowsInSection section:Int) -> Int {
+        return dictCurrItemData.count
+    }
+    
+    /**
+     * UITableView, Cell 內容
+     */
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        if (dictCurrItemData.count < 1) {
+            return nil
+        }
+    
+        // 取得 Cell View
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellHealthVal", forIndexPath: indexPath) as! HealthValCell
+        
+        // 取得目前指定 Item 的 array data
+        let ditItem = dictCurrItemData[(mHealthDataInit.D_HEALTHITEMKEY)[indexPath.row]]!
+        
+        mCell.labName.text = ditItem["name"]
+        mCell.labVal.text = ditItem["val"]
+        mCell.labUnit.text = ditItem["unit"]
+        
+        return mCell
+    }
+    
+    /**
+     * UITableView, Cell 點取
+     */
+     /*
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     // 跳轉至指定的名稱的Segue頁面
+     self.performSegueWithIdentifier("NewsDetail", sender: nil)
+     }
+     */
     
     /**
      * btn '返回' 點取
