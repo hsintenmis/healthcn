@@ -43,8 +43,8 @@
 "healthname_group_whr" = "腰臀比";
 "healthname_group_bp" = "血压";
 "healthname_group_sugar" = "血糖";
-"heartbeatsunitname" = "次"
-"temperature_unitname_P" = "C°"
-"temperature_unitname_E" = "F°"
+"heartbeatsunitname" = "次";
+"temperature_unitname_P" = "C°";
+"temperature_unitname_E" = "F°";
 
 

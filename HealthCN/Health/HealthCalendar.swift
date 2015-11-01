@@ -6,8 +6,9 @@ import UIKit
 import Foundation
 
 /**
- * 以月曆型態顯示會員的健康檢測數值資料
- */
+* 健康檢測資料，以 Calendar 方式顯示，點取日期'Block'
+* 下方顯示該日期的健康檢測資料列表
+*/
 class HealthCalendar: UIViewController {
     // @IBOutlet
     @IBOutlet weak var viewCalendar: UICollectionView!
@@ -39,6 +40,9 @@ class HealthCalendar: UIViewController {
     // CollectionView Cell 的 'Block' dict 資料 class
     private var mHealthCalCellData = HealthCalCellData()
     
+    // // Cell 延伸設定 class
+    private var mHealthCellExtData = HealthCellExtData()
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +52,9 @@ class HealthCalendar: UIViewController {
         pubClass = PubClass(viewControl: mVCtrl)
         
         // 其他 class 初始
-        mHealthCalCellData.cusInit(mVCtrl)
         mHealthDataInit.CustInit(mVCtrl)
+        mHealthCalCellData.cusInit(mVCtrl)
+        mHealthCellExtData.CustInit(mVCtrl)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -213,8 +218,8 @@ class HealthCalendar: UIViewController {
         mCell.labName.text = ditItem["name"]
         mCell.labVal.text = ditItem["val"]
         mCell.labUnit.text = ditItem["unit"]
-        
-        return mCell
+
+        return mHealthCellExtData.getExtCell(mCell, dictData: ditItem)
     }
     
     /**

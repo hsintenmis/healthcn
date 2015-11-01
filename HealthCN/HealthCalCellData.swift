@@ -8,6 +8,7 @@ import Foundation
 class HealthCalCellData {
     private var pubClass: PubClass!
     
+    // 月曆相關參數設定
     private let aryFixWeek = ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"]
     private var dictDataSource: [String:[String:String]] = [:]
     private let dictColor = ["white":"FFFFFF", "green":"99CC33", "red":"FF6666"]
