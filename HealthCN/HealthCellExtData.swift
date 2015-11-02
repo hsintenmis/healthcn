@@ -47,7 +47,7 @@ class HealthCellExtData {
     * 'result', 'good'正常, 'bad'不正常, 'none'無數值, 可以給'圖片使用'
     */
     func getExtCell(mCell: HealthValCell, dictData: [String:String])->UITableViewCell {
-        var newCellData = mHealthExplainTestData.GetTestExplain(dictData["field"]!, jobjItem: dictData)
+        let newCellData = mHealthExplainTestData.GetTestExplain(dictData["field"]!, jobjItem: dictData)
         let strResult = newCellData["result"]!
         let dbVal = Double(dictData["val"]!)!
         

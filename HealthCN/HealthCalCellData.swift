@@ -25,7 +25,8 @@ class HealthCalCellData {
     */
     init() {
         components = mCalendar!.components(NSCalendarUnit.Month, fromDate: mNSDate)
-        components.timeZone = NSTimeZone(name: "ASIA/Taipei")
+        //components.timeZone = NSTimeZone(name: "ASIA/Taipei")
+        //components.timeZone = NSTimeZone(forSecondsFromGMT: 60 * 60 * 8)
     }
     
     /**
@@ -52,10 +53,14 @@ class HealthCalCellData {
         
         components.year = Int(dictCurrDate["YY"]!)!
         components.month = Int(dictCurrDate["MM"]!)!
+        components.hour = 8;
+        components.minute = 0;
+        components.second = 1;
         
         // 指定月份的第一天，最後一天，格式為 NSDate
         components.day = 1
         let firstDateOfMonth: NSDate = mCalendar!.dateFromComponents(components)!
+        
         components.month += 1
         components.day = 0
         let lastDateOfMonth: NSDate = mCalendar!.dateFromComponents(components)!
@@ -162,6 +167,7 @@ class HealthCalCellData {
         //dateFormatter.dateFormat = "yyyy-MM-dd ccc HH:mm"
         dateFormatter.dateFormat = "yyyyMMddccc"
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+
         return dateFormatter.stringFromDate(mDate)
     }
     

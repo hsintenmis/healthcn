@@ -41,7 +41,7 @@ class HealthCalendar: UIViewController {
     // calendar 相關
     private var aryAllBlock: [[[String:String]]] = []  // 月曆全部的 'block' 資料
     private var dictCurrDate: [String: String] = [:]  // 日期相關按鍵點取後，設定的YY MM DD
-    private var currCalBlockIndex: NSIndexPath = NSIndexPath()  // 點取日期紀錄目前的 index
+    private var currCalBlockIndex: NSIndexPath = NSIndexPath()  // 點取日期, 紀錄目前的 NSIndexPath
     
     // CollectionView Cell 的 'Block' dict 資料 class
     private var mHealthCalCellData = HealthCalCellData()
@@ -233,13 +233,21 @@ class HealthCalendar: UIViewController {
     }
     
     /**
-    * CollectionView, Cell onClick Listen
+    * CollectionView, 點取 Cell
     */
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         // 資料如. ["txt_day": "8", "hasdata": "N", "color": "FFFFFF"]
         let dictBlock: [String:String] = aryAllBlock[indexPath.section][indexPath.row]
         if (dictBlock["txt_day"] == "") {
+            return
+        }
+        
+        // 點取的 YMD 大於 today
+        let tmpDate0 = dictCurrDate["YY"]! + dictCurrDate["MM"]! + String(format: "%02d", Int(dictBlock["txt_day"]!)!)
+        let tmpDate1 = pubClass.subStr(today, strFrom: 0, strEnd: 4) + pubClass.subStr(today, strFrom: 4, strEnd: 6) + pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        
+        if (Int(tmpDate0) > Int(tmpDate1)) {
             return
         }
         
@@ -296,6 +304,17 @@ class HealthCalendar: UIViewController {
      self.performSegueWithIdentifier("NewsDetail", sender: nil)
      }
      */
+    
+    /**
+    *  btn 返回今日
+    */
+    @IBAction func actToday(sender: UIButton) {
+        dictCurrDate["YY"] = pubClass.subStr(today, strFrom: 0, strEnd: 4)
+        dictCurrDate["MM"] = pubClass.subStr(today, strFrom: 4, strEnd: 6)
+        dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        
+        self.initCalendarParm()
+    }
     
     /**
      * btn '返回' 點取
