@@ -8,10 +8,13 @@ import Foundation
 class HealthCalCellData {
     private var pubClass: PubClass!
     
+    // public property
+    let dictColor = ["white":"FFFFFF", "green":"99CC33", "red":"FF6666"] // block 顏色
+    
     // 月曆相關參數設定
     private let aryFixWeek = ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"]
     private var dictDataSource: [String:[String:String]] = [:]
-    private let dictColor = ["white":"FFFFFF", "green":"99CC33", "red":"FF6666"]
+    
     
     let mCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
     let mNSDate = NSDate()
@@ -25,6 +28,9 @@ class HealthCalCellData {
         components.timeZone = NSTimeZone(name: "ASIA/Taipei")
     }
     
+    /**
+    * Cust init
+    */
     func cusInit(mVC: UIViewController) {
         pubClass = PubClass(viewControl: mVC)
     }
@@ -77,6 +83,10 @@ class HealthCalCellData {
                 dictBlock["txt_day"] = ""
                 dictBlock["hasdata"] = "N"
                 dictBlock["color"] = dictColor["white"]
+                
+                dictBlock["index_sec"] = "0"
+                dictBlock["index_row"] = String(loopi)
+                
                 arySect.append(dictBlock)
                 
                 continue
@@ -101,7 +111,7 @@ class HealthCalCellData {
         aryAllBlock.append(arySect)
         
         // 其他 sect 列設定, 2~6 列
-        for (var currSect = 2; currSect <= 6; currSect++) {
+        for (var currSect = 1; currSect <= 5; currSect++) {
             var arySect: [[String:String]] = []
             
             // 指定的 sect 列, 設定「星期幾」的資料
@@ -128,13 +138,15 @@ class HealthCalCellData {
                     dictBlock["color"] = dictColor["white"]
                 }
                 
+                dictBlock["index_sec"] = String(currSect)
+                dictBlock["index_row"] = String(loopi)
+                
                 arySect.append(dictBlock)
                 currDay++
             }
             
             aryAllBlock.append(arySect)
         }
-        
         
         return aryAllBlock
     }

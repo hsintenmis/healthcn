@@ -367,8 +367,8 @@ class HealthExplainTestData {
     private func _setWhr(jobjItem: [String:AnyObject]) {
         // 取得數值文字
         let strWhr = jobjItem["val"] as! String
-        let strWaist: String = jobjItem["waistline"]!["val"] as! String
-        let strHip: String = jobjItem["hipline"]!["val"] as! String
+        let strWaist: String = jobjItem["waistline_val"]! as! String
+        let strHip: String = jobjItem["hipline_val"]! as! String
         
         // 設定 '腰圍','臀圍' 數值文字
         let strStat_ext = pubClass.getLang("healthname_waistline") + ":" + strWaist + pubClass.getLang("height_cm") + ", " + pubClass.getLang("healthname_hipline") + ":" + strHip + pubClass.getLang("height_cm")

@@ -15,6 +15,7 @@ class HealthCalendar: UIViewController {
     @IBOutlet weak var labMM: UILabel!
     @IBOutlet weak var labYY: UILabel!
     @IBOutlet weak var viewHealthList: UITableView!
+    @IBOutlet weak var labMMDD: UILabel!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -30,17 +31,22 @@ class HealthCalendar: UIViewController {
     private var dictMember: [String: String] = [:]  // 會員資料
     private var today: String = ""
     
-    private var dictCurrItemData: [String: [String:String]] = [:]  // 指定日期的資料, TableView use
+    // 指定日期的資料, TableView use
+    private var dictCurrItemData: [String: [String:String]] = [:]
+    
+    // 本月曆的起始 YYMM
+    private let firstYYMM = "201503"
+    private var lastYYMM = "202512"
     
     // calendar 相關
-    private let firstYYMM = "201503", lastYYMM = "202512"  // 本月曆的起始 YYMM
     private var aryAllBlock: [[[String:String]]] = []  // 月曆全部的 'block' 資料
     private var dictCurrDate: [String: String] = [:]  // 日期相關按鍵點取後，設定的YY MM DD
+    private var currCalBlockIndex: NSIndexPath = NSIndexPath()  // 點取日期紀錄目前的 index
     
     // CollectionView Cell 的 'Block' dict 資料 class
     private var mHealthCalCellData = HealthCalCellData()
     
-    // // Cell 延伸設定 class
+    // 健康資料列表 table Cell 延伸設定 class
     private var mHealthCellExtData = HealthCellExtData()
     
     // View load
@@ -52,9 +58,13 @@ class HealthCalendar: UIViewController {
         pubClass = PubClass(viewControl: mVCtrl)
         
         // 其他 class 初始
-        mHealthDataInit.CustInit(mVCtrl)
+        mHealthDataInit.custInit(mVCtrl)
         mHealthCalCellData.cusInit(mVCtrl)
         mHealthCellExtData.CustInit(mVCtrl)
+        
+        // TableCell autoheight
+        viewHealthList.estimatedRowHeight = 100.0
+        viewHealthList.rowHeight = UITableViewAutomaticDimension
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -111,6 +121,8 @@ class HealthCalendar: UIViewController {
         
         // 設定今天日期相關參數
         today = dictContent["today"] as! String
+        lastYYMM = pubClass.subStr(today, strFrom: 0, strEnd: 6)
+        
         dictCurrDate["YY"] = pubClass.subStr(today, strFrom: 0, strEnd: 4)
         dictCurrDate["MM"] = pubClass.subStr(today, strFrom: 4, strEnd: 6)
         dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
@@ -126,19 +138,37 @@ class HealthCalendar: UIViewController {
     func initCalendarParm() {
         aryAllBlock = mHealthCalCellData.getAllData(dictCurrDate)
         
-         // collectionView Reload
+        // 初始 calendar collectionView 後, 取得目前日期對應的 Block NSIndexPath
+        let todayYYMM = pubClass.subStr(today, strFrom: 0, strEnd: 6)
+        var todayDD: String = "1"
+        
+        if (todayYYMM == (dictCurrDate["YY"]! + dictCurrDate["MM"]!)) {
+            todayDD = pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        }
+        
+        for (var i=0; i<5; i++) {
+            for (var j=0; j<7; j++) {
+                if (Int(todayDD)! == Int(aryAllBlock[i][j]["txt_day"]!)) {
+                    currCalBlockIndex = NSIndexPath(forRow: j, inSection: i)
+                    
+                    break
+                }
+            }
+        }
+        
+        // collectionView Reload
         dispatch_async(dispatch_get_main_queue(), {
-            self.labMM.text = self.dictCurrDate["MM"]! + "月"
+            self.labMM.text = self.pubClass.getLang("mm_" + self.dictCurrDate["MM"]!)
             self.labYY.text = self.dictCurrDate["YY"]!
             self.viewCalendar.reloadData()
         })
-        
+
         // 重新 reload 健康項目資料的 TableView
         self.reloadTableViewData()
     }
     
     /**
-    * 日期改變重新 reload TableView
+    * 日期改變, 重新 reload TableView
     */
     func reloadTableViewData() {
         // 取得資料的 'key'
@@ -146,8 +176,12 @@ class HealthCalendar: UIViewController {
         mHealthDataInit.setAllTestData(dictMMData[strKey])
         dictCurrItemData = mHealthDataInit.GetAllTestData()
         
+        let strMM = self.pubClass.getLang("mm_" + self.dictCurrDate["MM"]!)
+        let strDD = String((Int(self.dictCurrDate["DD"]!))!)
+        
         dispatch_async(dispatch_get_main_queue(), {
             self.viewHealthList.reloadData()
+            self.labMMDD.text =  "\(strMM)\(strDD)日"
         })
     }
     
@@ -170,7 +204,7 @@ class HealthCalendar: UIViewController {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: CellCalendarDate = collectionView.dequeueReusableCellWithReuseIdentifier("cellCalendarDate", forIndexPath: indexPath) as! CellCalendarDate
-
+        
         if (aryAllBlock.count < 1) {
             return cell
         }
@@ -183,6 +217,11 @@ class HealthCalendar: UIViewController {
         cell.labDate.layer.cornerRadius = 5
         cell.labDate.layer.borderColor = (pubClass.ColorHEX(dictBlock["color"]!)).CGColor
 
+        // view 首次 reload, 設定以選擇的日期 calendar block 顏色
+        if (currCalBlockIndex == indexPath) {
+            cell.labDate.layer.borderColor = (self.pubClass.ColorHEX(self.mHealthCalCellData.dictColor["red"]!)).CGColor
+        }
+        
         return cell
     }
     
@@ -191,6 +230,32 @@ class HealthCalendar: UIViewController {
      */
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.size.width/7), height: 30);
+    }
+    
+    /**
+    * CollectionView, Cell onClick Listen
+    */
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        // 資料如. ["txt_day": "8", "hasdata": "N", "color": "FFFFFF"]
+        let dictBlock: [String:String] = aryAllBlock[indexPath.section][indexPath.row]
+        if (dictBlock["txt_day"] == "") {
+            return
+        }
+        
+        // 原先的 calendar block 顏色回復原先的值
+        let strColor = aryAllBlock[currCalBlockIndex.section][currCalBlockIndex.row]["color"]
+        let newColor = (pubClass.ColorHEX(strColor!)).CGColor
+        (viewCalendar.cellForItemAtIndexPath(currCalBlockIndex) as! CellCalendarDate).labDate.layer.borderColor = newColor
+
+        // 更新點取的 calendar block 顏色
+        currCalBlockIndex = indexPath
+        
+        (viewCalendar.cellForItemAtIndexPath(indexPath) as! CellCalendarDate).labDate.layer.borderColor = (pubClass.ColorHEX(mHealthCalCellData.dictColor["red"]!)).CGColor
+        
+        // 更新 'tableList' data
+        dictCurrDate["DD"] = String(format: "%02d", Int(dictBlock["txt_day"]!)!)
+        self.reloadTableViewData()
     }
     
     /**

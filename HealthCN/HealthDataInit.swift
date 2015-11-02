@@ -26,7 +26,7 @@ class HealthDataInit {
     /**
     * Cust init
     */
-    func CustInit(mVC: UIViewController) {
+    func custInit(mVC: UIViewController) {
         mVCtrl = mVC
         pubClass = PubClass(viewControl: mVCtrl)
         
@@ -73,6 +73,10 @@ class HealthDataInit {
             
             self.setUnitNameVal(strKey, doubleVal: val)
         }
+        
+        // 重新處理 'whr' 腰臀比資料, 加入 waistline 腰圍, hipline 臀圍 數值
+        mapAllData["whr"]!["waistline_val"] = mapAllData["waistline"]!["val"]
+        mapAllData["whr"]!["hipline_val"] = mapAllData["hipline"]!["val"]
     }
     
     /**
@@ -161,6 +165,7 @@ class HealthDataInit {
             mapItem["val"] = String(format:"%.2f", doubleVal)
             mapItem["unit"] = ""
             mapItem["group"] = "whr"
+            
             mapAllData[strKey] = mapItem
             
             return;

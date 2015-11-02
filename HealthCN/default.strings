@@ -15,6 +15,20 @@
 "err_data" = "資料錯誤!";
 "nodata" = "目前沒有資料. . .";
 
+"mm_01" = "一月";
+"mm_02" = "二月";
+"mm_03" = "三月";
+"mm_04" = "四月";
+"mm_05" = "五月";
+"mm_06" = "六月";
+"mm_07" = "七月";
+"mm_08" = "八月";
+"mm_09" = "九月";
+"mm_10" = "十月";
+"mm_11" = "十一月";
+"mm_12" = "十二月";
+
+"height_cm" = "厘米(CM)";
 "name_height" = "厘米(CM)";
 "name_weight" = "千克(KG)";
 "genderandage" = "性别年龄";
@@ -44,7 +58,146 @@
 "healthname_group_bp" = "血压";
 "healthname_group_sugar" = "血糖";
 "heartbeatsunitname" = "次";
+
+"healthstandvalexplain" = "标准数值应如下所示:";
+"health_nodata" = "无数值";
+"health_noexplain" = "目前没有说明 . . .";
+"health_inputdataerr" = "输入资料错误!";
+"health_inputdataerr_weight" = "输入资料错误! 体重数值错误!";
+
+"bmirs_001" = "过轻";
+"bmirs_002" = "正常";
+"bmirs_003" = "过重";
+"bmirs_004" = "轻度肥胖";
+"bmirs_005" = "中度肥胖";
+"bmirs_006" = "重度肥胖";
+"bmival_001" = "BMI < 18.5";
+"bmival_002" = "BMI 介於 18.5 ~ 24";
+"bmival_003" = "BMI 介於 24 ~ 27";
+"bmival_004" = "BMI 介於 27 ~ 30";
+"bmival_005" = "BMI 介於 30 ~ 35";
+"bmival_006" = "BMI > 35";
+
+"fatrs_M_001" = "(男)偏瘦";
+"fatrs_M_002" = "(男)正常";
+"fatrs_M_003" = "(男)偏胖";
+"fatrs_M_004" = "(男)肥胖";
+
+"fatrs_F_001" = "(女)偏瘦";
+"fatrs_F_002" = "(女)正常";
+"fatrs_F_003" = "(女)偏胖";
+"fatrs_F_004" = "(女)肥胖";
+
+"fatval_M_001" = "体脂率介於 12.1 ~ 17.0";
+"fatval_M_002" = "体脂率介於 12.5 ~ 18.0";
+"fatval_M_003" = "体脂率介於 13.1 ~ 18.4";
+"fatval_M_004" = "体脂率介於 13.5 ~ 19.0";
+"fatval_M_005" = "体脂率介於 14.1 ~ 19.4";
+
+"fatval_F_001" = "体脂率介於 15.1 ~ 22.0";
+"fatval_F_002" = "体脂率介於 15.5 ~ 23.0";
+"fatval_F_003" = "体脂率介於 16.1 ~ 23.4";
+"fatval_F_004" = "体脂率介於 16.5 ~ 24.0";
+"fatval_F_005" = "体脂率介於 17.1 ~ 24.4";
+
+"waistrs_001" = "腰围超标";
+"waistrs_002" = "腰围与腰臀比都超标";
+"waistrs_003" = "正常";
+"waistrs_004" = "腰臀比超标";
+"waistval_001" = "男:腰围>90公分(35.4吋)\n女:腰围>80公分(31.5吋)";
+"waistval_002" = "男:腰围>90公分(35.4吋),腰臀比>0.9\n女:腰围>80公分(31.5吋),腰臀比>0.85";
+"waistval_003" = "男:腰围<=90公分(35.4吋),腰臀比<=0.9\n女:腰围<=80公分(31.5吋),腰臀比<=0.85";
+"waistval_004" = "男:腰臀比>0.9\n女:腰臀比>0.85";
+
 "temperature_unitname_P" = "C°";
 "temperature_unitname_E" = "F°";
+
+"bodytemperature" = "体温";
+"plzseltesttemptype" = "请选择体温测量方式";
+"bodytemperatureerr" = "体温输入资料错误!!";
+"testtemptype" = "测量方式";
+"testtemptype_0" = "耳温";
+"testtemptype_1" = "腋下";
+"testtemptype_2" = "舌下";
+"testtemptype_3" = "肛温";
+"bodytemp_normal" = "正常";
+"bodytemp_hot" = "发烧";
+"bodytemp_low" = "过低";
+"temprs_001" = "正常";
+"temprs_002" = "发烧";
+"temprs_003" = "过低";
+"tempval_001" = "";
+"tempval_002" = "耳温 > 37.5度(摄氏) 或 > 99.5度(华氏)";
+"tempval_003" = "耳温 < 36.0度(摄氏) 或 < 96.8度(华氏)";
+
+"waistline" = "腰围";
+"hips" = "臀围";
+"waistorhipserr" = "腰围或是臀围输入资料错误!";
+"blood_shrink" = "收缩压";
+"blood_diastole" = "舒张压";
+"blooddatainputerr" = "输入的血压数值资料错误!";
+"bloodrs_001" = "血压理想";
+"bloodrs_002" = "血压正常";
+"bloodrs_003" = "正常但偏高";
+"bloodrs_004" = "第一期高血压";
+"bloodrs_005" = "第二期高血压";
+"bloodrs_006" = "第三期高血压";
+"bpval_001" = "收缩压 <120 及 舒张压 <80";
+"bpval_002" = "收缩压 <130 及 舒张压 <85";
+"bpval_003" = "收缩压 130~139 或 舒张压 85~89";
+"bpval_004" = "收缩压 140~159 或 舒张压 90~99";
+"bpval_005" = "收缩压 160~179 或 舒张压 100~109";
+"bpval_006" = "收缩压 >=180 或 舒张压 >=110";
+
+"bs_empty" = "空腹";
+"bs_after" = "饭後";
+"bloodsugarrs_001" = "空腹血糖偏低";
+"bloodsugarrs_002" = "空腹血糖正常";
+"bloodsugarrs_003" = "空腹血糖偏高";
+"bloodsugarrs_004" = "空腹血糖过高";
+"bloodsugarrs_005" = "饭後血糖偏低";
+"bloodsugarrs_006" = "饭後血糖正常";
+"bloodsugarrs_007" = "饭後血糖偏高";
+"bloodsugarrs_008" = "饭後血糖偏高";
+"bloodsugardataerr" = "血糖数值输入资料错误!";
+
+"heartbeatsunitname" = "次";
+"heartbeatsnums" = "心跳数";
+"heartbeatsnumserr" = "输入数值错误!";
+"heartbeats_001" = "过低";
+"heartbeats_002" = "正常";
+"heartbeats_003" = "过高";
+"heartbeats_ratemsg" = "适合您的中低强度运动心率: ";
+"heartval_001" = "心跳数 < 50";
+"heartval_002" = "心跳数介於 50 ~ 100";
+"heartval_003" = "心跳数 > 100";
+
+"waterrs_normal" = "正常";
+"waterrs_low" = "偏低";
+"waterrs_high" = "过高";
+"waterval_001" = "含水率介於 54.0 ~ 60.0";
+"waterval_002" = "含水率介於 53.5 ~ 59.5";
+"waterval_003" = "含水率介於 53.0 ~ 59.0";
+"waterval_004" = "含水率介於 52.5 ~ 58.5";
+"waterval_005" = "含水率介於 52.0 ~ 58.0";
+
+"caloryrs_normal" = "正常";
+"caloryrs_low" = "偏低";
+"caloryrs_high" = "过高";
+
+"caloryrs_good" = "正常";
+"caloryrs_bad" = "需注意";
+
+"caloryval_M_001" = "(男)18岁以下 ,标准值 1610Kcal";
+"caloryval_M_002" = "(男)18~29岁, 标准值 1550Kcal";
+"caloryval_M_003" = "(男)30~49岁, 标准值 1500Kcal";
+"caloryval_M_004" = "(男)50~69岁, 标准值 1350Kcal";
+"caloryval_M_005" = "(男)69岁以上, 标准值 1220Kcal";
+
+"caloryval_F_001" = "(女)18岁以下 ,标准值 1300Kcal";
+"caloryval_F_002" = "(女)18~29岁, 标准值 1210Kcal";
+"caloryval_F_003" = "(女)30~49岁, 标准值 1170Kcal";
+"caloryval_F_004" = "(女)50~69岁, 标准值 1100Kcal";
+"caloryval_F_005" = "(女)69岁以上, 标准值 1010Kcal";
 
 
