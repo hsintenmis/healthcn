@@ -89,6 +89,10 @@
 		D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2EB1BE323D00067CCC1 /* HealthDataInit.swift */; };
 		D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2ED1BE34FEB0067CCC1 /* HealthCellExtData.swift */; };
 		D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CE2EF1BE36D640067CCC1 /* HealthExplainTestData.swift */; };
+		D726BE7E1BE87B980039C70E /* ReservationAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE7D1BE87B980039C70E /* ReservationAdd.swift */; };
+		D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */; };
+		D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE811BE892FA0039C70E /* SelDateCell.swift */; };
+		D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE831BE8A9AC0039C70E /* SelServCell.swift */; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; };
 		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
@@ -186,6 +190,10 @@
 		D71CE2EB1BE323D00067CCC1 /* HealthDataInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataInit.swift; sourceTree = "<group>"; };
 		D71CE2ED1BE34FEB0067CCC1 /* HealthCellExtData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCellExtData.swift; sourceTree = "<group>"; };
 		D71CE2EF1BE36D640067CCC1 /* HealthExplainTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthExplainTestData.swift; sourceTree = "<group>"; };
+		D726BE7D1BE87B980039C70E /* ReservationAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReservationAdd.swift; path = Reservation/ReservationAdd.swift; sourceTree = "<group>"; };
+		D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelTimeCell.swift; sourceTree = "<group>"; };
+		D726BE811BE892FA0039C70E /* SelDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelDateCell.swift; sourceTree = "<group>"; };
+		D726BE831BE8A9AC0039C70E /* SelServCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelServCell.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCalCellData.swift; sourceTree = "<group>"; };
@@ -333,6 +341,7 @@
 				42E708F41BC752D40092A5A9 /* MainHome */,
 				42C9C4921BD15BDF00BB217F /* Program */,
 				429B2E651BDD207D00BAF88E /* Health */,
+				D726BE7C1BE87B4E0039C70E /* Reservation */,
 				42E708F31BC752C40092A5A9 /* PubClass */,
 				42C4984C1BC80B7D002DF0ED /* image */,
 				42E708F51BC752EE0092A5A9 /* SysFIle */,
@@ -371,6 +380,17 @@
 				42E708FA1BC754190092A5A9 /* default.strings */,
 			);
 			name = SysFIle;
+			sourceTree = "<group>";
+		};
+		D726BE7C1BE87B4E0039C70E /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				D726BE7D1BE87B980039C70E /* ReservationAdd.swift */,
+				D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */,
+				D726BE811BE892FA0039C70E /* SelDateCell.swift */,
+				D726BE831BE8A9AC0039C70E /* SelServCell.swift */,
+			);
+			name = Reservation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,13 +530,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D726BE7E1BE87B980039C70E /* ReservationAdd.swift in Sources */,
 				427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */,
+				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
 				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
+				D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
+				D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */,
 				D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */,
 				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
 				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,

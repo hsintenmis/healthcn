@@ -15,6 +15,24 @@
 "err_data" = "資料錯誤!";
 "nodata" = "目前沒有資料. . .";
 
+"week_0" = "日";
+"week_1" = "一";
+"week_2" = "二";
+"week_3" = "三";
+"week_4" = "四";
+"week_5" = "五";
+"week_6" = "六";
+"week_7" = "日";
+
+"weeklong_0" = "星期日";
+"weeklong_1" = "星期一";
+"weeklong_2" = "星期二";
+"weeklong_3" = "星期三";
+"weeklong_4" = "星期四";
+"weeklong_5" = "星期五";
+"weeklong_6" = "星期六";
+"weeklong_7" = "星期日";
+
 "mm_01" = "一月";
 "mm_02" = "二月";
 "mm_03" = "三月";
@@ -200,4 +218,6 @@
 "caloryval_F_004" = "(女)50~69岁, 标准值 1100Kcal";
 "caloryval_F_005" = "(女)69岁以上, 标准值 1010Kcal";
 
+"servicezone" = "服務區";
+"srv_notavail" = "滿";
 
