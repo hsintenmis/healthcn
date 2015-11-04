@@ -6,9 +6,9 @@ import UIKit
 import Foundation
 
 /**
- * 療程選擇 class, 由 ReservationAdd 轉入
+ * 療程選擇 (已購買) class, 由 ReservationAdd 轉入
  */
-class CourseSel: UIViewController {
+class CourseSelCust: UIViewController {
     @IBOutlet weak var tableList: UITableView!
     
     // common property

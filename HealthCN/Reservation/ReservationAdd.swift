@@ -57,7 +57,7 @@ class ReservationAdd: UIViewController {
     
     // 療程相關資料集, 預設療程/購買的療程
     private var dictCourse_def: Array<Dictionary<String, String>>!
-    private var dictCourse_cust: Dictionary<String, AnyObject>?
+    private var dictCourse_cust: Array<Dictionary<String, String>>?
     
     // View load
     override func viewDidLoad() {
@@ -117,6 +117,13 @@ class ReservationAdd: UIViewController {
         
         // 預設療程資料集
         dictCourse_def = dictContent["coursedef"] as! Array<Dictionary<String, String>>
+        
+        // 已購買療程資料集
+        if dictContent["coursedef"] != nil {
+            dictCourse_cust = dictContent["coursecust"] as? Array<Dictionary<String, String>>
+        } else {
+            dictCourse_cust = nil
+        }
         
         // 設定今天日期相關參數
         today = dictContent["today"] as! String

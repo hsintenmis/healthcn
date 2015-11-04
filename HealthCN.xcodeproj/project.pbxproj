@@ -81,6 +81,8 @@
 		42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1A73C1BC587DD008ECEFB /* MainLogin.swift */; };
 		42D1A7401BC587DD008ECEFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D1A73E1BC587DD008ECEFB /* Main.storyboard */; };
 		42D1A7421BC587DD008ECEFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D1A7411BC587DD008ECEFB /* Assets.xcassets */; };
+		42E376B91BEA6CDE00910327 /* CourseSelCustCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */; };
+		42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E376BA1BEA6DAE00910327 /* CourseSelCust.swift */; };
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; };
@@ -184,6 +186,8 @@
 		42D1A73F1BC587DD008ECEFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42D1A7411BC587DD008ECEFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42D1A7461BC587DD008ECEFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSelCustCell.swift; sourceTree = "<group>"; };
+		42E376BA1BEA6DAE00910327 /* CourseSelCust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSelCust.swift; sourceTree = "<group>"; };
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 				D726BE831BE8A9AC0039C70E /* SelServCell.swift */,
 				D7FBBC741BE9F890009A615B /* CourseSel.swift */,
 				D7FBBC761BEA0600009A615B /* CourseSelCell.swift */,
+				42E376BA1BEA6DAE00910327 /* CourseSelCust.swift */,
+				42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
+				42E376B91BEA6CDE00910327 /* CourseSelCustCell.swift in Sources */,
 				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
 				D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */,
@@ -553,6 +560,7 @@
 				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
 				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
+				42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */,
 				D7FDEFC11BD8E49200ECA71A /* OdrsCell.swift in Sources */,
 				422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */,
 				4219A7D91BD6A05E008C6F0E /* NewsDetail.swift in Sources */,
