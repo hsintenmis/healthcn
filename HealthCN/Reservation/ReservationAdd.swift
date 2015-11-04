@@ -13,6 +13,10 @@ import Foundation
  *
  */
 class ReservationAdd: UIViewController {
+    @IBOutlet weak var labReserDate: UILabel!
+    @IBOutlet weak var labReserTime: UILabel!
+    @IBOutlet weak var labReserCourse: UILabel!
+    @IBOutlet weak var labMsgSelDate: UILabel!
     
     @IBOutlet weak var colvSelDate: UICollectionView!
     @IBOutlet weak var colvSelServ: UICollectionView!
@@ -25,6 +29,18 @@ class ReservationAdd: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     private var isDataSourceReady = false
     
+    // CollectionView Cell 背景
+    let dictColor = ["white":"FFFFFF", "red":"FFCCCC", "gray":"C0C0C0", "silver":"F0F0F0"]
+    
+    // Collectuion Cell View 目前選擇的 position
+    private var positionDate = -1
+    private var positionServ = 0
+    private var positionTime = -1
+    
+    // Collectuion Cell View 目前選擇的 NSIndexPath
+    private var indexpathDate: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    private var indexpathServ = NSIndexPath(forRow: 0, inSection: 0)
+    private var indexpathTime: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     
     /*日期/時間/服務區  JSON 資料 */
     // colvView 選擇日期的資料集, ex. 0=>{'ymd'="20151031,..., 'service'=JSONAry "}
@@ -32,13 +48,16 @@ class ReservationAdd: UIViewController {
     
     // colvView 選擇服務區資料
     private var numsSrvZone = 0  // 服務區總數
-    private var positionServ = 0  // 目前選擇的服務區 position
     
     // colvView, 選擇時段 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
     private var dictDataTime: [[String:AnyObject]] = [[:]]  // 目前選擇的'時段'資料集
     
     // 日期相關設定
     private var today: String = ""
+    
+    // 療程相關資料集, 預設療程/購買的療程
+    private var dictCourse_def: Array<Dictionary<String, String>>!
+    private var dictCourse_cust: Dictionary<String, AnyObject>?
     
     // View load
     override func viewDidLoad() {
@@ -47,6 +66,8 @@ class ReservationAdd: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
+        
+        labMsgSelDate.alpha = 0.0
     }
     
     // View did Appear
@@ -94,6 +115,9 @@ class ReservationAdd: UIViewController {
         let dictRespon = dictRS["data"] as! Dictionary<String, AnyObject>
         let dictContent = dictRespon["content"] as! Dictionary<String, AnyObject>
         
+        // 預設療程資料集
+        dictCourse_def = dictContent["coursedef"] as! Array<Dictionary<String, String>>
+        
         // 設定今天日期相關參數
         today = dictContent["today"] as! String
         
@@ -114,7 +138,6 @@ class ReservationAdd: UIViewController {
             self.colvSelServ.reloadData()
             self.colvSelTime.reloadData()
         })
-        
     }
     
     /**
@@ -170,7 +193,7 @@ class ReservationAdd: UIViewController {
     }
     
     /**
-    * 回傳 collectionView '選擇日期' CellView
+    * 回傳 collectionView CellView, '選擇日期'
     */
     func getCellDate(collectionView: UICollectionView, indexPath: NSIndexPath)->UICollectionViewCell {
         let mCell: SelDateCell = collectionView.dequeueReusableCellWithReuseIdentifier("cellSelDate", forIndexPath: indexPath) as! SelDateCell
@@ -186,13 +209,20 @@ class ReservationAdd: UIViewController {
         // 樣式/外觀/顏色
         mCell.layer.borderWidth = 1
         mCell.layer.cornerRadius = 5
-        mCell.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
+        mCell.layer.borderColor = pubClass.ColorCGColor(dictColor["gray"])
+        
+        // 背景
+        if (positionDate == indexPath.row) {
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["red"])
+        } else {
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["white"])
+        }
         
         return mCell
     }
     
     /**
-     * 回傳 collectionView '選擇服務區' CellView
+     * 回傳 collectionView CellView,  '選擇服務區'
      */
     func getCellServ(collectionView: UICollectionView, indexPath: NSIndexPath)->UICollectionViewCell {
         let mCell: SelServCell = collectionView.dequeueReusableCellWithReuseIdentifier("cellSelServ", forIndexPath: indexPath) as! SelServCell
@@ -202,19 +232,20 @@ class ReservationAdd: UIViewController {
         // 樣式/外觀/顏色
         mCell.layer.borderWidth = 1
         mCell.layer.cornerRadius = 5
-        mCell.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
+        mCell.layer.borderColor = pubClass.ColorCGColor(dictColor["gray"])
         
-        if (indexPath.row == positionServ) {
-            mCell.layer.backgroundColor = (pubClass.ColorHEX("FFCCCC")).CGColor
+        // 背景
+        if (positionServ == indexPath.row) {
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["red"])
         } else {
-            mCell.layer.backgroundColor = (pubClass.ColorHEX("FFFFFF")).CGColor
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["white"])
         }
-    
+        
         return mCell
     }
     
     /**
-     * 回傳 collectionView '選擇時間' CellView
+     * 回傳 collectionView CellView, '選擇時間'
      */
     func getCellTime(collectionView: UICollectionView, indexPath: NSIndexPath)->UICollectionViewCell {
         let mCell: SelTimeCell = collectionView.dequeueReusableCellWithReuseIdentifier("cellSelTime", forIndexPath: indexPath) as! SelTimeCell
@@ -225,17 +256,125 @@ class ReservationAdd: UIViewController {
         // 樣式/外觀/顏色
         mCell.layer.borderWidth = 1
         mCell.layer.cornerRadius = 5
-        mCell.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
+        mCell.layer.borderColor = pubClass.ColorCGColor(dictColor["gray"])
+        mCell.labStat.text = pubClass.getLang("")
         
         if ((dictItem["isavail"] as! String) == "N") {
-            mCell.layer.backgroundColor = (pubClass.ColorHEX("F0F0F0")).CGColor
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["silver"])
             mCell.labStat.text = pubClass.getLang("srv_notavail")
-        } else {
-            mCell.layer.backgroundColor = (pubClass.ColorHEX("FFFFFF")).CGColor
-            mCell.labStat.text = pubClass.getLang("")
+        }
+        else if (positionTime == indexPath.row) {
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["red"])
+        }
+        else {
+            mCell.layer.backgroundColor = pubClass.ColorCGColor(dictColor["white"])
         }
         
         return mCell
+    }
+    
+    /**
+     * CollectionView, 點取 Cell
+     */
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let strIdent = collectionView.restorationIdentifier
+
+        // 點選日期
+        if (strIdent == "colvSelDate") {
+            positionDate = indexPath.row
+            self.resetDataDate()
+        }
+        else if (strIdent == "colvSelServ") {
+            if (positionDate < 0) {
+                labMsgSelDate.alpha = 1.0
+                return
+            }
+            
+            positionServ = indexPath.row
+            self.resetDataServ()
+        }
+        else if (strIdent == "colvSelTime") {
+            if (positionDate < 0) {
+                labMsgSelDate.alpha = 1.0
+                return
+            }
+            
+            let dictItem = dictDataTime[indexPath.row]
+            
+            // 檢查是否允許點取
+            if ((dictItem["isavail"] as! String) == "N") {
+                return
+            }
+            
+            positionTime = indexPath.row
+            
+            // lab 文字顯示
+            labReserTime.text = String(format: "%02d", dictItem["hh"] as! Int) + ":00"
+            
+            self.resetDataTime()
+        }
+    }
+    
+    /**
+    * 日期選擇點取，服務區重新顯示
+    */
+    func resetDataDate() {
+        positionServ = 0
+        labMsgSelDate.alpha = 0.0
+        
+        // lab 文字顯示
+        let dictItem = dictDataSelDate[positionDate]
+        let strYY = pubClass.subStr(dictItem["ymd"] as! String, strFrom: 0, strEnd: 4)
+        let strMM = pubClass.subStr(dictItem["ymd"] as! String, strFrom: 4, strEnd: 6)
+        let strDD = pubClass.subStr(dictItem["ymd"] as! String , strFrom: 6, strEnd: 8)
+        let strLabDate = strYY + "年" + pubClass.getLang("mm_" + strMM) + String(Int(strDD)!) + "日" + " " + pubClass.getLang("weeklong_" + (dictItem["week"] as! String))
+        labReserDate.text = strLabDate
+        
+        // cell reload
+        dispatch_async(dispatch_get_main_queue(), {
+            self.colvSelDate.reloadData()
+        })
+        
+        self.resetDataServ()
+    }
+    
+    /**
+     * 服務區選擇點取，時段重新顯示
+     */
+    func resetDataServ() {
+        positionTime = -1
+        labReserTime.text = ""
+        
+        // 根據服務區, 取得2對應時段資料集 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
+        dictDataTime = dictDataSelDate[positionDate]["service"]![positionServ] as! [[String:AnyObject]]
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.colvSelServ.reloadData()
+        })
+        
+        self.resetDataTime()
+    }
+    
+    /**
+     * 時段選擇點取
+     */
+    func resetDataTime() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.colvSelTime.reloadData()
+        })
+    }
+    
+    /**
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "CourseSel") {
+            let cvChild = segue.destinationViewController as! CourseSel
+            cvChild.aryCourseData = dictCourse_def
+            
+            return
+        }
     }
     
     /**

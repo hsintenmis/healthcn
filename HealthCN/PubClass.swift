@@ -226,9 +226,9 @@ class PubClass {
     }
     
     /**
-    * Color 使用 HEX code, ex. #FFFFFF<BR>
+    * Color 使用 HEX code, ex. #FFFFFF, 回傳 UIColor
     */
-    func ColorHEX (hex:String) -> UIColor {
+    func ColorHEX (hex:String!) -> UIColor {
         var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
         
         if (cString.hasPrefix("#")) {
@@ -249,6 +249,14 @@ class PubClass {
         NSScanner(string: bString).scanHexInt(&b)
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+    
+    /**
+    * 顏色數值輸入'#FFFFFF', 回傳 CGColor
+    */
+    func ColorCGColor(hex: String!)->CGColor {
+        let mColor = self.ColorHEX(hex)
+        return mColor.CGColor
     }
     
     /**
