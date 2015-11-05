@@ -22,6 +22,8 @@ class ReservationAdd: UIViewController {
     @IBOutlet weak var colvSelServ: UICollectionView!
     @IBOutlet weak var colvSelTime: UICollectionView!
     
+    @IBOutlet weak var btnCourseCust: UIButton!
+    
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
@@ -57,7 +59,7 @@ class ReservationAdd: UIViewController {
     
     // 療程相關資料集, 預設療程/購買的療程
     private var dictCourse_def: Array<Dictionary<String, String>>!
-    private var dictCourse_cust: Array<Dictionary<String, String>>?
+    private var dictCourse_cust: [[String:AnyObject]] = [[:]]
     
     // View load
     override func viewDidLoad() {
@@ -119,12 +121,10 @@ class ReservationAdd: UIViewController {
         dictCourse_def = dictContent["coursedef"] as! Array<Dictionary<String, String>>
         
         // 已購買療程資料集
-        if dictContent["coursedef"] != nil {
-            dictCourse_cust = dictContent["coursecust"] as? Array<Dictionary<String, String>>
-        } else {
-            dictCourse_cust = nil
+        if let jaryData = dictContent["coursecust"] as? Array<Dictionary<String, AnyObject>> {
+            dictCourse_cust = jaryData
         }
-        
+
         // 設定今天日期相關參數
         today = dictContent["today"] as! String
         
@@ -144,6 +144,10 @@ class ReservationAdd: UIViewController {
             self.colvSelDate.reloadData()
             self.colvSelServ.reloadData()
             self.colvSelTime.reloadData()
+            
+            if (self.dictCourse_cust.count < 1) {
+                self.btnCourseCust.layer.backgroundColor = self.pubClass.ColorCGColor(self.dictColor["gray"])
+            }
         })
     }
     
@@ -379,6 +383,13 @@ class ReservationAdd: UIViewController {
         if (segue.identifier == "CourseSel") {
             let cvChild = segue.destinationViewController as! CourseSel
             cvChild.aryCourseData = dictCourse_def
+            
+            return
+        }
+        
+        if (segue.identifier == "CourseSelCust" && self.dictCourse_cust.count > 0) {
+            let cvChild = segue.destinationViewController as! CourseSelCust
+            cvChild.aryCourseData = dictCourse_cust
             
             return
         }

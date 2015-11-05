@@ -43,7 +43,7 @@ class NewsDetail: UIViewController {
     */
     private func initViewField() {
         // 初始 TableView Cell 自動調整高度
-        tableDetail.estimatedRowHeight = 10.0
+        tableDetail.estimatedRowHeight = 250.0
         tableDetail.rowHeight = UITableViewAutomaticDimension
     }
     

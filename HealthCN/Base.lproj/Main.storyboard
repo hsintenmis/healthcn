@@ -795,64 +795,60 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="250" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="j49-96-otl">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="300" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="j49-96-otl">
                                 <rect key="frame" x="-4" y="64" width="328" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNewsDetail" id="VGS-7V-xKg" customClass="NewsDetailCell" customModule="HealthCN" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="328" height="250"/>
+                                        <rect key="frame" x="0.0" y="10" width="328" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="VGS-7V-xKg" id="1hh-tT-wt5">
-                                            <rect key="frame" x="0.0" y="0.0" width="328" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMQ-fk-eEP" userLabel="labTitle">
-                                                    <rect key="frame" x="18" y="8" width="292" height="24"/>
+                                                    <rect key="frame" x="18" y="18" width="292" height="24"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015/01/31" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIT-HS-1d2" userLabel="labDate">
-                                                    <rect key="frame" x="18" y="33" width="200" height="17"/>
+                                                    <rect key="frame" x="18" y="47" width="292" height="17"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="UGy-P0-T5g"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zZ-QA-XhC" userLabel="labContent">
-                                                    <rect key="frame" x="18" y="58" width="292" height="17"/>
+                                                    <rect key="frame" x="18" y="69" width="292" height="17"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doH-cr-CK1">
-                                                    <rect key="frame" x="14" y="82" width="300" height="159"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="doH-cr-CK1">
+                                                    <rect key="frame" x="18" y="101" width="292" height="180"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LPV-L9-Ori"/>
-                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="VMQ-fk-eEP" secondAttribute="trailing" constant="10" id="9mW-OU-z8A"/>
-                                                <constraint firstItem="lIT-HS-1d2" firstAttribute="top" secondItem="VMQ-fk-eEP" secondAttribute="bottom" constant="1" id="D6W-8W-S3G"/>
-                                                <constraint firstItem="0zZ-QA-XhC" firstAttribute="top" secondItem="lIT-HS-1d2" secondAttribute="bottom" constant="8" id="HmM-MF-lqa"/>
-                                                <constraint firstItem="doH-cr-CK1" firstAttribute="centerX" secondItem="1hh-tT-wt5" secondAttribute="centerX" id="Sh6-Sf-obY"/>
-                                                <constraint firstAttribute="topMargin" secondItem="VMQ-fk-eEP" secondAttribute="top" id="Vek-eT-03I"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="0zZ-QA-XhC" secondAttribute="trailing" constant="10" id="X0e-QR-JaN"/>
-                                                <constraint firstItem="0zZ-QA-XhC" firstAttribute="leading" secondItem="VMQ-fk-eEP" secondAttribute="leading" id="XfB-Wz-wy5"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="doH-cr-CK1" secondAttribute="bottom" id="aEG-Ct-4u2"/>
-                                                <constraint firstItem="doH-cr-CK1" firstAttribute="top" secondItem="0zZ-QA-XhC" secondAttribute="bottom" constant="8" id="paj-3H-vZN"/>
-                                                <constraint firstItem="lIT-HS-1d2" firstAttribute="leading" secondItem="VMQ-fk-eEP" secondAttribute="leading" id="sfA-6v-qMc"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="VMQ-fk-eEP" secondAttribute="leading" constant="-10" id="ujC-FQ-RPz"/>
+                                                <constraint firstItem="VMQ-fk-eEP" firstAttribute="top" secondItem="1hh-tT-wt5" secondAttribute="topMargin" constant="10" id="40N-Pf-gva"/>
+                                                <constraint firstItem="0zZ-QA-XhC" firstAttribute="top" secondItem="lIT-HS-1d2" secondAttribute="bottom" constant="5" id="5dr-DT-3bt"/>
+                                                <constraint firstItem="doH-cr-CK1" firstAttribute="leading" secondItem="1hh-tT-wt5" secondAttribute="leadingMargin" constant="10" id="6UE-yr-3Tg"/>
+                                                <constraint firstItem="lIT-HS-1d2" firstAttribute="leading" secondItem="1hh-tT-wt5" secondAttribute="leadingMargin" constant="10" id="D5Q-qu-nfe"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0zZ-QA-XhC" secondAttribute="trailing" constant="10" id="HD8-LJ-ewD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="doH-cr-CK1" secondAttribute="bottom" constant="11" id="Lbf-nZ-5Ko"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lIT-HS-1d2" secondAttribute="trailing" constant="10" id="VUR-Wb-AE3"/>
+                                                <constraint firstItem="lIT-HS-1d2" firstAttribute="top" secondItem="VMQ-fk-eEP" secondAttribute="bottom" constant="5" id="dPF-Cg-cAz"/>
+                                                <constraint firstItem="0zZ-QA-XhC" firstAttribute="leading" secondItem="1hh-tT-wt5" secondAttribute="leadingMargin" constant="10" id="foq-Yh-cak"/>
+                                                <constraint firstItem="VMQ-fk-eEP" firstAttribute="leading" secondItem="1hh-tT-wt5" secondAttribute="leadingMargin" constant="10" id="j9z-JX-K0R"/>
+                                                <constraint firstItem="doH-cr-CK1" firstAttribute="top" secondItem="0zZ-QA-XhC" secondAttribute="bottom" constant="15" id="tpN-rT-1VD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VMQ-fk-eEP" secondAttribute="trailing" constant="10" id="vvV-tj-dSb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="doH-cr-CK1" secondAttribute="trailing" constant="10" id="y35-rA-Y3t"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
@@ -2020,8 +2016,8 @@
                                 <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiP-AL-v8c">
-                                <rect key="frame" x="160" y="442" width="140" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiP-AL-v8c">
+                                <rect key="frame" x="161" y="442" width="140" height="40"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2077,6 +2073,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnCourseCust" destination="yiP-AL-v8c" id="ceW-Du-4dw"/>
                         <outlet property="colvSelDate" destination="HPZ-bs-B9D" id="sd2-Tl-bvq"/>
                         <outlet property="colvSelServ" destination="bmb-yG-JTh" id="VCq-uC-PBq"/>
                         <outlet property="colvSelTime" destination="ymE-fZ-vcr" id="aMz-5U-3Fm"/>
@@ -2200,10 +2197,10 @@
             </objects>
             <point key="canvasLocation" x="1238" y="-2133"/>
         </scene>
-        <!--選擇療程-已購買　-->
+        <!--選擇療程已購買　-->
         <scene sceneID="1lT-1b-YVp">
             <objects>
-                <viewController id="Ifh-VY-ftG" userLabel="選擇療程-已購買　" customClass="CourseSelCust" sceneMemberID="viewController">
+                <viewController id="Ifh-VY-ftG" userLabel="選擇療程已購買　" customClass="CourseSelCust" customModule="HealthCN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X5g-cH-FUj"/>
                         <viewControllerLayoutGuide type="bottom" id="KWz-Dk-DNd"/>
@@ -2228,7 +2225,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="取消" id="xG6-Nq-6tY">
                                             <color key="tintColor" red="1" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="actBack:" destination="luG-Xg-0LD" id="s5A-TJ-M5X"/>
+                                                <action selector="actBack:" destination="Ifh-VY-ftG" id="fKJ-JL-VUg"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -2239,7 +2236,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2Il-4p-YOZ" customClass="CourseSelCustCell" customModule="HealthCN" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCourseCustSel" id="2Il-4p-YOZ" customClass="CourseSelCustCell" customModule="HealthCN" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="328" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Il-4p-YOZ" id="Dyn-bM-jTW">
@@ -2260,72 +2257,93 @@
                                                     <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="療程到期日 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN5-lS-hBW">
-                                                    <rect key="frame" x="18" y="67" width="78" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="療程到期日 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN5-lS-hBW">
+                                                    <rect key="frame" x="18" y="67" width="80" height="17"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="1c2-kH-qkE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用次數 :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RS3-dQ-C4q">
+                                                    <rect key="frame" x="211" y="67" width="64" height="17"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用次數 :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RS3-dQ-C4q">
-                                                    <rect key="frame" x="205" y="67" width="70" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015/10/31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiV-ha-ASL" userLabel="到期日">
+                                                    <rect key="frame" x="104" y="67" width="120" height="17"/>
                                                     <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="N5Q-sU-Krc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="療程購買日 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUv-jN-vcC">
+                                                    <rect key="frame" x="18" y="90" width="80" height="17"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="ruU-Gh-PmF"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015/10/31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiV-ha-ASL">
-                                                    <rect key="frame" x="104" y="67" width="78" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="療程卡資料 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKN-vE-qAG">
+                                                    <rect key="frame" x="18" y="113" width="80" height="17"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="GAi-9f-gdu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015/10/31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e61-Wc-hvv" userLabel="購買日">
+                                                    <rect key="frame" x="104" y="90" width="120" height="17"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="gFy-Hh-eZX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="包月5個月, 療程費用 400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-qp-1l6">
+                                                    <rect key="frame" x="104" y="113" width="206" height="17"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="療程到期日 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUv-jN-vcC">
-                                                    <rect key="frame" x="18" y="90" width="78" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="療程建議說明 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfP-TP-JIL">
+                                                    <rect key="frame" x="18" y="140" width="95" height="17"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="95" id="vCA-J3-jRL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="course content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-fA-dEf">
+                                                    <rect key="frame" x="38" y="162" width="272" height="17"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="療程卡資料 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKN-vE-qAG">
-                                                    <rect key="frame" x="18" y="114" width="78" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muR-J4-Qk8">
+                                                    <rect key="frame" x="283" y="67" width="30" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015/10/31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e61-Wc-hvv">
-                                                    <rect key="frame" x="104" y="90" width="78" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="包月5個月, 療程費用 400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-qp-1l6">
-                                                    <rect key="frame" x="104" y="114" width="216" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="療程建議說明 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfP-TP-JIL">
-                                                    <rect key="frame" x="18" y="138" width="92" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="course content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-fA-dEf">
-                                                    <rect key="frame" x="18" y="162" width="292" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muR-J4-Qk8">
-                                                    <rect key="frame" x="283" y="67" width="30" height="21"/>
-                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="WJs-dV-wO2"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2333,21 +2351,53 @@
                                             </subviews>
                                             <animations/>
                                             <constraints>
+                                                <constraint firstItem="lsc-fA-dEf" firstAttribute="top" secondItem="dfP-TP-JIL" secondAttribute="bottom" constant="5" id="07N-z3-W9b"/>
+                                                <constraint firstItem="dKN-vE-qAG" firstAttribute="leading" secondItem="MN5-lS-hBW" secondAttribute="leading" id="5gB-yO-WRR"/>
+                                                <constraint firstItem="wUv-jN-vcC" firstAttribute="top" secondItem="MN5-lS-hBW" secondAttribute="bottom" constant="6" id="6e0-Or-ICq"/>
+                                                <constraint firstItem="RS3-dQ-C4q" firstAttribute="centerY" secondItem="MN5-lS-hBW" secondAttribute="centerY" id="7LS-SG-6Sr"/>
                                                 <constraint firstItem="UQm-JO-Fm0" firstAttribute="top" secondItem="Dyn-bM-jTW" secondAttribute="topMargin" constant="10" id="8KN-39-mFe"/>
+                                                <constraint firstItem="muR-J4-Qk8" firstAttribute="leading" secondItem="RS3-dQ-C4q" secondAttribute="trailing" constant="8" id="9mJ-56-hG2"/>
+                                                <constraint firstItem="BiV-ha-ASL" firstAttribute="leading" secondItem="MN5-lS-hBW" secondAttribute="trailing" constant="6" id="9xX-k1-MT6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="c6g-qp-1l6" secondAttribute="trailing" constant="10" id="ALR-62-uij"/>
+                                                <constraint firstItem="dfP-TP-JIL" firstAttribute="leading" secondItem="MN5-lS-hBW" secondAttribute="leading" id="ARO-7l-nKv"/>
+                                                <constraint firstItem="lsc-fA-dEf" firstAttribute="leading" secondItem="MN5-lS-hBW" secondAttribute="leading" constant="20" id="H6d-EX-FE4"/>
                                                 <constraint firstItem="UQm-JO-Fm0" firstAttribute="trailing" secondItem="Dyn-bM-jTW" secondAttribute="trailingMargin" constant="10" id="HTu-RB-dPi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="E4w-kC-cqn" secondAttribute="trailing" constant="10" id="IAb-vm-lxp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lsc-fA-dEf" secondAttribute="trailing" constant="10" id="N8Y-hF-wT1"/>
                                                 <constraint firstItem="E4w-kC-cqn" firstAttribute="leading" secondItem="UQm-JO-Fm0" secondAttribute="leading" id="Pxi-u8-PKe"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lsc-fA-dEf" secondAttribute="bottom" constant="12" id="Y0h-Ec-zxh"/>
+                                                <constraint firstItem="c6g-qp-1l6" firstAttribute="centerY" secondItem="dKN-vE-qAG" secondAttribute="centerY" id="Z54-7r-jEz"/>
+                                                <constraint firstItem="e61-Wc-hvv" firstAttribute="centerY" secondItem="wUv-jN-vcC" secondAttribute="centerY" id="Zsk-Gx-pOz"/>
                                                 <constraint firstItem="E4w-kC-cqn" firstAttribute="top" secondItem="UQm-JO-Fm0" secondAttribute="bottom" constant="2" id="bYB-j1-5FN"/>
+                                                <constraint firstItem="muR-J4-Qk8" firstAttribute="centerY" secondItem="MN5-lS-hBW" secondAttribute="centerY" id="eYf-7H-bcb"/>
+                                                <constraint firstItem="wUv-jN-vcC" firstAttribute="leading" secondItem="MN5-lS-hBW" secondAttribute="leading" id="iwe-sh-gsR"/>
                                                 <constraint firstItem="UQm-JO-Fm0" firstAttribute="leading" secondItem="Dyn-bM-jTW" secondAttribute="leadingMargin" constant="10" id="ml5-8G-UNf"/>
+                                                <constraint firstItem="dfP-TP-JIL" firstAttribute="top" secondItem="dKN-vE-qAG" secondAttribute="bottom" constant="10" id="oHr-qJ-0lc"/>
+                                                <constraint firstItem="MN5-lS-hBW" firstAttribute="top" secondItem="E4w-kC-cqn" secondAttribute="bottom" constant="8" id="siO-Lg-bbK"/>
+                                                <constraint firstItem="dKN-vE-qAG" firstAttribute="top" secondItem="wUv-jN-vcC" secondAttribute="bottom" constant="6" id="vZ2-Dh-Jcc"/>
+                                                <constraint firstItem="c6g-qp-1l6" firstAttribute="leading" secondItem="dKN-vE-qAG" secondAttribute="trailing" constant="6" id="wrZ-Lc-OwE"/>
+                                                <constraint firstItem="BiV-ha-ASL" firstAttribute="centerY" secondItem="MN5-lS-hBW" secondAttribute="centerY" id="yNy-bd-EVh"/>
+                                                <constraint firstItem="e61-Wc-hvv" firstAttribute="leading" secondItem="wUv-jN-vcC" secondAttribute="trailing" constant="6" id="yST-pV-Lnw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="muR-J4-Qk8" secondAttribute="trailing" constant="7" id="yTs-p8-92C"/>
+                                                <constraint firstItem="MN5-lS-hBW" firstAttribute="leading" secondItem="UQm-JO-Fm0" secondAttribute="leading" id="yyn-lk-2gz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
+                                            <outlet property="labCardType" destination="lsc-fA-dEf" id="E85-Oh-WuF"/>
                                             <outlet property="labContent" destination="E4w-kC-cqn" id="dxu-u3-aG4"/>
+                                            <outlet property="labEddDate" destination="BiV-ha-ASL" id="8gp-f5-eah"/>
+                                            <outlet property="labSdate" destination="e61-Wc-hvv" id="Dji-tb-dlx"/>
+                                            <outlet property="labSugst" destination="lsc-fA-dEf" id="xt5-7s-d4s"/>
                                             <outlet property="labTitle" destination="UQm-JO-Fm0" id="PCh-PH-vJu"/>
+                                            <outlet property="labUseTimes" destination="muR-J4-Qk8" id="WqY-Uc-xYj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ifh-VY-ftG" id="Pyk-h1-ACc"/>
+                                    <outlet property="delegate" destination="Ifh-VY-ftG" id="HVe-sG-cuM"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -2367,6 +2417,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableList" destination="aSo-Lk-Slz" id="qov-Hr-hPN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYE-5o-unE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

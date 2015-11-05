@@ -20,7 +20,7 @@ class CourseSelCust: UIViewController {
      * 前一個頁面傳入的資料(療程資料) 格式如下<BR>
      * ary[0=> [String:String], ....]
      */
-    var aryCourseData: Array<Dictionary<String, String>>!
+    var aryCourseData: Array<Dictionary<String, AnyObject>>!
     
     // View load
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class CourseSelCust: UIViewController {
     override func viewDidAppear(animated: Bool) {
         // 初始 TableView Cell 自動調整高度
         tableList.rowHeight = UITableViewAutomaticDimension
-        tableList.estimatedRowHeight = 80.0
+        tableList.estimatedRowHeight = 200.0
         
         dispatch_async(dispatch_get_main_queue(), {
             self.tableList.reloadData()
@@ -68,15 +68,36 @@ class CourseSelCust: UIViewController {
         }
         
         // 取得 Cell View
-        let mCell = tableView.dequeueReusableCellWithIdentifier("cellCourseSel", forIndexPath: indexPath) as! CourseSelCell
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellCourseCustSel", forIndexPath: indexPath) as! CourseSelCustCell
         
         // 取得目前指定 Item 的 array data
         let ditItem = aryCourseData[indexPath.row]
         
-        mCell.labTitle.text = ditItem["pdname"]
-        mCell.labContent.text = ditItem["pdid"]
+        mCell.labTitle.text = ditItem["pdname"] as? String
+        mCell.labContent.text = ditItem["pdid"] as? String
+        mCell.labSdate.text = pubClass.formatDateWIthStr(ditItem["sdate"] as! String, type: 8)
+        mCell.labEddDate.text = pubClass.formatDateWIthStr(ditItem["end_date"] as! String, type: 8)
+        mCell.labSugst.text = ditItem["card_msg"] as? String
+        mCell.labUseTimes.text = ditItem["usecount"] as? String
+        mCell.labCardType.text = self.getTypeMsg(ditItem)
         
         return mCell
+    }
+    
+    /**
+    * 取得療程卡資料文字
+    */
+    func getTypeMsg(ditItem: Dictionary<String, AnyObject>)->String {
+        let strType = ditItem["cardtype"] as! String
+        let strTimes = ditItem["card_times"] as! String
+        
+        // 包月文字, 'cardtype' == "M",  card_times = "2",  包月2個月
+        if (strType == "M") {
+            return "包月: \(strTimes)個月"
+        }
+        
+        // 包次文字, 'cardtype' == "T",  card_times = "10", 包次10次
+        return "包次: \(strTimes)次"
     }
     
     /**
