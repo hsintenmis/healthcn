@@ -8,10 +8,8 @@ import Foundation
 /**
  * 已經預約的記錄列表，提供刪除功能
  */
-class ReservationList: UIViewController {    
-    @IBOutlet weak var labMsgSelDate: UILabel!
-    @IBOutlet weak var btnCourseDef: UIButton!
-    @IBOutlet weak var btnCourseCust: UIButton!
+class ReservationList: UIViewController {
+    @IBOutlet weak var tableList: UITableView!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -20,6 +18,9 @@ class ReservationList: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     private var isDataSourceReady = false
 
+    // 本 class TableView 需要的資料集, 預約資料
+    private var aryAllData: Array<Dictionary<String, AnyObject>> = []
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class ReservationList: UIViewController {
             isPageReloadAgain = true
             
             // HTTP 連線取得本頁面需要的資料
-            //self.StartHTTPConn()
+            self.StartHTTPConn()
             
             // 初始與設定 VCview 內的 field
             self.initViewField();
@@ -86,14 +87,59 @@ class ReservationList: UIViewController {
         let dictRespon = dictRS["data"] as! Dictionary<String, AnyObject>
         let dictContent = dictRespon["content"] as! Dictionary<String, AnyObject>
 
+        // 取得預約資料
+        if let jaryData = dictContent["data"] as? Array<Dictionary<String, AnyObject>> {
+            aryAllData = jaryData
+        }
+        else {
+            pubClass.popIsee(Msg: pubClass.getLang("nodata"))
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            return
+        }
+
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableList.reloadData()
+        })
     }
     
     /**
-     * 返回前頁
+     * UITableView, 'section' 回傳指定的數量
      */
-    @IBAction func actBack(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func numberOfSectionsInTableView(tableView: UITableView!)->Int {
+        return 1
     }
+    
+    /**
+     * UITableView<BR>
+     * 宣告這個 UITableView 畫面上的控制項總共有多少筆資料<BR>
+     * 可根據 'section' 回傳指定的數量
+     */
+    func tableView(tableView: UITableView!, numberOfRowsInSection section:Int) -> Int {
+        return aryAllData.count
+    }
+    
+    /**
+     * UITableView, Cell 內容
+     */
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        if (aryAllData.count < 1) {
+            return nil
+        }
+        
+        // 取得 Cell View
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellReservationList", forIndexPath: indexPath) as! ReservationListCell
+        
+        // 取得目前指定 Item 的 array data
+        let ditItem = aryAllData[indexPath.row]
+        
+        mCell.labYYMM.text = ditItem["yymm"] as? String
+        mCell.labDD.text = ditItem["dd"] as? String
+        mCell.labCourse.text = ditItem["pdname"] as? String
+        
+        return mCell
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

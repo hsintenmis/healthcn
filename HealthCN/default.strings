@@ -219,7 +219,10 @@
 "caloryval_F_004" = "(女)50~69岁, 标准值 1100Kcal";
 "caloryval_F_005" = "(女)69岁以上, 标准值 1010Kcal";
 
+"course_reservation_add" = "預約新增";
+"course_uselist" = "療程紀錄";
+"course_reservation_list" = "預約記錄";
+
 "servicezone" = "服務區";
 "srv_notavail" = "滿";
 "course_fee" = "療程費用";
-

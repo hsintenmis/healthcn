@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4219A7D91BD6A05E008C6F0E /* NewsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */; };
 		422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422D4F5E1BDE85310045E6D5 /* CellCalendarDate.swift */; };
+		427CBE261BED0EDE00FAFB01 /* ReservationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */; };
 		427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F028B1BC9799400A4AEB7 /* MainCategory.swift */; };
 		429B2E641BDD205300BAF88E /* HealthCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429B2E631BDD205300BAF88E /* HealthCalendar.swift */; };
 		42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0B9B61BCFF9E500B56D3D /* CellViewHealth.swift */; };
@@ -114,6 +115,7 @@
 /* Begin PBXFileReference section */
 		4219A7D81BD6A05E008C6F0E /* NewsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsDetail.swift; path = Program/NewsDetail.swift; sourceTree = "<group>"; };
 		422D4F5E1BDE85310045E6D5 /* CellCalendarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellCalendarDate.swift; path = Health/CellCalendarDate.swift; sourceTree = "<group>"; };
+		427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationListCell.swift; sourceTree = "<group>"; };
 		427F028B1BC9799400A4AEB7 /* MainCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCategory.swift; sourceTree = "<group>"; };
 		429B2E631BDD205300BAF88E /* HealthCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthCalendar.swift; path = Health/HealthCalendar.swift; sourceTree = "<group>"; };
 		42C0B9B61BCFF9E500B56D3D /* CellViewHealth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewHealth.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				42E376BA1BEA6DAE00910327 /* CourseSelCust.swift */,
 				42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */,
 				D75C3FD81BEC890400123087 /* ReservationList.swift */,
+				427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
 				D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */,
+				427CBE261BED0EDE00FAFB01 /* ReservationListCell.swift in Sources */,
 				D7FBBC751BE9F890009A615B /* CourseSel.swift in Sources */,
 				D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */,
 				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
