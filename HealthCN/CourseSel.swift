@@ -16,6 +16,9 @@ class CourseSel: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
+    // parent VC
+    var mVCtrlParent: ReservationAdd!
+    
     /**
      * 前一個頁面傳入的資料(療程資料) 格式如下<BR>
      * ary[0=> [String:String], ....]
@@ -77,6 +80,24 @@ class CourseSel: UIViewController {
         mCell.labContent.text = ditItem["pdid"]
         
         return mCell
+    }
+    
+    /**
+     * UITableView, Cell 點取
+     */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 設定選擇的療程資料, ex. 'pdname', 'pdidid', 'index_id'
+        var dictData: [String:String] = [:]
+        
+        // 取得原來的療程資料，重新設定新的 dict, 本頁面結束
+        let ditItem = aryCourseData[indexPath.row]
+        
+        dictData["pdname"] = ditItem["pdname"]! as String
+        dictData["pdid"] = ditItem["pdid"]! as String
+        dictData["index_id"] = ""
+        
+        mVCtrlParent.setSelCourseData(dictData)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /**

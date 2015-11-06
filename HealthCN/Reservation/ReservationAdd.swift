@@ -16,12 +16,13 @@ class ReservationAdd: UIViewController {
     @IBOutlet weak var labReserDate: UILabel!
     @IBOutlet weak var labReserTime: UILabel!
     @IBOutlet weak var labReserCourse: UILabel!
-    @IBOutlet weak var labMsgSelDate: UILabel!
     
     @IBOutlet weak var colvSelDate: UICollectionView!
     @IBOutlet weak var colvSelServ: UICollectionView!
     @IBOutlet weak var colvSelTime: UICollectionView!
     
+    @IBOutlet weak var labMsgSelDate: UILabel!
+    @IBOutlet weak var btnCourseDef: UIButton!
     @IBOutlet weak var btnCourseCust: UIButton!
     
     // common property
@@ -80,12 +81,25 @@ class ReservationAdd: UIViewController {
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
             
+            // 初始與設定 VCview 內的 field
+            self.initViewField();
+            
             return
         }
     }
     
     /**
-     * HTTP 連線取得 news JSON data
+     * 初始與設定 VCview 內的 field
+     */
+    private func initViewField() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.btnCourseDef.layer.cornerRadius = 5
+            self.btnCourseCust.layer.cornerRadius = 5
+        })
+    }
+    
+    /**
+     * HTTP 連線取得 JSON data
      */
     func StartHTTPConn() {
         var dictParm = Dictionary<String, String>()
@@ -380,19 +394,79 @@ class ReservationAdd: UIViewController {
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 跳轉預設療程選擇頁面
         if (segue.identifier == "CourseSel") {
             let cvChild = segue.destinationViewController as! CourseSel
+            cvChild.mVCtrlParent = self
             cvChild.aryCourseData = dictCourse_def
             
             return
         }
         
+        // 跳轉已購買療程頁面
         if (segue.identifier == "CourseSelCust" && self.dictCourse_cust.count > 0) {
             let cvChild = segue.destinationViewController as! CourseSelCust
+            cvChild.mVCtrlParent = self
             cvChild.aryCourseData = dictCourse_cust
             
             return
         }
+    }
+    
+    /**
+    * 設定'已選擇療程'資料，通常由 child 'dismissViewControllerAnimated' 執行
+    */
+    func setSelCourseData(dictData: Dictionary<String, String>?) {
+        if (dictData?.count < 1) {
+            return
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.labReserCourse.text = dictData!["pdname"]
+        })
+    }
+    
+    /**
+     * HTTP 連線, 由本 class 傳送資料至 server 取得儲存結果
+     */
+    func SaveHTTPConn(strArg0: String!) {
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = mAppDelegate.V_USRACC
+        dictParm["psd"] = mAppDelegate.V_USRPSD
+        dictParm["page"] = "reservation"
+        dictParm["act"] = "reservation_addsave"
+        dictParm["arg0"] = strArg0
+        
+        // HTTP 開始連線
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: SaveHttpResponChk)
+    }
+    
+    /**
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
+     */
+    private func SaveHttpResponChk(dictRS: Dictionary<String, AnyObject>) {
+        pubClass.closePopLoading()
+        
+        // 回傳失敗
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: pubClass.getLang("err_systemmaintain"))
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            return
+        }
+        
+        // 跳轉新的 class, '預約記錄' 頁面
+        pubClass.popIsee(Msg: pubClass.getLang("提醒預約通知"))
+        
+        
+    }
+
+    /**
+    * 跳轉預約記錄頁面
+    */
+    @IBAction func actReserList(sender: UIBarButtonItem) {
+
     }
     
     /**

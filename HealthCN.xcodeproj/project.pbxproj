@@ -95,6 +95,8 @@
 		D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */; };
 		D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE811BE892FA0039C70E /* SelDateCell.swift */; };
 		D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE831BE8A9AC0039C70E /* SelServCell.swift */; };
+		D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FD81BEC890400123087 /* ReservationList.swift */; };
+		D75C3FDB1BECA19100123087 /* ReservationMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FDA1BECA19100123087 /* ReservationMain.swift */; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; };
 		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
@@ -200,6 +202,8 @@
 		D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelTimeCell.swift; sourceTree = "<group>"; };
 		D726BE811BE892FA0039C70E /* SelDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelDateCell.swift; sourceTree = "<group>"; };
 		D726BE831BE8A9AC0039C70E /* SelServCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelServCell.swift; sourceTree = "<group>"; };
+		D75C3FD81BEC890400123087 /* ReservationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationList.swift; sourceTree = "<group>"; };
+		D75C3FDA1BECA19100123087 /* ReservationMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationMain.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCalCellData.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 		D726BE7C1BE87B4E0039C70E /* Reservation */ = {
 			isa = PBXGroup;
 			children = (
+				D75C3FDA1BECA19100123087 /* ReservationMain.swift */,
 				D726BE7D1BE87B980039C70E /* ReservationAdd.swift */,
 				D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */,
 				D726BE811BE892FA0039C70E /* SelDateCell.swift */,
@@ -401,6 +406,7 @@
 				D7FBBC761BEA0600009A615B /* CourseSelCell.swift */,
 				42E376BA1BEA6DAE00910327 /* CourseSelCust.swift */,
 				42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */,
+				D75C3FD81BEC890400123087 /* ReservationList.swift */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -549,6 +555,7 @@
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
 				42E376B91BEA6CDE00910327 /* CourseSelCustCell.swift in Sources */,
 				42C9C4941BD15C0E00BB217F /* NewsMain.swift in Sources */,
+				D75C3FDB1BECA19100123087 /* ReservationMain.swift in Sources */,
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
 				D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
@@ -558,6 +565,7 @@
 				D7FBBC751BE9F890009A615B /* CourseSel.swift in Sources */,
 				D71CE2EE1BE34FEB0067CCC1 /* HealthCellExtData.swift in Sources */,
 				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
+				D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */,
 				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */,

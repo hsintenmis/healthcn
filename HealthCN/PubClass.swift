@@ -275,7 +275,7 @@ class PubClass {
         strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
         
         if (type == 8) {
-            return "\(strYY)年\(strMM)月\(strDD)日"
+            return "\(strYY)年\(Int(strMM)!)月\(Int(strDD)!)日"
         }
         
         if (type > 8) {

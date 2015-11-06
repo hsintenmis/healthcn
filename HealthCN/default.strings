@@ -14,6 +14,7 @@
 "err_accpsd" = "帳號或是密碼錯誤!";
 "err_data" = "資料錯誤!";
 "nodata" = "目前沒有資料. . .";
+"err_systemmaintain" = "伺服器維護中, 請稍候再重試...";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -220,4 +221,5 @@
 
 "servicezone" = "服務區";
 "srv_notavail" = "滿";
+"course_fee" = "療程費用";
 
