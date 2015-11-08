@@ -20,7 +20,6 @@ class ReservationMain: UIViewController {
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
-    private var isDataSourceReady = false
     
     // View load
     override func viewDidLoad() {
