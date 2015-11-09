@@ -1,14 +1,14 @@
 //
-// ConyainerView 的子 Class
+// ContainerView 的子 Class
 //
 
 import UIKit
 import Foundation
 
 /**
- * 店家新訊, 點取 Cell 顯示詳細資料
+ * 官網新訊, 點取 Cell 顯示詳細資料
  */
-class NewsStore: UIViewController {
+class NewsOffice: UIViewController {
     @IBOutlet weak var tableNews: UITableView!
     
     // common property
@@ -19,7 +19,7 @@ class NewsStore: UIViewController {
     
     // public, 由parent 設定, 本 class 需要使用的資料
     var aryAllData: Array<Dictionary<String, AnyObject>> = [[:]]
-
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,8 @@ class NewsStore: UIViewController {
     }
     
     /**
-     * 初始與設定 VCview 內的 field
-     */
+    * 初始與設定 VCview 內的 field
+    */
     private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableNews.reloadData()
@@ -66,24 +66,14 @@ class NewsStore: UIViewController {
             return nil
         }
         
-        let cell: NewsStoreCell = tableView.dequeueReusableCellWithIdentifier("cellNewsStore", forIndexPath: indexPath) as! NewsStoreCell
+        let cell: NewsOfficeCell = tableView.dequeueReusableCellWithIdentifier("cellNewsOffice", forIndexPath: indexPath) as! NewsOfficeCell
         let ditItem = aryAllData[indexPath.row] as! Dictionary<String, String>
-        
+
         cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
         cell.labTitle.text = ditItem["title"]
         
         return cell
     }
-    
-    /**
-     * UITableView, Cell 點取
-     */
-     /*
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     // 跳轉至指定的名稱的Segue頁面
-     self.performSegueWithIdentifier("NewsDetail", sender: nil)
-     }
-     */
      
      /**
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
@@ -92,7 +82,7 @@ class NewsStore: UIViewController {
         // 取得點取 cell 的 index, 產生 JSON data
         let indexPath = self.tableNews.indexPathForSelectedRow!
         let ditItem = aryAllData[indexPath.row] as! Dictionary<String, String>
-        let cvChild = segue.destinationViewController as! NewsStoreDetail
+        let cvChild = segue.destinationViewController as! NewsOfficeDetail
         cvChild.parentData = ditItem
         
         return

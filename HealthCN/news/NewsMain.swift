@@ -123,6 +123,13 @@ class NewsMain: UIViewController {
             strTitle = pubClass.getLang("news_store")
         }
         else if (flag == "NewsOffice") {
+            var mSubVC: NewsOffice
+            mSubVC = self.storyboard!.instantiateViewControllerWithIdentifier("NewsOffice") as! NewsOffice
+            mSubVC.aryAllData = self.aryNewsOffice
+            
+            viewContainer.addSubview(mSubVC.view)
+            self.addChildViewController(mSubVC)
+            
             strTitle = pubClass.getLang("news_office")
         }
         
@@ -132,14 +139,14 @@ class NewsMain: UIViewController {
     /**
      * 點取 店家新訊: NewsStore
      */
-    @IBAction func actReserAdd(sender: UIBarButtonItem) {
+    @IBAction func actNewsStore(sender: UIBarButtonItem) {
         self.setContainerView("NewsStore")
     }
     
     /**
      * 點取 官網新訊: NewsOffice
      */
-    @IBAction func actCourseList(sender: UIBarButtonItem) {
+    @IBAction func actNewsOffice(sender: UIBarButtonItem) {
         self.setContainerView("NewsOffice")
     }
     

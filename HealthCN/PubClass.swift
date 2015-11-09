@@ -13,6 +13,10 @@ class PubClass {
     // public
     /** 伺服器/網站 URL: http://pub.mysoqi.com/store_cn/001/ */
     let D_WEBURL = "http://pub.mysoqi.com/store_cn/001/"
+    
+    /** HTE 網站 http://publicsh.hsinten.com.tw/storecn/ */
+    let D_HTEURL = "http://public.hsinten.com.tw/storecn/"
+    
     var AppDelg: AppDelegate
     var aryLangCode = ["default", "zh-Hans"]  // 本專案語系
     
