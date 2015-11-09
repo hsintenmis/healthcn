@@ -93,13 +93,50 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     /**
-     * 點取 選擇圖片
+     * 點取 本地相簿
      */
-    @IBAction func actSelPict(sender: UIButton) {
+    @IBAction func actSelPhotoLibrary(sender: UIBarButtonItem) {
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    /**
+     * 點取 選擇相機
+     */
+    @IBAction func actSelCamera(sender: UIBarButtonItem) {
+        if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePicker.cameraCaptureMode = .Photo
+            presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            noCamera()
+        }
+        
+        
+        //imagePicker.allowsEditing = true
+        //imagePicker.sourceType = .Camera
+        //presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    /**
+    * 沒有相機，彈出視窗
+    */
+    func noCamera(){
+        let alertVC = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
+            preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(
+            title: "OK",
+            style:.Default,
+            handler: nil)
+        
+        alertVC.addAction(okAction)
+        presentViewController(alertVC, animated: true, completion: nil)
     }
     
     /**
