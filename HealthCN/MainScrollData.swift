@@ -20,9 +20,13 @@ class MainScrollData: UIViewController {
     @IBOutlet weak var viewTodayInfo: UIView!  // 今日提醒資料 View list
     @IBOutlet var btnGroup: [UIButton]! // 跳轉的 UIButton array
     
+    @IBOutlet weak var imgUser: UIImageView!  // 大頭照
+    @IBOutlet weak var btnPict: UIButton! // 更改照片
+    
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
+    let mImageClass = ImageClass()
     
     // 本 class 需要使用的 json data
     var parentData: Dictionary<String, AnyObject>!
@@ -47,6 +51,10 @@ class MainScrollData: UIViewController {
         for btnItem: UIButton in btnGroup {
             dictBtn[btnItem.restorationIdentifier!] = btnItem
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        btnPict.reloadInputViews()
     }
 
     /**
@@ -80,7 +88,19 @@ class MainScrollData: UIViewController {
             let dicContent = self.parentData["content"] as! Dictionary<String, AnyObject>
             self.aryHealth = dicContent["health"] as! [[String:String]]
             self.colviewHealth.reloadData()
+            
+            self.btnPict.reloadInputViews()
         })
+        
+        // 設定會員圖片, base64String to Image
+        if let strEncode = parentData["content"]!["imgstr"] as? String {
+            if (strEncode.characters.count > 0) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.imgUser.image = self.mImageClass.Base64ToImg(strEncode)
+                })
+            }
+        }
+
     }
     
     /**

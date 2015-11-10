@@ -22,9 +22,10 @@ import UIKit
 /**
  * 會員大頭照上傳
  */
-class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
     
     @IBOutlet weak var imgPict: UIImageView!
+    @IBOutlet weak var imgPreview: UIImageView!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -34,6 +35,8 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     // ImagePicker 設定
     let imagePicker = UIImagePickerController()
+    var mImage = UIImage()
+    let mImageClass = ImageClass()
     
     // View load
     override func viewDidLoad() {
@@ -49,6 +52,10 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         
         // ImagePicker 設定
         imagePicker.delegate = self
+        
+        // 設定手勢 Gesture
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapImageView")
+        self.imgPict.addGestureRecognizer(tapRecognizer)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,24 +86,67 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
      * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        // 選擇圖片後，執行第三方圖片處理
+        dismissViewControllerAnimated(true, completion: {
+            ()->Void in
+            
+            self.mImage = image
+            
+            let cropController = TOCropViewController(image: image)
+            cropController.delegate = self
+            self.presentViewController(cropController, animated: true, completion: nil)
+        })
+    }
+    /*
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             imgPict.contentMode = .ScaleAspectFit
             imgPict.image = pickedImage
         }
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    */
+
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    /**
+     * 第三方圖片處理, 裁切完成後傳回圖片
+     */
+    func cropViewController(cropViewController: TOCropViewController!, didCropToImage image: UIImage!, withRect cropRect: CGRect, angle: Int) {
+        
+        self.imgPict.hidden = true
+        
+        cropViewController.dismissAnimatedFromParentViewController(self, withCroppedImage: image, toFrame: self.imgPict.frame, completion: {
+            () -> Void in
+            
+            self.imgPict.image = image
+            self.imgPict.hidden = false
+            
+            let newImage = self.mImageClass.ResizeImage(image, targetSize: CGSize(width: 128, height: 128))
+            let strImgEncode = self.mImageClass.ImgToBase64(newImage)
+            self.imgPreview.image = self.mImageClass.Base64ToImg(strImgEncode)
+        })
+    }
+    
+    /**
+    * 手勢 Gesture, 調整圖片大小
+    */
+    func didTapImageView() {
+        let cropController = TOCropViewController(image: self.mImage)
+        cropController.delegate = self;
+
+        self.presentViewController(cropController, animated: true, completion: nil)
     }
     
     /**
      * 點取 本地相簿
      */
     @IBAction func actSelPhotoLibrary(sender: UIBarButtonItem) {
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
@@ -114,11 +164,6 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         } else {
             noCamera()
         }
-        
-        
-        //imagePicker.allowsEditing = true
-        //imagePicker.sourceType = .Camera
-        //presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     /**
@@ -137,6 +182,15 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         
         alertVC.addAction(okAction)
         presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
+    /**
+     * 儲存圖片
+     */
+    @IBAction func actSave(sender: UIBarButtonItem) {
+        let strImgEncode = mImageClass.ImgToBase64(self.imgPreview.image!)
+        
+        print(strImgEncode)
     }
     
     /**

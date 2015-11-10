@@ -66,7 +66,8 @@ class MainCategory: UIViewController {
         dictParm["psd"] = mAppDelegate.V_USRPSD
         dictParm["page"] = "memberdata"
         dictParm["act"] = "memberdata_homepage"
-        
+        dictParm["arg0"] = pubClass.MemberHeadimgFile(mAppDelegate.V_USRACC)
+
         // HTTP 開始連線
         pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)

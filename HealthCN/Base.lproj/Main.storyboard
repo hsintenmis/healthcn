@@ -1824,7 +1824,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="680"/>
                     <connections>
+                        <outlet property="btnPict" destination="mbw-kr-TF4" id="YEm-Ik-uK0"/>
                         <outlet property="colviewHealth" destination="LXr-tx-Qzb" id="Xl2-YD-V3f"/>
+                        <outlet property="imgUser" destination="dy3-lP-Kyg" id="sD7-Iq-lr1"/>
                         <outlet property="labMemberName" destination="JM8-nX-aJk" id="cuT-0g-TCJ"/>
                         <outlet property="labStoreName" destination="mKG-Gk-HP1" id="zvP-TC-V4O"/>
                         <outlet property="labStoreTel" destination="hoe-ku-seG" id="wL6-1W-glz"/>
@@ -1968,14 +1970,14 @@
                                         <barButtonItem key="rightBarButtonItem" title="儲存" id="Pdd-9z-fvU">
                                             <color key="tintColor" red="0.80000000000000004" green="1" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="actReload:" destination="tY5-Ez-NfG" id="xN8-Pq-Cg9"/>
+                                                <action selector="actSave:" destination="UgX-N8-r9v" id="1dn-bP-mHt"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-0c-mlb">
-                                <rect key="frame" x="96" y="141" width="128" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="camera_256_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-0c-mlb">
+                                <rect key="frame" x="96" y="96" width="128" height="128"/>
                                 <animations/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fL1-hc-V66">
@@ -1997,6 +1999,11 @@
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="pWV-OL-2hi"/>
                                 </items>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0e-K9-F65">
+                                <rect key="frame" x="96" y="246" width="128" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2016,6 +2023,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="imgPict" destination="PCb-0c-mlb" id="NKa-yD-3zP"/>
+                        <outlet property="imgPreview" destination="o0e-K9-F65" id="aQE-GE-fOa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPS-an-LyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3338,6 +3346,7 @@
         <image name="appicon01.png" width="512" height="512"/>
         <image name="arrow_left02.png" width="128" height="128"/>
         <image name="arrow_right02.png" width="128" height="128"/>
+        <image name="camera_256_01.png" width="256" height="256"/>
         <image name="homelogo001.png" width="422" height="175"/>
         <image name="homelogo002.png" width="276" height="253"/>
         <image name="homelogo003.png" width="397" height="46"/>

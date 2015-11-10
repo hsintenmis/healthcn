@@ -108,6 +108,17 @@
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; };
 		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; };
+		D7EC48851BF18A520088BBE2 /* ImageClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC48841BF18A520088BBE2 /* ImageClass.swift */; };
+		D7EC494D1BF1A0FE0088BBE2 /* TOCropViewControllerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7EC49291BF1A0FE0088BBE2 /* TOCropViewControllerLocalizable.strings */; };
+		D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49351BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m */; };
+		D7EC494F1BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49371BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m */; };
+		D7EC49501BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49391BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m */; };
+		D7EC49511BF1A0FE0088BBE2 /* UIImage+CropRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC493B1BF1A0FE0088BBE2 /* UIImage+CropRotate.m */; };
+		D7EC49521BF1A0FE0088BBE2 /* TOCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49411BF1A0FE0088BBE2 /* TOCropViewController.m */; };
+		D7EC49531BF1A0FE0088BBE2 /* TOCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49441BF1A0FE0088BBE2 /* TOCropOverlayView.m */; };
+		D7EC49541BF1A0FE0088BBE2 /* TOCropScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49461BF1A0FE0088BBE2 /* TOCropScrollView.m */; };
+		D7EC49551BF1A0FE0088BBE2 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC49481BF1A0FE0088BBE2 /* TOCropToolbar.m */; };
+		D7EC49561BF1A0FE0088BBE2 /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EC494A1BF1A0FE0088BBE2 /* TOCropView.m */; };
 		D7FBBC751BE9F890009A615B /* CourseSel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FBBC741BE9F890009A615B /* CourseSel.swift */; };
 		D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FBBC761BEA0600009A615B /* CourseSelCell.swift */; };
 		D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FDEFB81BD8BCA000ECA71A /* MeadList.swift */; };
@@ -221,6 +232,41 @@
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
 		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCalCellData.swift; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
+		D7EC48841BF18A520088BBE2 /* ImageClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageClass.swift; sourceTree = "<group>"; };
+		D7EC49001BF19CAF0088BBE2 /* HealthCN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HealthCN-Bridging-Header.h"; sourceTree = "<group>"; };
+		D7EC492A1BF1A0FE0088BBE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC492B1BF1A0FE0088BBE2 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC492C1BF1A0FE0088BBE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC492D1BF1A0FE0088BBE2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC492E1BF1A0FE0088BBE2 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC492F1BF1A0FE0088BBE2 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC49301BF1A0FE0088BBE2 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC49311BF1A0FE0088BBE2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC49321BF1A0FE0088BBE2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC49341BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOActivityCroppedImageProvider.h; sourceTree = "<group>"; };
+		D7EC49351BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOActivityCroppedImageProvider.m; sourceTree = "<group>"; };
+		D7EC49361BF1A0FE0088BBE2 /* TOCroppedImageAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCroppedImageAttributes.h; sourceTree = "<group>"; };
+		D7EC49371BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCroppedImageAttributes.m; sourceTree = "<group>"; };
+		D7EC49381BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewControllerTransitioning.h; sourceTree = "<group>"; };
+		D7EC49391BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewControllerTransitioning.m; sourceTree = "<group>"; };
+		D7EC493A1BF1A0FE0088BBE2 /* UIImage+CropRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CropRotate.h"; sourceTree = "<group>"; };
+		D7EC493B1BF1A0FE0088BBE2 /* UIImage+CropRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CropRotate.m"; sourceTree = "<group>"; };
+		D7EC493C1BF1A0FE0088BBE2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC493D1BF1A0FE0088BBE2 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC493E1BF1A0FE0088BBE2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC493F1BF1A0FE0088BBE2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
+		D7EC49401BF1A0FE0088BBE2 /* TOCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewController.h; sourceTree = "<group>"; };
+		D7EC49411BF1A0FE0088BBE2 /* TOCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewController.m; sourceTree = "<group>"; };
+		D7EC49431BF1A0FE0088BBE2 /* TOCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropOverlayView.h; sourceTree = "<group>"; };
+		D7EC49441BF1A0FE0088BBE2 /* TOCropOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropOverlayView.m; sourceTree = "<group>"; };
+		D7EC49451BF1A0FE0088BBE2 /* TOCropScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropScrollView.h; sourceTree = "<group>"; };
+		D7EC49461BF1A0FE0088BBE2 /* TOCropScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropScrollView.m; sourceTree = "<group>"; };
+		D7EC49471BF1A0FE0088BBE2 /* TOCropToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropToolbar.h; sourceTree = "<group>"; };
+		D7EC49481BF1A0FE0088BBE2 /* TOCropToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropToolbar.m; sourceTree = "<group>"; };
+		D7EC49491BF1A0FE0088BBE2 /* TOCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropView.h; sourceTree = "<group>"; };
+		D7EC494A1BF1A0FE0088BBE2 /* TOCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropView.m; sourceTree = "<group>"; };
+		D7EC494B1BF1A0FE0088BBE2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TOCropViewControllerLocalizable.strings"; sourceTree = "<group>"; };
+		D7EC494C1BF1A0FE0088BBE2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TOCropViewControllerLocalizable.strings"; sourceTree = "<group>"; };
 		D7FBBC741BE9F890009A615B /* CourseSel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSel.swift; sourceTree = "<group>"; };
 		D7FBBC761BEA0600009A615B /* CourseSelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSelCell.swift; sourceTree = "<group>"; };
 		D7FDEFB81BD8BCA000ECA71A /* MeadList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadList.swift; sourceTree = "<group>"; };
@@ -380,8 +426,10 @@
 				D726BE7C1BE87B4E0039C70E /* Reservation */,
 				42E708F31BC752C40092A5A9 /* PubClass */,
 				D71B2BDB1BF082BF006BB466 /* ImageClass */,
+				D7EC49281BF1A0FE0088BBE2 /* TOCropViewController */,
 				42C4984C1BC80B7D002DF0ED /* image */,
 				42E708F51BC752EE0092A5A9 /* SysFIle */,
+				D7EC49001BF19CAF0088BBE2 /* HealthCN-Bridging-Header.h */,
 			);
 			path = HealthCN;
 			sourceTree = "<group>";
@@ -422,6 +470,7 @@
 		D71B2BDB1BF082BF006BB466 /* ImageClass */ = {
 			isa = PBXGroup;
 			children = (
+				D7EC48841BF18A520088BBE2 /* ImageClass.swift */,
 				D71B2BDC1BF082FD006BB466 /* ImageCut.swift */,
 			);
 			name = ImageClass;
@@ -443,6 +492,48 @@
 				427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */,
 			);
 			name = Reservation;
+			sourceTree = "<group>";
+		};
+		D7EC49281BF1A0FE0088BBE2 /* TOCropViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D7EC49401BF1A0FE0088BBE2 /* TOCropViewController.h */,
+				D7EC49411BF1A0FE0088BBE2 /* TOCropViewController.m */,
+				D7EC49291BF1A0FE0088BBE2 /* TOCropViewControllerLocalizable.strings */,
+				D7EC49421BF1A0FE0088BBE2 /* Views */,
+				D7EC49331BF1A0FE0088BBE2 /* Models */,
+			);
+			path = TOCropViewController;
+			sourceTree = "<group>";
+		};
+		D7EC49331BF1A0FE0088BBE2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D7EC49341BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.h */,
+				D7EC49351BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m */,
+				D7EC49361BF1A0FE0088BBE2 /* TOCroppedImageAttributes.h */,
+				D7EC49371BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m */,
+				D7EC49381BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.h */,
+				D7EC49391BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m */,
+				D7EC493A1BF1A0FE0088BBE2 /* UIImage+CropRotate.h */,
+				D7EC493B1BF1A0FE0088BBE2 /* UIImage+CropRotate.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D7EC49421BF1A0FE0088BBE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D7EC49431BF1A0FE0088BBE2 /* TOCropOverlayView.h */,
+				D7EC49441BF1A0FE0088BBE2 /* TOCropOverlayView.m */,
+				D7EC49451BF1A0FE0088BBE2 /* TOCropScrollView.h */,
+				D7EC49461BF1A0FE0088BBE2 /* TOCropScrollView.m */,
+				D7EC49471BF1A0FE0088BBE2 /* TOCropToolbar.h */,
+				D7EC49481BF1A0FE0088BBE2 /* TOCropToolbar.m */,
+				D7EC49491BF1A0FE0088BBE2 /* TOCropView.h */,
+				D7EC494A1BF1A0FE0088BBE2 /* TOCropView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +562,7 @@
 		42D1A72F1BC587DD008ECEFB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Merit;
 				TargetAttributes = {
@@ -486,6 +578,19 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				nl,
+				pl,
+				pt,
+				ru,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 42D1A72E1BC587DD008ECEFB;
 			productRefGroup = 42D1A7381BC587DD008ECEFB /* Products */;
@@ -509,6 +614,7 @@
 				42C498A31BC80B7D002DF0ED /* customer.png in Resources */,
 				42C4988E1BC80B7D002DF0ED /* appicon01.png in Resources */,
 				42C498B61BC80B7D002DF0ED /* logo_merit02.png in Resources */,
+				D7EC494D1BF1A0FE0088BBE2 /* TOCropViewControllerLocalizable.strings in Resources */,
 				42C4989C1BC80B7D002DF0ED /* bluetooth_on_128.png in Resources */,
 				42C498C91BC80B7D002DF0ED /* search01_128.png in Resources */,
 				42C498BA1BC80B7D002DF0ED /* menu_cert_256.png in Resources */,
@@ -582,13 +688,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7EC49551BF1A0FE0088BBE2 /* TOCropToolbar.m in Sources */,
 				D726BE7E1BE87B980039C70E /* ReservationAdd.swift in Sources */,
 				427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */,
 				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
+				D7EC49521BF1A0FE0088BBE2 /* TOCropViewController.m in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
+				D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
 				42E376B91BEA6CDE00910327 /* CourseSelCustCell.swift in Sources */,
+				D7EC49561BF1A0FE0088BBE2 /* TOCropView.m in Sources */,
 				D71B2BDD1BF082FD006BB466 /* ImageCut.swift in Sources */,
+				D7EC49511BF1A0FE0088BBE2 /* UIImage+CropRotate.m in Sources */,
+				D7EC494F1BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m in Sources */,
+				D7EC49501BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m in Sources */,
 				42D0F7521BEFADCD00C97D54 /* NewsStore.swift in Sources */,
 				42D0F7501BEFAC7A00C97D54 /* NewsMain.swift in Sources */,
 				D71B2BD81BF02C17006BB466 /* NewsOfficeCell.swift in Sources */,
@@ -611,15 +724,18 @@
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */,
 				D7FDEFC11BD8E49200ECA71A /* OdrsCell.swift in Sources */,
+				D7EC49541BF1A0FE0088BBE2 /* TOCropScrollView.m in Sources */,
 				422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */,
 				D7FDEFBD1BD8D38800ECA71A /* MeadDetail.swift in Sources */,
 				42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */,
 				42D0F7561BEFB50500C97D54 /* NewsStoreCell.swift in Sources */,
+				D7EC49531BF1A0FE0088BBE2 /* TOCropOverlayView.m in Sources */,
 				D7FDEFBF1BD8E15700ECA71A /* OdrsList.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,
 				D71B2BD61BF02B8C006BB466 /* NewsOffice.swift in Sources */,
 				D7FDEFBB1BD8C9E800ECA71A /* MeadCell.swift in Sources */,
 				429B2E641BDD205300BAF88E /* HealthCalendar.swift in Sources */,
+				D7EC48851BF18A520088BBE2 /* ImageClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +748,28 @@
 				42D1A73F1BC587DD008ECEFB /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D7EC49291BF1A0FE0088BBE2 /* TOCropViewControllerLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7EC492A1BF1A0FE0088BBE2 /* Base */,
+				D7EC492B1BF1A0FE0088BBE2 /* de */,
+				D7EC492C1BF1A0FE0088BBE2 /* en */,
+				D7EC492D1BF1A0FE0088BBE2 /* es */,
+				D7EC492E1BF1A0FE0088BBE2 /* fr */,
+				D7EC492F1BF1A0FE0088BBE2 /* id */,
+				D7EC49301BF1A0FE0088BBE2 /* it */,
+				D7EC49311BF1A0FE0088BBE2 /* ja */,
+				D7EC49321BF1A0FE0088BBE2 /* ko */,
+				D7EC493C1BF1A0FE0088BBE2 /* nl */,
+				D7EC493D1BF1A0FE0088BBE2 /* pl */,
+				D7EC493E1BF1A0FE0088BBE2 /* pt */,
+				D7EC493F1BF1A0FE0088BBE2 /* ru */,
+				D7EC494B1BF1A0FE0088BBE2 /* zh-Hans */,
+				D7EC494C1BF1A0FE0088BBE2 /* zh-Hant */,
+			);
+			name = TOCropViewControllerLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -724,10 +862,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = HealthCN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mysoqi.com.HealthCN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HealthCN/HealthCN-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -735,10 +876,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = HealthCN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mysoqi.com.HealthCN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HealthCN/HealthCN-Bridging-Header.h";
 			};
 			name = Release;
 		};

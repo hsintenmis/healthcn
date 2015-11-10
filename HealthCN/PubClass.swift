@@ -403,4 +403,9 @@ class PubClass {
         mVCtrl.view.backgroundColor = UIColor(patternImage: mImage)
     }
     
+    // ********** 以下為本專案使用 ********** //
+    func MemberHeadimgFile(memberid: String!)->String {
+        return "HP_\(memberid).png"
+    }
+    
 }
