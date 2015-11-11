@@ -17,15 +17,17 @@ class ImageClass {
     }
     
     /**
-    * UIImage 轉換為 Base64 encode
+    * UIImage 轉換為 Base64 encode, 一律為 jpg 格式
     * @return String (Base64encode)
     */
-    func ImgToBase64(image: UIImage) -> String {
-        let imageData = UIImagePNGRepresentation(image)
+    func ImgToBase64(mImage: UIImage) -> String {
+        //let imageData = UIImagePNGRepresentation(mImage)
+        let imageData = UIImageJPEGRepresentation(mImage, 0.1)
+        
         let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        //let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
         
         return base64String
-        
     }
     
     /**
@@ -63,8 +65,8 @@ class ImageClass {
     * 指定 SIZE, 回傳影像
     */
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        // 壓縮比
-        let fltZipRate: CGFloat = 1.0
+        // 壓縮比, 壓縮圖片
+        let fltZipRate: CGFloat = 0.7
         
         let size = image.size
         let widthRatio  = targetSize.width  / image.size.width
@@ -86,10 +88,10 @@ class ImageClass {
         
         image.drawInRect(rect)
         
-        // 壓縮圖片
-        UIImageJPEGRepresentation(image, fltZipRate)
-        
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        //UIImagePNGRepresentation(newImage)
+        UIImageJPEGRepresentation(newImage, fltZipRate)
+        
         UIGraphicsEndImageContext()
         
         return newImage

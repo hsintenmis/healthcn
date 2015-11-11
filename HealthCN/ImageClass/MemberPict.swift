@@ -20,12 +20,11 @@ import Foundation
 import UIKit
 
 /**
- * 會員大頭照上傳
+ * 會員大頭照上傳, 圖片轉為 base64 string 上傳儲存
  */
-class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
+class MemberPict: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
     
     @IBOutlet weak var imgPict: UIImageView!
-    @IBOutlet weak var imgPreview: UIImageView!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -33,10 +32,12 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // ImagePicker 設定
+    // ImagePicker, 圖片相關設定
+    let aryPictSize = [256, 256]  // 長/寬
     let imagePicker = UIImagePickerController()
     var mImage = UIImage()
     let mImageClass = ImageClass()
+    var strImgBase64 = ""  // 選擇完成的圖片 Base64 string
     
     // View load
     override func viewDidLoad() {
@@ -47,10 +48,10 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
         
-        // 設定相關 UI text 欄位 delegate to textfile
+        // 設定相關 IBOutlet 欄位
         self.initViewField()
         
-        // ImagePicker 設定
+        // ImagePicker, 圖片相關設定
         imagePicker.delegate = self
         
         // 設定手勢 Gesture
@@ -86,28 +87,19 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
      * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage pickImg: UIImage, editingInfo: [String : AnyObject]?) {
         
         // 選擇圖片後，執行第三方圖片處理
         dismissViewControllerAnimated(true, completion: {
             ()->Void in
             
-            self.mImage = image
+            self.mImage = pickImg
             
-            let cropController = TOCropViewController(image: image)
+            let cropController = TOCropViewController(image: pickImg)
             cropController.delegate = self
             self.presentViewController(cropController, animated: true, completion: nil)
         })
     }
-    /*
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
-        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            imgPict.contentMode = .ScaleAspectFit
-            imgPict.image = pickedImage
-        }
-    }
-    */
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -123,12 +115,10 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         cropViewController.dismissAnimatedFromParentViewController(self, withCroppedImage: image, toFrame: self.imgPict.frame, completion: {
             () -> Void in
             
-            self.imgPict.image = image
+            let newImage = self.mImageClass.ResizeImage(image, targetSize: CGSize(width: self.aryPictSize[0], height: self.aryPictSize[1]))
+            self.imgPict.image = newImage
+
             self.imgPict.hidden = false
-            
-            let newImage = self.mImageClass.ResizeImage(image, targetSize: CGSize(width: 128, height: 128))
-            let strImgEncode = self.mImageClass.ImgToBase64(newImage)
-            self.imgPreview.image = self.mImageClass.Base64ToImg(strImgEncode)
         })
     }
     
@@ -162,36 +152,79 @@ class ImageCut: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             imagePicker.cameraCaptureMode = .Photo
             presentViewController(imagePicker, animated: true, completion: nil)
         } else {
-            noCamera()
+            pubClass.popIsee(Msg: pubClass.getLang("nocameramsg"))
         }
-    }
-    
-    /**
-    * 沒有相機，彈出視窗
-    */
-    func noCamera(){
-        let alertVC = UIAlertController(
-            title: "No Camera",
-            message: "Sorry, this device has no camera",
-            preferredStyle: .Alert)
-        
-        let okAction = UIAlertAction(
-            title: "OK",
-            style:.Default,
-            handler: nil)
-        
-        alertVC.addAction(okAction)
-        presentViewController(alertVC, animated: true, completion: nil)
     }
     
     /**
      * 儲存圖片
      */
     @IBAction func actSave(sender: UIBarButtonItem) {
-        let strImgEncode = mImageClass.ImgToBase64(self.imgPreview.image!)
+        self.strImgBase64 = self.mImageClass.ImgToBase64(self.imgPict.image!)
         
-        print(strImgEncode)
+        if (strImgBase64.characters.count < 1) {
+            pubClass.popIsee(Msg: pubClass.getLang("plsselpict"))
+            
+            return
+        }
+        
+        self.StartHTTPSaveConn()
     }
+    
+    /**
+     * HTTP 連線, 上傳資料儲存
+     */
+    func StartHTTPSaveConn() {
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = mAppDelegate.V_USRACC
+        dictParm["psd"] = mAppDelegate.V_USRPSD
+        dictParm["page"] = "memberdata"
+        dictParm["act"] = "memberdata_sendpict"
+        dictParm["arg1"] = self.strImgBase64
+        
+        // 產生 arg0 參數資料
+        var dictArg: Dictionary<String, String> = [:]
+        dictArg["filename"] = pubClass.MemberHeadimgFile(mAppDelegate.V_USRACC)
+        dictArg["type"] = "head"
+        //dictArg["image"] = self.strImgBase64
+        dictArg["mime"] = "png"
+        
+        // 產生 JSON string
+        do {
+            let jobjData = try NSJSONSerialization.dataWithJSONObject(dictArg, options: NSJSONWritingOptions(rawValue: 0))
+            let jsonString = NSString(data: jobjData, encoding: NSASCIIStringEncoding)! as String
+
+            dictParm["arg0"] = jsonString
+        } catch {
+            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
+            
+            return
+        }
+        
+        // HTTP 開始連線
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
+    }
+    
+    /**
+     * HTTP 連線後取得連線結果
+     */
+    private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
+        pubClass.closePopLoading()
+        
+        // 任何錯誤跳離
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: dictRS["msg"] as! String)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            return
+        }
+        
+        // 上傳與儲存完成，本 class 結束
+        pubClass.popIsee(Msg: pubClass.getLang("pictupdatecomplete"))
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     
     /**
      * 返回前頁

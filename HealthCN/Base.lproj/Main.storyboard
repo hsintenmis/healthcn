@@ -1158,7 +1158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAy-4P-4uZ" userLabel="MemberView">
-                                <rect key="frame" x="-4" y="0.0" width="328" height="160"/>
+                                <rect key="frame" x="-2" y="0.0" width="324" height="160"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_empty01.png" translatesAutoresizingMaskIntoConstraints="NO" id="dy3-lP-Kyg">
                                         <rect key="frame" x="15" y="15" width="96" height="96"/>
@@ -1169,7 +1169,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JM8-nX-aJk">
-                                        <rect key="frame" x="125" y="15" width="183" height="24"/>
+                                        <rect key="frame" x="125" y="15" width="179" height="24"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Eux-ik-fFT"/>
@@ -1179,7 +1179,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99W-8C-cMI">
-                                        <rect key="frame" x="208" y="39" width="100" height="20"/>
+                                        <rect key="frame" x="204" y="39" width="100" height="20"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="j9p-dC-gUW"/>
@@ -1205,7 +1205,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您是以下店家的尊榮會員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRd-ba-zTU">
-                                        <rect key="frame" x="125" y="69" width="183" height="14"/>
+                                        <rect key="frame" x="125" y="69" width="179" height="14"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="pBY-Ns-HXv"/>
@@ -1237,7 +1237,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKG-Gk-HP1">
-                                        <rect key="frame" x="195" y="93" width="113" height="14"/>
+                                        <rect key="frame" x="195" y="93" width="109" height="14"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="wRW-8O-jPX"/>
@@ -1246,7 +1246,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contect TEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoe-ku-seG">
-                                        <rect key="frame" x="195" y="112" width="113" height="14"/>
+                                        <rect key="frame" x="195" y="112" width="109" height="14"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="ISO-dx-4V5"/>
@@ -1802,7 +1802,7 @@
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="O8C-Mw-Yus" secondAttribute="leading" constant="4" id="1Ri-xq-KOA"/>
                             <constraint firstItem="tvf-0S-4n5" firstAttribute="leading" secondItem="Ea2-I1-Zel" secondAttribute="leadingMargin" constant="-20" id="6Qy-pg-jKz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XAy-4P-4uZ" secondAttribute="trailing" constant="-20" id="BtC-Au-gGj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XAy-4P-4uZ" secondAttribute="trailing" constant="-18" id="BtC-Au-gGj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1Bl-QY-rQs" secondAttribute="trailing" constant="-20" id="DkR-d2-GM3"/>
                             <constraint firstItem="I3F-7O-Nh3" firstAttribute="leading" secondItem="Ea2-I1-Zel" secondAttribute="leadingMargin" constant="-20" id="G6m-T2-eNa"/>
                             <constraint firstItem="1Bl-QY-rQs" firstAttribute="leading" secondItem="Ea2-I1-Zel" secondAttribute="leadingMargin" constant="-20" id="NgV-0e-mFo"/>
@@ -1813,7 +1813,7 @@
                             <constraint firstItem="I3F-7O-Nh3" firstAttribute="top" secondItem="tvf-0S-4n5" secondAttribute="bottom" id="YMR-S3-LlG"/>
                             <constraint firstItem="XAy-4P-4uZ" firstAttribute="top" secondItem="LAb-kM-ZyO" secondAttribute="bottom" id="g1Y-oY-PgT"/>
                             <constraint firstItem="tvf-0S-4n5" firstAttribute="top" secondItem="O8C-Mw-Yus" secondAttribute="bottom" constant="6" id="p7f-1g-jpJ"/>
-                            <constraint firstItem="XAy-4P-4uZ" firstAttribute="leading" secondItem="Ea2-I1-Zel" secondAttribute="leadingMargin" constant="-20" id="uEV-79-9ci"/>
+                            <constraint firstItem="XAy-4P-4uZ" firstAttribute="leading" secondItem="Ea2-I1-Zel" secondAttribute="leadingMargin" constant="-18" id="uEV-79-9ci"/>
                             <constraint firstItem="O8C-Mw-Yus" firstAttribute="top" secondItem="1Bl-QY-rQs" secondAttribute="bottom" id="vtw-hd-mcJ"/>
                         </constraints>
                     </view>
@@ -1936,10 +1936,10 @@
             </objects>
             <point key="canvasLocation" x="779" y="-962"/>
         </scene>
-        <!--會員圖片上傳-->
+        <!--更新圖片-->
         <scene sceneID="FIy-cY-ZcP">
             <objects>
-                <viewController title="會員圖片上傳" id="UgX-N8-r9v" customClass="ImageCut" customModule="HealthCN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="更新圖片" id="UgX-N8-r9v" customClass="MemberPict" customModule="HealthCN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="97E-CC-JVk"/>
                         <viewControllerLayoutGuide type="bottom" id="Rnb-WE-4u7"/>
@@ -1960,7 +1960,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="主選單" id="esM-ha-dLl">
+                                    <navigationItem title="更新圖片" id="esM-ha-dLl">
                                         <barButtonItem key="leftBarButtonItem" title="返回" id="fA0-gu-zga">
                                             <color key="tintColor" red="1" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -1976,10 +1976,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="camera_256_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-0c-mlb">
-                                <rect key="frame" x="96" y="96" width="128" height="128"/>
-                                <animations/>
-                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fL1-hc-V66">
                                 <rect key="frame" x="-2" y="524" width="324" height="44"/>
                                 <animations/>
@@ -1999,18 +1995,23 @@
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="pWV-OL-2hi"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0e-K9-F65">
-                                <rect key="frame" x="96" y="246" width="128" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_256_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-0c-mlb">
+                                <rect key="frame" x="96" y="220" width="128" height="128"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="2yq-oa-ARH"/>
+                                    <constraint firstAttribute="height" constant="128" id="KRT-7I-gv5"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PCb-0c-mlb" firstAttribute="centerY" secondItem="6m9-9c-SQl" secondAttribute="centerY" id="5fa-UY-J7C"/>
                             <constraint firstItem="BPc-wk-lPf" firstAttribute="top" secondItem="97E-CC-JVk" secondAttribute="bottom" id="6fx-Sn-5cM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fL1-hc-V66" secondAttribute="trailing" constant="-18" id="8NW-wE-Km1"/>
                             <constraint firstItem="BPc-wk-lPf" firstAttribute="leading" secondItem="6m9-9c-SQl" secondAttribute="leadingMargin" constant="-18" id="Dc0-Be-gSf"/>
+                            <constraint firstItem="PCb-0c-mlb" firstAttribute="centerX" secondItem="6m9-9c-SQl" secondAttribute="centerX" id="W6V-B4-IlN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BPc-wk-lPf" secondAttribute="trailing" constant="-18" id="les-jO-GRL"/>
                             <constraint firstItem="Rnb-WE-4u7" firstAttribute="top" secondItem="fL1-hc-V66" secondAttribute="bottom" id="pZS-Px-vEO"/>
                             <constraint firstItem="fL1-hc-V66" firstAttribute="leading" secondItem="6m9-9c-SQl" secondAttribute="leadingMargin" constant="-18" id="sxv-wi-vDp"/>
@@ -2022,8 +2023,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="imgPict" destination="PCb-0c-mlb" id="NKa-yD-3zP"/>
-                        <outlet property="imgPreview" destination="o0e-K9-F65" id="aQE-GE-fOa"/>
+                        <outlet property="imgPict" destination="PCb-0c-mlb" id="Mvk-xc-ydi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPS-an-LyS" userLabel="First Responder" sceneMemberID="firstResponder"/>

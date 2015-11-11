@@ -63,6 +63,8 @@ class MainScrollData: UIViewController {
     private func initViewField() {
         viewTodayInfo.layer.borderWidth = 2
         viewTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
+        
+        self.imgUser.layer.cornerRadius = 20
     }
     
     /**

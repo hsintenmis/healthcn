@@ -404,6 +404,10 @@ class PubClass {
     }
     
     // ********** 以下為本專案使用 ********** //
+    
+    /**
+    * 會員大頭照圖片檔名
+    */
     func MemberHeadimgFile(memberid: String!)->String {
         return "HP_\(memberid).png"
     }
