@@ -22,7 +22,7 @@ class ImageClass {
     */
     func ImgToBase64(mImage: UIImage) -> String {
         //let imageData = UIImagePNGRepresentation(mImage)
-        let imageData = UIImageJPEGRepresentation(mImage, 0.1)
+        let imageData = UIImageJPEGRepresentation(mImage, 0.6)
         
         let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
         //let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
@@ -66,7 +66,7 @@ class ImageClass {
     */
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         // 壓縮比, 壓縮圖片
-        let fltZipRate: CGFloat = 0.7
+        let fltZipRate: CGFloat = 1.0
         
         let size = image.size
         let widthRatio  = targetSize.width  / image.size.width
