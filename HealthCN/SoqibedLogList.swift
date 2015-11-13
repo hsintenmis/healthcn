@@ -1,15 +1,12 @@
 //
-// ConyainerView 的子 Class
+// TabvleView 資料列表, Cell 使用標準內建格式 'SubTitle'
 //
 
-import UIKit
-import Foundation
-
 /**
- * 店家新訊 TableView List, 點取 Cell 顯示詳細資料
- */
-class NewsStore: UIViewController {
-    @IBOutlet weak var tableNews: UITableView!
+* Soqibed 私人+標準 列表 TableView List, 點取 Cell 顯示詳細資料
+*/
+class SoqibedLoglist: UIViewController {
+    @IBOutlet weak var tableList: UITableView!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -17,9 +14,10 @@ class NewsStore: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // public, 由parent 設定, 本 class 需要使用的資料
+    // public, 由 parent 設定, 本 class 需要使用的資料
+    var strLogType: String = ""  // priv or stand
     var aryAllData: Array<Dictionary<String, AnyObject>> = [[:]]
-
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +25,6 @@ class NewsStore: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        
-        // TableCell autoheight
-        tableNews.estimatedRowHeight = 80.0
-        tableNews.rowHeight = UITableViewAutomaticDimension
     }
     
     /**
@@ -38,7 +32,7 @@ class NewsStore: UIViewController {
      */
     private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.tableNews.reloadData()
+            self.tableList.reloadData()
         })
     }
     
@@ -59,35 +53,33 @@ class NewsStore: UIViewController {
     }
     
     /**
-     * UITableView, Cell 內容
+     * UITableView, Cell 內容, 使用內建格式 'SubTitle'
      */
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         if (aryAllData.count < 1) {
             return nil
         }
         
-        let cell: NewsStoreCell = tableView.dequeueReusableCellWithIdentifier("cellNewsStore", forIndexPath: indexPath) as! NewsStoreCell
-        let ditItem = aryAllData[indexPath.row] as! Dictionary<String, String>
+        // 取得 Item data source
+        let ditItem = aryAllData[indexPath.row] 
         
-        cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
-        cell.labTitle.text = ditItem["title"]
+        // 取得 CellView
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellSoqibedLogList")!
+        let strSDate = pubClass.formatDateWIthStr(ditItem["sdate"] as? String, type: "8s")
+        let strCounts = ditItem["count"] as! String
         
-        return cell
+        let strSubTitle = pubClass.getLang("soqibed_actdate") + ": " + strSDate + ", " + pubClass.getLang("soqibed_usecount") + ": " + strCounts
+        
+        mCell.textLabel?.text = ditItem["title"] as? String
+        mCell.detailTextLabel?.text = strSubTitle
+        
+        return mCell
     }
-    
-    /**
-     * UITableView, Cell 點取
-     */
-     /*
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     // 跳轉至指定的名稱的Segue頁面
-     self.performSegueWithIdentifier("NewsDetail", sender: nil)
-     }
-     */
      
      /**
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // 取得點取 cell 的 index, 產生 JSON data
         let indexPath = self.tableNews.indexPathForSelectedRow!
@@ -97,6 +89,7 @@ class NewsStore: UIViewController {
         
         return
     }
+    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

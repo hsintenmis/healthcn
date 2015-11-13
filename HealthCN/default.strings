@@ -231,3 +231,9 @@
 
 "news_store" = "店家新訊";
 "news_office" = "美利官網新訊";
+
+"soqibed_mod_priv" = "私人模式記錄";
+"soqibed_mod_stand" = "標準模式紀錄";
+"soqibed_mod_all" = "全部使用記錄";
+"soqibed_actdate" = "建立日期";
+"soqibed_usecount" = "使用次數";

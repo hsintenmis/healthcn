@@ -106,6 +106,10 @@
 		D75C3FDB1BECA19100123087 /* ReservationMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FDA1BECA19100123087 /* ReservationMain.swift */; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; };
 		D77684191BD0A1C500B97009 /* digt002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684171BD0A1C500B97009 /* digt002.ttf */; };
+		D781F2B71BF5B48300477ABE /* SoqibedMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2B61BF5B48300477ABE /* SoqibedMain.swift */; };
+		D781F2B91BF5B8D600477ABE /* SoqibedLogList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2B81BF5B8D600477ABE /* SoqibedLogList.swift */; };
+		D781F2BB1BF5C7D100477ABE /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2BA1BF5C7D100477ABE /* NoDataView.swift */; };
+		D781F2BD1BF5D6E700477ABE /* SoqibedLogAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2BC1BF5D6E700477ABE /* SoqibedLogAll.swift */; };
 		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
 		D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */; };
 		D7EC48851BF18A520088BBE2 /* ImageClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC48841BF18A520088BBE2 /* ImageClass.swift */; };
@@ -230,6 +234,10 @@
 		D75C3FDA1BECA19100123087 /* ReservationMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationMain.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
 		D77684171BD0A1C500B97009 /* digt002.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt002.ttf; sourceTree = "<group>"; };
+		D781F2B61BF5B48300477ABE /* SoqibedMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoqibedMain.swift; path = Soqibed/SoqibedMain.swift; sourceTree = "<group>"; };
+		D781F2B81BF5B8D600477ABE /* SoqibedLogList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoqibedLogList.swift; sourceTree = "<group>"; };
+		D781F2BA1BF5C7D100477ABE /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		D781F2BC1BF5D6E700477ABE /* SoqibedLogAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoqibedLogAll.swift; sourceTree = "<group>"; };
 		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCalCellData.swift; sourceTree = "<group>"; };
 		D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScrollData.swift; sourceTree = "<group>"; };
 		D7EC48841BF18A520088BBE2 /* ImageClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageClass.swift; sourceTree = "<group>"; };
@@ -424,6 +432,7 @@
 				42C9C4921BD15BDF00BB217F /* Program */,
 				429B2E651BDD207D00BAF88E /* Health */,
 				D726BE7C1BE87B4E0039C70E /* Reservation */,
+				D781F2B51BF5B44500477ABE /* Soqibed */,
 				42E708F31BC752C40092A5A9 /* PubClass */,
 				D71B2BDB1BF082BF006BB466 /* ImageClass */,
 				D7EC49281BF1A0FE0088BBE2 /* TOCropViewController */,
@@ -438,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				42E708F61BC7534A0092A5A9 /* PubClass.swift */,
+				D781F2BA1BF5C7D100477ABE /* NoDataView.swift */,
 			);
 			name = PubClass;
 			sourceTree = "<group>";
@@ -492,6 +502,16 @@
 				427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */,
 			);
 			name = Reservation;
+			sourceTree = "<group>";
+		};
+		D781F2B51BF5B44500477ABE /* Soqibed */ = {
+			isa = PBXGroup;
+			children = (
+				D781F2B61BF5B48300477ABE /* SoqibedMain.swift */,
+				D781F2B81BF5B8D600477ABE /* SoqibedLogList.swift */,
+				D781F2BC1BF5D6E700477ABE /* SoqibedLogAll.swift */,
+			);
+			name = Soqibed;
 			sourceTree = "<group>";
 		};
 		D7EC49281BF1A0FE0088BBE2 /* TOCropViewController */ = {
@@ -692,6 +712,7 @@
 				D726BE7E1BE87B980039C70E /* ReservationAdd.swift in Sources */,
 				427F028C1BC9799400A4AEB7 /* MainCategory.swift in Sources */,
 				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
+				D781F2B71BF5B48300477ABE /* SoqibedMain.swift in Sources */,
 				D7EC49521BF1A0FE0088BBE2 /* TOCropViewController.m in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */,
@@ -707,12 +728,14 @@
 				D71B2BD81BF02C17006BB466 /* NewsOfficeCell.swift in Sources */,
 				D75C3FDB1BECA19100123087 /* ReservationMain.swift in Sources */,
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
+				D781F2BD1BF5D6E700477ABE /* SoqibedLogAll.swift in Sources */,
 				D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */,
 				D71B2BDA1BF02D05006BB466 /* NewsOfficeDetail.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
 				42D0F7541BEFB22D00C97D54 /* NewsStoreDetail.swift in Sources */,
 				D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */,
 				D7EA9FB31BCF86A200E8CD10 /* MainScrollData.swift in Sources */,
+				D781F2B91BF5B8D600477ABE /* SoqibedLogList.swift in Sources */,
 				D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */,
 				427CBE261BED0EDE00FAFB01 /* ReservationListCell.swift in Sources */,
 				D7FBBC751BE9F890009A615B /* CourseSel.swift in Sources */,
@@ -735,6 +758,7 @@
 				D71B2BD61BF02B8C006BB466 /* NewsOffice.swift in Sources */,
 				D7FDEFBB1BD8C9E800ECA71A /* MeadCell.swift in Sources */,
 				429B2E641BDD205300BAF88E /* HealthCalendar.swift in Sources */,
+				D781F2BB1BF5C7D100477ABE /* NoDataView.swift in Sources */,
 				D7EC48851BF18A520088BBE2 /* ImageClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

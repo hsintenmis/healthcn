@@ -1,5 +1,5 @@
 //
-// 店家新訊詳細內容
+// TabvleView 資料列表, Cell 使用自訂格式
 //
 
 import UIKit

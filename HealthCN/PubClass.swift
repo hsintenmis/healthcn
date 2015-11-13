@@ -295,6 +295,37 @@ class PubClass {
     }
     
     /**
+     * 字串格式化可閱讀的日期文字, 簡短顯示 ex. '20150131235959' = 2015/01/31 23:59<BR>
+     * @param type: 8s or 14s (String)
+     */
+    func formatDateWIthStr(strDate: String!, type: String?)->String {
+        if ( strDate.characters.count < 8) {
+            return strDate
+        }
+        
+        var strYY: String, strMM: String, strDD: String
+        
+        strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
+        strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
+        strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
+        
+        if (type == "8s") {
+            return "\(strYY)/\(strMM)/\(strDD)"
+        }
+        
+        if (type == "14s") {
+            var strHH: String, strMin: String
+            
+            strHH = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(8), end: strDate.startIndex.advancedBy(10)))
+            strMin = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(10), end: strDate.startIndex.advancedBy(12)))
+            
+            return "\(strYY)/\(strMM)/\(strDD) \(strHH):\(strMin)"
+        }
+        
+        return strDate
+    }
+    
+    /**
     * 計算動態 View 的 CGFloat 長,寬
     * @return dict: ex. dict["h"], dict["w"]
     */
