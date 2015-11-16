@@ -267,7 +267,7 @@ class PubClass {
      * 字串格式化可閱讀的日期文字, ex. '20150131235959' = 2015年01月31日 23:59<BR>
      * @param type: 8 or 14 (Int)
      */
-    func formatDateWIthStr(strDate: String!, type: Int?)->String {
+    func formatDateWithStr(strDate: String!, type: Int?)->String {
         if ( strDate.characters.count < 8) {
             return strDate
         }
@@ -298,7 +298,7 @@ class PubClass {
      * 字串格式化可閱讀的日期文字, 簡短顯示 ex. '20150131235959' = 2015/01/31 23:59<BR>
      * @param type: 8s or 14s (String)
      */
-    func formatDateWIthStr(strDate: String!, type: String?)->String {
+    func formatDateWithStr(strDate: String!, type: String?)->String {
         if ( strDate.characters.count < 8) {
             return strDate
         }

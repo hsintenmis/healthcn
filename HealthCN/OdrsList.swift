@@ -113,7 +113,7 @@ class OdrsList: UIViewController {
         let cell: OdrsCell = tableView.dequeueReusableCellWithIdentifier("cellOdrs", forIndexPath: indexPath) as! OdrsCell
         let ditItem = dictAllData[indexPath.row] as Dictionary<String, AnyObject>
         
-        cell.labSdate.text = pubClass.formatDateWIthStr(ditItem["sdate"] as! String, type: 14)
+        cell.labSdate.text = pubClass.formatDateWithStr(ditItem["sdate"] as! String, type: 14)
         cell.labId.text = ditItem["id"] as? String
         cell.labPrice.text = ditItem["price"] as? String
         cell.labCustPrice.text = ditItem["custprice"] as? String

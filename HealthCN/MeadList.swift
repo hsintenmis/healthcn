@@ -113,7 +113,7 @@ class MeadList: UIViewController {
         let cell: MeadCell = tableView.dequeueReusableCellWithIdentifier("cellMead", forIndexPath: indexPath) as! MeadCell
         let ditItem = dictAllData[indexPath.row] as! Dictionary<String, String>
         
-        cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
+        cell.labDate.text = pubClass.formatDateWithStr(ditItem["sdate"], type: 8)
         cell.labAvg.text = ditItem["avg"]
         cell.labAvgH.text = ditItem["avgH"]
         cell.labAvgL.text = ditItem["avgL"]

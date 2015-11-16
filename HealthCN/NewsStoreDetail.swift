@@ -70,7 +70,7 @@ class NewsStoreDetail: UIViewController {
         
         let cell: NewsStoreDetailCell = tableView.dequeueReusableCellWithIdentifier("cellNewsStoreDetail", forIndexPath: indexPath) as! NewsStoreDetailCell
         
-        cell.labDate.text = pubClass.formatDateWIthStr(parentData["sdate"], type: 8)
+        cell.labDate.text = pubClass.formatDateWithStr(parentData["sdate"], type: 8)
         cell.labTitle.text = parentData["title"]
         cell.labContent.text = parentData["content"]
         

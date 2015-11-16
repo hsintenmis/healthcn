@@ -78,8 +78,8 @@ class CourseSelCust: UIViewController {
         
         mCell.labTitle.text = ditItem["pdname"] as? String
         mCell.labContent.text = ditItem["pdid"] as? String
-        mCell.labSdate.text = pubClass.formatDateWIthStr(ditItem["sdate"] as! String, type: 8)
-        mCell.labEddDate.text = pubClass.formatDateWIthStr(ditItem["end_date"] as! String, type: 8)
+        mCell.labSdate.text = pubClass.formatDateWithStr(ditItem["sdate"] as! String, type: 8)
+        mCell.labEddDate.text = pubClass.formatDateWithStr(ditItem["end_date"] as! String, type: 8)
         mCell.labSugst.text = ditItem["card_msg"] as? String
         mCell.labUseTimes.text = ditItem["usecount"] as? String
         mCell.labSugst.text = ditItem["card_msg"] as? String

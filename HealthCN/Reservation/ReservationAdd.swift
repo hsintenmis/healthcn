@@ -47,20 +47,20 @@ class ReservationAdd: UIViewController {
     
     /*日期/時間/服務區  JSON 資料 */
     // colvView 選擇日期的資料集, ex. 0=>{'ymd'="20151031,..., 'service'=JSONAry "}
-    private var dictDataSelDate: [[String:AnyObject]] = [[:]]
+    private var dictDataSelDate: [[String:AnyObject]] = []
     
     // colvView 選擇服務區資料
     private var numsSrvZone = 0  // 服務區總數
     
     // colvView, 選擇時段 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
-    private var dictDataTime: [[String:AnyObject]] = [[:]]  // 目前選擇的'時段'資料集
+    private var dictDataTime: [[String:AnyObject]] = []  // 目前選擇的'時段'資料集
     
     // 日期相關設定
     private var today: String = ""
     
     // 療程相關資料集, 預設療程/購買的療程
     private var dictCourse_def: Array<Dictionary<String, String>>!
-    private var dictCourse_cust: [[String:AnyObject]] = [[:]]
+    private var dictCourse_cust: [[String:AnyObject]] = []
     
     // View load
     override func viewDidLoad() {

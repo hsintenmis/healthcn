@@ -9,14 +9,12 @@ class SoqibedLogAll: UIViewController {
     @IBOutlet weak var tableList: UITableView!
     
     // common property
-    private var isPageReloadAgain = false // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
-    private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // public, 由 parent 設定, 本 class 需要使用的資料
     var strLogType: String = "stand"  // priv or stand
-    var aryAllData: Array<Dictionary<String, AnyObject>> = [[:]]
+    var aryAllData: Array<Dictionary<String, AnyObject>> = []
     
     // View load
     override func viewDidLoad() {
@@ -65,7 +63,7 @@ class SoqibedLogAll: UIViewController {
         
         // 取得 CellView
         let mCell = tableView.dequeueReusableCellWithIdentifier("cellSoqibedLogAll")!
-        let strSDate = pubClass.formatDateWIthStr(ditItem["sdate"] as? String, type: "8s")
+        let strSDate = pubClass.formatDateWithStr(ditItem["sdate"] as? String, type: "8s")
         
         mCell.textLabel?.text = ditItem["title"] as? String
         mCell.detailTextLabel?.text = strSDate

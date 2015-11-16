@@ -21,9 +21,9 @@ class SoqibedMain: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // Log 的資料集, private + stand, alllog,  jsonArray 型態
-    private var aryLog_priv: Array<Dictionary<String, AnyObject>> = [[:]]
-    private var aryLog_stand: Array<Dictionary<String, AnyObject>> = [[:]]
-    private var aryLog_all: Array<Dictionary<String, AnyObject>> = [[:]]
+    private var aryLog_priv: Array<Dictionary<String, AnyObject>> = []
+    private var aryLog_stand: Array<Dictionary<String, AnyObject>> = []
+    private var aryLog_all: Array<Dictionary<String, AnyObject>> = []
     
     // View load
     override func viewDidLoad() {

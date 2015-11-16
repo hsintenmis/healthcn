@@ -16,7 +16,7 @@ class SoqibedLoglist: UIViewController {
     
     // public, 由 parent 設定, 本 class 需要使用的資料
     var strLogType: String = ""  // priv or stand
-    var aryAllData: Array<Dictionary<String, AnyObject>> = [[:]]
+    var aryAllData: Array<Dictionary<String, AnyObject>> = []
     
     // View load
     override func viewDidLoad() {
@@ -65,7 +65,7 @@ class SoqibedLoglist: UIViewController {
         
         // 取得 CellView
         let mCell = tableView.dequeueReusableCellWithIdentifier("cellSoqibedLogList")!
-        let strSDate = pubClass.formatDateWIthStr(ditItem["sdate"] as? String, type: "8s")
+        let strSDate = pubClass.formatDateWithStr(ditItem["sdate"] as? String, type: "8s")
         let strCounts = ditItem["count"] as! String
         
         let strSubTitle = pubClass.getLang("soqibed_actdate") + ": " + strSDate + ", " + pubClass.getLang("soqibed_usecount") + ": " + strCounts
@@ -79,17 +79,15 @@ class SoqibedLoglist: UIViewController {
      /**
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
-    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // 取得點取 cell 的 index, 產生 JSON data
-        let indexPath = self.tableNews.indexPathForSelectedRow!
-        let ditItem = aryAllData[indexPath.row] as! Dictionary<String, String>
-        let cvChild = segue.destinationViewController as! NewsStoreDetail
-        cvChild.parentData = ditItem
+        let indexPath = self.tableList.indexPathForSelectedRow!
+        let ditItem = aryAllData[indexPath.row]
+        let cvChild = segue.destinationViewController as! SoqibedAdEd
+        cvChild.aryAllData = ditItem
         
         return
     }
-    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

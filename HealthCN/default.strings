@@ -47,6 +47,9 @@
 "mm_11" = "十一月";
 "mm_12" = "十二月";
 
+"gender_M" = "男性";
+"gender_F" = "女性";
+"agename" = "歲";
 "height_cm" = "厘米(CM)";
 "name_height" = "厘米(CM)";
 "name_weight" = "千克(KG)";
@@ -237,3 +240,6 @@
 "soqibed_mod_all" = "全部使用記錄";
 "soqibed_actdate" = "建立日期";
 "soqibed_usecount" = "使用次數";
+"soqibed_builddate" = "建立時間";
+"testingdate" = "檢測日期";
+

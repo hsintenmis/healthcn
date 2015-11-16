@@ -18,7 +18,7 @@ class NewsOffice: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // public, 由parent 設定, 本 class 需要使用的資料
-    var aryAllData: Array<Dictionary<String, AnyObject>> = [[:]]
+    var aryAllData: Array<Dictionary<String, AnyObject>> = []
     
     // View load
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class NewsOffice: UIViewController {
         let cell: NewsOfficeCell = tableView.dequeueReusableCellWithIdentifier("cellNewsOffice", forIndexPath: indexPath) as! NewsOfficeCell
         let ditItem = aryAllData[indexPath.row] as! Dictionary<String, String>
 
-        cell.labDate.text = pubClass.formatDateWIthStr(ditItem["sdate"], type: 8)
+        cell.labDate.text = pubClass.formatDateWithStr(ditItem["sdate"], type: 8)
         cell.labTitle.text = ditItem["title"]
         
         return cell

@@ -193,14 +193,14 @@ class HealthExplainTestData {
         doubRs = Double(String(format: "%.2f", doubRs))!
         
         // 設定年齡性別 對應數值資料 map
-        var listFixVal_M: [[Double]] = [[]]
+        var listFixVal_M: [[Double]] = []
         listFixVal_M.append([12.0, 17.0, 22.0, 99.0])
         listFixVal_M.append([12.4, 18.0, 23.0, 99.0])
         listFixVal_M.append([13.0, 18.4, 23.0, 99.0])
         listFixVal_M.append([13.4, 19.0, 23.4, 99.0])
         listFixVal_M.append([14.0, 19.4, 24.0, 99.0])
         
-        var listFixVal_F: [[Double]] = [[]]
+        var listFixVal_F: [[Double]] = []
         listFixVal_F.append([15.0, 22.0, 26.4, 99.0])
         listFixVal_F.append([15.4, 23.0, 27.0, 99.0])
         listFixVal_F.append([16.0, 23.4, 27.4, 99.0])

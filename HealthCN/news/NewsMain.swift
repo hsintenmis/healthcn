@@ -21,8 +21,8 @@ class NewsMain: UIViewController {
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
     // News 的資料集, store and office, jsonArray 型態
-    private var aryNewsStore: Array<Dictionary<String, AnyObject>> = [[:]]
-    private var aryNewsOffice: Array<Dictionary<String, AnyObject>> = [[:]]
+    private var aryNewsStore: Array<Dictionary<String, AnyObject>> = []
+    private var aryNewsOffice: Array<Dictionary<String, AnyObject>> = []
     
     // View load
     override func viewDidLoad() {

@@ -1,0 +1,101 @@
+<head>
+<meta charset="utf-8">
+<title>ECharts</title>
+</head>
+<BODY BGCOLOR="white" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+    <div id="main" style="margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px;
+      width:D_CHART_WIDTH; height:D_CHART_HEIGHT"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="./js/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: './js/dist'
+            }
+        });
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/gauge'
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+// option Start
+var option = {
+  animation: true,
+
+  series: [
+    // 第一个资料
+    {
+      name: "体脂计",
+      type: "gauge",
+      max: 150,
+      splitNumber: 15,
+
+      title: {
+        textStyle:{
+           color: "#909090",
+          fontSize:12,
+          //fontWeight: "bold",
+        },
+      },
+
+      //startAngle: 200,
+      //endAngle: -20,
+
+      axisLine: {
+        lineStyle: {
+          width:15,
+        },
+      },
+
+      axisTick: {
+        length: 15,
+      },
+
+      axisLabel: {
+        textStyle:{
+          fontSize:10,
+        },
+      },
+
+      splitLine: {
+        length: 20,
+        lineStyle: {
+          color: "#909090",
+          width:1,
+        },
+      },
+
+      detail: {
+        //formatter:"{value} kg",
+        textStyle:{
+          fontSize:48,
+          fontWeight: "bold",
+        },
+
+      },
+
+      data:[
+        {
+          value: D_VAL,
+          name:"体重单位: kg(千克)",
+        }
+      ],
+    },
+
+  ],
+
+};
+// option End
+
+// 为echarts对象加载数据
+myChart.setOption(option);
+}
+);
+</script>
+</body>
