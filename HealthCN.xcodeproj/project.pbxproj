@@ -90,6 +90,9 @@
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; };
+		D704130D1BFAD2F4008F4CE4 /* MeadDetailTxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704130C1BFAD2F4008F4CE4 /* MeadDetailTxt.swift */; };
+		D704131B1BFADE76008F4CE4 /* mead_db.txt in Resources */ = {isa = PBXBuildFile; fileRef = D704131A1BFADE76008F4CE4 /* mead_db.txt */; };
+		D704131D1BFB0509008F4CE4 /* MeadDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704131C1BFB0509008F4CE4 /* MeadDetailCell.swift */; };
 		D70F0A4F1BF98588006B6596 /* SoqibedAdEd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F0A4E1BF98588006B6596 /* SoqibedAdEd.swift */; };
 		D70F0A8C1BF9BBBF006B6596 /* html in Resources */ = {isa = PBXBuildFile; fileRef = D70F0A8B1BF9BBBF006B6596 /* html */; };
 		D71B2BD61BF02B8C006BB466 /* NewsOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71B2BD51BF02B8C006BB466 /* NewsOffice.swift */; };
@@ -220,6 +223,9 @@
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
+		D704130C1BFAD2F4008F4CE4 /* MeadDetailTxt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadDetailTxt.swift; sourceTree = "<group>"; };
+		D704131A1BFADE76008F4CE4 /* mead_db.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mead_db.txt; sourceTree = "<group>"; };
+		D704131C1BFB0509008F4CE4 /* MeadDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadDetailCell.swift; sourceTree = "<group>"; };
 		D70F0A4E1BF98588006B6596 /* SoqibedAdEd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoqibedAdEd.swift; sourceTree = "<group>"; };
 		D70F0A8B1BF9BBBF006B6596 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = "<group>"; };
 		D71B2BD51BF02B8C006BB466 /* NewsOffice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsOffice.swift; sourceTree = "<group>"; };
@@ -470,6 +476,7 @@
 		42E708F51BC752EE0092A5A9 /* SysFIle */ = {
 			isa = PBXGroup;
 			children = (
+				D704131A1BFADE76008F4CE4 /* mead_db.txt */,
 				D77684161BD0A1C500B97009 /* digt001.ttf */,
 				D77684171BD0A1C500B97009 /* digt002.ttf */,
 				42D1A73A1BC587DD008ECEFB /* AppDelegate.swift */,
@@ -487,6 +494,8 @@
 				D7FDEFB81BD8BCA000ECA71A /* MeadList.swift */,
 				D7FDEFBA1BD8C9E800ECA71A /* MeadCell.swift */,
 				D7FDEFBC1BD8D38800ECA71A /* MeadDetail.swift */,
+				D704130C1BFAD2F4008F4CE4 /* MeadDetailTxt.swift */,
+				D704131C1BFB0509008F4CE4 /* MeadDetailCell.swift */,
 			);
 			name = Mead;
 			sourceTree = "<group>";
@@ -681,6 +690,7 @@
 				42C498941BC80B7D002DF0ED /* arrow_right01.png in Resources */,
 				42C498B71BC80B7D002DF0ED /* menu_calendar01_256.png in Resources */,
 				42C4988D1BC80B7D002DF0ED /* akregator_256.png in Resources */,
+				D704131B1BFADE76008F4CE4 /* mead_db.txt in Resources */,
 				42C498B01BC80B7D002DF0ED /* homelogo002.png in Resources */,
 				42C4988F1BC80B7D002DF0ED /* appicon02.png in Resources */,
 				42C498C31BC80B7D002DF0ED /* msgicon_fb.png in Resources */,
@@ -729,6 +739,7 @@
 				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
 				D781F2B71BF5B48300477ABE /* SoqibedMain.swift in Sources */,
 				D7EC49521BF1A0FE0088BBE2 /* TOCropViewController.m in Sources */,
+				D704130D1BFAD2F4008F4CE4 /* MeadDetailTxt.swift in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
@@ -772,6 +783,7 @@
 				D7FDEFBF1BD8E15700ECA71A /* OdrsList.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,
 				D71B2BD61BF02B8C006BB466 /* NewsOffice.swift in Sources */,
+				D704131D1BFB0509008F4CE4 /* MeadDetailCell.swift in Sources */,
 				D7FDEFBB1BD8C9E800ECA71A /* MeadCell.swift in Sources */,
 				429B2E641BDD205300BAF88E /* HealthCalendar.swift in Sources */,
 				D781F2BB1BF5C7D100477ABE /* NoDataView.swift in Sources */,

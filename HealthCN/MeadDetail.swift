@@ -7,15 +7,16 @@ import UIKit
 import Foundation
 
 /**
- * 能量檢測詳細內容 class,
+ * 能量檢測詳細內容 class, 圖表顯示
  */
 class MeadDetail: UIViewController {
     // !!TODO!! 圖表固定參數
-    let D_HTMLFILENAME = "mead_demo01"
-    let D_HTMLBASRURL = "html/mead"
+    let D_HTML_FILENAME = "mead01"
+    let D_HTML_URL = "html/mead"
+    let D_BASE_FILENAME = "index"
+    let D_BASE_URL = "html"
     
     // @IBOutlet
-    @IBOutlet weak var tableDetail: UITableView!
     @IBOutlet weak var webChart: UIWebView!
     
     // public property
@@ -122,7 +123,7 @@ class MeadDetail: UIViewController {
         mapVal["D_LOW"] = strAvgL
 
         // 設定圖表尺寸
-        mapVal["D_CHART_HEIGHT"] = "400px"
+        mapVal["D_CHART_HEIGHT"] = "500px"
         mapVal["D_CHART_WIDTH"] = "420px"
         
         // 圖表相關, 標題/次標題, 帶入會員資料
@@ -136,7 +137,7 @@ class MeadDetail: UIViewController {
         
         // 取得原始 HTML String code
         do {
-            let htmlFile = NSBundle.mainBundle().pathForResource(D_HTMLFILENAME, ofType: "html", inDirectory: D_HTMLBASRURL)!
+            let htmlFile = NSBundle.mainBundle().pathForResource(D_HTML_FILENAME, ofType: "html", inDirectory: D_HTML_URL)!
             var strHTML = try NSString(contentsOfFile: htmlFile, encoding: NSUTF8StringEncoding)
             
             // 開始執行字串取代
@@ -162,10 +163,9 @@ class MeadDetail: UIViewController {
             
             strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_SUBTITLE", withString: mapVal["D_CHART_SUBTITLE"]!)
             
-            print(strHTML)
-            
             // 以 HTML code 產生新的 WebView
-            let baseUrl = NSURL(fileURLWithPath: htmlFile)
+            let baseFile = NSBundle.mainBundle().pathForResource(D_BASE_FILENAME, ofType: "html", inDirectory: D_BASE_URL)!
+            let baseUrl = NSURL(fileURLWithPath: baseFile)
             self.webChart.loadHTMLString(strHTML as String, baseURL: baseUrl)
             
         } catch {
@@ -173,6 +173,17 @@ class MeadDetail: UIViewController {
             print("err")
             return
         }
+    }
+    
+    /**
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 取得點取 cell 的 index, 產生 JSON data
+        let cvChild = segue.destinationViewController as! MeadDetailTxt
+        cvChild.dictMeadData = parentData
+        
+        return
     }
     
     /**

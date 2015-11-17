@@ -242,4 +242,11 @@
 "soqibed_usecount" = "使用次數";
 "soqibed_builddate" = "建立時間";
 "testingdate" = "檢測日期";
+"testingvalokmsg" = "檢測結果正常，無相關報告資料！";
+"testingdate" = "檢測日期";
+
+"mead_analy" = "檢測分析";
+"mead_pdsuggest" = "調理建議";
+"mead_theory_E" = "東方學理";
+"mead_theory_W" = "西方學理";
 
