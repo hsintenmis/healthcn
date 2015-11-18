@@ -18,6 +18,8 @@ class MeadDetail: UIViewController {
     
     // @IBOutlet
     @IBOutlet weak var webChart: UIWebView!
+    @IBOutlet weak var viewLoading: UIActivityIndicatorView!
+    @IBOutlet weak var labLoading: UILabel!
     
     // public property
     var mVCtrl: UIViewController!
@@ -174,6 +176,28 @@ class MeadDetail: UIViewController {
             return
         }
     }
+    
+    /** WebView delegate Start */
+    func webView(webView: UIWebView!, didFailLoadWithError error: NSError!) {
+        //print("Webview fail with error \(error)");
+    }
+    
+    func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType)->Bool {
+        return true;
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView!) {
+        labLoading.alpha = 1.0
+        viewLoading.alpha = 1.0
+        //print("Webview started Loading")
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView!) {
+        labLoading.alpha = 0.0
+        viewLoading.alpha = 0.0
+        //print("Webview did finish load")
+    }
+    /** WebView delegate End */
     
     /**
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue

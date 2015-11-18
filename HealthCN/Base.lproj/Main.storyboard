@@ -1135,10 +1135,24 @@
                                 </items>
                             </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUf-do-wnx">
-                                <rect key="frame" x="-2" y="64" width="324" height="504"/>
+                                <rect key="frame" x="-2" y="84" width="324" height="464"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="18q-pf-Ees" id="TAX-Wc-lZN"/>
+                                </connections>
                             </webView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图表读取中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWA-Oz-ubB">
+                                <rect key="frame" x="119" y="276" width="83" height="17"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CeG-Nj-9Fo">
+                                <rect key="frame" x="150" y="248" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1146,16 +1160,22 @@
                             <constraint firstAttribute="trailingMargin" secondItem="kkk-pu-heb" secondAttribute="trailing" constant="-20" id="4DB-t2-fEr"/>
                             <constraint firstItem="kkk-pu-heb" firstAttribute="top" secondItem="bTv-BA-4jI" secondAttribute="bottom" id="66b-w9-7Zf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PUf-do-wnx" secondAttribute="trailing" constant="-18" id="Nb7-Mg-OK3"/>
-                            <constraint firstItem="PUf-do-wnx" firstAttribute="top" secondItem="kkk-pu-heb" secondAttribute="bottom" id="Qpa-x3-uLW"/>
+                            <constraint firstItem="PUf-do-wnx" firstAttribute="top" secondItem="kkk-pu-heb" secondAttribute="bottom" constant="20" id="Qpa-x3-uLW"/>
                             <constraint firstItem="PUf-do-wnx" firstAttribute="leading" secondItem="oR0-pG-qWu" secondAttribute="leadingMargin" constant="-18" id="URb-tT-Rtp"/>
-                            <constraint firstItem="zOw-iw-Ii0" firstAttribute="top" secondItem="PUf-do-wnx" secondAttribute="bottom" id="aps-G9-Dc9"/>
+                            <constraint firstItem="zOw-iw-Ii0" firstAttribute="top" secondItem="PUf-do-wnx" secondAttribute="bottom" constant="20" id="aps-G9-Dc9"/>
                             <constraint firstItem="kkk-pu-heb" firstAttribute="leading" secondItem="oR0-pG-qWu" secondAttribute="leadingMargin" constant="-20" id="dQb-He-vca"/>
+                            <constraint firstItem="AWA-Oz-ubB" firstAttribute="top" secondItem="CeG-Nj-9Fo" secondAttribute="bottom" constant="8" id="eut-e5-3pJ"/>
+                            <constraint firstItem="CeG-Nj-9Fo" firstAttribute="centerX" secondItem="oR0-pG-qWu" secondAttribute="centerX" id="fFv-fJ-gUn"/>
+                            <constraint firstItem="AWA-Oz-ubB" firstAttribute="centerX" secondItem="oR0-pG-qWu" secondAttribute="centerX" id="iHI-cm-oCb"/>
+                            <constraint firstItem="AWA-Oz-ubB" firstAttribute="centerY" secondItem="oR0-pG-qWu" secondAttribute="centerY" id="q87-XJ-lWh"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="labLoading" destination="AWA-Oz-ubB" id="hSH-v6-AoG"/>
+                        <outlet property="viewLoading" destination="CeG-Nj-9Fo" id="uw1-ho-073"/>
                         <outlet property="webChart" destination="PUf-do-wnx" id="DcT-gC-oxT"/>
                     </connections>
                 </viewController>
