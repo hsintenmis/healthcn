@@ -90,6 +90,11 @@
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; };
+		D700EB491BFD9CE400DAA145 /* CourseOdrsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB481BFD9CE400DAA145 /* CourseOdrsList.swift */; };
+		D700EB4B1BFD9CFA00DAA145 /* CourseOdrsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB4A1BFD9CFA00DAA145 /* CourseOdrsListCell.swift */; };
+		D700EB4D1BFDA73B00DAA145 /* CourseOdrsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB4C1BFDA73B00DAA145 /* CourseOdrsDetail.swift */; };
+		D700EB4F1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB4E1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift */; };
+		D700EB521BFDC9A500DAA145 /* PdSaleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB511BFDC9A500DAA145 /* PdSaleDetail.swift */; };
 		D704130D1BFAD2F4008F4CE4 /* MeadDetailTxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704130C1BFAD2F4008F4CE4 /* MeadDetailTxt.swift */; };
 		D704131B1BFADE76008F4CE4 /* mead_db.txt in Resources */ = {isa = PBXBuildFile; fileRef = D704131A1BFADE76008F4CE4 /* mead_db.txt */; };
 		D704131D1BFB0509008F4CE4 /* MeadDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704131C1BFB0509008F4CE4 /* MeadDetailCell.swift */; };
@@ -223,6 +228,11 @@
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
+		D700EB481BFD9CE400DAA145 /* CourseOdrsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsList.swift; sourceTree = "<group>"; };
+		D700EB4A1BFD9CFA00DAA145 /* CourseOdrsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsListCell.swift; sourceTree = "<group>"; };
+		D700EB4C1BFDA73B00DAA145 /* CourseOdrsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsDetail.swift; sourceTree = "<group>"; };
+		D700EB4E1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsDetailCell.swift; sourceTree = "<group>"; };
+		D700EB511BFDC9A500DAA145 /* PdSaleDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PdSaleDetail.swift; path = Odrs/PdSaleDetail.swift; sourceTree = "<group>"; };
 		D704130C1BFAD2F4008F4CE4 /* MeadDetailTxt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadDetailTxt.swift; sourceTree = "<group>"; };
 		D704131A1BFADE76008F4CE4 /* mead_db.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mead_db.txt; sourceTree = "<group>"; };
 		D704131C1BFB0509008F4CE4 /* MeadDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeadDetailCell.swift; sourceTree = "<group>"; };
@@ -393,8 +403,6 @@
 		42C9C4921BD15BDF00BB217F /* Program */ = {
 			isa = PBXGroup;
 			children = (
-				D7FDEFBE1BD8E15700ECA71A /* OdrsList.swift */,
-				D7FDEFC01BD8E49200ECA71A /* OdrsCell.swift */,
 			);
 			name = Program;
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 				42D0F74E1BEFAC4700C97D54 /* News */,
 				42C9C4921BD15BDF00BB217F /* Program */,
 				D70F0A881BF9A506006B6596 /* Mead */,
+				D700EB501BFDC96500DAA145 /* Odrs */,
 				429B2E651BDD207D00BAF88E /* Health */,
 				D726BE7C1BE87B4E0039C70E /* Reservation */,
 				D781F2B51BF5B44500477ABE /* Soqibed */,
@@ -488,6 +497,16 @@
 			name = SysFIle;
 			sourceTree = "<group>";
 		};
+		D700EB501BFDC96500DAA145 /* Odrs */ = {
+			isa = PBXGroup;
+			children = (
+				D7FDEFBE1BD8E15700ECA71A /* OdrsList.swift */,
+				D7FDEFC01BD8E49200ECA71A /* OdrsCell.swift */,
+				D700EB511BFDC9A500DAA145 /* PdSaleDetail.swift */,
+			);
+			name = Odrs;
+			sourceTree = "<group>";
+		};
 		D70F0A881BF9A506006B6596 /* Mead */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +541,10 @@
 				42E376B81BEA6CDE00910327 /* CourseSelCustCell.swift */,
 				D75C3FD81BEC890400123087 /* ReservationList.swift */,
 				427CBE251BED0EDE00FAFB01 /* ReservationListCell.swift */,
+				D700EB481BFD9CE400DAA145 /* CourseOdrsList.swift */,
+				D700EB4A1BFD9CFA00DAA145 /* CourseOdrsListCell.swift */,
+				D700EB4C1BFDA73B00DAA145 /* CourseOdrsDetail.swift */,
+				D700EB4E1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -739,6 +762,7 @@
 				D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */,
 				D781F2B71BF5B48300477ABE /* SoqibedMain.swift in Sources */,
 				D7EC49521BF1A0FE0088BBE2 /* TOCropViewController.m in Sources */,
+				D700EB4B1BFD9CFA00DAA145 /* CourseOdrsListCell.swift in Sources */,
 				D704130D1BFAD2F4008F4CE4 /* MeadDetailTxt.swift in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
 				D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */,
@@ -749,6 +773,7 @@
 				D7EC49511BF1A0FE0088BBE2 /* UIImage+CropRotate.m in Sources */,
 				D7EC494F1BF1A0FE0088BBE2 /* TOCroppedImageAttributes.m in Sources */,
 				D7EC49501BF1A0FE0088BBE2 /* TOCropViewControllerTransitioning.m in Sources */,
+				D700EB4F1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift in Sources */,
 				42D0F7521BEFADCD00C97D54 /* NewsStore.swift in Sources */,
 				D70F0A4F1BF98588006B6596 /* SoqibedAdEd.swift in Sources */,
 				42D0F7501BEFAC7A00C97D54 /* NewsMain.swift in Sources */,
@@ -757,6 +782,7 @@
 				D7FDEFB91BD8BCA000ECA71A /* MeadList.swift in Sources */,
 				D781F2BD1BF5D6E700477ABE /* SoqibedLogAll.swift in Sources */,
 				D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */,
+				D700EB4D1BFDA73B00DAA145 /* CourseOdrsDetail.swift in Sources */,
 				D71B2BDA1BF02D05006BB466 /* NewsOfficeDetail.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
 				42D0F7541BEFB22D00C97D54 /* NewsStoreDetail.swift in Sources */,
@@ -771,8 +797,10 @@
 				D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */,
 				42D0F7581BEFB66400C97D54 /* NewsStoreDetailCell.swift in Sources */,
 				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,
+				D700EB521BFDC9A500DAA145 /* PdSaleDetail.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,
 				42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */,
+				D700EB491BFD9CE400DAA145 /* CourseOdrsList.swift in Sources */,
 				D7FDEFC11BD8E49200ECA71A /* OdrsCell.swift in Sources */,
 				D7EC49541BF1A0FE0088BBE2 /* TOCropScrollView.m in Sources */,
 				422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */,

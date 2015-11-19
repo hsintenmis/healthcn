@@ -16,4 +16,6 @@ class ReservationListCell: UITableViewCell {
     @IBOutlet weak var labCourse: UILabel!
     @IBOutlet weak var labExpire: UILabel!
     @IBOutlet weak var labFinish: UILabel!
+    
+    @IBOutlet weak var viewYMD: UIView!
 }

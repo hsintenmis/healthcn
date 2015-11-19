@@ -92,9 +92,16 @@ class ReservationAdd: UIViewController {
      * 初始與設定 VCview 內的 field
      */
     private func initViewField() {
-        dispatch_async(dispatch_get_main_queue(), {
+        dispatch_async(dispatch_get_main_queue(), {   
+            // 樣式/外觀/顏色
             self.btnCourseDef.layer.cornerRadius = 5
             self.btnCourseCust.layer.cornerRadius = 5
+            
+            self.btnCourseDef.layer.borderWidth = 1
+            self.btnCourseCust.layer.borderWidth = 1
+            
+            self.btnCourseDef.layer.borderColor = self.pubClass.ColorCGColor("E0E0E0")
+            self.btnCourseCust.layer.borderColor = self.pubClass.ColorCGColor("E0E0E0")
         })
     }
     

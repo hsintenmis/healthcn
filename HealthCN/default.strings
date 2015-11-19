@@ -1,20 +1,20 @@
-"CFBundleDisplayName" = "iSOQI健康精靈";
-"app_name" = "iSOQI健康精靈";
-"app_name_full" = "iSOQI健康精靈  美利版";
+"CFBundleDisplayName" = "iSOQI健康精灵";
+"app_name" = "iSOQI健康精灵";
+"app_name_full" = "iSOQI健康精灵  美利版";
 "version" = "版本";
 
 "login" = "登入";
 "logout" = "登出";
 "login_acc" = "登入ID";
-"login_psd" = "登入密碼";
-"datatranplzwait" = "資料傳送中，請稍後...";
-"sysprompt" = "系統提示";
-"saveaccpsd" = "記住帳號密碼";
+"login_psd" = "登入密码";
+"datatranplzwait" = "资料传送中，请稍后...";
+"sysprompt" = "系统提示";
+"saveaccpsd" = "记住帐号密码";
 "i_see" = "我知道了";
-"err_accpsd" = "帳號或是密碼錯誤!";
-"err_data" = "資料錯誤!";
-"nodata" = "目前沒有資料. . .";
-"err_systemmaintain" = "伺服器維護中, 請稍候再重試...";
+"err_accpsd" = "帐号或是密码错误!";
+"err_data" = "资料错误!";
+"nodata" = "目前没有资料. . .";
+"err_systemmaintain" = "伺服器维护中, 请稍候再重试...";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -49,7 +49,7 @@
 
 "gender_M" = "男性";
 "gender_F" = "女性";
-"agename" = "歲";
+"agename" = "岁";
 "height_cm" = "厘米(CM)";
 "name_height" = "厘米(CM)";
 "name_weight" = "千克(KG)";
@@ -74,7 +74,7 @@
 "healthname_heartbeat" = "心跳";
 "healthname_temperature" = "体温";
 "healthname_sugar_before" = "血糖(空腹)";
-"healthname_sugar_after" = "血糖(饭後)";
+"healthname_sugar_after" = "血糖(饭后)";
 "healthname_group_bmi" = "BMI / 身高体重";
 "healthname_group_whr" = "腰臀比";
 "healthname_group_bp" = "血压";
@@ -94,10 +94,10 @@
 "bmirs_005" = "中度肥胖";
 "bmirs_006" = "重度肥胖";
 "bmival_001" = "BMI < 18.5";
-"bmival_002" = "BMI 介於 18.5 ~ 24";
-"bmival_003" = "BMI 介於 24 ~ 27";
-"bmival_004" = "BMI 介於 27 ~ 30";
-"bmival_005" = "BMI 介於 30 ~ 35";
+"bmival_002" = "BMI 介于 18.5 ~ 24";
+"bmival_003" = "BMI 介于 24 ~ 27";
+"bmival_004" = "BMI 介于 27 ~ 30";
+"bmival_005" = "BMI 介于 30 ~ 35";
 "bmival_006" = "BMI > 35";
 
 "fatrs_M_001" = "(男)偏瘦";
@@ -110,17 +110,17 @@
 "fatrs_F_003" = "(女)偏胖";
 "fatrs_F_004" = "(女)肥胖";
 
-"fatval_M_001" = "体脂率介於 12.1 ~ 17.0";
-"fatval_M_002" = "体脂率介於 12.5 ~ 18.0";
-"fatval_M_003" = "体脂率介於 13.1 ~ 18.4";
-"fatval_M_004" = "体脂率介於 13.5 ~ 19.0";
-"fatval_M_005" = "体脂率介於 14.1 ~ 19.4";
+"fatval_M_001" = "体脂率介于 12.1 ~ 17.0";
+"fatval_M_002" = "体脂率介于 12.5 ~ 18.0";
+"fatval_M_003" = "体脂率介于 13.1 ~ 18.4";
+"fatval_M_004" = "体脂率介于 13.5 ~ 19.0";
+"fatval_M_005" = "体脂率介于 14.1 ~ 19.4";
 
-"fatval_F_001" = "体脂率介於 15.1 ~ 22.0";
-"fatval_F_002" = "体脂率介於 15.5 ~ 23.0";
-"fatval_F_003" = "体脂率介於 16.1 ~ 23.4";
-"fatval_F_004" = "体脂率介於 16.5 ~ 24.0";
-"fatval_F_005" = "体脂率介於 17.1 ~ 24.4";
+"fatval_F_001" = "体脂率介于 15.1 ~ 22.0";
+"fatval_F_002" = "体脂率介于 15.5 ~ 23.0";
+"fatval_F_003" = "体脂率介于 16.1 ~ 23.4";
+"fatval_F_004" = "体脂率介于 16.5 ~ 24.0";
+"fatval_F_005" = "体脂率介于 17.1 ~ 24.4";
 
 "waistrs_001" = "腰围超标";
 "waistrs_002" = "腰围与腰臀比都超标";
@@ -172,15 +172,15 @@
 "bpval_006" = "收缩压 >=180 或 舒张压 >=110";
 
 "bs_empty" = "空腹";
-"bs_after" = "饭後";
+"bs_after" = "饭后";
 "bloodsugarrs_001" = "空腹血糖偏低";
 "bloodsugarrs_002" = "空腹血糖正常";
 "bloodsugarrs_003" = "空腹血糖偏高";
 "bloodsugarrs_004" = "空腹血糖过高";
-"bloodsugarrs_005" = "饭後血糖偏低";
-"bloodsugarrs_006" = "饭後血糖正常";
-"bloodsugarrs_007" = "饭後血糖偏高";
-"bloodsugarrs_008" = "饭後血糖偏高";
+"bloodsugarrs_005" = "饭后血糖偏低";
+"bloodsugarrs_006" = "饭后血糖正常";
+"bloodsugarrs_007" = "饭后血糖偏高";
+"bloodsugarrs_008" = "饭后血糖偏高";
 "bloodsugardataerr" = "血糖数值输入资料错误!";
 
 "heartbeatsunitname" = "次";
@@ -191,17 +191,17 @@
 "heartbeats_003" = "过高";
 "heartbeats_ratemsg" = "适合您的中低强度运动心率: ";
 "heartval_001" = "心跳数 < 50";
-"heartval_002" = "心跳数介於 50 ~ 100";
+"heartval_002" = "心跳数介于 50 ~ 100";
 "heartval_003" = "心跳数 > 100";
 
 "waterrs_normal" = "正常";
 "waterrs_low" = "偏低";
 "waterrs_high" = "过高";
-"waterval_001" = "含水率介於 54.0 ~ 60.0";
-"waterval_002" = "含水率介於 53.5 ~ 59.5";
-"waterval_003" = "含水率介於 53.0 ~ 59.0";
-"waterval_004" = "含水率介於 52.5 ~ 58.5";
-"waterval_005" = "含水率介於 52.0 ~ 58.0";
+"waterval_001" = "含水率介于 54.0 ~ 60.0";
+"waterval_002" = "含水率介于 53.5 ~ 59.5";
+"waterval_003" = "含水率介于 53.0 ~ 59.0";
+"waterval_004" = "含水率介于 52.5 ~ 58.5";
+"waterval_005" = "含水率介于 52.0 ~ 58.0";
 
 "caloryrs_normal" = "正常";
 "caloryrs_low" = "偏低";
@@ -222,31 +222,34 @@
 "caloryval_F_004" = "(女)50~69岁, 标准值 1100Kcal";
 "caloryval_F_005" = "(女)69岁以上, 标准值 1010Kcal";
 
-"nocameramsg" = "裝置不支援照相功能 ...";
-"plsselpict" = "請先選擇圖片!";
-"pictupdatecomplete" = "圖片更新完成!";
-"course_reservation_add" = "預約新增";
-"course_uselist" = "療程紀錄";
-"course_reservation_list" = "預約記錄";
-"servicezone" = "服務區";
-"srv_notavail" = "滿";
-"course_fee" = "療程費用";
+"nocameramsg" = "装置不支援照相功能 ...";
+"plsselpict" = "请先选择图片!";
+"pictupdatecomplete" = "图片更新完成!";
+"course_reservation_add" = "预约新增";
+"course_uselist" = "疗程纪录";
+"course_reservation_list" = "预约记录";
+"servicezone" = "服务区";
+"srv_notavail" = "满";
+"course_fee" = "疗程费用";
+"course_odrstype_M" = "包月";
+"course_odrstype_T" = "包次";
+"course_odrstype_M_unit" = "个月";
+"course_odrstype_T_unit" = "次";
 
-"news_store" = "店家新訊";
-"news_office" = "美利官網新訊";
+"news_store" = "店家新讯";
+"news_office" = "美利官网新讯";
 
-"soqibed_mod_priv" = "私人模式記錄";
-"soqibed_mod_stand" = "標準模式紀錄";
-"soqibed_mod_all" = "全部使用記錄";
+"soqibed_mod_priv" = "私人模式记录";
+"soqibed_mod_stand" = "标准模式纪录";
+"soqibed_mod_all" = "全部使用记录";
 "soqibed_actdate" = "建立日期";
-"soqibed_usecount" = "使用次數";
-"soqibed_builddate" = "建立時間";
-"testingdate" = "檢測日期";
-"testingvalokmsg" = "檢測結果正常，無相關報告資料！";
-"testingdate" = "檢測日期";
+"soqibed_usecount" = "使用次数";
+"soqibed_builddate" = "建立时间";
+"testingdate" = "检测日期";
+"testingvalokmsg" = "检测结果正常，无相关报告资料！";
+"testingdate" = "检测日期";
 
-"mead_analy" = "檢測分析";
-"mead_pdsuggest" = "調理建議";
-"mead_theory_E" = "東方學理";
-"mead_theory_W" = "西方學理";
-
+"mead_analy" = "检测分析";
+"mead_pdsuggest" = "调理建议";
+"mead_theory_E" = "东方学理";
+"mead_theory_W" = "西方学理";

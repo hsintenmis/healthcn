@@ -6,9 +6,9 @@ import UIKit
 import Foundation
 
 /**
- * 已經預約的記錄列表，提供刪除功能
+ * 已購買療程的使用紀錄列表
  */
-class ReservationList: UIViewController {
+class CourseOdrsList: UIViewController {
     @IBOutlet weak var tableList: UITableView!
     
     // common property
@@ -17,12 +17,13 @@ class ReservationList: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     private var isDataSourceReady = false
-
+    
     // 本 class TableView 需要的資料集, 預約資料
     private var aryAllData: Array<Dictionary<String, AnyObject>> = []
     
     // 其他參數設定
     private var strTodayYMD = ""
+    let dictColor = ["blue":"000099", "red":"CC0000"]
     
     // View load
     override func viewDidLoad() {
@@ -53,7 +54,7 @@ class ReservationList: UIViewController {
      */
     private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
-
+            
         })
     }
     
@@ -64,8 +65,8 @@ class ReservationList: UIViewController {
         var dictParm = Dictionary<String, String>()
         dictParm["acc"] = mAppDelegate.V_USRACC
         dictParm["psd"] = mAppDelegate.V_USRPSD
-        dictParm["page"] = "reservation"
-        dictParm["act"] = "reservation_list"
+        dictParm["page"] = "memberdata"
+        dictParm["act"] = "memberdata_getcourseodrs"
         
         // HTTP 開始連線
         pubClass.showPopLoading(nil)
@@ -89,30 +90,10 @@ class ReservationList: UIViewController {
         // 解析正確的 http 回傳結果，設定本 class JSON 資料
         let dictRespon = dictRS["data"] as! Dictionary<String, AnyObject>
         let dictContent = dictRespon["content"] as! Dictionary<String, AnyObject>
-
-        // 取得預約資料
+        
+        // 取得 JSON 資料
         if let jaryData = dictContent["data"] as? Array<Dictionary<String, AnyObject>> {
-            // 小於此日期的資料不顯示, 30天前, 重新產生 'aryAllData'
-            let minNSDate = NSDate(timeInterval: -(24*60*60*30), sinceDate: NSDate())
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyyMMdd"
-            let minYMD = dateFormatter.stringFromDate(minNSDate)
-            
-            var strYMD = ""
-            for dictItem in jaryData  {
-                strYMD = (dictItem["yymm"] as? String)! + (dictItem["dd"] as? String)!
-                
-                if (Int(strYMD) > Int(minYMD)) {
-                   aryAllData.append(dictItem)
-                }
-            }
-            
-            if (aryAllData.count < 1) {
-                pubClass.popIsee(Msg: pubClass.getLang("nodata"))
-                self.dismissViewControllerAnimated(true, completion: nil)
-                
-                return
-            }
+            aryAllData = jaryData
         }
         else {
             pubClass.popIsee(Msg: pubClass.getLang("nodata"))
@@ -128,7 +109,7 @@ class ReservationList: UIViewController {
             self.tableList.reloadData()
         })
     }
-    
+
     /**
      * UITableView, 'section' 回傳指定的數量
      */
@@ -154,41 +135,39 @@ class ReservationList: UIViewController {
         }
         
         // 取得 Cell View
-        let mCell = tableView.dequeueReusableCellWithIdentifier("cellReservationList", forIndexPath: indexPath) as! ReservationListCell
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellCourseOdrsList", forIndexPath: indexPath) as! CourseOdrsListCell
         
         // 設定 cell field
         let dictItem = aryAllData[indexPath.row]
-        let strYMD = (dictItem["yymm"] as? String)! + (dictItem["dd"] as? String)!
-        let strYM = (dictItem["yy"] as? String)! + pubClass.getLang("mm_" + (dictItem["mm"] as? String)!)
+        let eDateYMD = pubClass.subStr((dictItem["end_date"] as? String)!, strFrom: 0, strEnd: 8)
         
-        mCell.labYYMM.text = strYM
-        mCell.labDD.text = dictItem["dd"] as? String
-        mCell.labCourse.text = dictItem["pdname"] as? String
-        mCell.labTime.text = (dictItem["hh"] as? String)! + ":" + (dictItem["min"] as? String)!
+        mCell.labPdName.text = dictItem["pdname"] as? String
+        mCell.labUseCount.text = dictItem["usecount"] as? String
+        mCell.labSdate.text = pubClass.formatDateWithStr((dictItem["sdate"] as? String)!, type: "8s")
+        mCell.labEdate.text = pubClass.formatDateWithStr((dictItem["end_date"] as? String)!, type: "8s")
         
-        // 是否完成/過期
-        mCell.labExpire.alpha = 0.0
-        
-        if (dictItem["issale"] as? String == "Y") {
-            mCell.labFinish.alpha = 1.0
-        } else {
-            mCell.labFinish.alpha = 0.0
-            
-            // 是否過期
-            if (strTodayYMD > strYMD) {
-                mCell.labExpire.alpha = 1.0
-            }
-        }
-        
-        // 樣式/外觀/顏色
-        mCell.viewYMD.layer.cornerRadius = 5
+        // 是否過期, 文字顏色改變
+        let strColor = (Int(eDateYMD) < Int(strTodayYMD)) ? "red" : "blue"
+        mCell.labEdate.textColor = pubClass.ColorHEX(dictColor[strColor])
         
         return mCell
     }
-
+    
+    /**
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 取得點取 cell 的 index, 產生 JSON data
+        let indexPath = self.tableList.indexPathForSelectedRow!
+        let ditItem = aryAllData[indexPath.row] 
+        let cvChild = segue.destinationViewController as! CourseOdrsDetail
+        cvChild.dictAllData = ditItem
+        
+        return
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }

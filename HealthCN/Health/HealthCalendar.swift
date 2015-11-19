@@ -65,6 +65,12 @@ class HealthCalendar: UIViewController {
         // TableCell autoheight
         viewHealthList.estimatedRowHeight = 100.0
         viewHealthList.rowHeight = UITableViewAutomaticDimension
+        
+        
+        // 月曆 樣式/外觀/顏色
+        viewCalendar.layer.borderWidth = 1
+        //viewCalendar.layer.cornerRadius = 5
+        viewCalendar.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -229,7 +235,7 @@ class HealthCalendar: UIViewController {
      * CollectionView, Cell 長寬
      */
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.size.width/7), height: 30);
+        return CGSize(width: (collectionView.bounds.size.width/7) - 5.0, height: 30);
     }
     
     /**

@@ -68,6 +68,7 @@ class ReservationMain: UIViewController {
             strTitle = pubClass.getLang("course_reservation_add")
         }
         else if (flag == "CourseList") {
+            mSubVC = self.storyboard!.instantiateViewControllerWithIdentifier("CourseOdrsList")
             strTitle = pubClass.getLang("course_uselist")
         }
             
@@ -92,6 +93,7 @@ class ReservationMain: UIViewController {
      * 點取 療程紀錄：CourseList
      */
     @IBAction func actCourseList(sender: UIBarButtonItem) {
+        self.setContainerView("CourseList")
     }
     
     /**

@@ -1,29 +1,26 @@
 //
-// 療程選擇 TableView
+// TableView List, datasource 由 parent 設定帶入
 //
 
 import UIKit
 import Foundation
 
 /**
- * 療程選擇 (已購買) class, 由 ReservationAdd 轉入
+ * 已購買療程的使用紀錄列表
  */
-class CourseSelCust: UIViewController {
+class CourseOdrsDetail: UIViewController {
     @IBOutlet weak var tableList: UITableView!
     
     // common property
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
-    private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // parent VC
-    var mVCtrlParent: ReservationAdd!
+    // 本 class TableView 需要的資料集, 預約資料
+    var dictAllData: Dictionary<String, AnyObject> = [:]
     
-    /**
-     * 前一個頁面傳入的資料(療程資料) 格式如下<BR>
-     * ary[0=> [String:String], ....]
-     */
-    var aryCourseData: Array<Dictionary<String, AnyObject>>!
+    // 其他參數設定
+    private var strTodayYMD = ""
+    let dictColor = ["blue":"000099", "red":"CC0000"]
     
     // View load
     override func viewDidLoad() {
@@ -32,18 +29,24 @@ class CourseSelCust: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        
         // 初始 TableView Cell 自動調整高度
         tableList.rowHeight = UITableViewAutomaticDimension
         tableList.estimatedRowHeight = 200.0
-        
+    }
+    
+    // View did Appear
+    override func viewDidAppear(animated: Bool) {
+
+    }
+    
+    /**
+     * 初始與設定 VCview 內的 field
+     */
+    private func initViewField() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.tableList.reloadData()
+            
         })
-        
-        return
     }
     
     /**
@@ -59,22 +62,19 @@ class CourseSelCust: UIViewController {
      * 可根據 'section' 回傳指定的數量
      */
     func tableView(tableView: UITableView!, numberOfRowsInSection section:Int) -> Int {
-        return aryCourseData.count
+        return 1
     }
     
     /**
      * UITableView, Cell 內容
      */
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        if (aryCourseData.count < 1) {
-            return nil
-        }
         
         // 取得 Cell View
-        let mCell = tableView.dequeueReusableCellWithIdentifier("cellCourseCustSel", forIndexPath: indexPath) as! CourseSelCustCell
+        let mCell = tableView.dequeueReusableCellWithIdentifier("cellCourseOdrsDetail", forIndexPath: indexPath) as! CourseOdrsDetailCell
         
         // 取得目前指定 Item 的 array data
-        let ditItem = aryCourseData[indexPath.row]
+        let ditItem = dictAllData
         
         mCell.labTitle.text = ditItem["pdname"] as? String
         mCell.labContent.text = ditItem["pdid"] as? String
@@ -88,30 +88,6 @@ class CourseSelCust: UIViewController {
         return mCell
     }
     
-    /**
-     * UITableView, Cell 點取
-     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 設定選擇的療程資料, ex. 'pdname', 'pdidid', 'index_id'
-        var dictData: [String:String] = [:]
-        
-        // 取得原來的療程資料，重新設定新的 dict, 本頁面結束
-        let ditItem = aryCourseData[indexPath.row]
-        
-        dictData["pdname"] = ditItem["pdname"] as? String
-        dictData["pdid"] = ditItem["pdid"] as? String
-        
-        if let strIndexId = ditItem["index_id"] as? String {
-            dictData["index_id"] = strIndexId
-        }
-        else {
-            dictData["index_id"] = ""
-        }
-
-        mVCtrlParent.setSelCourseData(dictData)
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-
     /**
      * 取得療程卡資料文字
      */

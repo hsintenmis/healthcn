@@ -14,6 +14,10 @@ import Foundation
 class NewsOfficeDetail: UIViewController {
     @IBOutlet weak var webviewOffice: UIWebView!
     
+    @IBOutlet weak var labLoading: UILabel!
+    @IBOutlet weak var viewLoading: UIActivityIndicatorView!
+    
+    
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
@@ -55,6 +59,28 @@ class NewsOfficeDetail: UIViewController {
      */
     private func initViewField() {
     }
+    
+    /** WebView delegate Start */
+    func webView(webView: UIWebView!, didFailLoadWithError error: NSError!) {
+        //print("Webview fail with error \(error)");
+    }
+    
+    func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType)->Bool {
+        return true;
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView!) {
+        labLoading.alpha = 1.0
+        viewLoading.alpha = 1.0
+        //print("Webview started Loading")
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView!) {
+        labLoading.alpha = 0.0
+        viewLoading.alpha = 0.0
+        //print("Webview did finish load")
+    }
+    /** WebView delegate End */
     
     /**
      * btn '返回' 點取
