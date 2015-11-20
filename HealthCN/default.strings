@@ -248,8 +248,15 @@
 "testingdate" = "检测日期";
 "testingvalokmsg" = "检测结果正常，无相关报告资料！";
 "testingdate" = "检测日期";
-
 "mead_analy" = "检测分析";
 "mead_pdsuggest" = "调理建议";
 "mead_theory_E" = "东方学理";
 "mead_theory_W" = "西方学理";
+
+"odrs_orderpdlist" = "訂購商品列表";
+"odrs_returnqty" = "退貨數量";
+"odrs_returndetail" = "退貨明細";
+"odrs_listname_returndate" = "退貨日期:";
+"odrs_listname_unitprice" = "單價:";
+"odrs_listname_rqty" = "退貨數量:";
+"odrs_listname_amount" = "合計:";

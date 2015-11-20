@@ -136,12 +136,10 @@ class OdrsList: UIViewController {
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // 取得點取 cell 的 index, 產生 JSON data
-        /*
         let indexPath = self.tableMain.indexPathForSelectedRow!
-        let ditItem = dictAllData[indexPath.row] as! Dictionary<String, AnyObject>
-        let cvChild = segue.destinationViewController as! MeadDetail
-        cvChild.parentData = ditItem
-        */
+        let ditItem = dictAllData[indexPath.row] 
+        let cvChild = segue.destinationViewController as! PdSaleDetail
+        cvChild.dictAllData = ditItem
         
         return
     }
