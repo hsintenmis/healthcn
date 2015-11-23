@@ -90,6 +90,8 @@
 		42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E708F61BC7534A0092A5A9 /* PubClass.swift */; };
 		42E708F91BC754050092A5A9 /* zh-Hans.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708F81BC754050092A5A9 /* zh-Hans.strings */; };
 		42E708FB1BC754190092A5A9 /* default.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E708FA1BC754190092A5A9 /* default.strings */; };
+		42F0F6ED1C01A9F800753CEB /* MemberEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0F6EC1C01A9F800753CEB /* MemberEdit.swift */; };
+		42F0F6EF1C01B9DD00753CEB /* MemberEditContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F0F6EE1C01B9DD00753CEB /* MemberEditContainer.swift */; };
 		D700EB491BFD9CE400DAA145 /* CourseOdrsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB481BFD9CE400DAA145 /* CourseOdrsList.swift */; };
 		D700EB4B1BFD9CFA00DAA145 /* CourseOdrsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB4A1BFD9CFA00DAA145 /* CourseOdrsListCell.swift */; };
 		D700EB4D1BFDA73B00DAA145 /* CourseOdrsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D700EB4C1BFDA73B00DAA145 /* CourseOdrsDetail.swift */; };
@@ -231,6 +233,8 @@
 		42E708F61BC7534A0092A5A9 /* PubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PubClass.swift; sourceTree = "<group>"; };
 		42E708F81BC754050092A5A9 /* zh-Hans.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "zh-Hans.strings"; sourceTree = "<group>"; };
 		42E708FA1BC754190092A5A9 /* default.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = default.strings; sourceTree = "<group>"; };
+		42F0F6EC1C01A9F800753CEB /* MemberEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberEdit.swift; path = MainHome/MemberEdit.swift; sourceTree = "<group>"; };
+		42F0F6EE1C01B9DD00753CEB /* MemberEditContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberEditContainer.swift; path = MainHome/MemberEditContainer.swift; sourceTree = "<group>"; };
 		D700EB481BFD9CE400DAA145 /* CourseOdrsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsList.swift; sourceTree = "<group>"; };
 		D700EB4A1BFD9CFA00DAA145 /* CourseOdrsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsListCell.swift; sourceTree = "<group>"; };
 		D700EB4C1BFDA73B00DAA145 /* CourseOdrsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOdrsDetail.swift; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 				D7EA9FB21BCF86A200E8CD10 /* MainScrollData.swift */,
 				42C0B9B61BCFF9E500B56D3D /* CellViewHealth.swift */,
 				D71B2BDC1BF082FD006BB466 /* MemberPict.swift */,
+				42F0F6EE1C01B9DD00753CEB /* MemberEditContainer.swift */,
+				42F0F6EC1C01A9F800753CEB /* MemberEdit.swift */,
 			);
 			name = MainHome;
 			sourceTree = "<group>";
@@ -774,6 +780,7 @@
 				D700EB4B1BFD9CFA00DAA145 /* CourseOdrsListCell.swift in Sources */,
 				D704130D1BFAD2F4008F4CE4 /* MeadDetailTxt.swift in Sources */,
 				D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */,
+				42F0F6ED1C01A9F800753CEB /* MemberEdit.swift in Sources */,
 				D7EC494E1BF1A0FE0088BBE2 /* TOActivityCroppedImageProvider.m in Sources */,
 				42C0B9B71BCFF9E500B56D3D /* CellViewHealth.swift in Sources */,
 				42E376B91BEA6CDE00910327 /* CourseSelCustCell.swift in Sources */,
@@ -793,6 +800,7 @@
 				D7FBBC771BEA0600009A615B /* CourseSelCell.swift in Sources */,
 				D700EB4D1BFDA73B00DAA145 /* CourseOdrsDetail.swift in Sources */,
 				D71B2BDA1BF02D05006BB466 /* NewsOfficeDetail.swift in Sources */,
+				42F0F6EF1C01B9DD00753CEB /* MemberEditContainer.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
 				42D0F7541BEFB22D00C97D54 /* NewsStoreDetail.swift in Sources */,
 				D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */,
