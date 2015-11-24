@@ -1,5 +1,5 @@
 //
-// 療程主頁面，使用 containerView, 根據不同 class 帶入對應的 ViewControler
+// 使用 containerView, 根據不同 class 帶入對應的 ViewControler
 //
 
 import UIKit
