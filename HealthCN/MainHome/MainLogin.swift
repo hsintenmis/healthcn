@@ -1,5 +1,5 @@
 //
-// APP 首次進入頁面
+// Program start this class, UITextFieldDelegate
 //
 
 import UIKit

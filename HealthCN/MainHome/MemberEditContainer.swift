@@ -18,8 +18,8 @@ class MemberEditContainer: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // public, 由parent 設定, 本 class 需要使用的資料
-    var aryAllData: Array<Dictionary<String, AnyObject>> = []
+    // 會員資料, 由parent 設定, 本 class 需要使用的資料
+    var dictMember: Dictionary<String, String> = [:]
     
     // View load
     override func viewDidLoad() {
@@ -37,6 +37,19 @@ class MemberEditContainer: UIViewController {
         dispatch_async(dispatch_get_main_queue(), {
 
         })
+    }
+    
+    /**
+     * Segue 判別跳轉哪個頁面, 給 container 的 childView 使用
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 跳轉 'MainScrollData' class
+        if segue.identifier == "MemberEdit"{
+            let cvChild = segue.destinationViewController as! MemberEdit
+            cvChild.dictMember = dictMember
+        }
+        
+        return
     }
     
     /**

@@ -31,6 +31,7 @@ class MainScrollData: UIViewController {
     // 本 class 需要使用的 json data
     var parentData: Dictionary<String, AnyObject>!
     var aryHealth: [[String:String]] = []
+    private var dictMember: Dictionary<String, AnyObject> = [:]
     
     // 跳轉其他 class 的 UIButton
     // Dictionary 的 key 要在 storyboard 設定 restorationIdentifier
@@ -68,7 +69,7 @@ class MainScrollData: UIViewController {
     }
     
     /**
-    * 設定本 class 需要使用的 json data
+    * public, 設定本 class 需要使用的 json data
     */
     internal func setParam(parm: Dictionary<String, AnyObject>) {
         parentData = parm
@@ -79,12 +80,12 @@ class MainScrollData: UIViewController {
     */
     internal func resetViewField() {
         // 會員資料區塊
-        let dictMember = (parentData["content"])?.objectForKey("member") as! Dictionary<String, AnyObject>
+        dictMember = (parentData["content"])?.objectForKey("member") as! Dictionary<String, AnyObject>
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.labMemberName.text = dictMember["usrname"] as? String
-            self.labStoreName.text = dictMember["store_name"] as? String
-            self.labStoreTel.text = dictMember["up_tel"] as? String
+            self.labMemberName.text = self.dictMember["usrname"] as? String
+            self.labStoreName.text = self.dictMember["store_name"] as? String
+            self.labStoreTel.text = self.dictMember["up_tel"] as? String
             
             // CollectionView, 健康資料重新 reload
             let dicContent = self.parentData["content"] as! Dictionary<String, AnyObject>
@@ -109,8 +110,18 @@ class MainScrollData: UIViewController {
     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Scroll View
         if segue.identifier == "MainCategory"{
             //let cvChild = segue.destinationViewController as! MainCategory
+            return
+        }
+        
+        // 會員編輯 segue, 設定會員資料 param
+        if segue.identifier == "MemberEditContainer"{
+            let cvChild = segue.destinationViewController as! MemberEditContainer
+            cvChild.dictMember = dictMember as! Dictionary<String, String>
+            
+            return
         }
         
         return

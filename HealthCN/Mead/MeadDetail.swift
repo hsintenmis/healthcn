@@ -10,7 +10,7 @@ import Foundation
  * 能量檢測詳細內容 class, 圖表顯示
  */
 class MeadDetail: UIViewController {
-    // !!TODO!! 圖表固定參數
+    // !!TODO!! WebHTML, 圖表固定參數
     let D_HTML_FILENAME = "mead01"
     let D_HTML_URL = "html/mead"
     let D_BASE_FILENAME = "index"
@@ -171,8 +171,8 @@ class MeadDetail: UIViewController {
             self.webChart.loadHTMLString(strHTML as String, baseURL: baseUrl)
             
         } catch {
-            // 資料錯誤, 返回前頁
-            print("err")
+            // 資料錯誤
+            //print("err")
             return
         }
     }

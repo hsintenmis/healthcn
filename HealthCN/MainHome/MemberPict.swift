@@ -1,5 +1,5 @@
 //
-// 圖片選擇 + 裁切 + 上傳
+// 圖片選擇 + 裁切 + HTTP 上傳
 //
 // UIImagePickerControllerSourceType.PhotoLibrary
 // UIImagePickerControllerSourceType.Camera

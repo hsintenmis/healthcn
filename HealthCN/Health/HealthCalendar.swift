@@ -40,7 +40,7 @@ class HealthCalendar: UIViewController {
     
     // calendar 相關
     private var aryAllBlock: [[[String:String]]] = []  // 月曆全部的 'block' 資料
-    private var dictCurrDate: [String: String] = [:]  // 日期相關按鍵點取後，設定的YY MM DD
+    private var dictCurrDate: Dictionary<String, String> = [:]  // 日期相關按鍵點取後，設定的YY MM DD
     private var currCalBlockIndex: NSIndexPath = NSIndexPath()  // 點取日期, 紀錄目前的 NSIndexPath
     
     // CollectionView Cell 的 'Block' dict 資料 class
@@ -310,6 +310,21 @@ class HealthCalendar: UIViewController {
      self.performSegueWithIdentifier("NewsDetail", sender: nil)
      }
      */
+     
+     /**
+     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // 取得點取 cell 的 index, 產生 JSON data
+        let indexPath = self.viewHealthList.indexPathForSelectedRow!
+        let cvChild = segue.destinationViewController as! HealthItemEdit
+        
+        cvChild.dictAllData = dictCurrItemData
+        cvChild.strItemKey = (mHealthDataInit.D_HEALTHITEMKEY)[indexPath.row]
+        cvChild.dictCurrDate = dictCurrDate
+        
+        return
+    }
     
     /**
     *  btn 返回今日
