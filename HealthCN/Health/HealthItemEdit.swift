@@ -26,20 +26,29 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // 全部的檢測資料數值 dict array
+    // public parent 設定, 全部的檢測資料數值 dict array
     var dictAllData: Dictionary<String, Dictionary<String, String>> = [:]
     
-    // 指定的檢測項目 key name, ex. 'bmi', 參考 'HealthDataInit'
+    // public parent 設定, 指定的檢測項目 key name, ex. 'bmi', 參考 'HealthDataInit'
     var strItemKey = ""
     
-    // 日期資料, parent 設定
+    // public parent 設定, 日期資料, 會員資料
     var dictCurrDate: Dictionary<String, String> = [:]
+    var dictMember: Dictionary<String, String> = [:]
     
-    // group key
+    // 其他參數設定: group key, 本頁面資料是否有上傳變動，上層 class 刷新
     private var strGroup = ""
+    private var isDataSave = false;
+    private var currentTextField: UITextField?  // 目前選擇的 txtView, keyboard相關
     
     // other class import, 健康項目資料產生整理好的資料 class
     private var mHealthDataInit = HealthDataInit()
+    
+    // 本 class 實際的健康項目與數值 array
+    private var dictCurrHealth: Array<Dictionary<String, String>>! = []
+    
+    // class, 解釋健康檢測資料，計算特殊欄位數值
+    private var mHealthExplainTestData = HealthExplainTestData()
     
     // View load
     override func viewDidLoad() {
@@ -50,6 +59,7 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
         pubClass = PubClass(viewControl: mVCtrl)
         
         // 設定頁面顯示資料
+        self.setCurrHeatthData()
         self.setFieldData()
         self.setHTMLView()
         
@@ -75,31 +85,25 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
     * 根據檢測項目的 key name, 以 key 'group' 重新產生本 class 需要的資料集
     * 回傳如: ary(dict0, dict1 ...), dict = ('field'=> 'val', ...)
     */
-    private func getEditData()->Array<Dictionary<String, String>> {
-        // 參數設定, 取得 group key
-        var dictRS: Array<Dictionary<String, String>> = []
+    private func setCurrHeatthData() {
+        // 取得 group key
         strGroup = dictAllData[strItemKey]!["group"]!
         
         // loop data 取得相同 group data
         for strKey in mHealthDataInit.D_HEALTHITEMKEY {
             let dictItem = dictAllData[strKey]!
             if (dictItem["group"] == strGroup) {
-                dictRS.append(dictItem)
+                dictCurrHealth.append(dictItem)
             }
         }
-        
-        return dictRS
     }
     
     /**
     * 設定健康數值輸入的：欄位名稱/單位/數值
     */
     private func setFieldData() {
-        // 取得資料集
-        let aryData = self.getEditData()
-        var loopi = 0
-        
         // 相關欄位預設 disable
+        var loopi = 0
         for (loopi = 0; loopi<3; loopi++) {
             colLabName[loopi].alpha = 0.0
             colLabUnit[loopi].alpha = 0.0
@@ -108,8 +112,8 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
         }
         
         // loop data, 設定 @IBOutlet val
-        for (loopi = 0; loopi<aryData.count; loopi++) {
-            let dictItem = aryData[loopi]
+        for (loopi = 0; loopi<dictCurrHealth.count; loopi++) {
+            let dictItem = dictCurrHealth[loopi]
             colLabName[loopi].text = dictItem["name"]
             colLabUnit[loopi].text = dictItem["unit"]
             txtVal[loopi].text = dictItem["val"]
@@ -121,6 +125,14 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
             
             // 手動設定 textView Delegate
             txtVal[loopi].delegate = self
+            
+            // 欄位 'height' 身高預設值處理
+            if (dictItem["field"] == "height") {
+                let intValue: Int = NSString(string: dictItem["val"]!).integerValue
+                if (intValue < 1) {
+                    txtVal[loopi].text = dictMember["height"]
+                }
+            }
         }
     }
     
@@ -162,14 +174,110 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
      * btn '儲存' 點取
      */
     @IBAction func actSave(sender: UIBarButtonItem) {
-        //self.dismissViewControllerAnimated(true, completion: nil)
+        // 關閉虛擬鍵盤
+        if (currentTextField != nil) {
+            currentTextField!.resignFirstResponder()
+        }
+        
+        // 健康測量, key, val 加入新的 dict, 檢查輸入的資料
+        var dictItemNew: Dictionary<String, String> = [:]
+        var loopi = 0;
+        
+        for (loopi = 0; loopi < dictCurrHealth.count; loopi++) {
+            if (txtVal[loopi].text == "") {
+                pubClass.popIsee(Msg: "healthvalinputerr")
+                return
+            }
+            
+            // 嚴格檢查數值資料，一定為數字與 '.'
+            
+            // 加入 健康測量, key, val
+            let dictTmp = dictCurrHealth[loopi]
+            dictItemNew[dictTmp["field"]!] = txtVal[loopi].text
+        }
+        
+        // 特殊欄位需要計算, group='bmi', 'whr', 的數值顯示於 textView
+        if (strGroup == "bmi" || strGroup == "whr") {
+            dictItemNew = mHealthExplainTestData.CalHealthData(strGroup, jobjItem: dictItemNew)
+            
+            // 重新顯示 TextView 欄位
+            for (loopi = 0; loopi < dictCurrHealth.count; loopi++) {
+                let strField = dictCurrHealth[loopi]["field"]!
+                txtVal[loopi].text = dictItemNew[strField]
+            }
+        }
+        
+        // 產生 _REQUEST dict data
+        var dictArg0: Dictionary<String, AnyObject> = [:]
+        
+        dictArg0["age"] = dictMember["age"]
+        dictArg0["gender"] = dictMember["gender"]
+        dictArg0["sdate"] = dictCurrDate["YY"]! + dictCurrDate["MM"]! + dictCurrDate["DD"]!
+        dictArg0["data"] = dictItemNew
+        
+        // 產生 JSON string
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = mAppDelegate.V_USRACC
+        dictParm["psd"] = mAppDelegate.V_USRPSD
+        dictParm["page"] = "health"
+        dictParm["act"] = "health_savehealthdata"
+        
+        do {
+            let jobjData = try
+                NSJSONSerialization.dataWithJSONObject(dictArg0, options: NSJSONWritingOptions(rawValue: 0))
+            let jsonString = NSString(data: jobjData, encoding: NSUTF8StringEncoding)! as String
+            
+            dictParm["arg0"] = jsonString
+        } catch {
+            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
+            
+            return
+        }
+        
+        // HTTP 開始連線
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
+    }
+    
+    /**
+     * HTTP 連線後取得連線結果
+     */
+    private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
+        pubClass.closePopLoading()
+        
+        // 回傳失敗顯示錯誤訊息
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: dictRS["msg"] as! String)
+            
+            return
+        }
+        
+        // 上傳與儲存完成
+        pubClass.popIsee(Msg: pubClass.getLang("healthvalsavecompleted"))
+        isDataSave = true
     }
     
     /**
      * btn '返回' 點取
      */
     @IBAction func actBack(sender: UIBarButtonItem) {
+        // 檢查本頁面資料是否有變動
+        if (isDataSave) {
+            self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadPage", object: nil)
+            })
+            
+            return
+        }
+    
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    /**
+     * UITextFieldDelegate
+     * 取得並設定目前選擇的 textView
+     */
+    func textFieldDidBeginEditing(textField: UITextField) {
+        currentTextField = textField
     }
     
     override func didReceiveMemoryWarning() {

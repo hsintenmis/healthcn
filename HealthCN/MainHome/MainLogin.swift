@@ -162,7 +162,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
     // ********** 以下為常用固定 function ********** //
     
     /**
-     * UITextFieldDelegate<BR>
+     * UITextFieldDelegate
      * 取得並設定目前選擇的 textView
      */
     func textFieldDidBeginEditing(textField: UITextField) {

@@ -18,6 +18,9 @@ class MemberEditContainer: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
+    // child class, MemberEdit
+    private var mMemberEdit = MemberEdit()
+    
     // 會員資料, 由parent 設定, 本 class 需要使用的資料
     var dictMember: Dictionary<String, String> = [:]
     
@@ -43,22 +46,32 @@ class MemberEditContainer: UIViewController {
      * Segue 判別跳轉哪個頁面, 給 container 的 childView 使用
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // 跳轉 'MainScrollData' class
+        // 跳轉 'MemberEdit' class
         if segue.identifier == "MemberEdit"{
-            let cvChild = segue.destinationViewController as! MemberEdit
-            cvChild.dictMember = dictMember
+            mMemberEdit = segue.destinationViewController as! MemberEdit
+            mMemberEdit.dictMember = dictMember
         }
         
         return
     }
     
     /**
-     * 返回前頁
+     * btn action, 資料儲存
      */
-    @IBAction func actBack(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func actSave(sender: UIBarButtonItem) {
+        mMemberEdit.startSaveData()
+        
+        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /**
+     * btn action, 返回前頁
+     */
+    @IBAction func actBack(sender: UIBarButtonItem) {
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadPage", object: nil)
+        })
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

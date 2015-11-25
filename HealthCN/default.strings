@@ -15,6 +15,7 @@
 "err_data" = "资料错误!";
 "nodata" = "目前没有资料. . .";
 "err_systemmaintain" = "伺服器维护中, 请稍候再重试...";
+"datasavecompleted" = "資料儲存完成!";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -273,3 +274,12 @@
 "healthgroup_vfat" = "内脏脂肪";
 "healthgroup_heartbeat" = "心跳";
 "healthgroup_temperature" = "体温";
+"healthvalinputerr" = "量測數值資料錯誤!";
+"healthvalsavecompleted" = "量測數值儲存完成!";
+
+"memberedit_err_psd" = "密碼錯誤!";
+"memberedit_err_rpsd" = "密碼前後輸入不一樣!";
+"memberedit_err_height" = "身高錯誤!";
+"memberedit_err_weight" = "體重錯誤!";
+"memberedit_err_birth" = "生日錯誤!";
+"memberedit_err_tel" = "聯絡電話錯誤!";

@@ -426,16 +426,16 @@ class HealthExplainTestData {
     * @param jobjItem
     *            : ex. {"bmi":"0.0","height":"168.0","weight":"0.0"}
     */
-    func CalHealthData(strGroup: String, var jobjItem: [String:String])->[String:String] {
+    func CalHealthData(strGroup: String, var jobjItem: Dictionary<String, String>)->Dictionary<String, String> {
         // 計算 BMI
         if (strGroup == "bmi") {
             // 檢查 weigh, height
-            if (jobjItem["weigh"] == nil || jobjItem["height"] == nil) {
+            if (jobjItem["weight"] == nil || jobjItem["height"] == nil) {
                 return jobjItem
             }
         
             // 計算 BMI
-            let dbWeight = Double(jobjItem["weigh"]!)! * 10000
+            let dbWeight = Double(jobjItem["weight"]!)! * 10000
             let dbHeight = Double(jobjItem["height"]!)!
             let dbBMI = Double(dbWeight / (dbHeight * dbHeight))
             jobjItem["bmi"] = String(format: "%.1f", dbBMI)

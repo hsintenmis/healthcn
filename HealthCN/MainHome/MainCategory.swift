@@ -13,7 +13,7 @@ class MainCategory: UIViewController {
     @IBOutlet weak var viewScrolle: UIScrollView!
     
     // common property
-    private var isPageReloadAgain = false // child close, 返回本class辨識標記
+    private var isFirstEnter = true // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
@@ -35,11 +35,14 @@ class MainCategory: UIViewController {
         
         // 設定相關 UI text 欄位 delegate to textfile
         self.initViewField()
+        
+        // 註冊一個 NSNotificationCenter
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyPageReload", name:"ReloadPage", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
-        if (!isPageReloadAgain) {
-            isPageReloadAgain = true
+        if (isFirstEnter) {
+            isFirstEnter = false
             
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
@@ -112,6 +115,15 @@ class MainCategory: UIViewController {
     */
     @IBAction func actReload(sender: UIBarButtonItem) {
         // HTTP 開始連線
+        self.StartHTTPConn()
+    }
+    
+    /**
+     * NSNotificationCenter, 必須先在 ViewLoad declare
+     * child class 可以調用此 method
+     */
+    func notifyPageReload() {
+        // HTTP 連線取得本頁面需要的資料
         self.StartHTTPConn()
     }
 

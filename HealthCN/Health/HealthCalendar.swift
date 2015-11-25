@@ -18,7 +18,7 @@ class HealthCalendar: UIViewController {
     @IBOutlet weak var labMMDD: UILabel!
     
     // common property
-    private var isPageReloadAgain = false // child close, 返回本class辨識標記
+    private var isFirstEnter = true // child close, 返回本class辨識標記
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
@@ -71,11 +71,14 @@ class HealthCalendar: UIViewController {
         viewCalendar.layer.borderWidth = 1
         //viewCalendar.layer.cornerRadius = 5
         viewCalendar.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
+        
+        // 註冊一個 NSNotificationCenter
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyPageReload", name:"ReloadPage", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
-        if (!isPageReloadAgain) {
-            isPageReloadAgain = true
+        if (isFirstEnter) {
+            isFirstEnter = false
             
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
@@ -129,9 +132,12 @@ class HealthCalendar: UIViewController {
         today = dictContent["today"] as! String
         lastYYMM = pubClass.subStr(today, strFrom: 0, strEnd: 6)
         
-        dictCurrDate["YY"] = pubClass.subStr(today, strFrom: 0, strEnd: 4)
-        dictCurrDate["MM"] = pubClass.subStr(today, strFrom: 4, strEnd: 6)
-        dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        // 若 page reload, dictCurrDate 已有資料[不用]重設為今天日期
+        if (dictCurrDate["YY"] == nil) {
+            dictCurrDate["YY"] = pubClass.subStr(today, strFrom: 0, strEnd: 4)
+            dictCurrDate["MM"] = pubClass.subStr(today, strFrom: 4, strEnd: 6)
+            dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        }
         
         // 初始 Calendar, 重新 reload collectionView
         mHealthCalCellData.setDataSource(dictMMData)
@@ -322,6 +328,7 @@ class HealthCalendar: UIViewController {
         cvChild.dictAllData = dictCurrItemData
         cvChild.strItemKey = (mHealthDataInit.D_HEALTHITEMKEY)[indexPath.row]
         cvChild.dictCurrDate = dictCurrDate
+        cvChild.dictMember = dictMember
         
         return
     }
@@ -388,6 +395,15 @@ class HealthCalendar: UIViewController {
         dictCurrDate["DD"] = "01"
         
         self.initCalendarParm()
+    }
+    
+    /**
+    * NSNotificationCenter, 必須先在 ViewLoad declare
+    * child class 可以調用此 method
+    */
+    func notifyPageReload() {
+        // HTTP 連線取得本頁面需要的資料
+        self.StartHTTPConn()
     }
     
     override func didReceiveMemoryWarning() {
