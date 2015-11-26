@@ -16,6 +16,7 @@ class ReservationAdd: UIViewController {
     @IBOutlet weak var labReserDate: UILabel!
     @IBOutlet weak var labReserTime: UILabel!
     @IBOutlet weak var labReserCourse: UILabel!
+    @IBOutlet weak var btnSave: UIButton!
     
     @IBOutlet weak var colvSelDate: UICollectionView!
     @IBOutlet weak var colvSelServ: UICollectionView!
@@ -30,15 +31,20 @@ class ReservationAdd: UIViewController {
     private var mVCtrl: UIViewController!
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+
     private var isDataSourceReady = false
     
-    // CollectionView Cell 背景
-    let dictColor = ["white":"FFFFFF", "red":"FFCCCC", "gray":"C0C0C0", "silver":"F0F0F0"]
+    // public, parent VC, parent class 設定
+    var mVCtrlParent: ReservationMain = ReservationMain()   // 指定為 'ReservationMain'
     
-    // Collectuion Cell View 目前選擇的 position
+    // CollectionView Cell 背景
+    private let dictColor = ["white":"FFFFFF", "red":"FFCCCC", "gray":"C0C0C0", "silver":"F0F0F0"]
+    
+    // Collectuion Cell View 目前選擇的 position, 選擇的療程資料
     private var positionDate = -1
     private var positionServ = 0
     private var positionTime = -1
+    private var dictSelCourse: Dictionary<String, String> = [:]
     
     // Collectuion Cell View 目前選擇的 NSIndexPath
     private var indexpathDate: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -47,13 +53,13 @@ class ReservationAdd: UIViewController {
     
     /*日期/時間/服務區  JSON 資料 */
     // colvView 選擇日期的資料集, ex. 0=>{'ymd'="20151031,..., 'service'=JSONAry "}
-    private var dictDataSelDate: [[String:AnyObject]] = []
+    private var dictDataSelDate: Array<Dictionary<String, AnyObject>> = []
     
     // colvView 選擇服務區資料
     private var numsSrvZone = 0  // 服務區總數
     
     // colvView, 選擇時段 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
-    private var dictDataTime: [[String:AnyObject]] = []  // 目前選擇的'時段'資料集
+    private var dictDataTime: Array<Dictionary<String, AnyObject>> = []  // 目前選擇的'時段'資料集
     
     // 日期相關設定
     private var today: String = ""
@@ -357,10 +363,7 @@ class ReservationAdd: UIViewController {
         
         // lab 文字顯示
         let dictItem = dictDataSelDate[positionDate]
-        let strYY = pubClass.subStr(dictItem["ymd"] as! String, strFrom: 0, strEnd: 4)
-        let strMM = pubClass.subStr(dictItem["ymd"] as! String, strFrom: 4, strEnd: 6)
-        let strDD = pubClass.subStr(dictItem["ymd"] as! String , strFrom: 6, strEnd: 8)
-        let strLabDate = strYY + "年" + pubClass.getLang("mm_" + strMM) + String(Int(strDD)!) + "日" + " " + pubClass.getLang("weeklong_" + (dictItem["week"] as! String))
+        let strLabDate = pubClass.formatDateWithStr(pubClass.subStr(dictItem["ymd"] as! String, strFrom: 0, strEnd: 8), type: 8) + " " + pubClass.getLang("weeklong_" + (dictItem["week"] as! String))
         labReserDate.text = strLabDate
         
         // cell reload
@@ -419,14 +422,17 @@ class ReservationAdd: UIViewController {
             return
         }
     }
-    
+
     /**
     * 設定'已選擇療程'資料，通常由 child 'dismissViewControllerAnimated' 執行
+    * @param dictData: 選擇的療程資料，key => 'pdname', 'pdid', 'index_id'
     */
     func setSelCourseData(dictData: Dictionary<String, String>?) {
         if (dictData?.count < 1) {
             return
         }
+        
+        dictSelCourse = dictData!
         
         dispatch_async(dispatch_get_main_queue(), {
             self.labReserCourse.text = dictData!["pdname"]
@@ -434,9 +440,53 @@ class ReservationAdd: UIViewController {
     }
     
     /**
+     * btn action '資料儲存',  資料 HTTP 上傳儲存
+     */
+    @IBAction func actSave(sender: UIButton) {
+        // 檢查資料
+        if (positionDate < 0) {
+            pubClass.popIsee(Msg: pubClass.getLang("reservationadd_err_date"))
+            return
+        }
+        else if (positionTime < 0) {
+            pubClass.popIsee(Msg: pubClass.getLang("reservationadd_err_time"))
+            return
+        }
+        else if (dictSelCourse["pdid"]?.characters.count < 1) {
+            pubClass.popIsee(Msg: pubClass.getLang("reservationadd_err_course"))
+            return
+        }
+        
+        let dictYMD = dictDataSelDate[positionDate]
+        let strYMD = pubClass.subStr(dictYMD["ymd"] as! String, strFrom: 0, strEnd: 8)
+        let strHH = String(format: "%02d", dictDataTime[positionTime]["hh"] as! Int)
+        
+        // 產生 Request dict array, 轉為 JSON String
+        var strJSONStr = ""
+        var dictArg0: Dictionary<String, String> = [:]
+        dictArg0["time"] = strYMD + strHH +  "00"
+        dictArg0["odrs_id"] = dictSelCourse["odrs_id"]
+        dictArg0["pdid"] = dictSelCourse["pdid"]
+        
+        do {
+            let jobjData = try
+                NSJSONSerialization.dataWithJSONObject(dictArg0, options: NSJSONWritingOptions(rawValue: 0))
+            let jsonString = NSString(data: jobjData, encoding: NSUTF8StringEncoding)! as String
+            
+            strJSONStr = jsonString
+        } catch {
+            pubClass.popIsee(Msg: pubClass.getLang("err_data"))
+            
+            return
+        }
+        
+        self.StartHTTPConnSave(strJSONStr)
+    }
+    
+    /**
      * HTTP 連線, 由本 class 傳送資料至 server 取得儲存結果
      */
-    func SaveHTTPConn(strArg0: String!) {
+    private func StartHTTPConnSave(strArg0: String!) {
         var dictParm = Dictionary<String, String>()
         dictParm["acc"] = mAppDelegate.V_USRACC
         dictParm["psd"] = mAppDelegate.V_USRPSD
@@ -446,41 +496,47 @@ class ReservationAdd: UIViewController {
         
         // HTTP 開始連線
         pubClass.showPopLoading(nil)
-        pubClass.startHTTPConn(dictParm, callBack: SaveHttpResponChk)
+        pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
     }
     
     /**
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
-    private func SaveHttpResponChk(dictRS: Dictionary<String, AnyObject>) {
+    private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
         pubClass.closePopLoading()
         
         // 回傳失敗
         if (dictRS["result"] as! Bool != true) {
-            pubClass.popIsee(Msg: pubClass.getLang("err_systemmaintain"))
-            self.dismissViewControllerAnimated(true, completion: nil)
+            pubClass.popIsee(Msg: pubClass.getLang("err_trylatermsg"))
+            //self.dismissViewControllerAnimated(true, completion: nil)
             
             return
         }
         
-        // 跳轉新的 class, '預約記錄' 頁面
-        pubClass.popIsee(Msg: pubClass.getLang("提醒預約通知"))
-        
-        
-    }
-
-    /**
-    * 跳轉預約記錄頁面
-    */
-    @IBAction func actReserList(sender: UIBarButtonItem) {
-
+        self.popResponResult(Msg: pubClass.getLang("reservation_addsavecomplete"))
     }
     
     /**
-    * 返回前頁
-    */
-    @IBAction func actBack(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+     * [我知道了] 彈出視窗, 新增資料完成後跳轉其他 class
+     */
+    func popResponResult(Msg strMsg: String!) {
+        let mAlert = UIAlertController(title: pubClass.getLang("sysprompt"), message: strMsg, preferredStyle:UIAlertControllerStyle.Alert)
+        
+        mAlert.addAction(UIAlertAction(title:pubClass.getLang("i_see"), style: UIAlertActionStyle.Default, handler:{ (action: UIAlertAction!) in
+
+            /**
+            * 跳轉新的 class, '預約記錄' 頁面
+            * NSNotificationCenter, parent class 'ReservationMain'
+            */
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                NSNotificationCenter.defaultCenter().postNotificationName("ChangeReserList", object: nil)
+            })
+        }))
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
+        })
     }
     
     override func didReceiveMemoryWarning() {

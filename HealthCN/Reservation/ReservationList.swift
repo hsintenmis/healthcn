@@ -10,6 +10,7 @@ import Foundation
  */
 class ReservationList: UIViewController {
     @IBOutlet weak var tableList: UITableView!
+    @IBOutlet var gestLongPress: UILongPressGestureRecognizer!
     
     // common property
     private var isPageReloadAgain = false // child close, 返回本class辨識標記
@@ -31,6 +32,10 @@ class ReservationList: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
+        
+        // Gesture 設定，long press
+        gestLongPress.delaysTouchesBegan = true
+        tableList.addGestureRecognizer(gestLongPress)
     }
     
     // View did Appear
@@ -41,20 +46,8 @@ class ReservationList: UIViewController {
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
             
-            // 初始與設定 VCview 內的 field
-            self.initViewField();
-            
             return
         }
-    }
-    
-    /**
-     * 初始與設定 VCview 內的 field
-     */
-    private func initViewField() {
-        dispatch_async(dispatch_get_main_queue(), {
-
-        })
     }
     
     /**
@@ -91,6 +84,8 @@ class ReservationList: UIViewController {
         let dictContent = dictRespon["content"] as! Dictionary<String, AnyObject>
 
         // 取得預約資料
+        aryAllData = []  // 重新初始
+        
         if let jaryData = dictContent["data"] as? Array<Dictionary<String, AnyObject>> {
             // 小於此日期的資料不顯示, 30天前, 重新產生 'aryAllData'
             let minNSDate = NSDate(timeInterval: -(24*60*60*30), sinceDate: NSDate())
@@ -186,7 +181,97 @@ class ReservationList: UIViewController {
         return mCell
     }
 
+    /**
+    * act, LongPressGesture, 長按 'Cell' 執行刪除程序
+    */
+    @IBAction func actCellLongPress(sender: UILongPressGestureRecognizer) {
+        if (sender.state != UIGestureRecognizerState.Began){
+            return
+        }
+        
+        // 取得選取的 'indexPath', 彈出刪除確認視窗
+        if let indexPath: NSIndexPath = self.tableList.indexPathForRowAtPoint(sender.locationInView(self.tableList)) {
+            self.tableList.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            
+            // 標記為 '已完成' 不能刪除
+            if (self.aryAllData[indexPath.row]["issale"] as! String == "Y") {
+                return
+            }
+            
+            popConfirm(indexPath.row);
+        }
+    }
     
+    /**
+     * 彈出視窗，button 'Yes' 'No', 確認是否刪除資料
+     * @param positionItem : TableView cell position
+     */
+    func popConfirm(positionItem: Int) {
+        let mAlert = UIAlertController(title: pubClass.getLang("sysprompt"), message: pubClass.getLang("reservation_confirmdel"), preferredStyle:UIAlertControllerStyle.Alert)
+        
+        // btn 'Yes', 執行刪除資料程序
+        mAlert.addAction(UIAlertAction(title:pubClass.getLang("confirm_yes"), style:UIAlertActionStyle.Default, handler:{
+            (action: UIAlertAction!) in
+            
+            // 取得選取'預約療程'資料的 'id', ex. 'C0000481', 執行 HTTP 連線資料上傳
+            self.StartHTTPConnSave(self.aryAllData[positionItem]["id"] as! String)
+        }))
+        
+        // btn ' No', 取消，關閉 popWindow
+        mAlert.addAction(UIAlertAction(title:pubClass.getLang("confirm_no"), style:UIAlertActionStyle.Cancel, handler:nil ))
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
+        })
+    }
+    
+    /**
+     * HTTP 連線, 由本 class 傳送資料至 server 取得儲存結果
+     */
+    private func StartHTTPConnSave(strArg0: String!) {
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = mAppDelegate.V_USRACC
+        dictParm["psd"] = mAppDelegate.V_USRPSD
+        dictParm["page"] = "reservation"
+        dictParm["act"] = "reservation_del"
+        dictParm["arg0"] = strArg0
+        
+        // HTTP 開始連線
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
+    }
+    
+    /**
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
+     */
+    private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
+        pubClass.closePopLoading()
+        
+        // 回傳失敗
+        if (dictRS["result"] as! Bool != true) {
+            self.popResponResult(Msg: pubClass.getLang("err_trylatermsg"))
+        }
+        else {
+            self.popResponResult(Msg: pubClass.getLang("reservation_delcompleted"))
+        }
+    }
+    
+    /**
+     * [我知道了] 彈出視窗,
+     */
+    func popResponResult(Msg strMsg: String!) {
+        let mAlert = UIAlertController(title: pubClass.getLang("sysprompt"), message: strMsg, preferredStyle:UIAlertControllerStyle.Alert)
+        
+        mAlert.addAction(UIAlertAction(title:pubClass.getLang("i_see"), style: UIAlertActionStyle.Default, handler:{ (action: UIAlertAction!) in
+            // 頁面重整
+            self.StartHTTPConn()
+        }))
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
+        })
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

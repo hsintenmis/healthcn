@@ -15,7 +15,10 @@
 "err_data" = "资料错误!";
 "nodata" = "目前没有资料. . .";
 "err_systemmaintain" = "伺服器维护中, 请稍候再重试...";
+"err_trylatermsg" = "資料錯誤, 请稍候再重试...";
 "datasavecompleted" = "資料儲存完成!";
+"confirm_yes" = "是";
+"confirm_no" = "否";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -236,6 +239,12 @@
 "course_odrstype_T" = "包次";
 "course_odrstype_M_unit" = "个月";
 "course_odrstype_T_unit" = "次";
+"reservationadd_err_date" = "請選擇預約日期!";
+"reservationadd_err_time" = "請選擇預約時間!";
+"reservationadd_err_course" = "請選療程!";
+"reservation_addsavecomplete" = "疗程预约新增完成!";
+"reservation_confirmdel" = "確定取消選擇的預約嗎?";
+"reservation_delcompleted" = "選取的預約已經取消完成!";
 
 "news_store" = "店家新讯";
 "news_office" = "美利官网新讯";

@@ -107,10 +107,7 @@ class PubClass {
         
         let mAlert = UIAlertController(title: strTitle, message: strMsg, preferredStyle:UIAlertControllerStyle.Alert)
         
-        mAlert.addAction(UIAlertAction(title:getLang("i_see"), style: .Default, handler:{
-            (action: UIAlertAction!) in
-            // print("Handle Ok logic here")
-        }))
+        mAlert.addAction(UIAlertAction(title:getLang("i_see"), style: UIAlertActionStyle.Default, handler:nil))
         
         dispatch_async(dispatch_get_main_queue(), {
             self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)

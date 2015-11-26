@@ -30,7 +30,10 @@ class ReservationMain: UIViewController {
         pubClass = PubClass(viewControl: mVCtrl)
         
         // viewContainer加入 viewControl, 預設初始為 預約新增 ReserationAdd
-        self.setContainerView("ReserAdd")
+        self.setReservationContainerView("ReserAdd")
+        
+        // 註冊一個 NSNotificationCenter
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyChangeReserList", name:"ChangeReserList", object: nil)
     }
     
     // View did Appear
@@ -55,10 +58,10 @@ class ReservationMain: UIViewController {
     }
     
     /**
-    * 設定 viewContainer 內容
+    * public, 設定 viewContainer 內容
     * @param flag : ex. 'ReserAdd', 'CourseList', 'ReserList'
     */
-    private func setContainerView(flag: String!) {
+    private func setReservationContainerView(flag: String!) {
         var mSubVC = UIViewController()
         var strTitle = ""
         viewContainer.clearsContextBeforeDrawing = true
@@ -86,21 +89,29 @@ class ReservationMain: UIViewController {
     * 點取 預約新增：ReserationAdd
     */
     @IBAction func actReserAdd(sender: UIBarButtonItem) {
-        self.setContainerView("ReserAdd")
+        self.setReservationContainerView("ReserAdd")
     }
     
     /**
      * 點取 療程紀錄：CourseList
      */
     @IBAction func actCourseList(sender: UIBarButtonItem) {
-        self.setContainerView("CourseList")
+        self.setReservationContainerView("CourseList")
     }
     
     /**
      * 預約記錄：ReservationList
      */
     @IBAction func actReserList(sender: UIBarButtonItem) {
-        self.setContainerView("ReserList")
+        self.setReservationContainerView("ReserList")
+    }
+    
+    /**
+     * NSNotificationCenter, 必須先在 ViewLoad declare
+     * child class 可以調用此 method
+     */
+    func notifyChangeReserList() {
+        self.setReservationContainerView("ReserList")
     }
     
     /**

@@ -20,6 +20,7 @@ class MainScrollData: UIViewController {
     @IBOutlet weak var viewTodayInfo: UIView!  // 今日提醒資料 View list
     @IBOutlet var btnGroup: [UIButton]! // 跳轉的 UIButton array
     
+    @IBOutlet weak var viewPictBG: UIView! // 大頭照 白色背景
     @IBOutlet weak var imgUser: UIImageView!  // 大頭照
     @IBOutlet weak var btnPict: UIButton! // 更改照片
     
@@ -52,6 +53,10 @@ class MainScrollData: UIViewController {
         for btnItem: UIButton in btnGroup {
             dictBtn[btnItem.restorationIdentifier!] = btnItem
         }
+        
+        // 圖片, View, btn ... 圓角，外框設定
+        self.viewPictBG.layer.cornerRadius = 20
+        self.viewPictBG.layer.borderWidth = 0
     }
     
     override func viewDidAppear(animated: Bool) {

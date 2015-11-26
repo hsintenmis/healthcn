@@ -90,11 +90,11 @@ class CourseSel: UIViewController {
         var dictData: [String:String] = [:]
         
         // 取得原來的療程資料，重新設定新的 dict, 本頁面結束
-        let ditItem = aryCourseData[indexPath.row]
+        let dictItem = aryCourseData[indexPath.row]
         
-        dictData["pdname"] = ditItem["pdname"]! as String
-        dictData["pdid"] = ditItem["pdid"]! as String
-        dictData["index_id"] = ""
+        dictData["pdname"] = dictItem["pdname"]! as String
+        dictData["pdid"] = dictItem["pdid"]! as String
+        dictData["odrs_id"] = ""
         
         mVCtrlParent.setSelCourseData(dictData)
         self.dismissViewControllerAnimated(true, completion: nil)
