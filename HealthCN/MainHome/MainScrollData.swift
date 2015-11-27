@@ -27,10 +27,13 @@ class MainScrollData: UIViewController {
     // public property
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
+    private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+    
     let mImageClass = ImageClass()
+    private var isFirstEnter = true // child close, 返回本class辨識標記
     
     // 本 class 需要使用的 json data
-    var parentData: Dictionary<String, AnyObject>!
+    var dictAllData: Dictionary<String, AnyObject>!
     var aryHealth: [[String:String]] = []
     private var dictMember: Dictionary<String, AnyObject> = [:]
     
@@ -46,20 +49,27 @@ class MainScrollData: UIViewController {
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
         
-        // 設定相關 UI text 欄位
-        self.self.initViewField()
+        // 註冊一個 NSNotificationCenter
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyPageReload", name:"ReloadPage", object: nil)
         
         // 重新整理 btnGroup 為 Dictionary
         for btnItem: UIButton in btnGroup {
             dictBtn[btnItem.restorationIdentifier!] = btnItem
         }
         
-        // 圖片, View, btn ... 圓角，外框設定
-        self.viewPictBG.layer.cornerRadius = 20
-        self.viewPictBG.layer.borderWidth = 0
+        // 設定相關 UI text 欄位
+        self.self.initViewField()
     }
     
     override func viewDidAppear(animated: Bool) {
+        if (isFirstEnter) {
+            isFirstEnter = false
+            
+            // HTTP 連線取得本頁面需要的資料
+            self.StartHTTPConn()
+            return
+        }
+        
         btnPict.reloadInputViews()
     }
 
@@ -69,23 +79,57 @@ class MainScrollData: UIViewController {
     private func initViewField() {
         viewTodayInfo.layer.borderWidth = 2
         viewTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
-        
         self.imgUser.layer.cornerRadius = 20
+        
+        // 圖片, View, btn ... 圓角，外框設定
+        self.viewPictBG.layer.cornerRadius = 20
+        self.viewPictBG.layer.borderWidth = 0
     }
     
     /**
-    * public, 設定本 class 需要使用的 json data
-    */
-    internal func setParam(parm: Dictionary<String, AnyObject>) {
-        parentData = parm
+     * HTTP 連線取得本頁面需要的資料
+     */
+    private func StartHTTPConn() {
+        // 連線 HTTP post/get 參數
+        var dictParm = Dictionary<String, String>()
+        dictParm["acc"] = mAppDelegate.V_USRACC
+        dictParm["psd"] = mAppDelegate.V_USRPSD
+        dictParm["page"] = "memberdata"
+        dictParm["act"] = "memberdata_homepage"
+        dictParm["arg0"] = pubClass.MemberHeadimgFile(mAppDelegate.V_USRACC)
+        
+        // HTTP 開始連線
+        pubClass.showPopLoading(nil)
+        pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
     /**
-    * public method, 初始與設定 VCview 內的 field
+     * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
+     */
+    private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
+        pubClass.closePopLoading()
+        
+        // 任何錯誤跳離
+        if (dictRS["result"] as! Bool != true) {
+            pubClass.popIsee(Msg: dictRS["msg"] as! String)
+            return
+        }
+        
+        // 解析正確的 http 回傳結果，傳遞 JSONdata, 設定 'MainScrollData' view 資料
+        dictAllData = dictRS["data"] as! Dictionary<String, AnyObject>
+        
+        //self.mMainScrollData.initViewField()
+        self.resetViewField()
+    }
+    
+    /**
+    * 初始與設定 VCview 內的 field
     */
-    internal func resetViewField() {
+    private func resetViewField() {
+        let dictContent = dictAllData["content"]!
+        
         // 會員資料區塊
-        dictMember = (parentData["content"])?.objectForKey("member") as! Dictionary<String, AnyObject>
+        dictMember = dictContent["member"] as! Dictionary<String, AnyObject>
         
         dispatch_async(dispatch_get_main_queue(), {
             self.labMemberName.text = self.dictMember["usrname"] as? String
@@ -93,37 +137,36 @@ class MainScrollData: UIViewController {
             self.labStoreTel.text = self.dictMember["up_tel"] as? String
             
             // CollectionView, 健康資料重新 reload
-            let dicContent = self.parentData["content"] as! Dictionary<String, AnyObject>
-            self.aryHealth = dicContent["health"] as! [[String:String]]
+            self.aryHealth = dictContent["health"] as! [[String:String]]
             self.colviewHealth.reloadData()
-            
             self.btnPict.reloadInputViews()
         })
         
         // 設定會員圖片, base64String to Image
-        if let strEncode = parentData["content"]!["imgstr"] as? String {
+        if let strEncode = dictContent["imgstr"] as? String {
             if (strEncode.characters.count > 0) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.imgUser.image = self.mImageClass.Base64ToImg(strEncode)
                 })
             }
         }
-
     }
     
     /**
     * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Scroll View
-        if segue.identifier == "MainCategory"{
-            //let cvChild = segue.destinationViewController as! MainCategory
-            return
-        }
-        
         // 會員編輯 segue, 設定會員資料 param
         if segue.identifier == "MemberEditContainer"{
             let cvChild = segue.destinationViewController as! MemberEditContainer
+            cvChild.dictMember = dictMember as! Dictionary<String, String>
+            
+            return
+        }
+        
+        // 藍芽設備檢測 List segue, 設定會員資料 param
+        if segue.identifier == "BTDeviceMain"{
+            let cvChild = segue.destinationViewController as! BTDeviceMain
             cvChild.dictMember = dictMember as! Dictionary<String, String>
             
             return
@@ -201,8 +244,13 @@ class MainScrollData: UIViewController {
 
     }
     
-    @IBAction func actEditProfile(sender: UIButton) {
-        
+    /**
+     * NSNotificationCenter, 必須先在 ViewLoad declare
+     * child class 可以調用此 method
+     */
+    func notifyPageReload() {
+        // HTTP 連線取得本頁面需要的資料
+        self.StartHTTPConn()
     }
 
 }

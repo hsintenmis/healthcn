@@ -102,12 +102,15 @@ class ReservationAdd: UIViewController {
             // 樣式/外觀/顏色
             self.btnCourseDef.layer.cornerRadius = 5
             self.btnCourseCust.layer.cornerRadius = 5
+            self.btnSave.layer.cornerRadius = 5
             
             self.btnCourseDef.layer.borderWidth = 1
             self.btnCourseCust.layer.borderWidth = 1
+            self.btnSave.layer.borderWidth = 1
             
             self.btnCourseDef.layer.borderColor = self.pubClass.ColorCGColor("E0E0E0")
             self.btnCourseCust.layer.borderColor = self.pubClass.ColorCGColor("E0E0E0")
+            self.btnSave.layer.borderColor = self.pubClass.ColorCGColor("CC0000")
         })
     }
     
