@@ -73,7 +73,7 @@ class HealthCalendar: UIViewController {
         viewCalendar.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
         
         // 註冊一個 NSNotificationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyPageReload", name:"ReloadPage", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyReloadHealthCalendar", name:"ReloadHealthCalendar", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -401,7 +401,7 @@ class HealthCalendar: UIViewController {
     * NSNotificationCenter, 必須先在 ViewLoad declare
     * child class 可以調用此 method
     */
-    func notifyPageReload() {
+    func notifyReloadHealthCalendar() {
         // HTTP 連線取得本頁面需要的資料
         self.StartHTTPConn()
     }

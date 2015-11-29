@@ -16,8 +16,8 @@ class MainScrollData: UIViewController {
     @IBOutlet weak var labStoreName: UILabel!
     @IBOutlet weak var labStoreTel: UILabel!
     
+    @IBOutlet weak var textTodayInfo: UITextView!
     @IBOutlet weak var colviewHealth: UICollectionView!
-    @IBOutlet weak var viewTodayInfo: UIView!  // 今日提醒資料 View list
     @IBOutlet var btnGroup: [UIButton]! // 跳轉的 UIButton array
     
     @IBOutlet weak var viewPictBG: UIView! // 大頭照 白色背景
@@ -50,7 +50,7 @@ class MainScrollData: UIViewController {
         pubClass = PubClass(viewControl: mVCtrl)
         
         // 註冊一個 NSNotificationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyPageReload", name:"ReloadPage", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyReloadMainScrollData", name:"ReloadMainScrollData", object: nil)
         
         // 重新整理 btnGroup 為 Dictionary
         for btnItem: UIButton in btnGroup {
@@ -77,11 +77,12 @@ class MainScrollData: UIViewController {
      * 初始與設定 VCview 內的 field
      */
     private func initViewField() {
-        viewTodayInfo.layer.borderWidth = 2
-        viewTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
-        self.imgUser.layer.cornerRadius = 20
+        self.textTodayInfo.layer.borderWidth = 1
+        self.textTodayInfo.layer.cornerRadius = 5
+        self.textTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
         
         // 圖片, View, btn ... 圓角，外框設定
+        self.imgUser.layer.cornerRadius = 20
         self.viewPictBG.layer.cornerRadius = 20
         self.viewPictBG.layer.borderWidth = 0
     }
@@ -150,6 +151,34 @@ class MainScrollData: UIViewController {
                 })
             }
         }
+        
+        // 今日提醒 TextView
+        var strTodayInfo = ""
+        
+        if let aryCourse = dictContent["course"] as? Array<Dictionary<String, String>>  {
+            for dictCourse in aryCourse {
+                strTodayInfo += "[" + pubClass.getLang("todayinfo_course") + "] "
+                strTodayInfo += dictCourse["mm"]! + ":" + dictCourse["dd"]! + " "
+                strTodayInfo += dictCourse["pdname"]! + "\n"
+            }
+        }
+        
+        if let aryNews = dictContent["news"] as? Array<Dictionary<String, String>>  {
+            for dictNews in aryNews {
+                strTodayInfo += "[" + pubClass.getLang("todayinfo_news") + "] "
+                strTodayInfo += dictNews["title"]! + "\n"
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 10
+            let attributes = [NSParagraphStyleAttributeName : style]
+            self.textTodayInfo.attributedText = NSAttributedString(string: strTodayInfo, attributes:attributes)
+            self.textTodayInfo.textContainerInset = UIEdgeInsetsMake(10,5,5,5);
+            
+            //self.textTodayInfo.text = strTodayInfo
+        })
     }
     
     /**
@@ -248,7 +277,7 @@ class MainScrollData: UIViewController {
      * NSNotificationCenter, 必須先在 ViewLoad declare
      * child class 可以調用此 method
      */
-    func notifyPageReload() {
+    func notifyReloadMainScrollData() {
         // HTTP 連線取得本頁面需要的資料
         self.StartHTTPConn()
     }

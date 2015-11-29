@@ -35,7 +35,7 @@ class MainCategory: UIViewController {
     */
     @IBAction func actReload(sender: UIBarButtonItem) {
         // 由 class 'MainScrollData' declare
-        NSNotificationCenter.defaultCenter().postNotificationName("ReloadPage", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("ReloadMainScrollData", object: nil)
     }
 
     /**

@@ -263,7 +263,7 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
     @IBAction func actBack(sender: UIBarButtonItem) {
         // 檢查本頁面資料是否有變動
         if (isDataSave) {
-            self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadPage", object: nil)
+            self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadHealthCalendar", object: nil)
             })
             
             return

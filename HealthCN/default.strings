@@ -292,3 +292,6 @@
 "memberedit_err_weight" = "體重錯誤!";
 "memberedit_err_birth" = "生日錯誤!";
 "memberedit_err_tel" = "聯絡電話錯誤!";
+
+"todayinfo_course" = "療程通知";
+"todayinfo_news" = "今日新訊";

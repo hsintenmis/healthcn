@@ -16,20 +16,20 @@ class BTScaleMain: UIViewController {
     let D_BASE_FILENAME = "index"
     let D_BASE_URL = "html"
     
-    // 固定參數，體重計需要的欄位 array data
-    private let aryTestingField: Array<String> = ["bmi", "fat", "water", "calory",
-        "bone", "muscle", "vfat"]
-    private let aryTestingVal: Array<String> = ["0.0", "0.0", "0.0", "0", "0.0", "0.0","0.0" ]
-    private var aryAllData: Array<Dictionary<String, String>> = []
+    // TableView 健康項目的 field
+    private let aryTestingField: Array<String> = ["weight", "bmi", "fat", "water", "calory", "bone", "muscle", "vfat"]
     
-    // 體重計需要傳送的固定參數，身高/年齡/性別
-    private var dictUserData: Dictionary<String, String> = [:]
+    // 本 class 需要的 健康項目 field 對應的 dict data, 測量項目的 field name, val, unit name ...
+    private var dictAllData: Dictionary<String, AnyObject> = [:]
     
-    // public, 會員資料, parent class 設定
+    // 體重計需要傳送的固定參數，身高/年齡/性別, child class 也會使用
+    var dictUserData: Dictionary<String, String> = [:]
+    
+    // public, 會員資料, parent class 設定,
     var dictMember: Dictionary<String, String> = [:]
     
-    // BT service class import
-    var mBTScaleService = BTScaleService()
+    //  藍芽體重計 BT service class import
+    var mBTScaleService: BTScaleService = BTScaleService()
     
     // @IBOutlet
     @IBOutlet weak var webChart: UIWebView!
@@ -41,7 +41,7 @@ class BTScaleMain: UIViewController {
     private var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
     
-    // 健康檢測項目的欄位資料, ex. 名稱，單位，計算方式
+    // 健康檢測項目的欄位資料 class, ex. 名稱，單位，計算方式
     private var mHealthDataInit = HealthDataInit()
     
     // View load
@@ -51,18 +51,25 @@ class BTScaleMain: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-        mHealthDataInit.custInit(mVCtrl)
         
         // 整理產生本 class 需要的 健康項目 array data
         for strField in aryTestingField {
-            aryAllData.append(mHealthDataInit.GetSingleTestData(strField))
+            dictAllData[strField] = mHealthDataInit.GetSingleTestData(strField)
         }
         
+        dictUserData["membername"] = dictMember["membername"]
         dictUserData["gender"] = dictMember["gender"]
-        dictUserData["age"] = dictMember["age"]
         dictUserData["height"] = dictMember["height"]
         
+        // TODO! Server 加入 'age'欄位
+        //dictUserData["age"] = dictMember["age"]
+        dictUserData["age"] = "45"
+        
         self.setViewChartHTML()
+        
+        // 初始與設定 '體重計' BT service
+        mHealthDataInit.custInit(mVCtrl)
+        mBTScaleService.setParentVC(self)
     }
     
     /**
@@ -87,11 +94,15 @@ class BTScaleMain: UIViewController {
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         
         // 取得 Item data source
-        let ditItem = aryAllData[indexPath.row]
+        let strField = aryTestingField[indexPath.row]
+        let ditItem = dictAllData[strField] as! Dictionary<String, String>
         
         // 取得 CellView
         let mCell = tableView.dequeueReusableCellWithIdentifier("cellBTScaleMain")!
-        let strItem = ditItem["unit"]! + "     " + ditItem["name"]!
+        var strItem = ditItem["name"]!
+        if (ditItem["unit"]?.characters.count > 0)  {
+            strItem += "  ( " + ditItem["unit"]! + " )"
+        }
         
         mCell.textLabel?.text = ditItem["val"]!
         mCell.detailTextLabel?.text = strItem
@@ -103,8 +114,10 @@ class BTScaleMain: UIViewController {
      * UITableView, Header 內容
      */
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        let strTitle = "Member name\n年齡 35歲, 男性, 身高 173cm"
+        var strTitle = dictUserData["membername"]! + ", "
+        strTitle += pubClass.getLang("gender_" + dictUserData["gender"]!) + ", "
+        strTitle += pubClass.getLang("age") + ":" + dictUserData["age"]! + ", "
+        strTitle += pubClass.getLang("healthname_height") + ":" + dictUserData["height"]! +  pubClass.getLang("height_cm")
         
         return strTitle
     }
@@ -113,14 +126,16 @@ class BTScaleMain: UIViewController {
      * View 體重計 HTML 顯示<P>
      * 設定 Chart view, 設定到 'viewChart'
      */
-    private func setViewChartHTML() {
+    private func setViewChartHTML(strWeight: String = "0") {
         // 取得原始 HTML String code
         do {
             let htmlFile = NSBundle.mainBundle().pathForResource(D_HTML_FILENAME, ofType: "html", inDirectory: D_HTML_URL)!
             var strHTML = try NSString(contentsOfFile: htmlFile, encoding: NSUTF8StringEncoding)
             
             // TODO 開始執行字串取代
- 
+            strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_HEIGHT", withString: "360px");
+            strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_WIDTH", withString: "100%");
+            strHTML = strHTML.stringByReplacingOccurrencesOfString("D_VAL", withString: strWeight);
             
             // 以 HTML code 產生新的 WebView
             let baseFile = NSBundle.mainBundle().pathForResource(D_BASE_FILENAME, ofType: "html", inDirectory: D_BASE_URL)!
@@ -132,6 +147,23 @@ class BTScaleMain: UIViewController {
             //print("err")
             return
         }
+    }
+    
+    /**
+    * 本頁面 體重HTML view, TableView 健康數值 重新整理
+    * 體重計回傳資料後，需重設資料
+    */
+    func reloadPage(dictTestingVal: Dictionary<String, String>!) {
+        self.setViewChartHTML(dictTestingVal["weight"]!)
+        
+        // loop data
+        for strField in aryTestingField {
+            var dictNewData = dictAllData[strField] as! Dictionary<String, String>
+            dictNewData["val"] = dictTestingVal[strField]
+            dictAllData[strField] = dictNewData
+        }
+        
+        tableList.reloadData()
     }
     
     /**
