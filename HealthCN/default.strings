@@ -15,8 +15,8 @@
 "err_data" = "资料错误!";
 "nodata" = "目前没有资料. . .";
 "err_systemmaintain" = "伺服器维护中, 请稍候再重试...";
-"err_trylatermsg" = "資料錯誤, 请稍候再重试...";
-"datasavecompleted" = "資料儲存完成!";
+"err_trylatermsg" = "资料错误, 请稍候再重试...";
+"datasavecompleted" = "资料储存完成!";
 "confirm_yes" = "是";
 "confirm_no" = "否";
 
@@ -54,9 +54,9 @@
 "gender_M" = "男性";
 "gender_F" = "女性";
 "agename" = "岁";
-"height_cm" = "厘米(CM)";
-"name_height" = "厘米(CM)";
-"name_weight" = "千克(KG)";
+"height_cm" = "厘米CM";
+"name_height" = "厘米CM";
+"name_weight" = "千克KG";
 "genderandage" = "性别年龄";
 "heightandweight" = "身高体重";
 "age" = "年龄";
@@ -239,12 +239,12 @@
 "course_odrstype_T" = "包次";
 "course_odrstype_M_unit" = "个月";
 "course_odrstype_T_unit" = "次";
-"reservationadd_err_date" = "請選擇預約日期!";
-"reservationadd_err_time" = "請選擇預約時間!";
-"reservationadd_err_course" = "請選療程!";
+"reservationadd_err_date" = "请选择预约日期!";
+"reservationadd_err_time" = "请选择预约时间!";
+"reservationadd_err_course" = "请选疗程!";
 "reservation_addsavecomplete" = "疗程预约新增完成!";
-"reservation_confirmdel" = "確定取消選擇的預約嗎?";
-"reservation_delcompleted" = "選取的預約已經取消完成!";
+"reservation_confirmdel" = "确定取消选择的预约吗?";
+"reservation_delcompleted" = "选取的预约已经取消完成!";
 
 "news_store" = "店家新讯";
 "news_office" = "美利官网新讯";
@@ -263,13 +263,13 @@
 "mead_theory_E" = "东方学理";
 "mead_theory_W" = "西方学理";
 
-"odrs_orderpdlist" = "訂購商品列表";
-"odrs_returnqty" = "退貨數量";
-"odrs_returndetail" = "退貨明細";
-"odrs_listname_returndate" = "退貨日期:";
-"odrs_listname_unitprice" = "單價:";
-"odrs_listname_rqty" = "退貨數量:";
-"odrs_listname_amount" = "合計:";
+"odrs_orderpdlist" = "订购商品列表";
+"odrs_returnqty" = "退货数量";
+"odrs_returndetail" = "退货明细";
+"odrs_listname_returndate" = "退货日期:";
+"odrs_listname_unitprice" = "单价:";
+"odrs_listname_rqty" = "退货数量:";
+"odrs_listname_amount" = "合计:";
 
 "healthgroup_bmi" = "BMI / 身高体重";
 "healthgroup_whr" = "腰臀比";
@@ -283,15 +283,22 @@
 "healthgroup_vfat" = "内脏脂肪";
 "healthgroup_heartbeat" = "心跳";
 "healthgroup_temperature" = "体温";
-"healthvalinputerr" = "量測數值資料錯誤!";
-"healthvalsavecompleted" = "量測數值儲存完成!";
+"healthvalinputerr" = "量测数值资料错误!";
+"healthvalsavecompleted" = "量测数值储存完成!";
 
-"memberedit_err_psd" = "密碼錯誤!";
-"memberedit_err_rpsd" = "密碼前後輸入不一樣!";
-"memberedit_err_height" = "身高錯誤!";
-"memberedit_err_weight" = "體重錯誤!";
-"memberedit_err_birth" = "生日錯誤!";
-"memberedit_err_tel" = "聯絡電話錯誤!";
+"memberedit_err_psd" = "密码错误!";
+"memberedit_err_rpsd" = "密码前后输入不一样!";
+"memberedit_err_height" = "身高错误!";
+"memberedit_err_weight" = "体重错误!";
+"memberedit_err_birth" = "生日错误!";
+"memberedit_err_tel" = "联络电话错误!";
+"todayinfo_course" = "疗程通知";
+"todayinfo_news" = "今日新讯";
 
-"todayinfo_course" = "療程通知";
-"todayinfo_news" = "今日新訊";
+
+"BT_MSG_foundandtestconn" = "找到蓝牙设备, 连线中...";
+"BT_MSG_readyfortesting" = "可以开始量测了!";
+"BT_MSG_noconn" = "蓝牙设备未连线!";
+"BT_MSG_testingcomplete" = "量测完成!";
+"BT_MSG_testingerr" = "量测结果错误!";
+"BT_MSG_testingnoval" = "没有量测资料...";

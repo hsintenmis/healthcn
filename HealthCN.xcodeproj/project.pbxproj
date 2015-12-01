@@ -664,6 +664,7 @@
 				TargetAttributes = {
 					42D1A7361BC587DD008ECEFB = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = BCAW9WJ9JR;
 					};
 				};
 			};
@@ -985,6 +986,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HealthCN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mysoqi.com.HealthCN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1000,6 +1002,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HealthCN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mysoqi.com.HealthCN;
 				PRODUCT_NAME = "$(TARGET_NAME)";

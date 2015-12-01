@@ -36,13 +36,15 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
         dictPref = pubClass.getPrefData()
-        
-        dispatch_async(dispatch_get_main_queue(), {
-           self.initViewField()
-        })
 
         // Keyboard show/hide, 宣告此頁面的 VC NSNotificationCenter
         pubClass.setKeyboardNotify()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.initViewField()
+        })
     }
     
     /**

@@ -348,7 +348,11 @@ class HealthCalendar: UIViewController {
      * btn '返回' 點取
      */
     @IBAction func actBack(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        // 上層 'mainScrollData' reload page
+        self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadMainScrollData", object: nil)
+        })
+        
+        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /**

@@ -44,8 +44,9 @@ import Foundation
  * 本 class 回傳數值為 'Strings'
  */
 class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    // UID, 固定參數設定
     private let IS_DEBUG = false
+    
+    // UID, 固定參數設定
     private let D_BTDEVNAME0 = "VScale"
     let aryTestingField: Array<String> = ["weight", "bmi", "fat", "water", "calory", "bone", "muscle", "vfat"]
     
@@ -56,8 +57,11 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     private var activeTimer:NSTimer!
     private var centralManager:CBCentralManager!
-    private var blueToothReady = false
     private var connectingPeripheral: CBPeripheral!
+    
+    // 藍芽設備狀態
+    private var BT_POWERON = false
+    private var BT_ISREADYFOTESTING = false
     
     private var mBTService: CBService!
     private var mBTCharact_T: CBCharacteristic!
@@ -86,14 +90,15 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     /**
-     * BT CentralManager, discover
+     * BT CentralManager, discover BLE Service channel
      */
     func discoverDevices() {
         centralManager.scanForPeripheralsWithServices(nil, options: nil)
     }
     
     /**
-     * start Discover BT peripheral(周邊裝置)
+     * Delegate, CBCentralManagerDelegate
+     * 開始探索 BLE 周邊裝置
      * On detecting a device, will get a call back to "didDiscoverPeripheral"
      */
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
@@ -115,42 +120,63 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     /**
+     * Delegate, CBCentralManagerDelegate
      * 找到指定的BT, 開始查詢與連接 BT Service channel
      */
-    func centralManager(central: CBCentralManager,didConnectPeripheral peripheral: CBPeripheral) {
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         
-        peripheral.delegate = self
-        peripheral.discoverServices([UID_SERV])
+        //peripheral.delegate = self
+        //peripheral.discoverServices([UID_SERV])
+        
+        self.connectingPeripheral.delegate = self
+        self.connectingPeripheral.discoverServices([UID_SERV])
+        
+        mBTScaleMain.notifyBTStat("BT_MSG_foundandtestconn")
         
         if (IS_DEBUG) {
-            print("Connected BT device")
+            print("BT: Device found!")
         }
     }
     
     /**
+    * Delegate, CBCentralManagerDelegate
+    * BLE 斷線
+    */
+    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        BT_ISREADYFOTESTING = false
+        mBTScaleMain.notifyBTStat("BT_MSG_noconn")
+        pubClass.popIsee(Msg: pubClass.getLang("BT_MSG_noconn"))
+    }
+    
+    /**
+     * Delegate, CBCentralManagerDelegate
      * 目前 BLE center manage statu
      */
     func centralManagerDidUpdateState(central: CBCentralManager) {
         var msg = ""
         switch (central.state) {
         case .PoweredOff:
-            msg = "CoreBluetooth BLE hardware is powered off"
+            msg = "BT: powered Off"
+            print(msg)
+            BT_POWERON = false
+            BT_ISREADYFOTESTING = false
+            mBTScaleMain.notifyBTStat("BT_MSG_noconn")
             
         case .PoweredOn:
-            msg = "CoreBluetooth BLE hardware is powered on and ready"
-            blueToothReady = true;
+            msg = "BT: powered On"
+            BT_POWERON = true;
             
         case .Resetting:
-            msg = "CoreBluetooth BLE hardware is resetting"
+            msg = "BT: Resetting"
             
         case .Unauthorized:
-            msg = "CoreBluetooth BLE state is unauthorized"
+            msg = "BT: Unauthorized"
             
         case .Unknown:
-            msg = "CoreBluetooth BLE state is unknown"
+            msg = "BT: Unknown stat"
             
         case .Unsupported:
-            msg = "CoreBluetooth BLE hardware is unsupported on this platform"
+            msg = "BT: BLE Unsupported"
             
         }
         
@@ -158,7 +184,7 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             print(msg)
         }
         
-        if blueToothReady {
+        if BT_POWERON {
             discoverDevices()
         }
     }
@@ -169,14 +195,22 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?)
     {
         // 指定的 Service channel 查詢 character code
-        self.mBTService = peripheral.services![0]    
         
-        // Discover 指定的 charact 執行測試連接
-        if (IS_DEBUG) {
-            print("Service: \(self.mBTService.UUID)")
+        // loop Service UUID, 設定指定 UUID 的 channel
+        for tmpCBService in peripheral.services! {
+            if (tmpCBService.UUID == UID_SERV) {
+                self.mBTService = tmpCBService
+                break
+            }
         }
         
+        // Discover 指定的 charact 執行測試連接
         peripheral.discoverCharacteristics([UID_CHAR_T], forService: self.mBTService)
+        peripheral.discoverCharacteristics([UID_CHAR_W], forService: self.mBTService)
+        
+        if (IS_DEBUG) {
+            print("Serv UID: \(self.mBTService.UUID)")
+        }
     }
     
     /**
@@ -184,28 +218,31 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
      */
     func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
         
-        if (IS_DEBUG) {
-            for mChart in service.characteristics! {
-                print(mChart.UUID)
+        // 指定的 service channel,loop charact UUID 設定 Test/Write charact
+        for mChart in service.characteristics! {
+            if (IS_DEBUG) {
+                print("Char UID: \(mChart.UUID)")
+            }
+            
+            // 設定 '讀取' Chart
+            if (mChart.UUID == UID_CHAR_T) {
+                self.mBTCharact_T = mChart
+                
+                // 直接執行關閉或打開通知(Notify)的UUID, 藍牙規格固定值
+                peripheral.setNotifyValue(true, forCharacteristic: self.mBTCharact_T)
+                if (IS_DEBUG) {
+                    print("SetNotify_Chart_UID:\n\(self.mBTCharact_T.UUID)")
+                    print("Chart_IsNotify: \(self.mBTCharact_T.isNotifying)")
+                }
+            }
+            // 設定 '寫入' Chart
+            else if (mChart.UUID == UID_CHAR_W) {
+                self.mBTCharact_W = mChart
             }
         }
         
-        // 指定的 service channel,loop charact UUID 設定 Test/Write charact
-        self.mBTCharact_T = service.characteristics![0]
-        
-        if (IS_DEBUG) {
-            print("Characteristic: \(self.mBTCharact_T)")
-        }
-        
-        // 直接執行關閉或打開通知(Notify)的UUID, 藍牙規格固定值
-        peripheral.setNotifyValue(true, forCharacteristic: self.mBTCharact_T)
-        
         //peripheral.readValueForCharacteristic(self.actBTCharact)
         //peripheral.discoverDescriptorsForCharacteristic(self.actBTCharact)
-        
-        if (IS_DEBUG) {
-            print("SetNotify: \(self.mBTCharact_T)")
-        }
     }
     
     /**
@@ -214,10 +251,17 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         
         if (IS_DEBUG) {
-            print("didUpdata Notify: \(characteristic)")
+            print("Notfy UID: \(characteristic.UUID)")
+            print("Val: \(characteristic.value)")
+            print("Notify: \(characteristic.isNotifying)\n")
         }
         
         connectingPeripheral.writeValue( NSData(bytes: [0x01] as [UInt8], length: 1), forCharacteristic: self.mBTCharact_T, type: CBCharacteristicWriteType.WithResponse)
+        
+        if (characteristic.isNotifying == true) {
+            mBTScaleMain.notifyBTStat("BT_MSG_readyfortesting")
+            BT_ISREADYFOTESTING = true
+        }
     }
     
     /**
@@ -227,7 +271,14 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(peripheral: CBPeripheral, didDiscoverDescriptorsForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         
         if (IS_DEBUG) {
-            print("Descriptor: \(characteristic.descriptors)")
+            print("Chart of Despt: \(characteristic.UUID)")
+            
+            if (characteristic.descriptors?.count > 0) {
+                for tmpDispt in characteristic.descriptors! {
+                    print("Despt: \(tmpDispt.UUID)")
+                    print("Despt: \(tmpDispt.value)\n")
+                }
+            }
         }
         
         let mDisp: CBDescriptor = characteristic.descriptors![0]
@@ -235,13 +286,12 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         mDisp.setValue(UID_NOTIFY, forKey: "UUID")
         
         if (IS_DEBUG) {
-            print("disp0: \(mDisp)")
+            print("WRITE BTDEF_NOTIFY: \(mDisp)")
         }
         
-        //let mNSData = NSData()
+        // let mNSData = NSData()
         let mNSData = NSData(bytes: [0x01] as [UInt8], length: 1)
         peripheral.writeValue(mNSData, forDescriptor: mDisp)
-        
         peripheral.readValueForCharacteristic(self.mBTCharact_T)
         
         /*
@@ -280,21 +330,26 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 //let mNSData = NSData(bytes: [UInt8]("A".utf8), length: 1)
                 //let aryData: Array<UInt8> = [10, 1, 0, 45, 173]
                 
-                var aryData: Array<UInt8> = [10];
-                let intGender = (dictUserData["gender"] == "M") ? 1 : 0
+                //let aryData: Array<UInt8> = [0x10, 0x01, 0x00, 0x2D, 0xAD];
+                var aryData: Array<UInt8> = [0x10, 0x01];
+                let intGender = (dictUserData["gender"] == "M") ? 0 : 1
                 aryData.append(UInt8(intGender))
                 aryData.append(UInt8(dictUserData["age"]!)!)
                 aryData.append(UInt8(dictUserData["height"]!)!)
                 
-                let mNSData = NSData(bytes: aryData, length: aryData.count * sizeof(UInt8))
+                //let mNSData = NSData(bytes: aryData, length: aryData.count * sizeof(UInt8))
+                let mNSData = NSData(bytes: &aryData, length: (aryData.count))
+                
+                print(mNSData)
                 
                 // 寫入資料傳送至 remote BT
-                connectingPeripheral.writeValue(mNSData, forCharacteristic: self.mBTCharact_W, type: CBCharacteristicWriteType.WithoutResponse)
+                peripheral.writeValue(mNSData, forCharacteristic: self.mBTCharact_W, type: CBCharacteristicWriteType.WithResponse)
                 
                 return
             }
             
-            // 傳送 user 資料給 體重計計算後，體重計回傳結果, 通知上層 class 'BTScaleMain' 執行頁面更新
+            // 傳送 user 資料給 體重計計算後，體重計回傳結果
+            // 通知上層 class 'BTScaleMain' 執行頁面更新
             if (mIntVal[0] == 1) {
                 mBTScaleMain.reloadPage(self.getScaleResult(mIntVal))
                 
@@ -310,7 +365,7 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     * HEX: 01 00 23 A0 02 AE 00 E5 02 14 00 1F 01 29 0A 06 27 01 0B 00<BR>
     * -----00-01-02-03-04-05-06-07-08-09-10-11-12-13-14-15-16-17-18-19<BR>
     * --------ge-ag-hi-weigh--fat--water--bone-muscl-vf-calor--bmi--XX
-    *
+    * [1, 1, 45, 173, 2, 177, 1, 23, 2, 1, 0, 28, 0, 221, 10, 6, 85, 0, 230, 0]
     * @return Dict data, ex. 'weight'='69.1', 'bmi'='23.0', ...
     */
     private func getScaleResult(aryRS: Array<UInt8>)-> Dictionary<String, String> {
@@ -327,6 +382,7 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         // 檢查回傳的資料是否太離譜, 以 'vfat'內臟脂肪判別 >= 100, <=1
         if aryRS[14] >= 255 {
+            mBTScaleMain.notifyBTStat("BT_MSG_testingerr")
             return dictRS
         }
         
@@ -336,10 +392,11 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         dictRS["water"] = tranHEX10(valHigh: aryRS[8], valLow: aryRS[9])
         dictRS["bone"] = tranHEX10(valHigh: aryRS[10], valLow: aryRS[11])
         dictRS["muscle"] = tranHEX10(valHigh: aryRS[12], valLow: aryRS[13])
-        dictRS["vfat"] = String(aryRS[14])
-        dictRS["calory"] = String(aryRS[15] * 255) + String(aryRS[16])
+        dictRS["vfat"] = String(Int(aryRS[14]))
+        dictRS["calory"] = String( Int(aryRS[15]) * 256 + Int(aryRS[16]) )
         dictRS["bmi"] = tranHEX10(valHigh: aryRS[17], valLow: aryRS[18])
         
+        mBTScaleMain.notifyBTStat("BT_MSG_testingcomplete")
         return dictRS
     }
     
@@ -354,7 +411,7 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
      * @return string
      */
     private func tranHEX10(valHigh data0: UInt8, valLow data1: UInt8)-> String {
-        let strVal = String(data0 * 255 + data1)
+        let strVal = String((Int(data0) * 256) + Int(data1))
         let numChar = strVal.characters.count
         let strFloatVal = pubClass.subStr(strVal, strFrom: (numChar - 1), strEnd: numChar)
         
@@ -372,13 +429,24 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     * BT 執行連接程序
     */
     func BTConnStart() {
-        startUpCentralManager()
+        if (BT_ISREADYFOTESTING != true) {
+            startUpCentralManager()
+        }
     }
     
     /**
      * BT 斷開連接
      */
     func BTDisconn() {
+        if (BT_ISREADYFOTESTING != true) {
+            activeTimer = nil
+            connectingPeripheral = nil
+            mBTCharact_T = nil
+            mBTService = nil
+            
+            return
+        }
+        
         if activeTimer != nil {
             activeTimer.invalidate()
             activeTimer = nil
@@ -395,6 +463,7 @@ class BTScaleService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     /**
+    * NO user, for test
     * 寫入(傳送)資料至 remote BT
     */
     func BTWriteData() {

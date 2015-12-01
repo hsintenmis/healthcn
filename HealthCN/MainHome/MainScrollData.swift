@@ -58,12 +58,16 @@ class MainScrollData: UIViewController {
         }
         
         // 設定相關 UI text 欄位
-        self.self.initViewField()
+        //self.self.initViewField()
     }
     
     override func viewDidAppear(animated: Bool) {
         if (isFirstEnter) {
             isFirstEnter = false
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.initViewField()
+            })
             
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
@@ -119,7 +123,7 @@ class MainScrollData: UIViewController {
         // 解析正確的 http 回傳結果，傳遞 JSONdata, 設定 'MainScrollData' view 資料
         dictAllData = dictRS["data"] as! Dictionary<String, AnyObject>
         
-        //self.mMainScrollData.initViewField()
+        // 設定相關 UI text 欄位
         self.resetViewField()
     }
     

@@ -1,3 +1,303 @@
-"CFBundleDisplayName" = "iSOQI健康精灵";
-"app_name" = "iSOQI健康精灵";
-"app_name_full" = "iSOQI健康精灵  美利版";
+"CFBundleDisplayName" = "iSOQI健康精靈";
+"app_name" = "iSOQI健康精靈";
+"app_name_full" = "iSOQI健康精靈  美利版";
+"version" = "版本";
+
+"login" = "登入";
+"logout" = "登出";
+"login_acc" = "登入ID";
+"login_psd" = "登入密碼";
+"datatranplzwait" = "資料傳送中，請稍後...";
+"sysprompt" = "系統提示";
+"saveaccpsd" = "記住帳號密碼";
+"i_see" = "我知道了";
+"err_accpsd" = "帳號或是密碼錯誤!";
+"err_data" = "資料錯誤!";
+"nodata" = "目前沒有資料. . .";
+"err_systemmaintain" = "伺服器維護中, 請稍候再重試...";
+"err_trylatermsg" = "資料錯誤, 請稍候再重試...";
+"datasavecompleted" = "資料儲存完成!";
+"confirm_yes" = "是";
+"confirm_no" = "否";
+
+"week_0" = "日";
+"week_1" = "一";
+"week_2" = "二";
+"week_3" = "三";
+"week_4" = "四";
+"week_5" = "五";
+"week_6" = "六";
+"week_7" = "日";
+
+"weeklong_0" = "星期日";
+"weeklong_1" = "星期一";
+"weeklong_2" = "星期二";
+"weeklong_3" = "星期三";
+"weeklong_4" = "星期四";
+"weeklong_5" = "星期五";
+"weeklong_6" = "星期六";
+"weeklong_7" = "星期日";
+
+"mm_01" = "一月";
+"mm_02" = "二月";
+"mm_03" = "三月";
+"mm_04" = "四月";
+"mm_05" = "五月";
+"mm_06" = "六月";
+"mm_07" = "七月";
+"mm_08" = "八月";
+"mm_09" = "九月";
+"mm_10" = "十月";
+"mm_11" = "十一月";
+"mm_12" = "十二月";
+
+"gender_M" = "男性";
+"gender_F" = "女性";
+"agename" = "歲";
+"height_cm" = "厘米CM";
+"name_height" = "厘米CM";
+"name_weight" = "千克KG";
+"genderandage" = "性別年齡";
+"heightandweight" = "身高體重";
+"age" = "年齡";
+"healthname_height" = "身高";
+"healthname_weight" = "體重";
+"healthname_whr" = "腰臀比";
+"healthname_fat" = "體脂率";
+"healthname_water" = "含水量";
+"healthname_bone" = "骨骼";
+"healthname_muscle" = "肌肉";
+"healthname_vfat" = "內臟脂肪";
+"healthname_calory" = "基礎代謝";
+"healthname_bmi" = "BMI";
+"healthname_waistline" = "腰圍";
+"healthname_hipline" = "臀圍";
+"healthname_sbp" = "收縮壓";
+"healthname_dbp" = "舒張壓";
+"healthname_sugar" = "血糖";
+"healthname_heartbeat" = "心跳";
+"healthname_temperature" = "體溫";
+"healthname_sugar_before" = "血糖(空腹)";
+"healthname_sugar_after" = "血糖(飯後)";
+"healthname_group_bmi" = "BMI / 身高體重";
+"healthname_group_whr" = "腰臀比";
+"healthname_group_bp" = "血壓";
+"healthname_group_sugar" = "血糖";
+"heartbeatsunitname" = "次";
+
+"healthstandvalexplain" = "標準數值應如下所示:";
+"health_nodata" = "無數值";
+"health_noexplain" = "目前沒有說明 . . .";
+"health_inputdataerr" = "輸入資料錯誤!";
+"health_inputdataerr_weight" = "輸入資料錯誤! 體重數值錯誤!";
+
+"bmirs_001" = "過輕";
+"bmirs_002" = "正常";
+"bmirs_003" = "過重";
+"bmirs_004" = "輕度肥胖";
+"bmirs_005" = "中度肥胖";
+"bmirs_006" = "重度肥胖";
+"bmival_001" = "BMI < 18.5";
+"bmival_002" = "BMI 介於 18.5 ~ 24";
+"bmival_003" = "BMI 介於 24 ~ 27";
+"bmival_004" = "BMI 介於 27 ~ 30";
+"bmival_005" = "BMI 介於 30 ~ 35";
+"bmival_006" = "BMI > 35";
+
+"fatrs_M_001" = "(男)偏瘦";
+"fatrs_M_002" = "(男)正常";
+"fatrs_M_003" = "(男)偏胖";
+"fatrs_M_004" = "(男)肥胖";
+
+"fatrs_F_001" = "(女)偏瘦";
+"fatrs_F_002" = "(女)正常";
+"fatrs_F_003" = "(女)偏胖";
+"fatrs_F_004" = "(女)肥胖";
+
+"fatval_M_001" = "體脂率介於 12.1 ~ 17.0";
+"fatval_M_002" = "體脂率介於 12.5 ~ 18.0";
+"fatval_M_003" = "體脂率介於 13.1 ~ 18.4";
+"fatval_M_004" = "體脂率介於 13.5 ~ 19.0";
+"fatval_M_005" = "體脂率介於 14.1 ~ 19.4";
+
+"fatval_F_001" = "體脂率介於 15.1 ~ 22.0";
+"fatval_F_002" = "體脂率介於 15.5 ~ 23.0";
+"fatval_F_003" = "體脂率介於 16.1 ~ 23.4";
+"fatval_F_004" = "體脂率介於 16.5 ~ 24.0";
+"fatval_F_005" = "體脂率介於 17.1 ~ 24.4";
+
+"waistrs_001" = "腰圍超標";
+"waistrs_002" = "腰圍與腰臀比都超標";
+"waistrs_003" = "正常";
+"waistrs_004" = "腰臀比超標";
+"waistval_001" = "男:腰圍>90公分(35.4吋)\n女:腰圍>80公分(31.5吋)";
+"waistval_002" = "男:腰圍>90公分(35.4吋),腰臀比>0.9\n女:腰圍>80公分(31.5吋),腰臀比>0.85";
+"waistval_003" = "男:腰圍<=90公分(35.4吋),腰臀比<=0.9\n女:腰圍<=80公分(31.5吋),腰臀比<=0.85";
+"waistval_004" = "男:腰臀比>0.9\n女:腰臀比>0.85";
+
+"temperature_unitname_P" = "C°";
+"temperature_unitname_E" = "F°";
+
+"bodytemperature" = "體溫";
+"plzseltesttemptype" = "請選擇體溫測量方式";
+"bodytemperatureerr" = "體溫輸入資料錯誤!!";
+"testtemptype" = "測量方式";
+"testtemptype_0" = "耳溫";
+"testtemptype_1" = "腋下";
+"testtemptype_2" = "舌下";
+"testtemptype_3" = "肛溫";
+"bodytemp_normal" = "正常";
+"bodytemp_hot" = "發燒";
+"bodytemp_low" = "過低";
+"temprs_001" = "正常";
+"temprs_002" = "發燒";
+"temprs_003" = "過低";
+"tempval_001" = "";
+"tempval_002" = "耳溫 > 37.5度(攝氏) 或 > 99.5度(華氏)";
+"tempval_003" = "耳溫 < 36.0度(攝氏) 或 < 96.8度(華氏)";
+
+"waistline" = "腰圍";
+"hips" = "臀圍";
+"waistorhipserr" = "腰圍或是臀圍輸入資料錯誤!";
+"blood_shrink" = "收縮壓";
+"blood_diastole" = "舒張壓";
+"blooddatainputerr" = "輸入的血壓數值資料錯誤!";
+"bloodrs_001" = "血壓理想";
+"bloodrs_002" = "血壓正常";
+"bloodrs_003" = "正常但偏高";
+"bloodrs_004" = "第一期高血壓";
+"bloodrs_005" = "第二期高血壓";
+"bloodrs_006" = "第三期高血壓";
+"bpval_001" = "收縮壓 <120 及 舒張壓 <80";
+"bpval_002" = "收縮壓 <130 及 舒張壓 <85";
+"bpval_003" = "收縮壓 130~139 或 舒張壓 85~89";
+"bpval_004" = "收縮壓 140~159 或 舒張壓 90~99";
+"bpval_005" = "收縮壓 160~179 或 舒張壓 100~109";
+"bpval_006" = "收縮壓 >=180 或 舒張壓 >=110";
+
+"bs_empty" = "空腹";
+"bs_after" = "飯後";
+"bloodsugarrs_001" = "空腹血糖偏低";
+"bloodsugarrs_002" = "空腹血糖正常";
+"bloodsugarrs_003" = "空腹血糖偏高";
+"bloodsugarrs_004" = "空腹血糖過高";
+"bloodsugarrs_005" = "飯後血糖偏低";
+"bloodsugarrs_006" = "飯後血糖正常";
+"bloodsugarrs_007" = "飯後血糖偏高";
+"bloodsugarrs_008" = "飯後血糖偏高";
+"bloodsugardataerr" = "血糖數值輸入資料錯誤!";
+
+"heartbeatsunitname" = "次";
+"heartbeatsnums" = "心跳數";
+"heartbeatsnumserr" = "輸入數值錯誤!";
+"heartbeats_001" = "過低";
+"heartbeats_002" = "正常";
+"heartbeats_003" = "過高";
+"heartbeats_ratemsg" = "適合您的中低強度運動心率: ";
+"heartval_001" = "心跳數 < 50";
+"heartval_002" = "心跳數介於 50 ~ 100";
+"heartval_003" = "心跳數 > 100";
+
+"waterrs_normal" = "正常";
+"waterrs_low" = "偏低";
+"waterrs_high" = "過高";
+"waterval_001" = "含水率介於 54.0 ~ 60.0";
+"waterval_002" = "含水率介於 53.5 ~ 59.5";
+"waterval_003" = "含水率介於 53.0 ~ 59.0";
+"waterval_004" = "含水率介於 52.5 ~ 58.5";
+"waterval_005" = "含水率介於 52.0 ~ 58.0";
+
+"caloryrs_normal" = "正常";
+"caloryrs_low" = "偏低";
+"caloryrs_high" = "過高";
+
+"caloryrs_good" = "正常";
+"caloryrs_bad" = "需註意";
+
+"caloryval_M_001" = "(男)18歲以下 ,標準值 1610Kcal";
+"caloryval_M_002" = "(男)18~29歲, 標準值 1550Kcal";
+"caloryval_M_003" = "(男)30~49歲, 標準值 1500Kcal";
+"caloryval_M_004" = "(男)50~69歲, 標準值 1350Kcal";
+"caloryval_M_005" = "(男)69歲以上, 標準值 1220Kcal";
+
+"caloryval_F_001" = "(女)18歲以下 ,標準值 1300Kcal";
+"caloryval_F_002" = "(女)18~29歲, 標準值 1210Kcal";
+"caloryval_F_003" = "(女)30~49歲, 標準值 1170Kcal";
+"caloryval_F_004" = "(女)50~69歲, 標準值 1100Kcal";
+"caloryval_F_005" = "(女)69歲以上, 標準值 1010Kcal";
+
+"nocameramsg" = "裝置不支援照相功能 ...";
+"plsselpict" = "請先選擇圖片!";
+"pictupdatecomplete" = "圖片更新完成!";
+"course_reservation_add" = "預約新增";
+"course_uselist" = "療程紀錄";
+"course_reservation_list" = "預約記錄";
+"servicezone" = "服務區";
+"srv_notavail" = "滿";
+"course_fee" = "療程費用";
+"course_odrstype_M" = "包月";
+"course_odrstype_T" = "包次";
+"course_odrstype_M_unit" = "個月";
+"course_odrstype_T_unit" = "次";
+"reservationadd_err_date" = "請選擇預約日期!";
+"reservationadd_err_time" = "請選擇預約時間!";
+"reservationadd_err_course" = "請選療程!";
+"reservation_addsavecomplete" = "療程預約新增完成!";
+"reservation_confirmdel" = "確定取消選擇的預約嗎?";
+"reservation_delcompleted" = "選取的預約已經取消完成!";
+
+"news_store" = "店家新訊";
+"news_office" = "美利官網新訊";
+
+"soqibed_mod_priv" = "私人模式記錄";
+"soqibed_mod_stand" = "標準模式紀錄";
+"soqibed_mod_all" = "全部使用記錄";
+"soqibed_actdate" = "建立日期";
+"soqibed_usecount" = "使用次數";
+"soqibed_builddate" = "建立時間";
+"testingdate" = "檢測日期";
+"testingvalokmsg" = "檢測結果正常，無相關報告資料！";
+"testingdate" = "檢測日期";
+"mead_analy" = "檢測分析";
+"mead_pdsuggest" = "調理建議";
+"mead_theory_E" = "東方學理";
+"mead_theory_W" = "西方學理";
+
+"odrs_orderpdlist" = "訂購商品列表";
+"odrs_returnqty" = "退貨數量";
+"odrs_returndetail" = "退貨明細";
+"odrs_listname_returndate" = "退貨日期:";
+"odrs_listname_unitprice" = "單價:";
+"odrs_listname_rqty" = "退貨數量:";
+"odrs_listname_amount" = "合計:";
+
+"healthgroup_bmi" = "BMI / 身高體重";
+"healthgroup_whr" = "腰臀比";
+"healthgroup_bp" = "血壓";
+"healthgroup_sugar" = "血糖";
+"healthgroup_fat" = "體脂率";
+"healthgroup_water" = "含水量";
+"healthgroup_calory" = "基礎代謝";
+"healthgroup_bone" = "骨骼";
+"healthgroup_muscle" = "肌肉";
+"healthgroup_vfat" = "內臟脂肪";
+"healthgroup_heartbeat" = "心跳";
+"healthgroup_temperature" = "體溫";
+"healthvalinputerr" = "量測數值資料錯誤!";
+"healthvalsavecompleted" = "量測數值儲存完成!";
+
+"memberedit_err_psd" = "密碼錯誤!";
+"memberedit_err_rpsd" = "密碼前後輸入不一樣!";
+"memberedit_err_height" = "身高錯誤!";
+"memberedit_err_weight" = "體重錯誤!";
+"memberedit_err_birth" = "生日錯誤!";
+"memberedit_err_tel" = "聯絡電話錯誤!";
+"todayinfo_course" = "療程通知";
+"todayinfo_news" = "今日新訊";
+
+"BT_MSG_foundandtestconn" = "找到藍牙設備, 連線中...";
+"BT_MSG_readyfortesting" = "可以開始量測了!";
+"BT_MSG_noconn" = "藍牙設備未連線!";
+"BT_MSG_testingcomplete" = "量測完成!";
+"BT_MSG_testingerr" = "量測結果錯誤!";
+"BT_MSG_testingnoval" = "沒有量測資料...";

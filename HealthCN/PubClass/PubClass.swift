@@ -360,7 +360,24 @@ class PubClass {
     }
     
     /**
-     * Keyboard 相關<BR>
+    * 回傳裝置的 '今天' 日期 14 碼
+    */
+    func getDevToday()-> String {
+        let calendar = NSCalendar.currentCalendar()
+        let date = NSDate()
+        let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: date)
+        
+        var strRS = String(components.year)
+        strRS += String(format: "%02d", components.month)
+        strRS += String(format: "%02d", components.day)
+        strRS += String(format: "%02d", components.hour)
+        strRS += String(format: "%02d", components.minute)
+        
+        return strRS
+    }
+
+    /**
+     * Keyboard 相關, 使用全域 NSNotificationCenter
      * 宣告 NSNotificationCenter, Keyboard show/hide 使用
      * <BR>
      * 需要實作: <BR>
