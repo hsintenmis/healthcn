@@ -73,8 +73,6 @@ class MainScrollData: UIViewController {
             self.StartHTTPConn()
             return
         }
-        
-        btnPict.reloadInputViews()
     }
 
     /**
@@ -86,7 +84,6 @@ class MainScrollData: UIViewController {
         self.textTodayInfo.layer.borderColor = pubClass.ColorHEX("#E0E0E0").CGColor
         
         // 圖片, View, btn ... 圓角，外框設定
-        self.imgUser.layer.cornerRadius = 20
         self.viewPictBG.layer.cornerRadius = 20
         self.viewPictBG.layer.borderWidth = 0
     }
@@ -144,7 +141,6 @@ class MainScrollData: UIViewController {
             // CollectionView, 健康資料重新 reload
             self.aryHealth = dictContent["health"] as! [[String:String]]
             self.colviewHealth.reloadData()
-            self.btnPict.reloadInputViews()
         })
         
         // 設定會員圖片, base64String to Image
@@ -152,6 +148,7 @@ class MainScrollData: UIViewController {
             if (strEncode.characters.count > 0) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.imgUser.image = self.mImageClass.Base64ToImg(strEncode)
+                    self.imgUser.layer.cornerRadius = 20
                 })
             }
         }
