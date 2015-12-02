@@ -2117,7 +2117,7 @@
                         <viewControllerLayoutGuide type="top" id="LAb-kM-ZyO"/>
                         <viewControllerLayoutGuide type="bottom" id="8OM-nd-zHX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ea2-I1-Zel">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Ea2-I1-Zel">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
