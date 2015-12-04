@@ -19,6 +19,7 @@
 "datasavecompleted" = "资料储存完成!";
 "confirm_yes" = "是";
 "confirm_no" = "否";
+"cancel" = "取消";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -90,6 +91,7 @@
 "health_noexplain" = "目前没有说明 . . .";
 "health_inputdataerr" = "输入资料错误!";
 "health_inputdataerr_weight" = "输入资料错误! 体重数值错误!";
+"health_chartview_returnmsg" = "將會返回健康管理的月曆頁面，請再確認!";
 
 "bmirs_001" = "过轻";
 "bmirs_002" = "正常";
@@ -294,7 +296,6 @@
 "memberedit_err_tel" = "联络电话错误!";
 "todayinfo_course" = "疗程通知";
 "todayinfo_news" = "今日新讯";
-
 
 "BT_MSG_foundandtestconn" = "找到蓝牙设备, 连线中...";
 "BT_MSG_readyfortesting" = "可以开始量测了!";

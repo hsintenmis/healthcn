@@ -321,6 +321,10 @@ class HealthCalendar: UIViewController {
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "HealthWebChart") {
+            return
+        }
+        
         // 取得點取 cell 的 index, 產生 JSON data
         let indexPath = self.viewHealthList.indexPathForSelectedRow!
         let cvChild = segue.destinationViewController as! HealthItemEdit
@@ -348,6 +352,13 @@ class HealthCalendar: UIViewController {
      * btn '返回' 點取
      */
     @IBAction func actBack(sender: UIBarButtonItem) {
+        // 判別 source VC, 來源 VC 為 'BTScaleMain'
+        if(self.presentingViewController!.isKindOfClass(BTScaleMain)){
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            return
+        }
+        
         // 上層 'mainScrollData' reload page
         self.dismissViewControllerAnimated(true, completion: {NSNotificationCenter.defaultCenter().postNotificationName("ReloadMainScrollData", object: nil)
         })

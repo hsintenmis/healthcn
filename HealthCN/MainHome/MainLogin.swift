@@ -84,7 +84,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         
         // 連線 HTTP post/get 參數
         var dictParm = Dictionary<String, String>()
-        dictParm["acc"] = txtAcc.text;
+        dictParm["acc"] = txtAcc.text?.uppercaseString;
         dictParm["psd"] = txtPsd.text;
         dictParm["page"] = "memberdata";
         dictParm["act"] = "memberdata_login";

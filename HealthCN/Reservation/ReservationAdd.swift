@@ -268,7 +268,7 @@ class ReservationAdd: UIViewController {
     func getCellServ(collectionView: UICollectionView, indexPath: NSIndexPath)->UICollectionViewCell {
         let mCell: SelServCell = collectionView.dequeueReusableCellWithReuseIdentifier("cellSelServ", forIndexPath: indexPath) as! SelServCell
         
-        mCell.labName.text = pubClass.getLang("servicezone") + String(indexPath.row)
+        mCell.labName.text = pubClass.getLang("servicezone") + String(indexPath.row + 1)
         
         // 樣式/外觀/顏色
         mCell.layer.borderWidth = 1
