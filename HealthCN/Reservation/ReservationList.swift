@@ -160,7 +160,8 @@ class ReservationList: UIViewController {
         mCell.labDD.text = dictItem["dd"] as? String
         mCell.labCourse.text = dictItem["pdname"] as? String
         mCell.labTime.text = (dictItem["hh"] as? String)! + ":" + (dictItem["min"] as? String)!
-        
+        mCell.labWeek.text = pubClass.getLang("weeklong_" + (dictItem["week"] as? String)!)
+
         // 是否完成/過期
         mCell.labExpire.alpha = 0.0
         

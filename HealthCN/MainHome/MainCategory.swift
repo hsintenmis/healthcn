@@ -40,15 +40,17 @@ class MainCategory: UIViewController {
         )
         */
         
-        self.startSaveData(mAppDelegate.V_SPANTOKENID)
+        if (mAppDelegate.V_APNSTOKENID.characters.count > 0) {
+            self.startSaveData(mAppDelegate.V_APNSTOKENID)
+        }
         //print(mAppDelegate.V_SPANTOKENID)
     }
     
     override func viewDidAppear(animated: Bool) {
         // 檢查裝置推播用, 接收到 APNS 訊息
-        if (mAppDelegate.V_SPANALERTMSG.characters.count > 0) {
-            self.pubClass.popIsee(Msg: mAppDelegate.V_SPANALERTMSG)
-            mAppDelegate.V_SPANALERTMSG = ""
+        if (mAppDelegate.V_APNSALERTMSG.characters.count > 0) {
+            self.pubClass.popIsee(Msg: mAppDelegate.V_APNSALERTMSG)
+            mAppDelegate.V_APNSALERTMSG = ""
         }
     }
       

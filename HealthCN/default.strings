@@ -92,6 +92,7 @@
 "health_inputdataerr" = "输入资料错误!";
 "health_inputdataerr_weight" = "输入资料错误! 体重数值错误!";
 "health_chartview_returnmsg" = "將會返回健康管理的月曆頁面，請再確認!";
+"health_itemclkseeresult" = "( 点取项目可以查看今日量测结果 )";
 
 "bmirs_001" = "过轻";
 "bmirs_002" = "正常";

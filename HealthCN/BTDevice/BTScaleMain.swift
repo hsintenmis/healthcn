@@ -131,6 +131,13 @@ class BTScaleMain: UIViewController {
         
         return strTitle
     }
+    
+    /**
+     * UITableView, Footer 內容
+     */
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return pubClass.getLang("health_itemclkseeresult")
+    }
 
     /**
      * View 體重計 HTML 顯示<P>
@@ -143,7 +150,7 @@ class BTScaleMain: UIViewController {
             var strHTML = try NSString(contentsOfFile: htmlFile, encoding: NSUTF8StringEncoding)
             
             // TODO 開始執行字串取代
-            strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_HEIGHT", withString: "280px");
+            strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_HEIGHT", withString: "320px");
             strHTML = strHTML.stringByReplacingOccurrencesOfString("D_CHART_WIDTH", withString: "100%");
             strHTML = strHTML.stringByReplacingOccurrencesOfString("D_VAL", withString: strWeight);
             

@@ -71,6 +71,7 @@ class MainScrollData: UIViewController {
             
             // HTTP 連線取得本頁面需要的資料
             self.StartHTTPConn()
+            
             return
         }
     }
@@ -121,7 +122,9 @@ class MainScrollData: UIViewController {
         dictAllData = dictRS["data"] as! Dictionary<String, AnyObject>
         
         // 設定相關 UI text 欄位
-        self.resetViewField()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.resetViewField()
+        })
     }
     
     /**
@@ -133,13 +136,14 @@ class MainScrollData: UIViewController {
         // 會員資料區塊
         dictMember = dictContent["member"] as! Dictionary<String, AnyObject>
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.labMemberName.text = self.dictMember["usrname"] as? String
-            self.labStoreName.text = self.dictMember["store_name"] as? String
-            self.labStoreTel.text = self.dictMember["up_tel"] as? String
+        self.labMemberName.text = self.dictMember["usrname"] as? String
+        self.labStoreName.text = self.dictMember["store_name"] as? String
+        self.labStoreTel.text = self.dictMember["up_tel"] as? String
             
-            // CollectionView, 健康資料重新 reload
-            self.aryHealth = dictContent["health"] as! [[String:String]]
+        // CollectionView, 健康資料重新 reload
+        self.aryHealth = dictContent["health"] as! [[String:String]]
+        
+        dispatch_async(dispatch_get_main_queue(), {
             self.colviewHealth.reloadData()
         })
         
@@ -171,14 +175,18 @@ class MainScrollData: UIViewController {
             }
         }
         
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 10
+        let attributes = [NSParagraphStyleAttributeName : style]
+        self.textTodayInfo.attributedText = NSAttributedString(string: strTodayInfo, attributes:attributes)
+        self.textTodayInfo.textContainerInset = UIEdgeInsetsMake(10,5,5,5);
+        
+        if (strTodayInfo.characters.count < 1) {
+            strTodayInfo = self.pubClass.getLang("nodata")
+        }
+        
         dispatch_async(dispatch_get_main_queue(), {
-            let style = NSMutableParagraphStyle()
-            style.lineSpacing = 10
-            let attributes = [NSParagraphStyleAttributeName : style]
-            self.textTodayInfo.attributedText = NSAttributedString(string: strTodayInfo, attributes:attributes)
-            self.textTodayInfo.textContainerInset = UIEdgeInsetsMake(10,5,5,5);
-            
-            //self.textTodayInfo.text = strTodayInfo
+            self.textTodayInfo.text = strTodayInfo
         })
     }
     

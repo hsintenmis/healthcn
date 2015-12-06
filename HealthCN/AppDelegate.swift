@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var V_LANGCODE: String = "default"
     
     /** 裝置推播用的 dev token ID */
-    var V_SPANTOKENID: String = ""
+    var V_APNSTOKENID: String = ""
     
     /** 裝置推播用, 接收到 APNS 訊息，設定到此變數中 */
-    var V_SPANALERTMSG: String = ""
+    var V_APNSALERTMSG: String = ""
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Print出Device Token
         //print( deviceTokenString )
-        V_SPANTOKENID = deviceTokenString
+        V_APNSTOKENID = deviceTokenString
     }
     
     /**
@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
         
         if let info = userInfo["aps"] as? Dictionary<String, AnyObject> {
-            V_SPANALERTMSG = info["alert"] as! String
+            V_APNSALERTMSG = info["alert"] as! String
         }
     }
     

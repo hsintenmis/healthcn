@@ -129,7 +129,7 @@ class CourseSelCust: UIViewController {
         }
         else {
             // 包次文字, 'cardtype' == "T",  card_times = "10", 包次10次
-            strMsg = "\(pubClass.getLang("course_odrstype_T")): \(strTimes)\(pubClass.getLang("course_odrstype_T"))"
+            strMsg = "\(pubClass.getLang("course_odrstype_T")): \(strTimes)\(pubClass.getLang("course_odrstype_T_unit"))"
         }
         
         return (strMsg + ", " + pubClass.getLang("course_fee") + ": \(ditItem["price"]!)")
