@@ -19,6 +19,7 @@ class MainCategory: UIViewController {
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+    let localNotification = UILocalNotification()
 
     // 前一個頁面傳入的資料
     var parentData: Dictionary<String, AnyObject>!
@@ -43,13 +44,16 @@ class MainCategory: UIViewController {
         if (mAppDelegate.V_APNSTOKENID.characters.count > 0) {
             self.startSaveData(mAppDelegate.V_APNSTOKENID)
         }
+        
         //print(mAppDelegate.V_SPANTOKENID)
     }
     
     override func viewDidAppear(animated: Bool) {
+        //localNotification.applicationIconBadgeNumber = 0;
+        
         // 檢查裝置推播用, 接收到 APNS 訊息
         if (mAppDelegate.V_APNSALERTMSG.characters.count > 0) {
-            self.pubClass.popIsee(Msg: mAppDelegate.V_APNSALERTMSG)
+            self.pubClass.popIsee(Title: pubClass.getLang("APNS_prompt"), Msg: mAppDelegate.V_APNSALERTMSG)
             mAppDelegate.V_APNSALERTMSG = ""
         }
     }

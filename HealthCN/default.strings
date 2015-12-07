@@ -304,3 +304,5 @@
 "BT_MSG_testingcomplete" = "量测完成!";
 "BT_MSG_testingerr" = "量测结果错误!";
 "BT_MSG_testingnoval" = "没有量测资料...";
+
+"APNS_prompt" = "健康精灵讯息通知";
