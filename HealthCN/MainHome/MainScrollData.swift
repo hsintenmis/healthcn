@@ -163,7 +163,7 @@ class MainScrollData: UIViewController {
         if let aryCourse = dictContent["course"] as? Array<Dictionary<String, String>>  {
             for dictCourse in aryCourse {
                 strTodayInfo += "[" + pubClass.getLang("todayinfo_course") + "] "
-                strTodayInfo += dictCourse["mm"]! + ":" + dictCourse["dd"]! + " "
+                strTodayInfo += dictCourse["hh"]! + ":" + dictCourse["min"]! + " "
                 strTodayInfo += dictCourse["pdname"]! + "\n"
             }
         }
