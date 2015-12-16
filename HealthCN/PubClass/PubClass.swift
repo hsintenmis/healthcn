@@ -22,6 +22,9 @@ class PubClass {
     
     // private property
     private let mVCtrl: UIViewController!
+    
+    // pop Window 相關
+    var isPopWindowShow = false; // 頁面是否有 popWindow 顯示中
     var mPopLoading: UIAlertController? // 目前產生 pop Loading 視窗的 'ViewControler'
     
     /**
@@ -115,6 +118,21 @@ class PubClass {
     }
     
     /**
+    * 產生 UIAlertController (popWindow 資料傳送中)
+    */
+    func getPopLoading(msg: String?) -> UIAlertController {
+        var mPopLoading: UIAlertController
+        let strMsg = (msg == nil) ? self.getLang("datatranplzwait") : msg
+        
+        mPopLoading = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        mPopLoading.restorationIdentifier = "popLoading"
+        mPopLoading.message = strMsg
+        
+        return mPopLoading
+    }
+    
+    /*
+    /**
     * 資料傳送中/讀取中, 顯示視窗
     */
     func showPopLoading(msg: String?) {
@@ -129,7 +147,7 @@ class PubClass {
         mPopLoading!.message = strMsg
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.mVCtrl.presentViewController(self.mPopLoading!, animated: false, completion: nil)
+            self.mVCtrl.presentViewController(self.mPopLoading!, animated: false, completion:nil)
         })
     }
     
@@ -137,15 +155,16 @@ class PubClass {
     * 資料傳送中/讀取中, 關閉視窗
     */
     func closePopLoading() {
-        // self.mPopLoading.dismissViewControllerAnimated(true, completion: {})
-        self.mPopLoading!.dismissViewControllerAnimated(true, completion: nil)
+        self.mPopLoading!.dismissViewControllerAnimated(false, completion:nil)
     }
+    */
     
     /**
     * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
     * callBack 參數為 JSON data
     */
     func startHTTPConn(dictParm: Dictionary<String, String>!, callBack: (Dictionary<String, AnyObject>)->Void ) {
+        
         // 將 dict 參數轉為 string
         var strConnParm: String = "";
         var loopi = 0
@@ -159,29 +178,37 @@ class PubClass {
             }
         }
         
-        // 產生 http Request
-        let mRequest = NSMutableURLRequest(URL: NSURL(string: self.D_WEBURL)!)
-        mRequest.HTTPBody = strConnParm.dataUsingEncoding(NSUTF8StringEncoding)
-        mRequest.HTTPMethod = "POST"
-        mRequest.timeoutInterval = 60
-        mRequest.HTTPShouldHandleCookies = false
+        // 產生 popWindow
+        let mPop = self.getPopLoading(nil)
         
-        // 產生 'task' 使用閉包
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(mRequest) {
-            data, response, error in
+        self.mVCtrl.presentViewController(mPop, animated: false, completion:{
+            // 產生 http Request
+            let mRequest = NSMutableURLRequest(URL: NSURL(string: self.D_WEBURL)!)
+            mRequest.HTTPBody = strConnParm.dataUsingEncoding(NSUTF8StringEncoding)
+            mRequest.HTTPMethod = "POST"
+            mRequest.timeoutInterval = 60
+            mRequest.HTTPShouldHandleCookies = false
             
-            var dictRS = Dictionary<String, AnyObject>();
-            
-            if error != nil {
-                dictRS = self.getHTTPJSONData(nil)
-            } else {
-                dictRS = self.getHTTPJSONData(data!)
+            // 產生 'task' 使用閉包
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(mRequest) {
+                data, response, error in
+                
+                var dictRS = Dictionary<String, AnyObject>();
+                
+                if error != nil {
+                    dictRS = self.getHTTPJSONData(nil)
+                } else {
+                    dictRS = self.getHTTPJSONData(data!)
+                }
+                
+                // 關閉 popWindow
+                mPop.dismissViewControllerAnimated(false, completion:nil)
+                
+                callBack(dictRS)
             }
             
-            callBack(dictRS)
-        }
-        
-        task.resume()
+            task.resume()
+        })
     }
     
     /**

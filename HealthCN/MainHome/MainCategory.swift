@@ -76,7 +76,7 @@ class MainCategory: UIViewController {
     }
     
     /**
-     * 執行資料上傳程序, DEV Token ID 上傳
+     * 執行資料上傳程序, 推播使用，手機 Token ID 上傳
      */
     private func startSaveData(strToken: String!) {
         var dictParm = Dictionary<String, String>()

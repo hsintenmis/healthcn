@@ -52,7 +52,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
      * 初始與設定 VCview 內的 field
      */
     func initViewField() {
-        pubClass.setVCBackgroundImg("back002.jpg")
+        //pubClass.setVCBackgroundImg("back002.jpg")
         txtAcc.delegate = self
         txtPsd.delegate = self
     
@@ -65,8 +65,7 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         labSaveAcc.text = pubClass.getLang("saveaccpsd")
         btnLogin.setTitle(pubClass.getLang("login"), forState: UIControlState.Normal)
         
-        labVer.text = pubClass.getLang("version") + ":" +
-            (NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
+        labVer.text = pubClass.getLang("version") + ":" + (NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
     }
     
     /**
@@ -90,7 +89,8 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         dictParm["act"] = "memberdata_login";
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //self.pubClass.showPopLoading(nil)
+        
         pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
@@ -98,8 +98,8 @@ class MainLogin: UIViewController, UITextFieldDelegate {
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
     func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
-
+        //self.pubClass.closePopLoading()
+        
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
             pubClass.popIsee(Msg: dictRS["msg"] as! String)
@@ -150,6 +150,8 @@ class MainLogin: UIViewController, UITextFieldDelegate {
         if segue.identifier == "MainCategory"{
             let cvChild = segue.destinationViewController as! MainCategory
             cvChild.parentData = sender as! Dictionary<String, AnyObject>
+            
+            return
         }
         
         return

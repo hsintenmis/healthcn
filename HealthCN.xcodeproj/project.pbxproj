@@ -130,6 +130,8 @@
 		D781F2BB1BF5C7D100477ABE /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2BA1BF5C7D100477ABE /* NoDataView.swift */; };
 		D781F2BD1BF5D6E700477ABE /* SoqibedLogAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F2BC1BF5D6E700477ABE /* SoqibedLogAll.swift */; };
 		D79235081BE0AA570051D0B9 /* HealthCalCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */; };
+		D79A54031C1FA0F100BADA25 /* BTBPMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79A54021C1FA0F100BADA25 /* BTBPMain.swift */; };
+		D79A54051C1FA1CD00BADA25 /* BTBPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79A54041C1FA1CD00BADA25 /* BTBPService.swift */; };
 		D7E6E29A1BFEA58200434C1D /* PdSaleDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6E2991BFEA58200434C1D /* PdSaleDetailCell.swift */; };
 		D7E6E29C1BFEC71E00434C1D /* PdSaleReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6E29B1BFEC71E00434C1D /* PdSaleReturn.swift */; };
 		D7E6E29E1BFEC73200434C1D /* PdSaleReturnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6E29D1BFEC73200434C1D /* PdSaleReturnCell.swift */; };
@@ -280,6 +282,8 @@
 		D781F2BA1BF5C7D100477ABE /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDataView.swift; path = PubClass/NoDataView.swift; sourceTree = "<group>"; };
 		D781F2BC1BF5D6E700477ABE /* SoqibedLogAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoqibedLogAll.swift; path = Soqibed/SoqibedLogAll.swift; sourceTree = "<group>"; };
 		D79235071BE0AA570051D0B9 /* HealthCalCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthCalCellData.swift; path = Health/HealthCalCellData.swift; sourceTree = "<group>"; };
+		D79A54021C1FA0F100BADA25 /* BTBPMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BTBPMain.swift; path = BTDevice/BTBPMain.swift; sourceTree = "<group>"; };
+		D79A54041C1FA1CD00BADA25 /* BTBPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BTBPService.swift; path = BTDevice/BTBPService.swift; sourceTree = "<group>"; };
 		D7E6E2991BFEA58200434C1D /* PdSaleDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PdSaleDetailCell.swift; path = Odrs/PdSaleDetailCell.swift; sourceTree = "<group>"; };
 		D7E6E29B1BFEC71E00434C1D /* PdSaleReturn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PdSaleReturn.swift; path = Odrs/PdSaleReturn.swift; sourceTree = "<group>"; };
 		D7E6E29D1BFEC73200434C1D /* PdSaleReturnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PdSaleReturnCell.swift; path = Odrs/PdSaleReturnCell.swift; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 				D7130CB81C08011700949109 /* BTDeviceList.swift */,
 				D7130CBA1C0802E700949109 /* BTScaleMain.swift */,
 				D7130CBC1C08319000949109 /* BTScaleService.swift */,
+				D79A54021C1FA0F100BADA25 /* BTBPMain.swift */,
+				D79A54041C1FA1CD00BADA25 /* BTBPService.swift */,
 			);
 			name = BTDevice;
 			sourceTree = "<group>";
@@ -848,6 +854,7 @@
 				42E376BB1BEA6DAE00910327 /* CourseSelCust.swift in Sources */,
 				D700EB491BFD9CE400DAA145 /* CourseOdrsList.swift in Sources */,
 				D7FDEFC11BD8E49200ECA71A /* OdrsCell.swift in Sources */,
+				D79A54031C1FA0F100BADA25 /* BTBPMain.swift in Sources */,
 				D7EC49541BF1A0FE0088BBE2 /* TOCropScrollView.m in Sources */,
 				422D4F5F1BDE85310045E6D5 /* CellCalendarDate.swift in Sources */,
 				D7130CBB1C0802E700949109 /* BTScaleMain.swift in Sources */,
@@ -855,6 +862,7 @@
 				42D1A73D1BC587DD008ECEFB /* MainLogin.swift in Sources */,
 				D7E6E29A1BFEA58200434C1D /* PdSaleDetailCell.swift in Sources */,
 				42D0F7561BEFB50500C97D54 /* NewsStoreCell.swift in Sources */,
+				D79A54051C1FA1CD00BADA25 /* BTBPService.swift in Sources */,
 				D7EC49531BF1A0FE0088BBE2 /* TOCropOverlayView.m in Sources */,
 				D7FDEFBF1BD8E15700ECA71A /* OdrsList.swift in Sources */,
 				42D1A73B1BC587DD008ECEFB /* AppDelegate.swift in Sources */,

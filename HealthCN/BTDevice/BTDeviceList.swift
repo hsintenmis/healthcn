@@ -23,7 +23,7 @@ class BTDeviceList: UITableViewController {
      * Segue 跳轉頁面，StoryBoard 介面需要拖曳 pressenting segue
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // 藍芽設備檢測 List segue, 設定會員資料 param
+        // 藍芽體脂計 設備檢測 List segue, 設定會員資料 param
         if segue.identifier == "BTScaleMain"{
             let cvChild = segue.destinationViewController as! BTScaleMain
             cvChild.dictMember = dictMember
@@ -31,6 +31,14 @@ class BTDeviceList: UITableViewController {
             return
         }
         
+        // 藍芽血壓計
+        if segue.identifier == "BTBPMain"{
+            let cvChild = segue.destinationViewController as! BTBPMain
+            cvChild.dictMember = dictMember
+            
+            return
+        }
+
         return
     }
     

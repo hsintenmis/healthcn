@@ -173,7 +173,7 @@ class MemberEdit: UITableViewController, UITextFieldDelegate {
         //print(dictParm)
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
     }
     
@@ -181,7 +181,7 @@ class MemberEdit: UITableViewController, UITextFieldDelegate {
      * HTTP 連線後取得連線結果
      */
     private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
+        //pubClass.closePopLoading()
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
