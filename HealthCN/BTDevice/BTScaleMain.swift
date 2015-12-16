@@ -241,7 +241,7 @@ class BTScaleMain: UIViewController {
         }
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
     }
     
@@ -249,7 +249,7 @@ class BTScaleMain: UIViewController {
      * HTTP 連線後取得連線結果
      */
     private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
+        //pubClass.closePopLoading()
         
         // 回傳失敗顯示錯誤訊息
         if (dictRS["result"] as! Bool != true) {

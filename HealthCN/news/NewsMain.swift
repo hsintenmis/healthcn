@@ -68,7 +68,7 @@ class NewsMain: UIViewController {
         dictParm["act"] = "memberdata_getnews"
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
@@ -76,7 +76,7 @@ class NewsMain: UIViewController {
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
+        //pubClass.closePopLoading()
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {

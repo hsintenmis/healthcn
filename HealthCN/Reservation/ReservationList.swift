@@ -61,7 +61,7 @@ class ReservationList: UIViewController {
         dictParm["act"] = "reservation_list"
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpResponChk)
     }
     
@@ -69,7 +69,7 @@ class ReservationList: UIViewController {
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
     private func HttpResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
+        //pubClass.closePopLoading()
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
@@ -238,7 +238,7 @@ class ReservationList: UIViewController {
         dictParm["arg0"] = strArg0
         
         // HTTP 開始連線
-        pubClass.showPopLoading(nil)
+        //pubClass.showPopLoading(nil)
         pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
     }
     
@@ -246,7 +246,7 @@ class ReservationList: UIViewController {
      * HTTP 連線後取得連線結果, 實作給 'pubClass.startHTTPConn()' 使用，callback function
      */
     private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
-        pubClass.closePopLoading()
+        //pubClass.closePopLoading()
         
         // 回傳失敗
         if (dictRS["result"] as! Bool != true) {
