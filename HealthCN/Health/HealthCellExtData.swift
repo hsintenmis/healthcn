@@ -30,11 +30,14 @@ class HealthCellExtData {
     /**
      * Cust init
      */
-    func CustInit(mVC: UIViewController) {
+    func CustInit(mVC: UIViewController, dictMember: Dictionary<String, String>) {
         mVCtrl = mVC
         pubClass = PubClass(viewControl: mVCtrl)
         aryTestField = HealthDataInit().D_HEALTHITEMKEY
         mHealthExplainTestData.CustInit(mVCtrl)
+        
+        // gender, age
+        mHealthExplainTestData.SetUserData(Int(dictMember["age"]!)!, gender: dictMember["gender"]!)
     }
     
     /**

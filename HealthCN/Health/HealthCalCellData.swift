@@ -1,5 +1,5 @@
 //
-//  CollectionView 全部 Cell 的 'Block' dicy arydata
+//  CollectionView 全部 Cell 的 'Block' dict arydata
 //
 
 import UIKit

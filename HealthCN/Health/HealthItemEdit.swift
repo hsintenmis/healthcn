@@ -50,6 +50,8 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
     // class, 解釋健康檢測資料，計算特殊欄位數值
     private var mHealthExplainTestData = HealthExplainTestData()
     
+    
+    
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()

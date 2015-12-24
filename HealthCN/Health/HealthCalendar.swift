@@ -56,11 +56,11 @@ class HealthCalendar: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
+        currCalBlockIndex = NSIndexPath(forRow: -1, inSection: -1)
         
         // 其他 class 初始
         mHealthDataInit.custInit(mVCtrl)
         mHealthCalCellData.cusInit(mVCtrl)
-        mHealthCellExtData.CustInit(mVCtrl)
         
         // TableCell autoheight
         viewHealthList.estimatedRowHeight = 100.0
@@ -122,6 +122,9 @@ class HealthCalendar: UIViewController {
         
         if (dictContent["member"]?.count > 0) {
             self.dictMember = dictContent["member"]! as! [String : String]
+            
+            // 2015/12/24 設定會員資料(性別,年齡...)
+            self.mHealthCellExtData.CustInit(mVCtrl, dictMember: self.dictMember)
         }
         
         if (dictContent["data"]?.count > 0) {
@@ -148,6 +151,13 @@ class HealthCalendar: UIViewController {
     * 初始 NSCalendar, NSDate 相關參數<BR>
     */
     func initCalendarParm() {
+        /*
+        if (currCalBlockIndex.section >= 0) {
+            self.reloadTableViewData()
+            return
+        }
+        */
+        
         aryAllBlock = mHealthCalCellData.getAllData(dictCurrDate)
         
         // 初始 calendar collectionView 後, 取得目前日期對應的 Block NSIndexPath
@@ -158,12 +168,14 @@ class HealthCalendar: UIViewController {
             todayDD = pubClass.subStr(today, strFrom: 6, strEnd: 8)
         }
         
-        for (var i=0; i<5; i++) {
-            for (var j=0; j<7; j++) {
-                if (Int(todayDD)! == Int(aryAllBlock[i][j]["txt_day"]!)) {
-                    currCalBlockIndex = NSIndexPath(forRow: j, inSection: i)
-                    
-                    break
+        if (currCalBlockIndex.section < 0) {
+            for (var i=0; i<5; i++) {
+                for (var j=0; j<7; j++) {
+                    if (Int(todayDD)! == Int(aryAllBlock[i][j]["txt_day"]!)) {
+                        currCalBlockIndex = NSIndexPath(forRow: j, inSection: i)
+                        
+                        break
+                    }
                 }
             }
         }
@@ -344,6 +356,8 @@ class HealthCalendar: UIViewController {
         dictCurrDate["YY"] = pubClass.subStr(today, strFrom: 0, strEnd: 4)
         dictCurrDate["MM"] = pubClass.subStr(today, strFrom: 4, strEnd: 6)
         dictCurrDate["DD"] = pubClass.subStr(today, strFrom: 6, strEnd: 8)
+        
+        currCalBlockIndex = NSIndexPath(forRow: -1, inSection: -1)
         
         self.initCalendarParm()
     }
