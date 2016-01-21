@@ -121,6 +121,7 @@
 		D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE811BE892FA0039C70E /* SelDateCell.swift */; };
 		D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE831BE8A9AC0039C70E /* SelServCell.swift */; };
 		D7296D031C04066100FD3FAE /* HealthItemEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7296D021C04066100FD3FAE /* HealthItemEdit.swift */; };
+		D729F3521C506F030055B9C7 /* Act20160301.swift in Sources */ = {isa = PBXBuildFile; fileRef = D729F3511C506F030055B9C7 /* Act20160301.swift */; };
 		D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FD81BEC890400123087 /* ReservationList.swift */; };
 		D75C3FDB1BECA19100123087 /* ReservationMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FDA1BECA19100123087 /* ReservationMain.swift */; };
 		D77684181BD0A1C500B97009 /* digt001.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D77684161BD0A1C500B97009 /* digt001.ttf */; };
@@ -273,6 +274,7 @@
 		D726BE811BE892FA0039C70E /* SelDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelDateCell.swift; path = Reservation/SelDateCell.swift; sourceTree = "<group>"; };
 		D726BE831BE8A9AC0039C70E /* SelServCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelServCell.swift; path = Reservation/SelServCell.swift; sourceTree = "<group>"; };
 		D7296D021C04066100FD3FAE /* HealthItemEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthItemEdit.swift; path = Health/HealthItemEdit.swift; sourceTree = "<group>"; };
+		D729F3511C506F030055B9C7 /* Act20160301.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Act20160301.swift; path = Promote/Act20160301.swift; sourceTree = "<group>"; };
 		D75C3FD81BEC890400123087 /* ReservationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReservationList.swift; path = Reservation/ReservationList.swift; sourceTree = "<group>"; };
 		D75C3FDA1BECA19100123087 /* ReservationMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReservationMain.swift; path = Reservation/ReservationMain.swift; sourceTree = "<group>"; };
 		D77684161BD0A1C500B97009 /* digt001.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digt001.ttf; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				429B2E651BDD207D00BAF88E /* Health */,
 				D726BE7C1BE87B4E0039C70E /* Reservation */,
 				D781F2B51BF5B44500477ABE /* Soqibed */,
+				D729F3501C5066C60055B9C7 /* Promote */,
 				42E708F31BC752C40092A5A9 /* PubClass */,
 				D71B2BDB1BF082BF006BB466 /* ImageClass */,
 				D7EC49281BF1A0FE0088BBE2 /* TOCropViewController */,
@@ -589,6 +592,14 @@
 				D700EB4E1BFDA74E00DAA145 /* CourseOdrsDetailCell.swift */,
 			);
 			name = Reservation;
+			sourceTree = "<group>";
+		};
+		D729F3501C5066C60055B9C7 /* Promote */ = {
+			isa = PBXGroup;
+			children = (
+				D729F3511C506F030055B9C7 /* Act20160301.swift */,
+			);
+			name = Promote;
 			sourceTree = "<group>";
 		};
 		D781F2B51BF5B44500477ABE /* Soqibed */ = {
@@ -835,6 +846,7 @@
 				D71B2BDA1BF02D05006BB466 /* NewsOfficeDetail.swift in Sources */,
 				42F0F6EF1C01B9DD00753CEB /* MemberEditContainer.swift in Sources */,
 				D71CE2EA1BE31EBD0067CCC1 /* HealthValCell.swift in Sources */,
+				D729F3521C506F030055B9C7 /* Act20160301.swift in Sources */,
 				42D0F7541BEFB22D00C97D54 /* NewsStoreDetail.swift in Sources */,
 				D7130CB71C07FBC200949109 /* BTDeviceMain.swift in Sources */,
 				D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */,
@@ -1014,6 +1026,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HealthCN/HealthCN-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1031,6 +1044,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HealthCN/HealthCN-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

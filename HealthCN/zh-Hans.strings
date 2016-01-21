@@ -1,6 +1,6 @@
 "CFBundleDisplayName" = "iSOQI健康精靈";
 "app_name" = "iSOQI健康精靈";
-"app_name_full" = "iSOQI健康精靈  美利版";
+"app_name_full" = "iSOQI健康精靈美利版";
 "version" = "版本";
 
 "login" = "登入";
@@ -19,6 +19,7 @@
 "datasavecompleted" = "資料儲存完成!";
 "confirm_yes" = "是";
 "confirm_no" = "否";
+"cancel" = "取消";
 
 "week_0" = "日";
 "week_1" = "一";
@@ -90,6 +91,8 @@
 "health_noexplain" = "目前沒有說明 . . .";
 "health_inputdataerr" = "輸入資料錯誤!";
 "health_inputdataerr_weight" = "輸入資料錯誤! 體重數值錯誤!";
+"health_chartview_returnmsg" = "將會返回健康管理的月曆頁面，請再確認!";
+"health_itemclkseeresult" = "( 點取項目可以查看今日量測結果 )";
 
 "bmirs_001" = "過輕";
 "bmirs_002" = "正常";
@@ -301,3 +304,5 @@
 "BT_MSG_testingcomplete" = "量測完成!";
 "BT_MSG_testingerr" = "量測結果錯誤!";
 "BT_MSG_testingnoval" = "沒有量測資料...";
+
+"APNS_prompt" = "健康精靈訊息通知";
