@@ -15,8 +15,10 @@ import Foundation
  *
  */
 class Act20160301: UIViewController {
-    // 固定參數設定
-    private let strURL = "http://public.hsinten.com.tw/app/merit_game/index.php"
+    // 固定參數設定 TODO
+    private let strURL = "http://cnwww.mysoqi.com/merit_game/index.php"
+    //private let strURL = "http://public.hsinten.com.tw/app/merit_game/index.php"
+    
     private let aryURLAct = ["shopboard", "areaboard"]  // 區域/本店 排名
     
     @IBOutlet weak var webviewData: UIWebView!
@@ -35,7 +37,7 @@ class Act20160301: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
-            
+        
         self.initViewField()
         
         // WebView 設定與顯示
@@ -53,7 +55,7 @@ class Act20160301: UIViewController {
     */
     private func showWEBView(intPosition: Int) {
         let strURL = "\(self.strURL)?data[func]=\(aryURLAct[intPosition])&data[acc]=\(mAppDelegate.V_USRACC!)&data[psd]=\(mAppDelegate.V_USRPSD!)#\(mAppDelegate.V_USRACC!)"
-        
+
         let request = NSURLRequest(URL: NSURL(string: strURL)!)
         
         dispatch_async(dispatch_get_main_queue(), {
