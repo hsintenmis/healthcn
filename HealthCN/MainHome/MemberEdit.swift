@@ -274,46 +274,35 @@ class MemberEdit: UITableViewController, UITextFieldDelegate {
         
         // 檢查必填欄位, "height"
         hasErr = true
-        let strHeight = txtHeigh.text ?? ""
-        if (strHeight.characters.count > 0) {
-            if (self.chkCharIsAllNumber(strHeight, hasPoint: true)) {
+        if let doubTmp = Double(txtHeigh.text!) {
+            // 檢查數值範圍, 身高 50 ~ 250
+            if (doubTmp < 250.0 && doubTmp > 50) {
                 hasErr = false
             }
         }
-        
-        // 檢查數值範圍, 身高 50 ~ 250
-        let doblHeight = Double(strHeight)!
-        if (doblHeight > 250.0 || doblHeight < 50) {
-            hasErr = true
-        }
-        
         if (hasErr) {
             pubClass.popIsee(Msg: pubClass.getLang("memberedit_err_height"))
             
             return false
         }
         
-        txtHeigh.text = String(format: "%.1f", Double(strHeight)!)
+        txtHeigh.text = String(format: "%.1f", Double(txtHeigh.text!)!)
         
         // 檢查必填欄位 "weight"
-        let strWeight = txtWeight.text ?? ""
-        if (strWeight.characters.count > 0) {
-            if (self.chkCharIsAllNumber(strWeight, hasPoint: true) != true) {
-                pubClass.popIsee(Msg: pubClass.getLang("memberedit_err_weight"))
-                
-                return false
-            }
-            
-            // 檢查數值範圍, 體重 5 ~ 999
-            let doblWeight = Double(strWeight)!
-            if (doblWeight > 999.0 || doblWeight < 5) {
-                pubClass.popIsee(Msg: pubClass.getLang("memberedit_err_weight"))
-                
-                return false
+        hasErr = true
+        if let doubTmp = Double(txtWeight.text!) {
+            // 體重 5 ~ 999
+            if (doubTmp < 150 && doubTmp > 10) {
+                hasErr = false
             }
         }
+        if (hasErr) {
+            pubClass.popIsee(Msg: pubClass.getLang("memberedit_err_weight"))
+            
+            return false
+        }
         
-        txtWeight.text = String(format: "%.1f", Double(strWeight)!)
+        txtWeight.text = String(format: "%.1f", Double(txtWeight.text!)!)
         
         return true
     }

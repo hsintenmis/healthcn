@@ -12,7 +12,7 @@ import Foundation
  *
  *
  */
-class ReservationAdd: UIViewController {
+class ReservationAdd: UITableViewController {
     @IBOutlet weak var labReserDate: UILabel!
     @IBOutlet weak var labReserTime: UILabel!
     @IBOutlet weak var labReserCourse: UILabel!
@@ -540,6 +540,24 @@ class ReservationAdd: UIViewController {
         dispatch_async(dispatch_get_main_queue(), {
             self.mVCtrl.presentViewController(mAlert, animated: true, completion: nil)
         })
+    }
+    
+    /**
+    * act, 點取 '預設療程'
+    */
+    @IBAction func actCourseSel(sender: UIButton) {
+        self.performSegueWithIdentifier("CourseSel", sender: nil)
+    }
+    
+    /**
+     * act, 點取 '已購買療程'
+     */
+    @IBAction func actCourseSelCust(sender: UIButton) {
+        if (self.dictCourse_cust.count < 1) {
+            return
+        }
+        
+        self.performSegueWithIdentifier("CourseSelCust", sender: nil)
     }
     
     override func didReceiveMemoryWarning() {

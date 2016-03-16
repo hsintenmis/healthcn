@@ -46,7 +46,7 @@ class MainScrollData: UITableViewController {
         self.initViewField()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         StartHTTPConn()
     }
     
@@ -103,9 +103,6 @@ class MainScrollData: UITableViewController {
         self.labMemberName.text = self.dictMember["usrname"] as? String
         self.labStoreName.text = self.dictMember["store_name"] as? String
         self.labStoreTel.text = self.dictMember["up_tel"] as? String
-            
-        // CollectionView, 健康資料重新 reload
-        self.colviewHealth.reloadData()
         
         // 設定會員圖片, base64String to Image
         if let strEncode = dictContent["imgstr"] as? String {
@@ -145,9 +142,10 @@ class MainScrollData: UITableViewController {
             strTodayInfo = self.pubClass.getLang("nodata")
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.textTodayInfo.text = strTodayInfo
-        })
+        self.textTodayInfo.text = strTodayInfo
+        
+        // CollectionView, 健康資料重新 reload
+        self.colviewHealth.reloadData()
     }
     
     /**

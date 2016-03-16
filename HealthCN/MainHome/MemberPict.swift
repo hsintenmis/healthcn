@@ -214,17 +214,16 @@ class MemberPict: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         // 任何錯誤跳離
         if (dictRS["result"] as! Bool != true) {
-            pubClass.popIsee(Msg: dictRS["msg"] as! String)
-            self.dismissViewControllerAnimated(true, completion: nil)
-            
+            pubClass.popIsee(self, Msg: dictRS["msg"] as! String, withHandler: {self.dismissViewControllerAnimated(true, completion: nil)})
+
             return
         }
         
         // 上傳與儲存完成，本 class 結束
-        pubClass.popIsee(Msg: pubClass.getLang("pictupdatecomplete"))
-        self.dismissViewControllerAnimated(true, completion: nil)
+        pubClass.popIsee(self, Msg: pubClass.getLang("pictupdatecomplete"), withHandler: {self.dismissViewControllerAnimated(true, completion: nil)})
+        
+        return
     }
-
     
     /**
      * 返回前頁

@@ -58,6 +58,7 @@ class PdSaleDetail: UIViewController {
         labReturnPrice.alpha = 0.0
         
         // 是否有退貨
+        /*
         let strReturnPrice = dictAllData["returnprice"] as! String
         if (Int(strReturnPrice) > 0) {
             labRetrunName.alpha = 1.0
@@ -68,6 +69,11 @@ class PdSaleDetail: UIViewController {
             btnReturnDetail.title = ""
             btnReturnDetail.enabled = false
         }
+        */
+        
+        // 2016/03/16 disable 退貨明細 btn
+        btnReturnDetail.title = ""
+        btnReturnDetail.enabled = false
     }
     
     /**

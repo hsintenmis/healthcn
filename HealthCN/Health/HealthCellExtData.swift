@@ -16,7 +16,7 @@ class HealthCellExtData {
     private var aryTestField: [String] = []
     
     // field 相關 圖片與文字顏色值設定
-    private let dictColor = ["normal":"303030", "none":"909090", "good":"3366CC", "bad":"FF6666"]
+    private let dictColor = ["normal":"303030", "none":"c0c0c0", "good":"3366CC", "bad":"FF6666"]
     
     // class, 解釋健康檢測資料，正常或不正常
     private var mHealthExplainTestData = HealthExplainTestData()

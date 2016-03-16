@@ -81,7 +81,16 @@ class ReservationMain: UIViewController {
         }
         
         navyTopBar.title = strTitle
-        viewContainer.addSubview(mSubVC.view)
+        
+        if (flag == "ReserAdd") {
+            let mView = mSubVC.view
+            mView.frame.size.height = viewContainer.layer.frame.height
+            viewContainer.addSubview(mView)
+        }
+        else {
+            viewContainer.addSubview(mSubVC.view)
+        }
+        
         self.addChildViewController(mSubVC)
     }
 

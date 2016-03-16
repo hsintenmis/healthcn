@@ -103,8 +103,7 @@ class ReservationList: UIViewController {
             }
             
             if (aryAllData.count < 1) {
-                pubClass.popIsee(Msg: pubClass.getLang("nodata"))
-                self.dismissViewControllerAnimated(true, completion: nil)
+                pubClass.popIsee(self, Msg: pubClass.getLang("nodata"), withHandler: {self.dismissViewControllerAnimated(true, completion: nil)})
                 
                 return
             }
