@@ -39,13 +39,11 @@ class Act20160301: UIViewController {
         pubClass = PubClass(viewControl: mVCtrl)
         
         self.initViewField()
-        
-        // WebView 設定與顯示
-        self.showWEBView(0)
     }
     
-    override func viewDidAppear(animated: Bool){
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool){
+        // WebView 設定與顯示
+        self.showWEBView(0)
     }
     
     /**

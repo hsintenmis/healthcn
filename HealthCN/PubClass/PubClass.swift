@@ -120,6 +120,25 @@ class PubClass {
     }
     
     /**
+     * [我知道了] 彈出視窗, with 'handler'
+     */
+    func popIsee(mVC: UIViewController, var Title strTitle: String? = nil, Msg strMsg: String!, withHandler mHandler:()->Void) {
+        if strTitle == nil {
+            strTitle = getLang("sysprompt")
+        }
+        
+        let mAlert = UIAlertController(title: strTitle, message: strMsg, preferredStyle:UIAlertControllerStyle.Alert)
+        
+        mAlert.addAction(UIAlertAction(title:getLang("i_see"), style: UIAlertActionStyle.Default, handler:
+            {(action: UIAlertAction!) in mHandler()}
+            ))
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            mVC.presentViewController(mAlert, animated: true, completion: nil)
+        })
+    }
+    
+    /**
     * 產生 UIAlertController (popWindow 資料傳送中)
     */
     func getPopLoading(msg: String?) -> UIAlertController {
@@ -204,9 +223,14 @@ class PubClass {
                 }
                 
                 // 關閉 popWindow
-                mPop.dismissViewControllerAnimated(false, completion:nil)
+                //mPop.dismissViewControllerAnimated(false, completion:nil)
                 
-                callBack(dictRS)
+                // 關閉 'vcPopLoading'
+                dispatch_async(dispatch_get_main_queue(), {
+                    mPop.dismissViewControllerAnimated(true, completion: {
+                        callBack(dictRS)
+                    })
+                })
             }
             
             task.resume()

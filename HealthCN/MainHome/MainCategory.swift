@@ -19,10 +19,13 @@ class MainCategory: UIViewController {
     var mVCtrl: UIViewController!
     var pubClass: PubClass!
     private let mAppDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
-    let localNotification = UILocalNotification()
+    //let localNotification = UILocalNotification()
 
     // 前一個頁面傳入的資料
     var parentData: Dictionary<String, AnyObject>!
+    
+    // 子頁面 'MainScrollData'
+    private var mMainScrollData: MainScrollData?
     
     // View load
     override func viewDidLoad() {
@@ -44,7 +47,7 @@ class MainCategory: UIViewController {
         if (mAppDelegate.V_APNSTOKENID.characters.count > 0) {
             self.startSaveData(mAppDelegate.V_APNSTOKENID)
         }
-        
+
         //print(mAppDelegate.V_SPANTOKENID)
     }
     
@@ -57,26 +60,36 @@ class MainCategory: UIViewController {
             mAppDelegate.V_APNSALERTMSG = ""
         }
     }
-      
+    
     /**
-    * HTTP重新連線讀取資料
+     * Segue 跳轉頁面
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let strIdent = segue.identifier
+        
+        // 子頁面 'MainScrollData'
+        if (strIdent == "MainScrollData") {
+            mMainScrollData = segue.destinationViewController as? MainScrollData
+        }
+    }
+    
+    /**
+    * act, 點取 '刷新' btn, HTTP重新連線讀取資料
     */
     @IBAction func actReload(sender: UIBarButtonItem) {
-        //showNotificationNow()
-        
-        // 由 class 'MainScrollData' declare
-        NSNotificationCenter.defaultCenter().postNotificationName("ReloadMainScrollData", object: nil)
+        // 執行 child 'MainScrollData' http 連線重新取得資料
+        mMainScrollData?.StartHTTPConn()
     }
 
     /**
-    * 登出
+    * act, 點取 '登出' btn
     */
     @IBAction func actLogout(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /**
-     * 執行資料上傳程序, 推播使用，手機 Token ID 上傳
+     * 推播使用，手機 Token ID 上傳資料, 執行 http 連線資料上傳程序,
      */
     private func startSaveData(strToken: String!) {
         var dictParm = Dictionary<String, String>()
@@ -88,30 +101,9 @@ class MainCategory: UIViewController {
         dictParm["arg1"] = strToken
         
         // HTTP 開始連線
-        //pubClass.showPopLoading(nil)
-        pubClass.startHTTPConn(dictParm, callBack: HttpSaveResponChk)
-    }
-    
-    /**
-     * HTTP 連線後取得連線結果
-     */
-    private func HttpSaveResponChk(dictRS: Dictionary<String, AnyObject>) {
-        //pubClass.closePopLoading()
-        
-        /*
-        // 錯誤
-        if (dictRS["result"] as! Bool != true) {
-            pubClass.popIsee(Msg: dictRS["msg"] as! String)
-            self.dismissViewControllerAnimated(true, completion: nil)
-            
-            return
-        }
-        
-        // 上傳與儲存完成，顯示完成訊息
-        pubClass.popIsee(Msg: pubClass.getLang("datasavecompleted"))
-        */
-        
-        return
+        pubClass.startHTTPConn(dictParm, callBack: {(dictRS: Dictionary<String, AnyObject>) -> Void in
+                return
+            })
     }
     
     //立刻發送通知訊息
