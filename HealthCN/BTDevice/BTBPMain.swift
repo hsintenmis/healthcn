@@ -95,7 +95,7 @@ class BTBPMain: UIViewController {
         dictArg0["age"] = dictMember["age"]
         dictArg0["gender"] = dictMember["gender"]
         
-        // loop 以量測回傳的 val
+        // loop 已量測回傳的 val
         var dictItemNew: Dictionary<String, String> = [:]
         dictItemNew["height"] = dictMember["height"]
         

@@ -32,14 +32,12 @@ class BTDeviceList: UITableViewController {
         }
         
         // 藍芽血壓計
-        /*
         if segue.identifier == "BTBPMain"{
             let cvChild = segue.destinationViewController as! BTBPMain
             cvChild.dictMember = dictMember
             
             return
         }
-        */
 
         return
     }

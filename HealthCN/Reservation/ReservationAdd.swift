@@ -59,7 +59,7 @@ class ReservationAdd: UITableViewController {
     private var numsSrvZone = 0  // 服務區總數
     
     // colvView, 選擇時段 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
-    private var dictDataTime: Array<Dictionary<String, AnyObject>> = []  // 目前選擇的'時段'資料集
+    private var aryDataTime: Array<Dictionary<String, AnyObject>> = []  // 目前選擇的'時段'資料集
     
     // 日期相關設定
     private var today: String = ""
@@ -165,7 +165,9 @@ class ReservationAdd: UITableViewController {
         numsSrvZone = dictDataSelDate[0]["service"]!.count
         
         // 取得預設選擇時段資料集 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
-        dictDataTime = dictDataSelDate[0]["service"]![0] as! [[String:AnyObject]]
+        let dictServZone = dictDataSelDate[0]["service"] as! Array<AnyObject>
+        aryDataTime = dictServZone[0] as! Array<Dictionary<String, AnyObject>>
+        //aryDataTime = dictDataSelDate[0]["service"]![0] as! [[String:AnyObject]]
         
         // 重新 reload View
         isDataSourceReady = true
@@ -203,7 +205,7 @@ class ReservationAdd: UITableViewController {
             return dictDataSelDate.count
         }
         else if (strIdent == "colvSelTime") {
-            return dictDataTime.count
+            return aryDataTime.count
         }
         else if (strIdent == "colvSelServ") {
             return numsSrvZone
@@ -245,7 +247,14 @@ class ReservationAdd: UITableViewController {
         
         mCell.labMM.text = pubClass.getLang("mm_" + strMM)
         mCell.labDate.text = String(Int(strDD)!)
-        mCell.labWeek.text = pubClass.getLang("week_" + (dictItem["week"] as! String))
+        
+        // 顯示公休
+        var strWeek = pubClass.getLang("week_" + (dictItem["week"] as! String))
+        if (dictItem["isrest"] as! String == "Y") {
+            strWeek += "(休)"
+        }
+        
+        mCell.labWeek.text = strWeek
         
         // 樣式/外觀/顏色
         mCell.layer.borderWidth = 1
@@ -291,7 +300,7 @@ class ReservationAdd: UITableViewController {
     func getCellTime(collectionView: UICollectionView, indexPath: NSIndexPath)->UICollectionViewCell {
         let mCell: SelTimeCell = collectionView.dequeueReusableCellWithReuseIdentifier("cellSelTime", forIndexPath: indexPath) as! SelTimeCell
         
-        let dictItem = dictDataTime[indexPath.row]
+        let dictItem = aryDataTime[indexPath.row]
         mCell.labTime.text = String(format: "%02d", dictItem["hh"] as! Int) + ":00"
         
         // 樣式/外觀/顏色
@@ -323,6 +332,14 @@ class ReservationAdd: UITableViewController {
 
         // 點選日期
         if (strIdent == "colvSelDate") {
+            
+            let dictItem = dictDataSelDate[indexPath.row]
+            
+            // 檢查是否允許點取(公休)
+            if ((dictItem["isrest"] as! String) == "Y") {
+                return
+            }
+            
             positionDate = indexPath.row
             self.resetDataDate()
         }
@@ -341,7 +358,7 @@ class ReservationAdd: UITableViewController {
                 return
             }
             
-            let dictItem = dictDataTime[indexPath.row]
+            let dictItem = aryDataTime[indexPath.row]
             
             // 檢查是否允許點取
             if ((dictItem["isavail"] as! String) == "N") {
@@ -385,7 +402,11 @@ class ReservationAdd: UITableViewController {
         labReserTime.text = ""
         
         // 根據服務區, 取得2對應時段資料集 ex. 0(第一個服務區)=>{有幾個jobj時段, ex. 'hh'="9"}
-        dictDataTime = dictDataSelDate[positionDate]["service"]![positionServ] as! [[String:AnyObject]]
+        
+        let dictServZone = dictDataSelDate[positionDate]["service"] as! Array<AnyObject>
+        aryDataTime = dictServZone[positionServ] as! Array<Dictionary<String, AnyObject>>
+        
+        //aryDataTime = dictDataSelDate[positionDate]["service"]![positionServ] as! [[String:AnyObject]]
         
         dispatch_async(dispatch_get_main_queue(), {
             self.colvSelServ.reloadData()
@@ -462,7 +483,7 @@ class ReservationAdd: UITableViewController {
         
         let dictYMD = dictDataSelDate[positionDate]
         let strYMD = pubClass.subStr(dictYMD["ymd"] as! String, strFrom: 0, strEnd: 8)
-        let strHH = String(format: "%02d", dictDataTime[positionTime]["hh"] as! Int)
+        let strHH = String(format: "%02d", aryDataTime[positionTime]["hh"] as! Int)
         
         // 產生 Request dict array, 轉為 JSON String
         var strJSONStr = ""

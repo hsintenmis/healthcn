@@ -7,27 +7,36 @@ import CoreBluetooth
 import Foundation
 
 /**
-* 藍芽血壓計
-*
-* 藍牙4.0 BLE BluetoothLeService
-* <P>
-* 廠商: Yuwell, 型號:??<BR>
-* GATT Main service : D618D000-6000-1000-8000-000000000000
-* D_DEVNAME = "Yuwell BloodPressure"
-*
-* 藍芽電池官方 Service: 0x1810,  cahrt: 0x2A35
-*/
+ * 藍芽血壓計
+ *
+ * 藍牙4.0 BLE BluetoothLeService
+ * <P>
+ * 廠商: 穩合, 型號: DA14580<BR>
+ *
+ * main Service UUID: FC00
+ * Host  -> Slave (write)   UUID: FCA0
+ * Slave -> Host  (notify)  UUID: FCA1
+ * ? 0xFCA2       (write)
+ *
+ *
+ * 藍芽電池官方 Service: 0x1810,  cahrt: 0x2A35
+ */
 
 class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    private let IS_DEBUG = false
+    private let IS_DEBUG = true
     
     // 固定參數設定, 主 Service chanel, Character,
-    private let D_BTDEVNAME0 = "Yuwell BloodPressure"
+    private let D_BTDEVNAME0 = "ClinkBlood"
     
     // UUID, 血壓數值主 Service, Char
+    /*
     private let UID_SERV: CBUUID = CBUUID(string: "D618D000-6000-1000-8000-000000000000")
     private let UID_CHAR_W: CBUUID = CBUUID(string: "D618D001-6000-1000-8000-000000000000")
-    private let UID_CHAR_I: CBUUID = CBUUID(string: "D618D002-6000-1000-8000-000000000000")
+    private let UID_CHAR_W: CBUUID = CBUUID(string: "D618D002-6000-1000-8000-000000000000")
+    */
+    private let UID_SERV: CBUUID = CBUUID(string: "FC00")
+    private let UID_CHAR_W: CBUUID = CBUUID(string: "FCA0")
+    private let UID_CHAR_I: CBUUID = CBUUID(string: "FCA1")
     
     // BLE 設備，Center service 設定
     private var activeTimer:NSTimer!
@@ -100,10 +109,10 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         self.connectingPeripheral.delegate = self
         
         // 尋找指定的 Service UID
-        //self.connectingPeripheral.discoverServices([UID_SERV])
+        self.connectingPeripheral.discoverServices([UID_SERV])
         
         // 搜尋全部的 Service
-        self.connectingPeripheral.discoverServices(nil)
+        //self.connectingPeripheral.discoverServices(nil)
         
         mBTBPMain.notifyBTStat("BT_MSG_foundandtestconn")
         
@@ -169,8 +178,16 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
      */
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?)
     {
-        // 指定的 Service channel 查詢 character code
+        // 指定的 Service, 查詢指定的 Chart UUID 執行測試連接
+        if let tmpCBService = peripheral.services?[0] {
+            if (tmpCBService.UUID == UID_SERV) {
+                self.mBTService = tmpCBService
+                
+                peripheral.discoverCharacteristics([UID_CHAR_W, UID_CHAR_I], forService: self.mBTService)
+            }
+        }
         
+        /*
         // loop Service UUID, 設定指定 UUID 的 channel
         for tmpCBService in peripheral.services! {
             if (IS_DEBUG) {
@@ -189,9 +206,7 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             // 指定的 Service, 查詢全部的 Chart
             peripheral.discoverCharacteristics(nil, forService: tmpCBService)
         }
-        
-        // 指定的 Service, 查詢指定的 Chart UUID 執行測試連接
-        //peripheral.discoverCharacteristics([UID_CHAR_W], forService: self.mBTService)
+        */
     }
     
     /**
@@ -222,7 +237,7 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             }
             
             // 設定 '寫入' Chart
-            else if (mChart.UUID == UID_CHAR_W) {
+            if (mChart.UUID == UID_CHAR_W) {
                 self.mBTCharact_W = mChart
             }
         }
@@ -291,8 +306,10 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
      */
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         
+        print(characteristic.value!)
+        
         // 接收到血壓計 回傳數值
-        if (characteristic.value?.length > 0 && characteristic.UUID == UID_CHAR_I) {
+        if (characteristic.value?.length > 0 && characteristic.UUID == UID_CHAR_W) {
             if (IS_DEBUG) {
                 print("Update MainSrv val : \(characteristic.value!)\n")
             }

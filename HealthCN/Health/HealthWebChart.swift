@@ -10,7 +10,8 @@ import Foundation
  */
 class HealthWebChart: UIViewController {
     // 固定參數
-    let D_WEBURL = "http://public.hsinten.com.tw/storecn/"
+    //let D_WEBURL = "http://public.hsinten.com.tw/storecn/"
+    private var D_WEBURL: String = ""
 
     // @IBOutlet
     @IBOutlet weak var webChart: UIWebView!
@@ -30,6 +31,7 @@ class HealthWebChart: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
+        D_WEBURL = pubClass.D_HTEURL
     }
     
     override func viewDidAppear(animated: Bool) {
