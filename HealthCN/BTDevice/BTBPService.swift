@@ -1,5 +1,21 @@
 //
-// 藍牙 BLE Service
+// 藍芽血壓計, 指令與設備回傳 HEX code
+// 命令功能解析：例如:
+//
+//  0  1  2  3
+//  -----------
+//  04 00 A0 A4
+//
+//  1. 字結長度
+//  2. 配置碼：BIT7(原手冊認為低字結為 BIT7)
+//     1 = 主動測量, 例如: BPM 設備需要實際按下測量按鈕
+//     0 = 被動測量, 例如: APP 傳送命令碼後，BPM 才會開始量測
+//  3. 命令對照碼
+//  4. 校驗值: 字節 0, 1, 2 總和, 取低字節
+//
+//  本 class 主要使用以下指令
+//  1. 04 00 A0 A4 => APP 回覆 BPM 已連接,
+//  2. 04 00 A1 A5 => APP 要求開始量測
 //
 
 import UIKit
@@ -18,22 +34,17 @@ import Foundation
  * Slave -> Host  (notify)  UUID: FCA1
  * ? 0xFCA2       (write)
  *
- *
- * 藍芽電池官方 Service: 0x1810,  cahrt: 0x2A35
  */
 
 class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private let IS_DEBUG = true
     
+    // 固定參數
+    private var CMD_BTCONN: Array<UInt8> = [0x04, 0x00, 0xA0, 0xA4]
+    private var CMD_STARTTEST: Array<UInt8> = [0x04, 0x01, 0xA1, 0xA6]
+    
     // 固定參數設定, 主 Service chanel, Character,
     private let D_BTDEVNAME0 = "ClinkBlood"
-    
-    // UUID, 血壓數值主 Service, Char
-    /*
-    private let UID_SERV: CBUUID = CBUUID(string: "D618D000-6000-1000-8000-000000000000")
-    private let UID_CHAR_W: CBUUID = CBUUID(string: "D618D001-6000-1000-8000-000000000000")
-    private let UID_CHAR_W: CBUUID = CBUUID(string: "D618D002-6000-1000-8000-000000000000")
-    */
     private let UID_SERV: CBUUID = CBUUID(string: "FC00")
     private let UID_CHAR_W: CBUUID = CBUUID(string: "FCA0")
     private let UID_CHAR_I: CBUUID = CBUUID(string: "FCA1")
@@ -55,6 +66,10 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // parenrt class, BTScaleMain
     private var pubClass: PubClass!
     private var mBTBPMain: BTBPMain!
+    
+    // 血壓計設備回傳處理
+    private var countCMD: Int = 0  // 回傳值字節 count
+    private var currAryCode: Array<UInt8> = []  // 目前取得完整的回傳字節 array
     
     /**
     * 設定 vcParent 為上層的 BTScaleMain
@@ -265,6 +280,11 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             mBTBPMain.notifyBTStat("BT_MSG_readyfortesting")
             BT_ISREADYFOTESTING = true
             
+            // 寫入命令
+            self.connectingPeripheral?.writeValue( NSData(bytes: CMD_BTCONN, length: CMD_BTCONN.count), forCharacteristic: self.mBTCharact_W, type: CBCharacteristicWriteType.WithResponse)
+            
+            self.connectingPeripheral?.writeValue( NSData(bytes: CMD_STARTTEST, length: CMD_STARTTEST.count), forCharacteristic: self.mBTCharact_W, type: CBCharacteristicWriteType.WithResponse)
+            
             return
         }
     }
@@ -296,17 +316,8 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     /**
      * BT 有資料更新，傳送到本機 BT 顯示
-     *
-     * 主 Service 數值回傳：血壓計回傳如下：
-     *  
-     *  0  1   2   3   4   5   6   7   8   9   10  11   12  13  14  15  16 17 18 19
-     * ----------------------------------------------------------------------------
-     *            YY  MM  DD  HH  mm  ss      Val      Val  Ht
-     * [0, 5, 12, 15, 08, 20, 21, 46, 18, 00, 125, 00, 077, 88, 255, 0, 0, 0, 0, 0]
      */
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        
-        print(characteristic.value!)
         
         // 接收到血壓計 回傳數值
         if (characteristic.value?.length > 0 && characteristic.UUID == UID_CHAR_W) {
@@ -319,16 +330,90 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             var mIntVal = [UInt8](count:mNSData.length, repeatedValue:0)
             mNSData.getBytes(&mIntVal, length:mNSData.length)
             
-            if (IS_DEBUG) {
-                print(mIntVal)
-            }
+            if (IS_DEBUG) { print(mIntVal) }
          
+            // 數值加入到 'aryResponVal'
+            for val in mIntVal {
+                analyVal(val)
+            }
+            
+            /*
             // 通知上層 class 'BTScaleMain' 執行頁面更新
             dispatch_async(dispatch_get_main_queue(), {
                 self.mBTBPMain.reloadPage(self.getTestingResult(mIntVal))
             })
+            */
             
             return
+        }
+    }
+    
+    /**
+     * 解析回傳 HEX code
+     *
+     * 血壓計數值歸 '0' 傳回值
+     * HEX: 04 01 B4 B9,
+     * 辨識標記: 長度:第0字節='04', 命令:第2字節 = 'B4
+     *
+     * 量測過程傳回：
+     *       字結長度  配置碼  命令 有無心跳   氣壓值  校驗碼
+     * --------------------------------------------------
+     *  HEX: 06       01     B7    00      76       34
+     *  INT:  6       1      183   0       118      52
+     *
+     *
+     * 量測成功, 長度:第0字節 = '08', 命令:第2字節 = 'B8'
+     *
+     *        0  1   2  3   4  5  6  7
+     * --------------------------------------------------
+     *  HEX: 08 01  B8 00  9C 5A 57 0E
+     *  INT:  8  1 184  0 156 90 87 14
+     *
+     *  取字節 4, 5 ,6 為 高壓/低壓/心跳
+     *  字節 3 心律: 00=正常, 01 異常
+     */
+    private func analyVal(uint8Val: UInt8!) {
+        // 開頭為 04 ~ 08, 表示回傳 code 開始
+        if (uint8Val >= 0x04 && uint8Val <= 0x08) {
+            countCMD = Int(uint8Val)
+            currAryCode = []
+        }
+        
+        if (countCMD > 0) {
+            currAryCode.append(uint8Val)
+            countCMD -= 1
+            
+            if (countCMD == 0) {
+                var aryRS: Array<UInt8> = [0, 0 ,0]
+                var aryHEXStr: Array<String> = []
+                
+                for val in currAryCode {
+                    aryHEXStr.append(NSString(format:"%02X", val) as String)
+                }
+                if (IS_DEBUG) { print("HEX: \(aryHEXStr)") }
+                if (IS_DEBUG) { print("INT: \(currAryCode)") }
+                
+                // 血壓計數值歸 0, 通知上層 UILabTExt 重設數值
+                if (currAryCode[0] == 0x04 && currAryCode[2] == 0xB4) {
+                    
+                    // 通知上層 class 'BTScaleMain' 執行頁面更新
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.mBTBPMain.reloadPage(self.getTestingResult(aryRS))
+                    })
+                }
+                
+                // 判斷最後量測結果值
+                if (currAryCode[0] == 0x08 && currAryCode[2] == 0xB8) {
+                    aryRS[0] = currAryCode[4]
+                    aryRS[1] = currAryCode[5]
+                    aryRS[2] = currAryCode[6]
+                    
+                    // 通知上層 class 'BTScaleMain' 執行頁面更新
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.mBTBPMain.reloadPage(self.getTestingResult(aryRS))
+                    })
+                }
+            }
         }
     }
     
@@ -338,9 +423,9 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     */
     private func getTestingResult(aryRS: Array<UInt8>)-> Dictionary<String, String> {
         var dictRS: Dictionary<String, String> = [:]
-        dictRS["val_H"] = String(aryRS[10])
-        dictRS["val_L"] = String(aryRS[12])
-        dictRS["beat"] = String(aryRS[13])
+        dictRS["val_H"] = String(aryRS[0])
+        dictRS["val_L"] = String(aryRS[1])
+        dictRS["beat"] = String(aryRS[2])
         
         return dictRS
     }
