@@ -96,20 +96,20 @@ class MeadDetailTxt: UIViewController {
         // 其他參數設定
         let strGender = dictMeadData["gender"]!
         let strAvg = dictMeadData["avg"]!
-        var loopi = 0;
         
         // 重整數值資料對應的 key, ex. 'H1R' = '35', 'F3L' = '102'
         let aryKey = dictMeadData["testing_id"]!.componentsSeparatedByString(",")
         let aryVal = dictMeadData["testing_val"]!.componentsSeparatedByString(",")
         var dictKeyVal: Dictionary<String, String> = [:]
-        for (loopi = 0; loopi < aryKey.count; loopi++ ) {
+        
+        for loopi in (0..<aryKey.count) {
             dictKeyVal[aryKey[loopi]] = aryVal[loopi]
         }
         
         // 取得有問題的 iNo 代碼 array, 重新整理取得前四筆資料
         var aryOrgData = dictMeadData["problem_id"]!.componentsSeparatedByString(",")
         
-        for (loopi=0; loopi<aryOrgData.count; loopi++) {
+        for loopi in (0..<aryOrgData.count) {
             if (loopi == 4) {
                 break
             }

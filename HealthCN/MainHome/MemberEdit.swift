@@ -82,7 +82,7 @@ class MemberEdit: UITableViewController, UITextFieldDelegate {
         labSdate.text = pubClass.formatDateWithStr(dictMember["sdate"]!, type: 8)
         labName.text = dictMember["membername"]
         
-        for(var loopi = 0; loopi < aryField.count; loopi++) {
+        for loopi in (0..<aryField.count) {
             aryTxtView[loopi].text = dictMember[aryField[loopi]]
             
             // textView 的 delegate
@@ -147,7 +147,7 @@ class MemberEdit: UITableViewController, UITextFieldDelegate {
         var dictArg0: Dictionary<String, AnyObject> = [:]
         dictArg0["psd"] = txtPsd.text
         
-        for(var loopi = 0; loopi < aryField.count; loopi++) {
+        for loopi in (0..<aryField.count) {
             dictArg0[aryField[loopi]] = aryTxtView[loopi].text
         }
 

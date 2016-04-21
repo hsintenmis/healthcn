@@ -7,8 +7,8 @@ import Foundation
 import UIKit
 
 /**
-* 本專案所有的設定檔與公用 method
-*/
+ * 本專案所有的設定檔與公用 method
+ */
 class PubClass {
     // public
     /** 伺服器/網站 URL: http://pub.mysoqi.com/store_cn/001/ */
@@ -30,17 +30,17 @@ class PubClass {
     var mPopLoading: UIAlertController? // 目前產生 pop Loading 視窗的 'ViewControler'
     
     /**
-    * init
-    */
+     * init
+     */
     init(viewControl: UIViewController) {
         mVCtrl = viewControl;
         AppDelg = AppDelegate()
     }
-
+    
     /**
-    * 取得 prefer data, NSUserDefaults<br>
-    * 目前 key: 'prefAcc', 'prefPsd', 'prefLang', 'prefIssave'
-    */
+     * 取得 prefer data, NSUserDefaults<br>
+     * 目前 key: 'prefAcc', 'prefPsd', 'prefLang', 'prefIssave'
+     */
     func getPrefData(strKey: String)->AnyObject? {
         return NSUserDefaults(suiteName: "standardUserDefaults")?.objectForKey(strKey);
     }
@@ -75,25 +75,26 @@ class PubClass {
     }
     
     /**
-    * 輸入字串轉換為指定語系文字<BR>
-    * 繁體: Base.lproj     => default.strings<BR>
-    * 簡體: zh-Hans.lproj  => zh-Hans.strings<BR>
-    * 英文: en.lproj       => en.strings<BR>
-    */
+     * 輸入字串轉換為指定語系文字<BR>
+     * 繁體: Base.lproj     => default.strings<BR>
+     * 簡體: zh-Hans.lproj  => zh-Hans.strings<BR>
+     * 英文: en.lproj       => en.strings<BR>
+     */
     func getLang(strCode: String!)->String{
         return NSLocalizedString(strCode, tableName: AppDelg.V_LANGCODE, bundle:NSBundle.mainBundle(), value: "", comment: "")
     }
     
     /**
-    * SubString
-    */
+     * SubString
+     */
     func subStr(mStr: String, strFrom: Int, strEnd: Int)->String {
-        return mStr.substringWithRange(Range<String.Index>(start: mStr.startIndex.advancedBy(strFrom), end: mStr.startIndex.advancedBy(strEnd)))
+        let nsStr = mStr as NSString
+        return nsStr.substringWithRange(NSRange(location: strFrom, length: (strEnd - strFrom))) as String
     }
     
     /**
-    * 取得 prefer 的 user data, ex. acc, psd ...
-    */
+     * 取得 prefer 的 user data, ex. acc, psd ...
+     */
     func getUserData()->[String : String] {
         var aryUser = Dictionary<String, String>()
         aryUser["acc"] = "kevin"
@@ -105,8 +106,10 @@ class PubClass {
     /**
      * [我知道了] 彈出視窗
      */
-    func popIsee(var Title strTitle: String? = nil, Msg strMsg: String!) {
-        if strTitle == nil {
+    func popIsee(Title strTitleOrg: String? = nil, Msg strMsg: String!) {
+        var strTitle = strTitleOrg
+        
+        if strTitleOrg == nil {
             strTitle = getLang("sysprompt")
         }
         
@@ -122,8 +125,11 @@ class PubClass {
     /**
      * [我知道了] 彈出視窗, with 'handler'
      */
-    func popIsee(mVC: UIViewController, var Title strTitle: String? = nil, Msg strMsg: String!, withHandler mHandler:()->Void) {
-        if strTitle == nil {
+    func popIsee(mVC: UIViewController, Title strTitleOrg: String? = nil, Msg strMsg: String!, withHandler mHandler:()->Void) {
+        
+        var strTitle = strTitleOrg
+        
+        if strTitleOrg == nil {
             strTitle = getLang("sysprompt")
         }
         
@@ -139,8 +145,8 @@ class PubClass {
     }
     
     /**
-    * 產生 UIAlertController (popWindow 資料傳送中)
-    */
+     * 產生 UIAlertController (popWindow 資料傳送中)
+     */
     func getPopLoading(msg: String?) -> UIAlertController {
         var mPopLoading: UIAlertController
         let strMsg = (msg == nil) ? self.getLang("datatranplzwait") : msg
@@ -153,37 +159,37 @@ class PubClass {
     }
     
     /*
-    /**
-    * 資料傳送中/讀取中, 顯示視窗
-    */
-    func showPopLoading(msg: String?) {
-        var strMsg = msg
-        if (strMsg == nil) {
-            strMsg = self.getLang("datatranplzwait")
-        }
-        
-        // 產生 pop Loading 視窗的 'ViewControler'
-        mPopLoading = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        mPopLoading!.restorationIdentifier = "popLoading"
-        mPopLoading!.message = strMsg
-        
-        dispatch_async(dispatch_get_main_queue(), {
-            self.mVCtrl.presentViewController(self.mPopLoading!, animated: false, completion:nil)
-        })
-    }
+     /**
+     * 資料傳送中/讀取中, 顯示視窗
+     */
+     func showPopLoading(msg: String?) {
+     var strMsg = msg
+     if (strMsg == nil) {
+     strMsg = self.getLang("datatranplzwait")
+     }
+     
+     // 產生 pop Loading 視窗的 'ViewControler'
+     mPopLoading = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+     mPopLoading!.restorationIdentifier = "popLoading"
+     mPopLoading!.message = strMsg
+     
+     dispatch_async(dispatch_get_main_queue(), {
+     self.mVCtrl.presentViewController(self.mPopLoading!, animated: false, completion:nil)
+     })
+     }
+     
+     /**
+     * 資料傳送中/讀取中, 關閉視窗
+     */
+     func closePopLoading() {
+     self.mPopLoading!.dismissViewControllerAnimated(false, completion:nil)
+     }
+     */
     
     /**
-    * 資料傳送中/讀取中, 關閉視窗
-    */
-    func closePopLoading() {
-        self.mPopLoading!.dismissViewControllerAnimated(false, completion:nil)
-    }
-    */
-    
-    /**
-    * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
-    * callBack 參數為 JSON data
-    */
+     * HTTP 連線, 使用 post 方式, 'callBack' 需要實作<BR>
+     * callBack 參數為 JSON data
+     */
     func startHTTPConn(dictParm: Dictionary<String, String>!, callBack: (Dictionary<String, AnyObject>)->Void ) {
         
         // 將 dict 參數轉為 string
@@ -192,7 +198,7 @@ class PubClass {
         
         for (strKey, strVal) in dictParm {
             strConnParm += "\(strKey)=\(strVal)"
-            loopi++
+            loopi += 1
             
             if loopi != dictParm.count {
                 strConnParm += "&"
@@ -238,9 +244,9 @@ class PubClass {
     }
     
     /**
-    * HTTP 連線, 連線取得 NSData 解析並回傳 JSON data<BR>
-    * 回傳資料如: 'result' => bool, 'msg' => 錯誤訊息 or nil, 'data' => Dictionary
-    */
+     * HTTP 連線, 連線取得 NSData 解析並回傳 JSON data<BR>
+     * 回傳資料如: 'result' => bool, 'msg' => 錯誤訊息 or nil, 'data' => Dictionary
+     */
     private func getHTTPJSONData(mData: NSData?)->Dictionary<String, AnyObject> {
         var dictRS = Dictionary<String, AnyObject>()
         dictRS["result"] = false
@@ -280,8 +286,8 @@ class PubClass {
     }
     
     /**
-    * Color 使用 HEX code, ex. #FFFFFF, 回傳 UIColor
-    */
+     * Color 使用 HEX code, ex. #FFFFFF, 回傳 UIColor
+     */
     func ColorHEX (hex:String!) -> UIColor {
         var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
         
@@ -306,8 +312,8 @@ class PubClass {
     }
     
     /**
-    * 顏色數值輸入'#FFFFFF', 回傳 CGColor
-    */
+     * 顏色數值輸入'#FFFFFF', 回傳 CGColor
+     */
     func ColorCGColor(hex: String!)->CGColor {
         let mColor = self.ColorHEX(hex)
         return mColor.CGColor
@@ -322,11 +328,18 @@ class PubClass {
             return strDate
         }
         
+        let nsStrDate = strDate as NSString
         var strYY: String, strMM: String, strDD: String
-
-        strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
-        strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
-        strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
+        
+        strYY = nsStrDate.substringWithRange(NSRange(location: 0, length: 4))
+        strMM = nsStrDate.substringWithRange(NSRange(location: 4, length: 2))
+        strDD = nsStrDate.substringWithRange(NSRange(location: 6, length: 2))
+        
+        /*
+         strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
+         strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
+         strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
+         */
         
         if (type == 8) {
             return "\(strYY)年\(Int(strMM)!)月\(Int(strDD)!)日"
@@ -335,8 +348,8 @@ class PubClass {
         if (type > 8) {
             var strHH: String, strMin: String
             
-            strHH = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(8), end: strDate.startIndex.advancedBy(10)))
-            strMin = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(10), end: strDate.startIndex.advancedBy(12)))
+            strHH = nsStrDate.substringWithRange(NSRange(location: 8, length: 2))
+            strMin = nsStrDate.substringWithRange(NSRange(location: 10, length: 2))
             
             return "\(strYY)年\(strMM)月\(strDD)日 \(strHH):\(strMin)"
         }
@@ -349,15 +362,16 @@ class PubClass {
      * @param type: 8s or 14s (String)
      */
     func formatDateWithStr(strDate: String!, type: String?)->String {
-        if ( strDate.characters.count < 8) {
+        if (strDate.characters.count < 8) {
             return strDate
         }
         
+        let nsStrDate = strDate as NSString
         var strYY: String, strMM: String, strDD: String
         
-        strYY = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(0), end: strDate.startIndex.advancedBy(4)))
-        strMM = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(4), end: strDate.startIndex.advancedBy(6)))
-        strDD = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(6), end: strDate.startIndex.advancedBy(8)))
+        strYY = nsStrDate.substringWithRange(NSRange(location: 0, length: 4))
+        strMM = nsStrDate.substringWithRange(NSRange(location: 4, length: 2))
+        strDD = nsStrDate.substringWithRange(NSRange(location: 6, length: 2))
         
         if (type == "8s") {
             return "\(strYY)/\(strMM)/\(strDD)"
@@ -366,8 +380,8 @@ class PubClass {
         if (type == "14s") {
             var strHH: String, strMin: String
             
-            strHH = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(8), end: strDate.startIndex.advancedBy(10)))
-            strMin = strDate.substringWithRange(Range<String.Index>(start: strDate.startIndex.advancedBy(10), end: strDate.startIndex.advancedBy(12)))
+            strHH = nsStrDate.substringWithRange(NSRange(location: 8, length: 2))
+            strMin = nsStrDate.substringWithRange(NSRange(location: 10, length: 2))
             
             return "\(strYY)/\(strMM)/\(strDD) \(strHH):\(strMin)"
         }
@@ -376,9 +390,9 @@ class PubClass {
     }
     
     /**
-    * 計算動態 View 的 CGFloat 長,寬
-    * @return dict: ex. dict["h"], dict["w"]
-    */
+     * 計算動態 View 的 CGFloat 長,寬
+     * @return dict: ex. dict["h"], dict["w"]
+     */
     func getUIViewSize(mView: UIView)->Dictionary<String, CGFloat> {
         let mSize = mView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         var dictData = Dictionary<String, CGFloat>()
@@ -413,8 +427,8 @@ class PubClass {
     }
     
     /**
-    * 回傳裝置的 '今天' 日期 14 碼
-    */
+     * 回傳裝置的 '今天' 日期 14 碼
+     */
     func getDevToday()-> String {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
@@ -428,7 +442,7 @@ class PubClass {
         
         return strRS
     }
-
+    
     /**
      * Keyboard 相關, 使用全域 NSNotificationCenter
      * 宣告 NSNotificationCenter, Keyboard show/hide 使用
@@ -504,8 +518,8 @@ class PubClass {
     // ********** 以下為本專案使用 ********** //
     
     /**
-    * 會員大頭照圖片檔名
-    */
+     * 會員大頭照圖片檔名
+     */
     func MemberHeadimgFile(memberid: String!)->String {
         return "HP_\(memberid).png"
     }

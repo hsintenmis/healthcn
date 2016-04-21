@@ -188,9 +188,9 @@ class HealthExplainTestData {
      * <P>
      * 代入'性別', 說明為字代碼如. fatrs_001, ...
      */
-    private func _setFat(var doubRs: Double) {
+    private func _setFat(doubRsOrg: Double) {
         // doubRs 格式為: 12.1
-        doubRs = Double(String(format: "%.2f", doubRs))!
+        let doubRs = Double(String(format: "%.2f", doubRsOrg))!
         
         // 設定年齡性別 對應數值資料 map
         var listFixVal_M: [[Double]] = []
@@ -218,12 +218,12 @@ class HealthExplainTestData {
         var positionVal = 0
         var positionAge = 0
         
-        for (var i=0; i<aryFixAge.count; i++) {
+        for i in (0..<aryFixAge.count) {
             if (usrAge <= aryFixAge[i]) {
                 positionAge = i;
                 var fixVal = listFixVal_curr![i]
                 
-                for (var j = 0; j < fixVal.count; j++) {
+                for j in (0..<fixVal.count) {
                     if (doubRs <= fixVal[j]) {
                         positionVal = j;
                         
@@ -270,7 +270,7 @@ class HealthExplainTestData {
         listFixVal.append([52.0, 58.0])
         
         var mapFixVal: [String: [Double]] = [:]
-        for (var i=0; i<5; i++) {
+        for i in (0..<5) {
             let code = String(format: "%03d", i + 1)
             mapFixVal[code] = listFixVal[i]
         }
@@ -331,7 +331,7 @@ class HealthExplainTestData {
         mapCalory["F"] = [1300, 1210, 1170, 1100, 1010]
 
         // 比對年齡，取得資料所在 poistion, loop data
-        for (var i=0; i<aryFixAge.count; i++) {
+        for i in (0..<aryFixAge.count) {
             if (usrAge <= aryFixAge[i]) {
                 // 取得該年齡正常的 Calory 值
                 normalCalory = mapCalory[usrGender]![i]
@@ -426,7 +426,9 @@ class HealthExplainTestData {
     * @param jobjItem
     *            : ex. {"bmi":"0.0","height":"168.0","weight":"0.0"}
     */
-    func CalHealthData(strGroup: String, var jobjItem: Dictionary<String, String>)->Dictionary<String, String> {
+    func CalHealthData(strGroup: String, jobjItem: Dictionary<String, String>)->Dictionary<String, String> {
+        var jobjItemNew = jobjItem
+        
         // 計算 BMI
         if (strGroup == "bmi") {
             // 檢查 weigh, height
@@ -438,9 +440,9 @@ class HealthExplainTestData {
             let dbWeight = Double(jobjItem["weight"]!)! * 10000
             let dbHeight = Double(jobjItem["height"]!)!
             let dbBMI = Double(dbWeight / (dbHeight * dbHeight))
-            jobjItem["bmi"] = String(format: "%.1f", dbBMI)
+            jobjItemNew["bmi"] = String(format: "%.1f", dbBMI)
             
-            return jobjItem
+            return jobjItemNew
         }
         
         // 計算腰臀比
@@ -450,12 +452,12 @@ class HealthExplainTestData {
             }
             
             let dbWhr = Double(Double(jobjItem["waistline"]!)! / Double(jobjItem["hipline"]!)!)
-            jobjItem["whr"] = String(format: "%.2f", dbWhr)
+            jobjItemNew["whr"] = String(format: "%.2f", dbWhr)
             
-            return jobjItem;
+            return jobjItemNew;
         }
         
-        return jobjItem;
+        return jobjItemNew;
     }
     
 }

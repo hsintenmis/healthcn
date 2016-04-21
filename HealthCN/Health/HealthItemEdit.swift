@@ -105,8 +105,7 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
     */
     private func setFieldData() {
         // 相關欄位預設 disable
-        var loopi = 0
-        for (loopi = 0; loopi<3; loopi++) {
+        for loopi in (0..<3) {
             colLabName[loopi].alpha = 0.0
             colLabUnit[loopi].alpha = 0.0
             txtVal[loopi].alpha = 0.0
@@ -114,7 +113,7 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
         }
         
         // loop data, 設定 @IBOutlet val
-        for (loopi = 0; loopi<dictCurrHealth.count; loopi++) {
+        for loopi in (0..<dictCurrHealth.count) {
             let dictItem = dictCurrHealth[loopi]
             colLabName[loopi].text = dictItem["name"]
             colLabUnit[loopi].text = dictItem["unit"]
@@ -183,9 +182,8 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
         
         // 健康測量, key, val 加入新的 dict, 檢查輸入的資料
         var dictItemNew: Dictionary<String, String> = [:]
-        var loopi = 0;
         
-        for (loopi = 0; loopi < dictCurrHealth.count; loopi++) {
+        for loopi in (0..<dictCurrHealth.count) {
             if (txtVal[loopi].text == "") {
                 pubClass.popIsee(Msg: "healthvalinputerr")
                 return
@@ -203,7 +201,7 @@ class HealthItemEdit: UIViewController, UITextFieldDelegate {
             dictItemNew = mHealthExplainTestData.CalHealthData(strGroup, jobjItem: dictItemNew)
             
             // 重新顯示 TextView 欄位
-            for (loopi = 0; loopi < dictCurrHealth.count; loopi++) {
+            for loopi in (0..<dictCurrHealth.count) {
                 let strField = dictCurrHealth[loopi]["field"]!
                 txtVal[loopi].text = dictItemNew[strField]
             }

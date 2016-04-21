@@ -73,7 +73,7 @@ class HealthCalendar: UIViewController {
         viewCalendar.layer.borderColor = (pubClass.ColorHEX("E0E0E0")).CGColor
         
         // 註冊一個 NSNotificationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyReloadHealthCalendar", name:"ReloadHealthCalendar", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HealthCalendar.notifyReloadHealthCalendar), name:"ReloadHealthCalendar", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -169,8 +169,8 @@ class HealthCalendar: UIViewController {
         }
         
         if (currCalBlockIndex.section < 0) {
-            for (var i=0; i<5; i++) {
-                for (var j=0; j<7; j++) {
+            for i in (0..<5) {
+                for j in (0..<7) {
                     if (Int(todayDD)! == Int(aryAllBlock[i][j]["txt_day"]!)) {
                         currCalBlockIndex = NSIndexPath(forRow: j, inSection: i)
                         
@@ -391,9 +391,9 @@ class HealthCalendar: UIViewController {
             return
         }
         
-        MM--;
+        MM -= 1;
         if (MM < 1) {
-            MM = 12; YY--;
+            MM = 12; YY -= 1;
         }
         
         dictCurrDate["YY"] = String(YY)
@@ -414,9 +414,9 @@ class HealthCalendar: UIViewController {
             return
         }
         
-        MM++;
+        MM += 1;
         if (MM > 12) {
-            MM = 1; YY++;
+            MM = 1; YY += 1;
         }
         
         dictCurrDate["YY"] = String(YY)

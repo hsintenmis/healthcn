@@ -76,7 +76,7 @@ class HealthCalCellData {
         var arySect: [[String:String]] = []
         var isStartSet = false  // 是否開始設定資料 flag
         
-        for (var loopi = 0; loopi < 7; loopi++) {
+        for loopi in (0..<7) {
             var dictBlock: [String:String] = [:]
             
             // 設定 block 從第幾個開始有資料
@@ -116,11 +116,12 @@ class HealthCalCellData {
         aryAllBlock.append(arySect)
         
         // 其他 sect 列設定, 2~6 列
-        for (var currSect = 1; currSect <= 5; currSect++) {
+        for currSect in (1..<6) {
+        //for (var currSect = 1; currSect <= 5; currSect++) {
             var arySect: [[String:String]] = []
             
             // 指定的 sect 列, 設定「星期幾」的資料
-            for (var loopi = 0; loopi < 7; loopi++) {
+            for loopi in (0..<7) {
                 var dictBlock: [String:String] = [:]
                 
                 if (currDay <= lastMonthDay) {                    
@@ -147,7 +148,7 @@ class HealthCalCellData {
                 dictBlock["index_row"] = String(loopi)
                 
                 arySect.append(dictBlock)
-                currDay++
+                currDay += 1
             }
             
             aryAllBlock.append(arySect)

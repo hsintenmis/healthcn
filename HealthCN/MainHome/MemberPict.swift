@@ -55,7 +55,7 @@ class MemberPict: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         imagePicker.delegate = self
         
         // 設定手勢 Gesture
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "didTapImageView")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapImageView))
         self.imgPict.addGestureRecognizer(tapRecognizer)
     }
     

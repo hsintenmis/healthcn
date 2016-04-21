@@ -33,7 +33,7 @@ class ReservationMain: UIViewController {
         self.setReservationContainerView("ReserAdd")
         
         // 註冊一個 NSNotificationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "notifyChangeReserList", name:"ChangeReserList", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.notifyChangeReserList), name:"ChangeReserList", object: nil)
     }
     
     // View did Appear

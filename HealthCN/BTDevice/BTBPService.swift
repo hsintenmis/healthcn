@@ -320,7 +320,7 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         
         // 接收到血壓計 回傳數值
-        if (characteristic.value?.length > 0 && characteristic.UUID == UID_CHAR_W) {
+        if (characteristic.value?.length > 0 && characteristic.UUID == UID_CHAR_I) {
             if (IS_DEBUG) {
                 print("Update MainSrv val : \(characteristic.value!)\n")
             }

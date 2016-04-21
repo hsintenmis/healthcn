@@ -103,12 +103,11 @@ class PdSaleReturn: UIViewController {
     */
     private func getReturnMsg(aryPd: Array<Dictionary<String, String>>!)->String {
         var strRS = ""
-        var loopi = 0;
         let nums = aryPd.count
         var strName = "", strID = "", strQty = "", strPrice = "", strAmout = "0";
         
         // loop data
-        for (loopi = 0; loopi<nums; loopi++) {
+        for loopi in (0..<nums) {
             let dictItem = aryPd[loopi]
             strName = dictItem["pdname"]!
             strID = dictItem["pdid"]!

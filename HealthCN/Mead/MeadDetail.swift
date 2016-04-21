@@ -78,11 +78,11 @@ class MeadDetail: UIViewController {
     */
     private func setViewChartHTML() {
         var mapVal: Dictionary<String, String> = [:]
-        var loopi = 0;
-        
+
         // 取得數組 'aryVal' 最大值作為圖表 Y 軸最大值
         var currMax = 0, newMax = 0;
-        for (loopi = 0; loopi < 24; loopi++) {
+        
+        for loopi in (0..<24) {
             newMax = Int(aryVal[loopi])!
             if (newMax > currMax) {
                 currMax = newMax;
@@ -94,11 +94,13 @@ class MeadDetail: UIViewController {
         // 檢測的全部數值，前12個為 'H', 後12個為 'F', 解析為 '左右'
         var strD_L_VAL = "", strD_R_VAL = ""
         
-        for (loopi = 17; loopi >= 12; loopi--) {
+        for loopi in (12..<18).reverse() {
+        //for (loopi = 17; loopi >= 12; loopi--) {
             strD_L_VAL += aryVal[loopi] + ","
         }
         
-        for (loopi = 5; loopi >= 0; loopi--) {
+        for loopi in (0..<6).reverse() {
+        //for (loopi = 5; loopi >= 0; loopi--) {
             strD_L_VAL += aryVal[loopi];
             
             if (loopi > 0) {
@@ -107,10 +109,13 @@ class MeadDetail: UIViewController {
         }
         mapVal["D_L_VAL"] = strD_L_VAL
         
-        for (loopi = 23; loopi >= 18 ; loopi--) {
+        for loopi in (18..<24).reverse() {
+        //for (loopi = 23; loopi >= 18 ; loopi--) {
             strD_R_VAL += aryVal[loopi] + ","
         }
-        for (loopi = 11; loopi >= 6; loopi--) {
+        
+        for loopi in (6..<12).reverse() {
+        //for (loopi = 11; loopi >= 6; loopi--) {
             strD_R_VAL += aryVal[loopi];
             
             if (loopi > 6) {
