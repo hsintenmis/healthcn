@@ -120,6 +120,7 @@
 		D726BE801BE87E9E0039C70E /* SelTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */; };
 		D726BE821BE892FA0039C70E /* SelDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE811BE892FA0039C70E /* SelDateCell.swift */; };
 		D726BE841BE8A9AC0039C70E /* SelServCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BE831BE8A9AC0039C70E /* SelServCell.swift */; };
+		D7283FEB1CC9BA2200FACAF6 /* ActWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7283FEA1CC9BA2200FACAF6 /* ActWebView.swift */; };
 		D7296D031C04066100FD3FAE /* HealthItemEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7296D021C04066100FD3FAE /* HealthItemEdit.swift */; };
 		D729F3521C506F030055B9C7 /* Act20160301.swift in Sources */ = {isa = PBXBuildFile; fileRef = D729F3511C506F030055B9C7 /* Act20160301.swift */; };
 		D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75C3FD81BEC890400123087 /* ReservationList.swift */; };
@@ -273,6 +274,7 @@
 		D726BE7F1BE87E9E0039C70E /* SelTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelTimeCell.swift; path = Reservation/SelTimeCell.swift; sourceTree = "<group>"; };
 		D726BE811BE892FA0039C70E /* SelDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelDateCell.swift; path = Reservation/SelDateCell.swift; sourceTree = "<group>"; };
 		D726BE831BE8A9AC0039C70E /* SelServCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelServCell.swift; path = Reservation/SelServCell.swift; sourceTree = "<group>"; };
+		D7283FEA1CC9BA2200FACAF6 /* ActWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActWebView.swift; path = MainHome/ActWebView.swift; sourceTree = "<group>"; };
 		D7296D021C04066100FD3FAE /* HealthItemEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthItemEdit.swift; path = Health/HealthItemEdit.swift; sourceTree = "<group>"; };
 		D729F3511C506F030055B9C7 /* Act20160301.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Act20160301.swift; path = Promote/Act20160301.swift; sourceTree = "<group>"; };
 		D75C3FD81BEC890400123087 /* ReservationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReservationList.swift; path = Reservation/ReservationList.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				42F0F6EE1C01B9DD00753CEB /* MemberEditContainer.swift */,
 				42F0F6EC1C01A9F800753CEB /* MemberEdit.swift */,
 				D71B2BDC1BF082FD006BB466 /* MemberPict.swift */,
+				D7283FEA1CC9BA2200FACAF6 /* ActWebView.swift */,
 			);
 			name = MainHome;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				D71CE2EC1BE323D00067CCC1 /* HealthDataInit.swift in Sources */,
 				D75C3FD91BEC890400123087 /* ReservationList.swift in Sources */,
 				42D0F7581BEFB66400C97D54 /* NewsStoreDetailCell.swift in Sources */,
+				D7283FEB1CC9BA2200FACAF6 /* ActWebView.swift in Sources */,
 				D71CE2F01BE36D640067CCC1 /* HealthExplainTestData.swift in Sources */,
 				D700EB521BFDC9A500DAA145 /* PdSaleDetail.swift in Sources */,
 				42E708F71BC7534A0092A5A9 /* PubClass.swift in Sources */,

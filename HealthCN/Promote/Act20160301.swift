@@ -9,16 +9,14 @@ import Foundation
  * 促銷活動一次性
  * 2016/03/01 ~ 2016/05/31 美利瘦身比賽
  *
- * url: http://public.hsinten.com.tw/app/merit_game/index.php
+ * url: http://cnwww.mysoqi.com/merit_game/index.php
  * 參數如下：
  * data[acc]=MT000001[psd]=00000&data[func]=shopboard#MT000083
  *
  */
 class Act20160301: UIViewController {
     // 固定參數設定 TODO
-    private let strURL = "http://cnwww.mysoqi.com/merit_game/index.php"
-    //private let strURL = "http://public.hsinten.com.tw/app/merit_game/index.php"
-    
+    private var strFixURL = "merit_game/index.php"
     private let aryURLAct = ["shopboard", "areaboard"]  // 區域/本店 排名
     
     @IBOutlet weak var webviewData: UIWebView!
@@ -37,6 +35,7 @@ class Act20160301: UIViewController {
         // 固定初始參數
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
+        strFixURL = pubClass.D_HTEURL + strFixURL
         
         self.initViewField()
     }
@@ -52,7 +51,7 @@ class Act20160301: UIViewController {
     * @param intPosition: 0=店家, 1=區域
     */
     private func showWEBView(intPosition: Int) {
-        let strURL = "\(self.strURL)?data[func]=\(aryURLAct[intPosition])&data[acc]=\(mAppDelegate.V_USRACC!)&data[psd]=\(mAppDelegate.V_USRPSD!)#\(mAppDelegate.V_USRACC!)"
+        let strURL = "\(self.strFixURL)?data[func]=\(aryURLAct[intPosition])&data[acc]=\(mAppDelegate.V_USRACC!)&data[psd]=\(mAppDelegate.V_USRPSD!)#\(mAppDelegate.V_USRACC!)"
 
         let request = NSURLRequest(URL: NSURL(string: strURL)!)
         

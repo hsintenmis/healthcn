@@ -25,12 +25,11 @@ class MainCategory: UIViewController {
     var parentData: Dictionary<String, AnyObject>!
     
     // 子頁面 'MainScrollData'
-    private var mMainScrollData: MainScrollData?
+    private var mMainScrollData: MainScrollData!
     
     // View load
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(parentData)
         
         // 固定初始參數
         mVCtrl = self
@@ -67,10 +66,15 @@ class MainCategory: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let strIdent = segue.identifier
         
-        // 子頁面 'MainScrollData'
+        // Container 子頁面 'MainScrollData'
         if (strIdent == "MainScrollData") {
             mMainScrollData = segue.destinationViewController as? MainScrollData
+            mMainScrollData.dictAllData = parentData
+            
+            return
         }
+        
+        return
     }
     
     /**

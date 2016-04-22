@@ -1,7 +1,7 @@
 //
 // 官網新訊詳細內容
 // URL 網址如：
-// publicsh.hsinten.com.tw/storecn/
+// cnwww.mysoqi.com/storecn/
 // ?acc=XXX&psd=XXX&po=news&op=company&fm_data[id]=jobj["id"]
 //
 
@@ -41,7 +41,8 @@ class NewsOfficeDetail: UIViewController {
         self.initViewField()
 
         // WebView 設定
-        let strURL = "\(pubClass.D_HTEURL)?acc=\(mAppDelegate.V_USRACC!)&psd=\(mAppDelegate.V_USRPSD!)&po=news&op=company_content&fm_data[id]=\(parentData["id"]!)"
+        let fixURL = pubClass.D_HTEURL + "store/"
+        let strURL = "\(fixURL)?acc=\(mAppDelegate.V_USRACC!)&psd=\(mAppDelegate.V_USRPSD!)&po=news&op=company_content&fm_data[id]=\(parentData["id"]!)"
         
         let request = NSURLRequest(URL: NSURL(string: strURL)!)
         

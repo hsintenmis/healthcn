@@ -16,7 +16,7 @@ class PubClass {
     //let D_WEBURL = "http://pub.mysoqi.com/store_cn/001/"
     
     /** HTE 網站 http://publicsh.hsinten.com.tw/storecn/ */
-    let D_HTEURL = "http://cnwww.mysoqi.com/storecn/"
+    let D_HTEURL = "http://cnwww.mysoqi.com/"
     //let D_HTEURL = "http://public.hsinten.com.tw/storecn/"
     
     var AppDelg: AppDelegate

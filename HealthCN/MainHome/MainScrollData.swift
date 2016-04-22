@@ -11,15 +11,17 @@ import Foundation
  */
 class MainScrollData: UITableViewController {
     // @IBOutlet
+    @IBOutlet var tableList: UITableView!
     @IBOutlet weak var labMemberName: UILabel!
     @IBOutlet weak var labStoreName: UILabel!
     @IBOutlet weak var labStoreTel: UILabel!
-    
     @IBOutlet weak var textTodayInfo: UITextView!
     @IBOutlet weak var colviewHealth: UICollectionView!
-    
     @IBOutlet weak var viewPictBG: UIView! // 大頭照 白色背景
     @IBOutlet weak var imgUser: UIImageView!  // 大頭照
+    
+    @IBOutlet weak var labActTitle: UILabel!
+    @IBOutlet weak var labActMsg: UILabel!
     
     // 固定初始參數
     private var pubClass: PubClass!
@@ -44,9 +46,21 @@ class MainScrollData: UITableViewController {
         
         // view  field 設定
         self.initViewField()
+        
+        // 初始 TableView Cell 自動調整高度
+        tableList.estimatedRowHeight = 150.0
+        tableList.rowHeight = UITableViewAutomaticDimension
+        
+        let dictActInfo = dictAllData["content"]!["actinfo"] as! Dictionary<String, String>
+        labActTitle.text = dictActInfo["title"]
+        labActMsg.text = dictActInfo["msg"]
     }
     
     override func viewDidAppear(animated: Bool) {
+        // 設定 '活動專區' 文字
+
+        
+        // HTTP 連線取得本頁面需要的資料
         StartHTTPConn()
     }
     
@@ -74,8 +88,8 @@ class MainScrollData: UITableViewController {
             }
             
             // 取得參數回傳，設定 view field
-            self.dictAllData = dictRS["data"] as! Dictionary<String, AnyObject>
-            self.dictContent = self.dictAllData["content"] as! Dictionary<String, AnyObject>
+            let dictRSdata = dictRS["data"] as! Dictionary<String, AnyObject>
+            self.dictContent = dictRSdata["content"] as! Dictionary<String, AnyObject>
             self.dictMember = self.dictContent["member"] as! Dictionary<String, AnyObject>
             self.aryHealth = self.dictContent["health"] as! [[String:String]]
             
@@ -164,6 +178,15 @@ class MainScrollData: UITableViewController {
         if segue.identifier == "BTDeviceMain"{
             let cvChild = segue.destinationViewController as! BTDeviceMain
             cvChild.dictMember = dictMember as! Dictionary<String, String>
+            
+            return
+        }
+        
+        // 活動專區 WebView 頁面
+        if segue.identifier == "ActWebView"{
+            let dictActInfo = dictAllData["content"]!["actinfo"] as! Dictionary<String, String>
+            let mVC = segue.destinationViewController as! ActWebView
+            mVC.dictData = dictActInfo
             
             return
         }
