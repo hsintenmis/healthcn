@@ -10,7 +10,7 @@ import Foundation
  */
 class ActWebView: UIViewController {
     // 固定參數設定 TODO
-    private var strURL = "merit_act/index.php?data[acc]=%@&data[psd]=%@"
+    private var strURL = "?data[acc]=%@&data[psd]=%@"
 
     // @IBOutlet
     @IBOutlet weak var navyBar: UINavigationBar!
@@ -36,13 +36,15 @@ class ActWebView: UIViewController {
         mVCtrl = self
         pubClass = PubClass(viewControl: mVCtrl)
         
-        strURL = pubClass.D_HTEURL + String(format: strURL, arguments: [mAppDelegate.V_USRACC!, mAppDelegate.V_USRPSD!])
-        
         labLoading.alpha = 1.0
         viewLoading.startAnimating()
         
-        // Navy Title
+        // Navy Title, URL
         navyBar.topItem!.title = dictData["title"]
+        
+        strURL = (dictData["url"]! as String) + strURL
+        strURL = String(format: strURL, arguments: [mAppDelegate.V_USRACC!, mAppDelegate.V_USRPSD!])
+
     }
     
     /**
