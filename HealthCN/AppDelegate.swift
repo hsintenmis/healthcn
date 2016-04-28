@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
+        // 螢幕鎖定取消
+        UIApplication.sharedApplication().idleTimerDisabled = true
+        
         return true
     }
 
