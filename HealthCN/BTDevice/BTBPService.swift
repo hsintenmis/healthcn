@@ -37,11 +37,11 @@ import Foundation
  */
 
 class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    private let IS_DEBUG = true
+    private let IS_DEBUG = false
     
     // 固定參數
     private var CMD_BTCONN: Array<UInt8> = [0x04, 0x00, 0xA0, 0xA4]
-    private var CMD_STARTTEST: Array<UInt8> = [0x04, 0x01, 0xA1, 0xA6]
+    private var CMD_STARTTEST: Array<UInt8> = [0x04, 0x00, 0xA1, 0xA5]
     
     // 固定參數設定, 主 Service chanel, Character,
     private let D_BTDEVNAME0 = "ClinkBlood"
@@ -201,27 +201,6 @@ class BTBPService: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 peripheral.discoverCharacteristics([UID_CHAR_W, UID_CHAR_I], forService: self.mBTService)
             }
         }
-        
-        /*
-        // loop Service UUID, 設定指定 UUID 的 channel
-        for tmpCBService in peripheral.services! {
-            if (IS_DEBUG) {
-                print("Serv UID: \(tmpCBService.UUID)")  // 顯示 'Blood Pressure'
-                print("Serv UID: \(tmpCBService.UUID.UUIDString)\n") // 顯示 '1810'
-            }
-            
-            if (tmpCBService.UUID == UID_SERV) {
-                self.mBTService = tmpCBService
-                
-                if (IS_DEBUG) {
-                    print("Main Serv UID: \(self.mBTService.UUID)\n")
-                }
-            }
-            
-            // 指定的 Service, 查詢全部的 Chart
-            peripheral.discoverCharacteristics(nil, forService: tmpCBService)
-        }
-        */
     }
     
     /**
