@@ -36,7 +36,12 @@ class MainScrollData: UITableViewController {
     private var aryHealth: Array<Dictionary<String, String>> = []
     private var dictMember: Dictionary<String, AnyObject> = [:]
     
-    // View load
+    // 其他參數
+    private var isSaveToken = false  // 本機是別碼是否已上傳儲存
+    
+    /**
+     * View load
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +65,7 @@ class MainScrollData: UITableViewController {
         // 紀錄本機 TOKENID, APNS推播訊息
         let strToken = mAppDelegate.V_APNSTOKENID
         
-        if (strToken.characters.count > 0) {
+        if (strToken.characters.count > 0 && !isSaveToken) {
             //self.startSaveData(mAppDelegate.V_APNSTOKENID)
             
             // 推播使用，手機 Token ID 上傳資料, 執行 http 連線資料上傳程序,
@@ -74,6 +79,7 @@ class MainScrollData: UITableViewController {
             
             pubClass.startHTTPConn(dictParm, callBack: {(dictRS: Dictionary<String, AnyObject>) -> Void in
                 self.getAPNSMsg()
+                self.isSaveToken = true
             })
         }
         else {
