@@ -11,6 +11,7 @@ import Foundation
 class HealthWebChart: UIViewController {
     // 固定參數
     //let D_WEBURL = "http://public.hsinten.com.tw/storecn/"
+    private var strFixURl = "storecn/"
     private var D_WEBURL: String = ""
 
     // @IBOutlet
@@ -36,7 +37,7 @@ class HealthWebChart: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         // load Web view
-        let strURL = D_WEBURL + "?acc=" + mAppDelegate.V_USRACC! + "&psd=" + mAppDelegate.V_USRPSD! + "&po=stats"
+        let strURL = D_WEBURL + strFixURl + "?acc=" + mAppDelegate.V_USRACC! + "&psd=" + mAppDelegate.V_USRPSD! + "&po=stats"
         
         dispatch_async(dispatch_get_main_queue(), {
             self.webChart.loadRequest(NSURLRequest(URL: NSURL(string: strURL)!))

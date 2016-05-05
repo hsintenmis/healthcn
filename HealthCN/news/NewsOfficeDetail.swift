@@ -41,9 +41,9 @@ class NewsOfficeDetail: UIViewController {
         self.initViewField()
 
         // WebView 設定
-        let fixURL = pubClass.D_HTEURL + "store/"
+        let fixURL = pubClass.D_HTEURL + "storecn/"
         let strURL = "\(fixURL)?acc=\(mAppDelegate.V_USRACC!)&psd=\(mAppDelegate.V_USRPSD!)&po=news&op=company_content&fm_data[id]=\(parentData["id"]!)"
-        
+
         let request = NSURLRequest(URL: NSURL(string: strURL)!)
         
         dispatch_async(dispatch_get_main_queue(), {
