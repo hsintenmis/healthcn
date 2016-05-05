@@ -57,11 +57,51 @@ class MainScrollData: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        // 設定 '活動專區' 文字
-
+        // 紀錄本機 TOKENID, APNS推播訊息
+        let strToken = mAppDelegate.V_APNSTOKENID
+        
+        if (strToken.characters.count > 0) {
+            //self.startSaveData(mAppDelegate.V_APNSTOKENID)
+            
+            // 推播使用，手機 Token ID 上傳資料, 執行 http 連線資料上傳程序,
+            var dictParm = Dictionary<String, String>()
+            dictParm["acc"] = mAppDelegate.V_USRACC
+            dictParm["psd"] = mAppDelegate.V_USRPSD
+            dictParm["page"] = "memberdata"
+            dictParm["act"] = "memberdata_savetoken"
+            dictParm["arg0"] = "ios"
+            dictParm["arg1"] = strToken
+            
+            pubClass.startHTTPConn(dictParm, callBack: {(dictRS: Dictionary<String, AnyObject>) -> Void in
+                self.getAPNSMsg()
+            })
+        }
+        else {
+            getAPNSMsg()
+        }
+        
         
         // HTTP 連線取得本頁面需要的資料
-        StartHTTPConn()
+        //StartHTTPConn()
+    }
+    
+    /**
+     * 檢查裝置推播用, 接收到 APNS 訊息
+     */
+    private func getAPNSMsg() {
+        let strAPNSMsg = mAppDelegate.V_APNSALERTMSG
+        if (strAPNSMsg.characters.count > 0) {
+            self.mAppDelegate.V_APNSALERTMSG = ""
+            self.pubClass.popIsee(self, Title: self.pubClass.getLang("APNS_prompt"), Msg: strAPNSMsg, withHandler: {
+                
+                // HTTP 連線取得本頁面需要的資料
+                self.StartHTTPConn()
+            })
+        }
+        else {
+            // HTTP 連線取得本頁面需要的資料
+            self.StartHTTPConn()
+        }
     }
     
     /**

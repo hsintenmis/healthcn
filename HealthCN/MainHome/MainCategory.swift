@@ -42,22 +42,11 @@ class MainCategory: UIViewController {
                 forTypes: [ .Sound, .Alert, .Badge], categories: nil)
         )
         */
-        
-        if (mAppDelegate.V_APNSTOKENID.characters.count > 0) {
-            self.startSaveData(mAppDelegate.V_APNSTOKENID)
-        }
-
-        //print(mAppDelegate.V_SPANTOKENID)
     }
     
     override func viewDidAppear(animated: Bool) {
         //localNotification.applicationIconBadgeNumber = 0;
-        
-        // 檢查裝置推播用, 接收到 APNS 訊息
-        if (mAppDelegate.V_APNSALERTMSG.characters.count > 0) {
-            self.pubClass.popIsee(Title: pubClass.getLang("APNS_prompt"), Msg: mAppDelegate.V_APNSALERTMSG)
-            mAppDelegate.V_APNSALERTMSG = ""
-        }
+    
     }
     
     /**
@@ -90,24 +79,6 @@ class MainCategory: UIViewController {
     */
     @IBAction func actLogout(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    /**
-     * 推播使用，手機 Token ID 上傳資料, 執行 http 連線資料上傳程序,
-     */
-    private func startSaveData(strToken: String!) {
-        var dictParm = Dictionary<String, String>()
-        dictParm["acc"] = mAppDelegate.V_USRACC
-        dictParm["psd"] = mAppDelegate.V_USRPSD
-        dictParm["page"] = "memberdata"
-        dictParm["act"] = "memberdata_savetoken"
-        dictParm["arg0"] = "ios"
-        dictParm["arg1"] = strToken
-        
-        // HTTP 開始連線
-        pubClass.startHTTPConn(dictParm, callBack: {(dictRS: Dictionary<String, AnyObject>) -> Void in
-                return
-            })
     }
     
     //立刻發送通知訊息
